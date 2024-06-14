@@ -4,7 +4,7 @@ const cors = require("cors");
 // parser
 // app.use(express.json());
 app.use(express.json({ limit: "30mb" }));
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors());
 
 const globalErrorHandler = require("./utilities/globalErrorHandler");
 const notFound = require("./utilities/notFound");
@@ -26,6 +26,7 @@ const boatDiveCourseRoutes = require("./routes/boatDiveCourse.routes");
 const bankInformationRoutes = require("./routes/bankInformation.routes");
 const sendEmailRoutes = require("./routes/sendEmail.routes");
 const boatBookingRoutes = require("./routes/boatBooking.routes");
+const resortBookingRoutes = require("./routes/resortBooking.routes");
 
 // use all routes -----9---------
 // some changes
@@ -39,6 +40,7 @@ app.use("/api/resort-inclusions", resortInclusionRoutes);
 app.use("/api/resort-exclusions", resortExclusionRoutes);
 app.use("/api/resort-equipments", resortEquipmentRoutes);
 app.use("/api/resort-dive-courses", resortDiveCourseRoutes);
+app.use("/api/resort-booking", resortBookingRoutes);
 // boats items
 app.use("/api/boat-facilities", boatFacilityRoutes);
 app.use("/api/boat-inclusions", boatInclusionRoutes);

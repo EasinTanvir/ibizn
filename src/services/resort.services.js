@@ -61,10 +61,15 @@ const getResortSearchItemFromDB = async () => {
 
 // get single resort
 const getSingleResotFromDB = async (id) => {
-  const result = await Resort.findById(id).populate({
-    path: "user",
-    model: "User",
-  });
+  const result = await Resort.findById(id)
+    .populate({
+      path: "user",
+      model: "User",
+    })
+    .populate({
+      path: "listOfPackages",
+      model: "Package",
+    });
   // console.log({result});
   return result;
 };
