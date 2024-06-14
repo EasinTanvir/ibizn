@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+.button {
+  @apply rounded-full border hover:bg-white duration-500 transition-all  px-2  sm:px-5 py-1 border-white cursor-pointer;
+}
+.main-button {
+  @apply bg-[#2563eb] text-white font-semibold rounded-md;
+}
+.button2 {
+  @apply rounded-full border-2 hover:bg-white duration-500 transition-all 
+    px-2.5 md:px-8   py-2 border-white cursor-pointer;
+}
+.button3 {
+  @apply rounded-full border-2 hover:bg-white duration-500 transition-all hover:text-primary  bg-primary hover:border-2 hover:border-blue-600 px-8 text-xl  py-2 border-white cursor-pointer;
+}
+
+.customContainer {
+  @apply md:w-[85%] mx-auto;
+}
+
+.custom_red_color {
+  background: linear-gradient(#ff5656, rgb(245, 23, 23)) !important;
+}
+
+.cards:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+}
+
+.footerBg {
+  background-image: url("../public/bgfooter.jpg");
+  background-repeat: no-repeat;
+  width: 100%;
+}
+
+.custom-swal {
+  z-index: 999999999 !important;
+}
+
+.control-dots {
+  bottom: -10px !important;
+}
+.control-dots li {
+  width: 20px !important;
+  height: 20px !important;
+  background: none !important;
+  border: 2px solid #2563eb !important;
+}
+.control-dots .selected {
+  border-radius: 100%;
+  background-color: #2563eb !important;
+}
+
+.main-text {
+  color: #2f2f30;
+}
+
+.main-bg-color {
+  background-color: #0080ff;
+}
+
+.hover-color {
+  background: #00afff;
+}
+
+/* thats code for swiper in second page */
+/* swiper-custom.css */
+.swiper-button-next,
+.swiper-button-prev {
+  background-color: white;
+  border-radius: 50%;
+  width: 25px !important;
+  height: 25px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px !important;
+}
+
+.swiper-button-next::after {
+  font-size: 13px !important; /* Adjust the font size if needed */
+  color: #00afff;
+  padding: 10px !important;
+}
+.swiper-button-prev::after {
+  font-size: 13px !important; /* Adjust the font size if needed */
+  color: #00afff;
+  padding: 10px !important;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: #f0f0f0; /* Light gray on hover */
+}

@@ -1,0 +1,289 @@
+import React, { useContext, useEffect, useState } from "react";
+import { userContext } from "@/src/storage/contextApi";
+import { ArrowDropDown } from "@mui/icons-material";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from "dayjs";
+import { Typography } from "@mui/material";
+import { useRouter } from "next/router";
+import SearchItemModal from "../../Home/Banner/SearchItemModal";
+import { baseUrl } from "@/src/config/serverConfig";
+
+const tabItems = ["Liveaboards", "Resorts", "Special Offers"];
+const ratings = [
+  { minRating: 1, maxRating: 2 },
+  { minRating: 2, maxRating: 3 },
+  { minRating: 3, maxRating: 4 },
+  { minRating: 4, maxRating: 5 },
+];
+const Banner = ({ setSearchResult }) => {
+  const { searchValues, setSearchValues } = useContext(userContext);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [destination, setDestination] = useState("");
+  const [rating, setRating] = useState({ minRating: "", maxRating: "" });
+  const [formattedDate, setFormattedDate] = useState("");
+  const renderSelectedValue = (value) => {
+    return `${value.minRating}-${value.maxRating}`;
+  };
+
+  const handleDateChange = (date) => {
+    const formatted = date ? dayjs(date).format("YYYY-MM-DD") : "";
+
+    // setSearchValues({ ...searchValues, date: formatted });
+    setFormattedDate(formatted);
+  };
+
+  const handleSearchValues = () => {
+    if (rating.minRating) {
+      searchValues.minRating = rating?.minRating;
+      searchValues.maxRating = rating?.maxRating;
+    }
+    if (formattedDate) {
+      searchValues.date = formattedDate;
+    }
+    if (destination) {
+      searchValues.destination = destination;
+    }
+
+    const objectToQueryString = (obj) => {
+      const queryString = Object.keys(obj)
+        .map(
+          (key) => `${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}`
+        )
+        .join("&");
+      return queryString;
+    };
+
+    const queryString = objectToQueryString(searchValues);
+
+    fetch(
+      `${baseUrl}/${
+        searchValues?.tabValue === "Resorts" ||
+        searchValues?.property === "resort"
+          ? "resorts/all-resorts"
+          : "boats/all-boats"
+      }?${queryString}`
+    )
+      .then((res) => res.json())
+      .then((data) => setSearchResult(data?.data));
+  };
+
+  useEffect(() => {
+    setRating({
+      minRating: searchValues.minRating,
+      maxRating: searchValues.maxRating,
+    });
+  }, [searchValues]);
+  return (
+    <div className="bg-primary">
+      <div className="w-[90%] sm:w-[85%] mx-auto py-10">
+        <div>
+          <div className="flex items-center gap-2 md:gap-5 mt-10">
+            {tabItems?.map((item, index) => (
+              <div
+                onClick={() =>
+                  setSearchValues({
+                    ...searchValues,
+                    tabValue: item,
+                  })
+                }
+                key={index}
+                className={`${
+                  searchValues?.tabValue === item
+                    ? "text-[#0080ff]  bg-white"
+                    : "text-[#f1f2f2] bg-transparent border-2"
+                } px-3 md:px-6 cursor-pointer py-2 rounded-full text-[14px] md:text-[22px] font-[400]`}
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 flex flex-col md:flex-row md:space-y-0 space-y-2 gap-3 justify-between md:items-center pb-10 text-white">
+            <TextField
+              onClick={() => setIsModalOpen(true)}
+              id="outlined-basic"
+              label="Destination"
+              value={destination || searchValues?.destination}
+              variant="outlined"
+              size="large"
+              fullWidth
+              className="w-full lg:w-[45%]"
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "lightblue", // Border color
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "white", // Border color on hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "white", // Border color when focused
+                  },
+                },
+                "& .MuiInputBase-input": {
+                  height: "35px", // Height of the input element
+                  color: "white", // Text color
+                  backgroundColor: "transparent", // Ensure input background is transparent
+                },
+                "& .MuiInputLabel-root": {
+                  color: "white", // Label color
+                },
+                "& .MuiInputLabel-root.Mui-focused": {
+                  color: "white", // Label color when focused
+                },
+                "& .MuiSvgIcon-root": {
+                  color: "white", // Color of the calendar icon
+                },
+                width: "100%", // Width of the entire TextField
+              }}
+            />
+            {searchValues?.tabValue === "Special Offers" ? (
+              <div className="w-full lg:w-[25%]">
+                <FormControl className=" w-full" style={{ color: "#f1f2f2" }}>
+                  <InputLabel
+                    style={{ color: "#f1f2f2" }}
+                    id="demo-simple-select-label"
+                  >
+                    Select Property
+                  </InputLabel>
+                  <Select
+                    className="border-2 border-white"
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={searchValues?.property}
+                    input={<OutlinedInput label="Name" />}
+                    onChange={(e) =>
+                      setSearchValues({
+                        ...searchValues,
+                        property: e.target.value,
+                      })
+                    }
+                    IconComponent={() => (
+                      <ArrowDropDown className="text-white cursor-pointer" />
+                    )}
+                    sx={{
+                      borderWidth: "0.5px",
+                      height: 52,
+                      color: "white",
+                      ".MuiSelect-icon": {
+                        color: "white",
+                      },
+                    }}
+                  >
+                    <MenuItem value={"boat"}>Boat</MenuItem>
+                    <MenuItem value={"resort"}>Resort</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+            ) : (
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  className="w-full lg:w-[25%]"
+                  onChange={handleDateChange}
+                  disablePast
+                  value={
+                    searchValues?.date
+                      ? dayjs(new Date(searchValues.date).toISOString())
+                      : null
+                  }
+                  label={"Select Month and Year"}
+                  views={["month", "year"]}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "& fieldset": {
+                        borderColor: "lightblue", // Border color
+                      },
+                      "&:hover fieldset": {
+                        borderColor: "white", // Border color on hover
+                      },
+                      "&.Mui-focused fieldset": {
+                        borderColor: "white", // Border color when focused
+                      },
+                    },
+                    "& .MuiInputBase-input": {
+                      height: "35px", // Height of the input element
+                      color: "white", // Text color
+                      backgroundColor: "transparent", // Ensure input background is transparent
+                    },
+                    "& .MuiInputLabel-root": {
+                      color: "white", // Label color
+                    },
+                    "& .MuiInputLabel-root.Mui-focused": {
+                      color: "white", // Label color when focused
+                    },
+                    "& .MuiSvgIcon-root": {
+                      color: "white", // Color of the calendar icon
+                    },
+                    width: "100%", // Width of the entire TextField
+                  }}
+                />
+              </LocalizationProvider>
+            )}
+
+            <div className="w-full lg:w-[25%]">
+              <FormControl className=" w-full" style={{ color: "#f1f2f2" }}>
+                <InputLabel
+                  style={{ color: "#f1f2f2" }}
+                  id="demo-simple-select-label"
+                >
+                  Vegan rating
+                </InputLabel>
+                <Select
+                  className="border-2 border-white"
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={rating}
+                  renderValue={renderSelectedValue}
+                  input={<OutlinedInput label="Name" />}
+                  onChange={(e) => setRating(e.target.value)}
+                  IconComponent={() => (
+                    <ArrowDropDown className="text-white cursor-pointer" />
+                  )}
+                  sx={{
+                    borderWidth: "0.5px",
+                    height: 52, // Customize the height of the select field
+                    color: "white", // Customize the text color of the select field
+                    ".MuiSelect-icon": {
+                      color: "white", // Customize the color of the dropdown icon
+                    },
+                  }}
+                >
+                  {ratings.map((r) => (
+                    <MenuItem key={`${r.minRating}-${r.maxRating}`} value={r}>
+                      {r.minRating}-{r.maxRating}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
+            <div className="w-[200px] lg:w-[15%] text-center">
+              <div
+                className={` bg-white md:px-6 lg:px-0 py-2 rounded-full text-[#0080ff]  
+                text-[22px] font-[400] cursor-pointer`}
+                onClick={handleSearchValues}
+              >
+                Search
+              </div>
+            </div>
+          </div>
+          <SearchItemModal
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+            setDestination={setDestination}
+            destination={destination}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Banner;
