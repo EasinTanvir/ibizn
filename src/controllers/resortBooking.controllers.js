@@ -1,6 +1,12 @@
 const httpStatus = require("http-status");
 const {
   createResortBookingIntoDB,
+  updateBookingStatusByAdminFromDB,
+  getAllPendingResortBookingFromDB,
+  getSingleResortBookingFromDB,
+  updateResortBookingIntoDB,
+  updateBookingStatusByOperatorIntoDB,
+  getAllConfirmBoatOrderFromDB,
 } = require("../services/resortBooking.services");
 const catchAsync = require("../utilities/catchAsync");
 const sendResponse = require("../utilities/sendResponse");
@@ -15,15 +21,15 @@ const createResortBooking = catchAsync(async (req, res) => {
   });
 });
 const getAllPendingBooking = catchAsync(async (req, res) => {
-  const result = await getAllPendingBoatBookingFromDB(req.user);
+  const result = await getAllPendingResortBookingFromDB(req.user);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Boat booking retrieved successfully",
+    message: "Resort booking retrieved successfully",
     data: result,
   });
 });
-const getAllConfirmBoatOrder = catchAsync(async (req, res) => {
+const getAllConfirmResortOrder = catchAsync(async (req, res) => {
   const result = await getAllConfirmBoatOrderFromDB(req.user);
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -33,19 +39,19 @@ const getAllConfirmBoatOrder = catchAsync(async (req, res) => {
   });
 });
 
-const getSingleBoatBooking = catchAsync(async (req, res) => {
+const getSingleResortBooking = catchAsync(async (req, res) => {
   const id = req.params.id;
-  const result = await getSingleBoatBookingFromDB(id);
+  const result = await getSingleResortBookingFromDB(id);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Boat booking retrieved successfully",
+    message: "Resort booking retrieved successfully",
     data: result,
   });
 });
-const updateBooking = catchAsync(async (req, res) => {
+const updateResorting = catchAsync(async (req, res) => {
   const id = req.params.id;
-  const result = await updateBookingIntoDB(id, req.body);
+  const result = await updateResortBookingIntoDB(id, req.body);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -82,4 +88,10 @@ const updateBookingStatusByOperator = catchAsync(async (req, res) => {
 
 module.exports = {
   createResortBooking,
+  updateBookingStatusByAdmin,
+  getAllPendingBooking,
+  getSingleResortBooking,
+  updateResorting,
+  updateBookingStatusByOperator,
+  getAllConfirmResortOrder,
 };

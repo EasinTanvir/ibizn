@@ -41,10 +41,10 @@ const createResortBookingIntoDB = async (payload) => {
   return result;
 };
 
-const getAllPendingBoatBookingFromDB = async (userData) => {
+const getAllPendingResortBookingFromDB = async (userData) => {
   console.log(userData);
   if (userData?.role === "admin") {
-    const result = await BoatBooking.find({
+    const result = await ResortBooking.find({
       $and: [
         { bookingStatus: { $ne: "confirmed" } },
         { bookingStatus: { $ne: "rejected" } },
@@ -52,13 +52,13 @@ const getAllPendingBoatBookingFromDB = async (userData) => {
     }).populate({
       path: "property", // First level: populates the property field
       populate: {
-        path: "schedules.itinerary", // Second level: populates schedules within property
-        model: "Itinerary",
+        path: "listOfPackages",
+        model: "Package",
       },
     });
     return result;
   } else {
-    const result = await BoatBooking.find({
+    const result = await ResortBooking.find({
       $and: [
         { bookingStatus: { $ne: "confirmed" } },
         { bookingStatus: { $ne: "pending" } },
@@ -72,10 +72,10 @@ const getAllPendingBoatBookingFromDB = async (userData) => {
 
 const getAllConfirmBoatOrderFromDB = async (userData) => {
   if (userData?.role === "admin") {
-    const result = await BoatBooking.find({ bookingStatus: "confirmed" });
+    const result = await ResortBooking.find({ bookingStatus: "confirmed" });
     return result;
   } else {
-    const result = await BoatBooking.find({
+    const result = await ResortBooking.find({
       bookingStatus: "confirmed",
       operator: userData?.userId,
     });
@@ -83,21 +83,22 @@ const getAllConfirmBoatOrderFromDB = async (userData) => {
   }
 };
 
-const getSingleBoatBookingFromDB = async (id) => {
-  const result = await BoatBooking.findById(id)
+const getSingleResortBookingFromDB = async (id) => {
+  const result = await ResortBooking.findById(id)
     .populate({
       path: "property", // First level: populates the property field
       populate: {
-        path: "schedules.itinerary", // Second level: populates schedules within property
-        model: "Itinerary",
+        path: "listOfPackages",
+        model: "Package",
       },
     })
-    .populate("operator");
+    .populate("operator")
+    .populate("packageId");
   return result;
 };
 
-const updateBookingIntoDB = async (id, payload) => {
-  const result = await BoatBooking.findByIdAndUpdate(id, payload, {
+const updateResortBookingIntoDB = async (id, payload) => {
+  const result = await ResortBooking.findByIdAndUpdate(id, payload, {
     new: true,
     runValidators: true,
   });
@@ -105,12 +106,18 @@ const updateBookingIntoDB = async (id, payload) => {
 };
 
 const updateBookingStatusByAdminFromDB = async (id, status) => {
-  console.log(status);
-  const booking = await BoatBooking.findById(id);
+  let result;
+  const booking = await ResortBooking.findById(id);
   if (!booking) {
     throw new AppError("Booking not found");
   }
-  const result = await BoatBooking.findByIdAndUpdate(
+
+  if (status === "rejected") {
+    result = await ResortBooking.findByIdAndDelete(id);
+    return result;
+  }
+
+  result = await ResortBooking.findByIdAndUpdate(
     id,
     { bookingStatus: status },
     {
@@ -137,7 +144,7 @@ const updateBookingStatusByAdminFromDB = async (id, status) => {
 };
 const updateBookingStatusByOperatorIntoDB = async (id, status, userData) => {
   console.log(status);
-  const booking = await BoatBooking.findOne({
+  const booking = await ResortBooking.findOne({
     _id: id,
     bookingStatus: "approved",
     operator: userData?.userId,
@@ -146,7 +153,7 @@ const updateBookingStatusByOperatorIntoDB = async (id, status, userData) => {
     throw new AppError("Booking not found");
   }
   console.log("nice");
-  const result = await BoatBooking.findByIdAndUpdate(
+  const result = await ResortBooking.findByIdAndUpdate(
     id,
     { bookingStatus: status },
     {
@@ -174,4 +181,10 @@ const updateBookingStatusByOperatorIntoDB = async (id, status, userData) => {
 
 module.exports = {
   createResortBookingIntoDB,
+  updateBookingStatusByAdminFromDB,
+  getAllPendingResortBookingFromDB,
+  getSingleResortBookingFromDB,
+  updateResortBookingIntoDB,
+  updateBookingStatusByOperatorIntoDB,
+  getAllConfirmBoatOrderFromDB,
 };

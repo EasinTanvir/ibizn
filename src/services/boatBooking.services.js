@@ -105,12 +105,19 @@ const updateBookingIntoDB = async (id, payload) => {
 };
 
 const updateBookingStatusByAdminFromDB = async (id, status) => {
-  console.log(status);
+  let result;
+
   const booking = await BoatBooking.findById(id);
   if (!booking) {
     throw new AppError("Booking not found");
   }
-  const result = await BoatBooking.findByIdAndUpdate(
+  console.log(status);
+  if (status === "rejected") {
+    result = await BoatBooking.findByIdAndDelete(id);
+    return result;
+  }
+
+  result = await BoatBooking.findByIdAndUpdate(
     id,
     { bookingStatus: status },
     {

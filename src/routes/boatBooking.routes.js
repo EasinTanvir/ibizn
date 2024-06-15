@@ -25,7 +25,9 @@ boatBookingRoutes.get(
   getAllConfirmBoatOrder
 );
 boatBookingRoutes.get("/:id", auth("admin", "operator"), getSingleBoatBooking);
+
 boatBookingRoutes.patch("/update-booking/:id", auth("admin"), updateBooking);
+
 boatBookingRoutes.patch(
   "/update-status-by-admin/:id",
   auth("admin"),

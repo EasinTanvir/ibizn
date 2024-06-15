@@ -13,7 +13,8 @@ const resortBookingSchema = new Schema(
       required: true,
     },
     packageId: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: "Package",
       required: true,
     },
     phone: {
