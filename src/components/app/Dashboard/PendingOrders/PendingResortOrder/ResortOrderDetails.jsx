@@ -6,6 +6,8 @@ import { Questions } from "@/src/constant/questions/questions";
 import Loader from "@/src/components/core/shared/Loader/Loader";
 import OrderedSchedule from "../../admin/PendingOrders/Edit/BoatEdit/OrderedSchedule";
 import ResortOrderedSchedule from "../../admin/PendingOrders/Edit/BoatEdit/ResortOrderedSchedule copy";
+import OperatorDetails from "../../admin/PendingProperty/OperatorDetails";
+import EditFormResort from "../../admin/PendingOrders/Edit/BoatEdit/EditFormResort";
 const ResortOrderDetails = ({ id }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [bookingData, setBookingData] = useState({});
@@ -135,6 +137,14 @@ const ResortOrderDetails = ({ id }) => {
             })}
           </div>
           <ResortOrderedSchedule packagess={bookingData?.packageId} />
+
+          <OperatorDetails userInfo={bookingData?.operator} />
+
+          <EditFormResort
+            status={bookingData?.bookingStatus === "pending"}
+            bookingData={bookingData}
+            setBookingData={setBookingData}
+          />
         </div>
       </Box>
     </div>

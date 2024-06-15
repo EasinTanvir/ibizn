@@ -12,54 +12,92 @@ import { baseUrl } from "@/src/config/serverConfig";
 import Itineraries from "../Dashboard/Boat/Itineraries";
 import ItinerariesAndPrices from "./Itinerary/ItinerariesAndPrices";
 import ResortAndPrice from "./Itinerary/PackageAndPrice";
+import { Blocks } from "react-loader-spinner";
 // import SwipeBoard from "@/src/components/app/PropertyPage/SwipeBoard";
 
 function ResortProperyPage({ rid }) {
   const [propertyData, setPropertyData] = useState({});
-  console.log(propertyData);
-  console.log(rid);
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
-    fetch(`${baseUrl}/resorts/single-resort/${rid}`)
-      .then((res) => res.json())
-      .then((data) => setPropertyData(data.data));
+    setLoader(true);
+
+    if (rid) {
+      fetch(`${baseUrl}/resorts/single-resort/${rid}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setLoader(false);
+          setPropertyData(data.data);
+        })
+        .catch((err) => {
+          setLoader(false);
+          console.log(err);
+        });
+    }
   }, [rid]);
   return (
     <>
-      <Liveaboards propertyData={propertyData} />
-      <div>
-        <div className="">
-          <LiveaboardDetails resort={true} propertyData={propertyData} />
-          <div className="swipeboard">
-            <SwipeBoard propertyData={propertyData} />
+      {loader ? (
+        <>
+          <div className="min-h-[calc(100vh-70px)] flex justify-center items-center">
+            <div className="flex flex-col">
+              <Blocks
+                height="80"
+                width="80"
+                color="#4fa94d"
+                ariaLabel="blocks-loading"
+                wrapperStyle={{}}
+                wrapperClass="blocks-wrapper"
+                visible={true}
+              />
+              <span className="font-semibold">Please Wait...</span>
+            </div>
           </div>
-          <div id="accommodation">
-            <Accommodation resort={true} propertyData={propertyData} />
-          </div>
-        </div>
+        </>
+      ) : (
+        <>
+          {" "}
+          <>
+            <Liveaboards propertyData={propertyData} />
+            <div>
+              <div className="">
+                <LiveaboardDetails resort={true} propertyData={propertyData} />
+                <div className="swipeboard">
+                  <SwipeBoard propertyData={propertyData} />
+                </div>
+                <div id="accommodation">
+                  <Accommodation resort={true} propertyData={propertyData} />
+                </div>
+              </div>
 
-        <div id="facilities">
-          <Facilities propertyData={propertyData} />
-        </div>
+              <div id="facilities">
+                <Facilities propertyData={propertyData} />
+              </div>
 
-        <div className="">
-          <div className="px-4 lg:px-0" id="food">
-            <Food resort={true} propertyData={propertyData} />
-          </div>
-          <div className="bg-[#F1F2F2] py-20 px-4 lg:px-0" id="scuba">
-            <Scuba propertyData={propertyData} />
-          </div>
-          <div className="py-6" id="exclusions">
-            <Exclusions />
-          </div>
-          <div className="bg-[#F1F2F2] py-20 px-4 lg:px-0">
-            <EnvironmentelPacket resort={true} propertyData={propertyData} />
-          </div>
-          <div id="itinerariesandprices">
-            <ResortAndPrice propertyData={propertyData} />
-          </div>
-        </div>
-      </div>
+              <div className="">
+                <div className="px-4 lg:px-0" id="food">
+                  <Food resort={true} propertyData={propertyData} />
+                </div>
+                <div className="bg-[#F1F2F2] py-20 px-4 lg:px-0" id="scuba">
+                  <Scuba propertyData={propertyData} />
+                </div>
+                <div className="py-6" id="exclusions">
+                  <Exclusions />
+                </div>
+                <div className="bg-[#F1F2F2] py-20 px-4 lg:px-0">
+                  <EnvironmentelPacket
+                    resort={true}
+                    propertyData={propertyData}
+                  />
+                </div>
+                <div id="itinerariesandprices">
+                  <ResortAndPrice propertyData={propertyData} />
+                </div>
+              </div>
+            </div>
+          </>
+        </>
+      )}
     </>
   );
 }

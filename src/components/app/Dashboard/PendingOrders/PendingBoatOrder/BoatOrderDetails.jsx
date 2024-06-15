@@ -5,6 +5,8 @@ import LaunchIcon from "@mui/icons-material/Launch";
 import { Questions } from "@/src/constant/questions/questions";
 import Loader from "@/src/components/core/shared/Loader/Loader";
 import OrderedSchedule from "../../admin/PendingOrders/Edit/BoatEdit/OrderedSchedule";
+import OperatorDetails from "../../admin/PendingProperty/OperatorDetails";
+import EditForm from "../../admin/PendingOrders/Edit/BoatEdit/EditForm";
 const BoatOrderDetails = ({ id }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [bookingData, setBookingData] = useState({});
@@ -134,6 +136,13 @@ const BoatOrderDetails = ({ id }) => {
           <OrderedSchedule
             scheduleId={bookingData?.scheduleId}
             schedules={bookingData?.property?.schedules}
+          />
+          <OperatorDetails userInfo={bookingData?.operator} />
+
+          <EditForm
+            status={bookingData?.bookingStatus === "pending"}
+            bookingData={bookingData}
+            setBookingData={setBookingData}
           />
         </div>
       </Box>

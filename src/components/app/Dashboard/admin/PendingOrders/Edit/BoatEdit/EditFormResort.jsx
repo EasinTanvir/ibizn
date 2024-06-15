@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
-const EditFormResort = ({ bookingData, setBookingData }) => {
+const EditFormResort = ({ bookingData, setBookingData, status }) => {
   console.log(bookingData.startDate);
   console.log(bookingData.endDate);
   // Ensure startDate and endDate are dayjs objects
@@ -53,7 +53,7 @@ const EditFormResort = ({ bookingData, setBookingData }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data?.success) {
-          toast.success("Booking information updated successfully");
+          toast.success("Booking Information Updated");
         }
       })
       .catch((err) => {
@@ -63,9 +63,11 @@ const EditFormResort = ({ bookingData, setBookingData }) => {
 
   return (
     <div>
-      <h1 className="text-center font-semibold text-2xl my-6">
-        Edit Booking Information
-      </h1>
+      {status && (
+        <h1 className="text-center font-semibold text-2xl my-6">
+          Edit Booking Information
+        </h1>
+      )}
       <form onSubmit={updateBoatOrder}>
         <Typography sx={{ fontSize: "25px", fontWeight: 600 }}>
           Booking Schedule
@@ -75,6 +77,7 @@ const EditFormResort = ({ bookingData, setBookingData }) => {
             <p className="text-lg font-semibold">Phone:</p>
             <input
               type="text"
+              disabled={!status}
               name="phone"
               className="w-full rounded-md"
               required
@@ -91,6 +94,7 @@ const EditFormResort = ({ bookingData, setBookingData }) => {
           <div className="mt-3 w-full">
             <p className="text-lg font-semibold">Email:</p>
             <input
+              disabled={!status}
               type="email"
               name="email"
               className="w-full rounded-md"
@@ -110,6 +114,7 @@ const EditFormResort = ({ bookingData, setBookingData }) => {
           <div className="mt-3 w-full">
             <p className="text-lg font-semibold">whatsapp:</p>
             <input
+              disabled={!status}
               type="text"
               name="whatsapp"
               className="w-full rounded-md"
@@ -127,6 +132,7 @@ const EditFormResort = ({ bookingData, setBookingData }) => {
           <div className="mt-3 w-full">
             <p className="text-lg font-semibold">Number Of Guest:</p>
             <input
+              disabled={!status}
               type="text"
               name="numberOfGuest"
               className="w-full rounded-md"
@@ -147,6 +153,7 @@ const EditFormResort = ({ bookingData, setBookingData }) => {
             <div>
               <p className="mb-1">Start Date</p>
               <DatePicker
+                disabled={!status}
                 value={updatedDate.startDate}
                 onChange={(newDate) =>
                   setUpdatedDate({
@@ -160,6 +167,7 @@ const EditFormResort = ({ bookingData, setBookingData }) => {
             <div>
               <p className="mb-1">End Date</p>
               <DatePicker
+                disabled={!status}
                 value={updatedDate.endDate}
                 onChange={(newDate) =>
                   setUpdatedDate({
@@ -172,11 +180,13 @@ const EditFormResort = ({ bookingData, setBookingData }) => {
             </div>
           </LocalizationProvider>
         </div>
-        <div>
-          <button type="submit" className="main-button py-3 w-full mt-4">
-            Submit
-          </button>
-        </div>
+        {status && (
+          <div>
+            <button type="submit" className="main-button py-3 w-full mt-4">
+              Submit
+            </button>
+          </div>
+        )}
       </form>
     </div>
   );

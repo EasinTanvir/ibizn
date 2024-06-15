@@ -140,12 +140,12 @@ const ResortEdit = ({ id }) => {
           </div>
           <ResortOrderedSchedule packagess={bookingData?.packageId} />
           <OperatorDetails userInfo={bookingData?.operator} />
-          {bookingData?.bookingStatus === "pending" && (
-            <EditFormResort
-              bookingData={bookingData}
-              setBookingData={setBookingData}
-            />
-          )}
+
+          <EditFormResort
+            status={bookingData?.bookingStatus === "pending"}
+            bookingData={bookingData}
+            setBookingData={setBookingData}
+          />
         </div>
       </Box>
     </div>

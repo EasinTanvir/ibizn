@@ -139,12 +139,12 @@ const BoatEdit = ({ id }) => {
             schedules={bookingData?.property?.schedules}
           />
           <OperatorDetails userInfo={bookingData?.operator} />
-          {bookingData?.bookingStatus === "pending" && (
-            <EditForm
-              bookingData={bookingData}
-              setBookingData={setBookingData}
-            />
-          )}
+
+          <EditForm
+            status={bookingData?.bookingStatus === "pending"}
+            bookingData={bookingData}
+            setBookingData={setBookingData}
+          />
         </div>
       </Box>
     </div>
