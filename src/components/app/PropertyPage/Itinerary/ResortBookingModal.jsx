@@ -36,8 +36,8 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
   // handle booking boat
   const handleBookingBoat = (e) => {
     setLoading(true);
-    const start = startDate.format();
-    const end = endDate.format();
+    const start = updatedDate.startDate.format();
+    const end = updatedDate.endDate.format();
     e.preventDefault();
     const form = e.target;
     const phone = form.phone.value;
@@ -137,7 +137,7 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
                   <div>
                     <p className="text-lg font-semibold">Start date:</p>
                     <DatePicker
-                      value={startDate}
+                      value={updatedDate.startDate}
                       onChange={(newDate) =>
                         setUpdatedDate({
                           ...updatedDate,
@@ -150,7 +150,7 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
                   <div>
                     <p className="text-lg font-semibold">End Date:</p>
                     <DatePicker
-                      value={endDate}
+                      value={updatedDate.endDate}
                       onChange={(newDate) =>
                         setUpdatedDate({
                           ...updatedDate,

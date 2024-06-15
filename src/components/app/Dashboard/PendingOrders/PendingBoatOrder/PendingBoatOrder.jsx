@@ -23,6 +23,7 @@ const PendingBoatOrder = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         setPendingBooking(data?.data);
         setIsLoading(false);
       })
@@ -34,7 +35,7 @@ const PendingBoatOrder = () => {
 
   // handle booking status update
   const handleBookingStatusUpdate = (id, status) => {
-    setIsLoading(true);
+    setStatusLoader(true);
     fetch(`${baseUrl}/boat-booking/update-status-by-operator/${id}`, {
       method: "PATCH",
       headers: {
@@ -47,11 +48,11 @@ const PendingBoatOrder = () => {
       .then((data) => {
         console.log(data);
         if (data?.success) {
-          setIsLoading(false);
+          setStatusLoader(false);
           toast.success(`Booking ${data?.data?.bookingStatus} successfully`);
           setControl(!control);
         } else {
-          setIsLoading(false);
+          setStatusLoader(false);
           toast.error(data?.message || "Something went wrong");
         }
       })
