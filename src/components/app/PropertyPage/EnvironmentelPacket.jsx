@@ -1,4 +1,7 @@
 import Environmental from "./Environmental";
+import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
+import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
+import Typography from "@mui/material/Typography";
 
 function EnvironmentelPacket({ propertyData }) {
   return (
@@ -82,6 +85,32 @@ function EnvironmentelPacket({ propertyData }) {
             },
           ]}
         />
+
+        <div className="mt-5">
+          <Accordion
+            className="border-t border-[#00afff] w-full md:w-full font-outfit"
+            sx={{ borderRadius: 0, backgroundColor: "#F1F2F2" }}
+          >
+            <AccordionSummary
+              expandIcon={
+                <AddCircleRoundedIcon className="md:text-[#3a95ea] text-[#3a95ea] md:text-5xl " />
+              }
+              aria-controls={`panel d-content`}
+              id={`panel d-header`}
+              className="bg-[#F1F2F2] flex-row-reverse md:flex-row-reverse"
+              sx={{ borderRadius: 0 }}
+            >
+              <Typography className="font-outfit md:text-2xl md:font-extralight md:py-4 text-[#3a95ea]">
+                Rsort Daily Schedule
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography className="text-[#2f2f30] md:text-lg bg-[#F1F2F2] font-outfit">
+                {propertyData?.resortDailySchedule}
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+        </div>
       </div>
     </>
   );

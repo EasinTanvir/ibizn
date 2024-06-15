@@ -11,28 +11,30 @@ import SwipeBoard from "./SwipeBoard";
 import { baseUrl } from "@/src/config/serverConfig";
 import Itineraries from "../Dashboard/Boat/Itineraries";
 import ItinerariesAndPrices from "./Itinerary/ItinerariesAndPrices";
+import ResortAndPrice from "./Itinerary/PackageAndPrice";
 // import SwipeBoard from "@/src/components/app/PropertyPage/SwipeBoard";
 
-function PropertyPage({ id }) {
+function ResortProperyPage({ rid }) {
   const [propertyData, setPropertyData] = useState({});
   console.log(propertyData);
+  console.log(rid);
 
   useEffect(() => {
-    fetch(`${baseUrl}/boats/single-boat/${id}`)
+    fetch(`${baseUrl}/resorts/single-resort/${rid}`)
       .then((res) => res.json())
       .then((data) => setPropertyData(data.data));
-  }, [id]);
+  }, [rid]);
   return (
     <>
       <Liveaboards propertyData={propertyData} />
       <div>
         <div className="">
-          <LiveaboardDetails propertyData={propertyData} />
+          <LiveaboardDetails resort={true} propertyData={propertyData} />
           <div className="swipeboard">
             <SwipeBoard propertyData={propertyData} />
           </div>
           <div id="accommodation">
-            <Accommodation propertyData={propertyData} />
+            <Accommodation resort={true} propertyData={propertyData} />
           </div>
         </div>
 
@@ -42,7 +44,7 @@ function PropertyPage({ id }) {
 
         <div className="">
           <div className="px-4 lg:px-0" id="food">
-            <Food propertyData={propertyData} />
+            <Food resort={true} propertyData={propertyData} />
           </div>
           <div className="bg-[#F1F2F2] py-20 px-4 lg:px-0" id="scuba">
             <Scuba propertyData={propertyData} />
@@ -51,10 +53,10 @@ function PropertyPage({ id }) {
             <Exclusions />
           </div>
           <div className="bg-[#F1F2F2] py-20 px-4 lg:px-0">
-            <EnvironmentelPacket propertyData={propertyData} />
+            <EnvironmentelPacket resort={true} propertyData={propertyData} />
           </div>
           <div id="itinerariesandprices">
-            <ItinerariesAndPrices propertyData={propertyData} />
+            <ResortAndPrice propertyData={propertyData} />
           </div>
         </div>
       </div>
@@ -62,4 +64,4 @@ function PropertyPage({ id }) {
   );
 }
 
-export default PropertyPage;
+export default ResortProperyPage;

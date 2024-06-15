@@ -3,8 +3,8 @@ import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 
-export default function RatingPortion() {
-  const [value, setValue] = React.useState(5); // Remove the type annotation
+export default function RatingPortion({ rating }) {
+  const [value, setValue] = React.useState(rating); // Remove the type annotation
 
   return (
     <Box

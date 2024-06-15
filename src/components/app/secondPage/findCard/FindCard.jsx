@@ -63,12 +63,14 @@ const faqData = [
   //if you want Add more questions and answers here as needed
 ];
 
-const FindCard = ({ searchResult, isLoading }) => {
+const FindCard = ({ searchResult, isLoading, resort }) => {
+  console.log(resort);
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   console.log(searchResult);
+
   return (
     <div className="min-h-[70vh] lg:w-[85%] mx-auto px-5 lg:px-0 py-20">
       <div>
@@ -88,7 +90,13 @@ const FindCard = ({ searchResult, isLoading }) => {
               {" "}
               {searchResult?.map((item, index) => (
                 <div
-                  onClick={() => router.push(`/secondPage/${item?._id}`)}
+                  onClick={() =>
+                    router.push(
+                      !resort
+                        ? `/secondPage/${item?._id}`
+                        : `/secondPage/resort/${item?._id}`
+                    )
+                  }
                   key={index}
                   className="border-2 border-primary mb-20 cursor-pointer"
                 >

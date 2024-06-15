@@ -1,7 +1,7 @@
 import React from "react";
 
 const PendingResortOrder = () => {
-  return <div>Pending resort order</div>;
+  return <div>Pending resort orders admin</div>;
 };
 
 export default PendingResortOrder;

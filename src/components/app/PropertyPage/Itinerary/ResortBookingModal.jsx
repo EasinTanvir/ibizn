@@ -5,6 +5,9 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { baseUrl } from "@/src/config/serverConfig";
 import toast from "react-hot-toast";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
+import dayjs from "dayjs";
 import { ColorRing } from "react-loader-spinner";
 const style = {
   position: "absolute",
@@ -17,7 +20,15 @@ const style = {
   p: 4,
 };
 
-const BookingModal = ({ open, setOpen, propertyData, schedule }) => {
+const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
+  const startDate = dayjs();
+  const endDate = dayjs().add(1, "day");
+
+  const [updatedDate, setUpdatedDate] = React.useState({
+    startDate,
+    endDate,
+  });
+
   const [loading, setLoading] = React.useState(false);
 
   const handleOpen = () => setOpen(true);
@@ -25,6 +36,8 @@ const BookingModal = ({ open, setOpen, propertyData, schedule }) => {
   // handle booking boat
   const handleBookingBoat = (e) => {
     setLoading(true);
+    const start = startDate.format();
+    const end = endDate.format();
     e.preventDefault();
     const form = e.target;
     const phone = form.phone.value;
@@ -34,16 +47,18 @@ const BookingModal = ({ open, setOpen, propertyData, schedule }) => {
     const bookingData = {
       property: propertyData?._id,
       operator: propertyData?.user?._id,
-      scheduleId: schedule?._id,
-      startDate: schedule?.tripStart,
-      endDate: schedule?.tripEnd,
-      price: schedule?.cost,
+      packageId: packages?._id,
+      price: packages?.price,
       phone,
       email,
       whatsapp,
       numberOfGuest,
+      startDate: start,
+      endDate: end,
     };
-    fetch(`${baseUrl}/boat-booking`, {
+    console.log(bookingData);
+
+    fetch(`${baseUrl}/resort-booking`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -53,11 +68,11 @@ const BookingModal = ({ open, setOpen, propertyData, schedule }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data?.success) {
-          setLoading(false);
           toast.success("Booking successful");
           setOpen(false);
+          setLoading(false);
         } else {
-          toast.error("Something went wrong");
+          toast.error("Booking Failed");
         }
       })
       .catch((error) => {
@@ -78,7 +93,7 @@ const BookingModal = ({ open, setOpen, propertyData, schedule }) => {
         <Box sx={style}>
           <form onSubmit={handleBookingBoat}>
             <Typography sx={{ fontSize: "25px", fontWeight: 600 }}>
-              Booking Schedule
+              Booking Package
             </Typography>
             <div className="mt-3">
               <p className="text-lg font-semibold">Phone:</p>
@@ -116,6 +131,38 @@ const BookingModal = ({ open, setOpen, propertyData, schedule }) => {
                 required
               />
             </div>
+            <React.Fragment>
+              <div className="md:flex gap-6 my-4">
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <div>
+                    <p className="text-lg font-semibold">Start date:</p>
+                    <DatePicker
+                      value={startDate}
+                      onChange={(newDate) =>
+                        setUpdatedDate({
+                          ...updatedDate,
+                          startDate: newDate,
+                        })
+                      }
+                      renderInput={(params) => <input {...params} />}
+                    />
+                  </div>
+                  <div>
+                    <p className="text-lg font-semibold">End Date:</p>
+                    <DatePicker
+                      value={endDate}
+                      onChange={(newDate) =>
+                        setUpdatedDate({
+                          ...updatedDate,
+                          endDate: newDate,
+                        })
+                      }
+                      renderInput={(params) => <input {...params} />}
+                    />
+                  </div>
+                </LocalizationProvider>
+              </div>
+            </React.Fragment>
             <div>
               <button
                 disabled={loading}
@@ -150,4 +197,4 @@ const BookingModal = ({ open, setOpen, propertyData, schedule }) => {
   );
 };
 
-export default BookingModal;
+export default ResortBookingModal;
