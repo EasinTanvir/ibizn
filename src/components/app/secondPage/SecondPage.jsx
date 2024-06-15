@@ -47,7 +47,14 @@ const SecondPage = () => {
     <div>
       <Banner setSearchResult={setSearchResult} />
       <Filtering />
-      <FindCard searchResult={searchResult} isLoading={isLoading} />
+      <FindCard
+        resort={
+          searchValues?.tabValue === "Resorts" ||
+          searchValues?.property === "resort"
+        }
+        searchResult={searchResult}
+        isLoading={isLoading}
+      />
     </div>
   );
 };

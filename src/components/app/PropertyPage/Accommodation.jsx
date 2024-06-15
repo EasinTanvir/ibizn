@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Accommodation = ({ propertyData }) => {
+const Accommodation = ({ propertyData, resort }) => {
   const [activeButton, setActiveButton] = useState("Regular room");
 
   const accommodationTypes = {
@@ -61,11 +61,13 @@ const Accommodation = ({ propertyData }) => {
               {propertyData?.accommodation?.description}
             </p>
           </div>
-          <div className="flex flex-wrap gap-4 mt-12 lg:mt-16 text-[#2f2f30]">
-            {Object.keys(accommodationTypes).map((button) => (
-              <Button key={button} label={button} />
-            ))}
-          </div>
+          {!resort && (
+            <div className="flex flex-wrap gap-4 mt-12 lg:mt-16 text-[#2f2f30]">
+              {Object.keys(accommodationTypes).map((button) => (
+                <Button key={button} label={button} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </div>

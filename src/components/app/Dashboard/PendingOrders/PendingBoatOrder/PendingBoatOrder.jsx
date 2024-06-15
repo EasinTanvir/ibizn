@@ -4,7 +4,10 @@ import { useRouter } from "next/router";
 import { Dropdown } from "flowbite-react";
 import Loader from "@/src/components/core/shared/Loader/Loader";
 import toast from "react-hot-toast";
+import { ColorRing } from "react-loader-spinner";
+
 const PendingBoatOrder = () => {
+  const [statusLoader, setStatusLoader] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [control, setControl] = useState(false);
   const [pendingBooking, setPendingBooking] = useState([]);
@@ -20,6 +23,7 @@ const PendingBoatOrder = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         setPendingBooking(data?.data);
         setIsLoading(false);
       })
@@ -31,6 +35,7 @@ const PendingBoatOrder = () => {
 
   // handle booking status update
   const handleBookingStatusUpdate = (id, status) => {
+    setStatusLoader(true);
     fetch(`${baseUrl}/boat-booking/update-status-by-operator/${id}`, {
       method: "PATCH",
       headers: {
@@ -43,9 +48,11 @@ const PendingBoatOrder = () => {
       .then((data) => {
         console.log(data);
         if (data?.success) {
+          setStatusLoader(false);
           toast.success(`Booking ${data?.data?.bookingStatus} successfully`);
           setControl(!control);
         } else {
+          setStatusLoader(false);
           toast.error(data?.message || "Something went wrong");
         }
       })
@@ -92,22 +99,42 @@ const PendingBoatOrder = () => {
                     View
                   </button>
                   {booking?.bookingStatus === "approved" && (
-                    <Dropdown label="Action" dismissOnClick={false}>
-                      <Dropdown.Item
-                        onClick={() =>
-                          handleBookingStatusUpdate(booking?._id, "accepted")
-                        }
-                      >
-                        Accept
-                      </Dropdown.Item>
-                      <Dropdown.Item
-                        onClick={() =>
-                          handleBookingStatusUpdate(booking?._id, "rejected")
-                        }
-                      >
-                        Reject
-                      </Dropdown.Item>
-                    </Dropdown>
+                    <>
+                      <>
+                        <>
+                          {" "}
+                          <button
+                            className="bg-red-800 text-white px-3 py-1 rounded-md"
+                            onClick={() =>
+                              handleBookingStatusUpdate(
+                                booking?._id,
+                                "accepted"
+                              )
+                            }
+                          >
+                            {statusLoader ? (
+                              <ColorRing
+                                visible={true}
+                                height="25"
+                                width="40"
+                                ariaLabel="color-ring-loading"
+                                wrapperStyle={{}}
+                                wrapperClass="color-ring-wrapper"
+                                colors={[
+                                  "#e15b64",
+                                  "#f47e60",
+                                  "#f8b26a",
+                                  "#abbd81",
+                                  "#849b87",
+                                ]}
+                              />
+                            ) : (
+                              "Accept"
+                            )}
+                          </button>
+                        </>
+                      </>
+                    </>
                   )}
                 </div>
               </td>
