@@ -17,6 +17,10 @@ const resortBookingSchema = new Schema(
       ref: "Package",
       required: true,
     },
+    name: {
+      type: String,
+      required: true,
+    },
     phone: {
       type: String,
       required: true,

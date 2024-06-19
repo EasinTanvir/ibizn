@@ -184,11 +184,11 @@ const boatSchema = new Schema(
     carousal: [{ type: String }],
     equipment: [{ type: String }],
     diveCourses: [{ type: String }],
-    cabins: [
-      {
-        type: cabinsSchema,
-      },
-    ],
+    // cabins: [
+    //   {
+    //     type: cabinsSchema,
+    //   },
+    // ],
     inclusions: [{ type: String }],
     exclusions: [{ type: String }],
     environmentalQuestions: {
