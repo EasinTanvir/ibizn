@@ -9,6 +9,14 @@ const cabinsSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  currency: {
+    type: String,
+    require: true,
+  },
+  convertedPrice: {
+    type: String,
+    require: true,
+  },
   cabinPicture: {
     type: String,
     require: true,

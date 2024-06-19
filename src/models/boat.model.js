@@ -16,6 +16,15 @@ const Schedules = new Schema({
     type: Date,
     required: true,
   },
+  currency: {
+    type: String,
+    required: true,
+  },
+  convertPrice: {
+    type: String,
+    required: true,
+  },
+
   tripEnd: {
     type: Date,
     required: true,

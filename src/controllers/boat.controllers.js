@@ -1,4 +1,6 @@
 const httpStatus = require("http-status");
+const { convertTedCurrency } = require("../utilities/currency");
+
 const {
   createBoatIntoDB,
   getBoatsFromDB,
@@ -15,6 +17,22 @@ const catchAsync = require("../utilities/catchAsync");
 const sendResponse = require("../utilities/sendResponse");
 
 const createBoat = catchAsync(async (req, res) => {
+  const scheduleItems = req.body.schedules;
+
+  const convertedPrices = await Promise.all(
+    scheduleItems.map(async (item) => {
+      const convertedPrice =
+        item.currency === "USD"
+          ? item.cost
+          : await convertTedCurrency(item.cost, item.currency);
+      return { ...item, convertPrice: convertedPrice }; // Add converted price to the item
+    })
+  );
+
+  // Update req.body.schedules with converted prices
+  console.log("convertedPrices = ", convertedPrices);
+  req.body.schedules = convertedPrices;
+
   const result = await createBoatIntoDB(req.user, req.body);
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
@@ -103,6 +121,21 @@ const getSingleBoat = catchAsync(async (req, res) => {
 });
 // update boat
 const updateBoat = catchAsync(async (req, res) => {
+  if (req.body.schedules && req.body.schedules.length > 0) {
+    console.log("status = ", req.body.status);
+    const scheduleItems = req.body.schedules;
+    const convertedPrices = await Promise.all(
+      scheduleItems.map(async (item) => {
+        const convertedPrice =
+          item.currency === "USD"
+            ? item.cost
+            : await convertTedCurrency(item.cost, item.currency);
+        return { ...item, convertPrice: convertedPrice }; // Add converted price to the item
+      })
+    );
+    req.body.schedules = convertedPrices;
+  }
+
   const { id } = req.params;
   const payload = req.body;
   const result = await updateBoatFromDB(id, payload);

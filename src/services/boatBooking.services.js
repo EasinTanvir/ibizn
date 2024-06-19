@@ -42,7 +42,6 @@ const createBoatBookingIntoDB = async (payload) => {
 };
 
 const getAllPendingBoatBookingFromDB = async (userData) => {
-  console.log(userData);
   if (userData?.role === "admin") {
     const result = await BoatBooking.find({
       $and: [

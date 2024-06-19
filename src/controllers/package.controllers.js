@@ -1,6 +1,7 @@
 const httpStatus = require("http-status");
 const catchAsync = require("../utilities/catchAsync");
 const sendResponse = require("../utilities/sendResponse");
+const { convertTedCurrency } = require("../utilities/currency");
 const {
   createPackageIntoDB,
   getAllPackageIntoDB,
@@ -10,7 +11,15 @@ const {
 } = require("../services/package.services");
 
 const createPackage = catchAsync(async (req, res) => {
-  console.log(req.user);
+  const price = req.body.price;
+  const currecny = req.body.currency;
+
+  let ConvertedPrice =
+    currecny === "USD" ? price : await convertTedCurrency(price, currecny);
+
+  //ConvertedPrice
+  req.body.ConvertedPrice = ConvertedPrice;
+
   const result = await createPackageIntoDB(req.user, req.body);
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
@@ -35,28 +44,47 @@ const getAllPackage = catchAsync(async (req, res) => {
 
 const getSinglePackage = catchAsync(async (req, res) => {
   const { id } = req.params;
-  const result = await getSinglePackageIntoDB(id)
+  const result = await getSinglePackageIntoDB(id);
 
-sendResponse(res, {
+  sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: "Package is retrieved successfully",
     data: result,
   });
-})
+});
+
 // update Single Package
 
 const updatetSinglePackage = catchAsync(async (req, res) => {
-  const { id } = req.params;
-  const result = await updatePackageIntoDB(id,req.body)
+  const price = req.body.price;
+  const packageCurrency = req.body.currency;
+  let convertedPrice;
 
-sendResponse(res, {
+  try {
+    convertedPrice =
+      packageCurrency === "USD"
+        ? price
+        : await convertTedCurrency(price, packageCurrency);
+  } catch (err) {
+    console.log(err);
+  }
+  console.log(req.body);
+  console.log("price = ", price);
+  console.log("packageCurrency = ", packageCurrency);
+  console.log("convertedPrice = ", convertedPrice);
+  req.body.ConvertedPrice = convertedPrice;
+
+  const { id } = req.params;
+  const result = await updatePackageIntoDB(id, req.body);
+
+  sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: "Package is updated successfully",
     data: result,
   });
-})
+});
 
 // delete itinerary
 const deletePackage = catchAsync(async (req, res) => {
@@ -70,4 +98,10 @@ const deletePackage = catchAsync(async (req, res) => {
   });
 });
 
-module.exports = { createPackage, getAllPackage, deletePackage, getSinglePackage ,updatetSinglePackage};
+module.exports = {
+  createPackage,
+  getAllPackage,
+  deletePackage,
+  getSinglePackage,
+  updatetSinglePackage,
+};

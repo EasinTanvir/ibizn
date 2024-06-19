@@ -47,7 +47,7 @@ const createBoatIntoDB = async (userData, payload) => {
 // another ------------
 const getAllBoatFromDB = async (queryData) => {
   const { tabValue, destination, date, minRating, maxRating } = queryData;
-  console.log("queryData", queryData);
+
   // Initialize an empty query object
   const query = {
     status: "approved",

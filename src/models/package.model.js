@@ -47,6 +47,14 @@ const packageSchema = new Schema(
       type: Number,
       required: true,
     },
+    currency: {
+      type: String,
+      required: true,
+    },
+    ConvertedPrice: {
+      type: String,
+      required: true,
+    },
     // resortDailySchedule: {
     //   type: String,
     //   required: true,

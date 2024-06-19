@@ -1,4 +1,5 @@
 const httpStatus = require("http-status");
+const { convertTedCurrency } = require("../utilities/currency");
 const {
   createItineraryIntoDB,
   getItinerariesFromDB,
@@ -10,6 +11,20 @@ const catchAsync = require("../utilities/catchAsync");
 const sendResponse = require("../utilities/sendResponse");
 
 const createItinerary = catchAsync(async (req, res) => {
+  const itinaryCabins = req.body.cabins;
+
+  const convertedPrices = await Promise.all(
+    itinaryCabins.map(async (item) => {
+      const convertedPrice =
+        item.currency === "USD"
+          ? item.cabinPrice
+          : await convertTedCurrency(item.cabinPrice, item.currency);
+      return { ...item, convertedPrice: convertedPrice };
+    })
+  );
+
+  req.body.cabins = convertedPrices;
+
   const result = await createItineraryIntoDB(req.user, req.body);
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
@@ -41,7 +56,21 @@ const getSingleItineraries = catchAsync(async (req, res) => {
 });
 // update  itinerary for operator -----
 const updateSingleItineraries = catchAsync(async (req, res) => {
-  const result = await updateSingleIteneryFromDB(req.params?.id,req.body);
+  const itinaryCabins = req.body.cabins;
+
+  const convertedPrices = await Promise.all(
+    itinaryCabins.map(async (item) => {
+      const convertedPrice =
+        item.currency === "USD"
+          ? item.cabinPrice
+          : await convertTedCurrency(item.cabinPrice, item.currency);
+      return { ...item, convertedPrice: convertedPrice };
+    })
+  );
+
+  req.body.cabins = convertedPrices;
+
+  const result = await updateSingleIteneryFromDB(req.params?.id, req.body);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -62,4 +91,10 @@ const deleteItinerary = catchAsync(async (req, res) => {
   });
 });
 
-module.exports = { createItinerary, getItineraries, deleteItinerary ,getSingleItineraries,updateSingleItineraries};
+module.exports = {
+  createItinerary,
+  getItineraries,
+  deleteItinerary,
+  getSingleItineraries,
+  updateSingleItineraries,
+};
