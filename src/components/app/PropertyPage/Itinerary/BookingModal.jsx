@@ -37,7 +37,7 @@ const BookingModal = ({ open, setOpen, propertyData, schedule }) => {
       scheduleId: schedule?._id,
       startDate: schedule?.tripStart,
       endDate: schedule?.tripEnd,
-      price: schedule?.cost,
+      price: Number(schedule?.convertPrice),
       phone,
       email,
       whatsapp,

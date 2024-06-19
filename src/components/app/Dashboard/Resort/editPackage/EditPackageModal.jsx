@@ -13,13 +13,25 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "60vw",
-  height: "70vh",
+  width: "80vw",
+  height: "80vh",
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  border: "none",
   boxShadow: 24,
   p: 4,
-  overflow: "scroll",
+  borderRadius: "10px",
+  overflowY: "auto",
+  "&::-webkit-scrollbar": {
+    width: "12px", // Set the width of the scrollbar
+  },
+  "&::-webkit-scrollbar-thumb": {
+    backgroundColor: "#888", // Set the color of the scrollbar thumb
+    borderRadius: "10px", // Set the border radius of the scrollbar thumb
+    border: "3px solid #f1f1f1", // Add a border around the scrollbar thumb
+  },
+  "&::-webkit-scrollbar-thumb:hover": {
+    background: "#555", // Set the color of the scrollbar thumb on hover
+  },
 };
 const EditPackageModal = ({
   open,
@@ -30,6 +42,14 @@ const EditPackageModal = ({
   const router = useRouter();
   const [loader, setLoader] = useState(true);
   const [packageData, setPackageData] = useState({});
+  const [currency, setCurrency] = useState(null);
+
+  const handleCurrencyChange = (event) => {
+    let myEvents = event !== "select" ? event : "USD";
+    setCurrency(myEvents);
+    setPackageData({ ...packageData, currency: myEvents });
+  };
+
   useEffect(() => {
     fetch(`${baseUrl}/packages/single-package/${singlePackageData.id}`, {
       method: "GET",
@@ -40,6 +60,7 @@ const EditPackageModal = ({
       .then((res) => res.json())
       .then((data) => {
         setPackageData(data?.data);
+        setCurrency(data?.data.currency);
         setLoader(false);
       })
       .catch((err) => console.log(err));
@@ -95,7 +116,7 @@ const EditPackageModal = ({
         ) : (
           <div>
             <h3 className="text-center font-semibold text-3xl">
-              Please Edit your accommodation and dive package
+              Update Accommodation And Dive Package
             </h3>
             <div className="mt-10">
               <form onSubmit={handlePackageSubmit}>
@@ -240,7 +261,7 @@ const EditPackageModal = ({
                     </select>
                   </div>
                 </div>
-                <div>
+                <div className="flex items-center  gap-2">
                   <div className="mt-4 w-full">
                     <p className="text-lg font-semibold">Price</p>
                     <input
@@ -257,24 +278,34 @@ const EditPackageModal = ({
                       className="w-full rounded-md"
                     />
                   </div>
+                  <div className="w-full">
+                    <p className="text-lg font-semibold mt-4">Currency</p>
+                    <select
+                      required
+                      className="font-semibold rounded-md border w-full border-slate-600"
+                      onChange={(e) => handleCurrencyChange(e.target.value)}
+                      value={currency}
+                      name="currency"
+                      id="currency"
+                    >
+                      {console.log(packageData?.currency)}
+                      <option value="select">Select Currency</option>
+                      <option value="USD">USD</option>
+                      <option value="EUR">EUR</option>
+                      <option value="IDR">IDR</option>
+                      <option value="GBP">GBP</option>
+                      <option value="CAD">CAD</option>
+                      <option value="AUD">AUD</option>
+                      <option value="NZD">NZD</option>
+                      <option value="THB">THB</option>
+                      <option value="CHF">CHF</option>
+                      <option value="PHP">PHP</option>
+
+                      <option value="MYR">MYR</option>
+                    </select>
+                  </div>
                 </div>
-                <div className="mt-3">
-                  <p className="text-lg font-semibold">Resort daily schedule</p>
-                  <textarea
-                    onChange={(e) =>
-                      setPackageData({
-                        ...packageData,
-                        resortDailySchedule: e.target.value,
-                      })
-                    }
-                    type="text"
-                    required
-                    defaultValue={packageData?.resortDailySchedule}
-                    name="resortDailySchedule"
-                    placeholder="Resort daily schedule"
-                    className="w-full h-20 rounded-md"
-                  />
-                </div>
+
                 {/* {error && <p className="text-red-600 text-xl mb-3">{error}</p>} */}
 
                 <input

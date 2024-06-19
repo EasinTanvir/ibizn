@@ -39,13 +39,13 @@ const BoatEdit = ({ id }) => {
             onClick={() =>
               window.open(`/secondPage/${bookingData?.property?._id}`, "_blank")
             }
-            className="text-2xl font-semibold  underline cursor-pointer"
+            className="text-2xl py-10 font-semibold  underline cursor-pointer"
           >
             {bookingData?.property?.nameOfProperty}
             <LaunchIcon sx={{ ml: "10px" }} />
           </h2>
           <img
-            className="w-full h-[300px] rounded my-3 object-contain"
+            className="w-fit mx-auto max-w-full pb-10 h-fit rounded my-3 object-cover"
             src={bookingData?.property?.featuredImage}
             alt="featured image"
           />

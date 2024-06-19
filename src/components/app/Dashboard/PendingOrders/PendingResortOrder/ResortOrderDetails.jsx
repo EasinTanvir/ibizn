@@ -136,7 +136,10 @@ const ResortOrderDetails = ({ id }) => {
               );
             })}
           </div>
-          <ResortOrderedSchedule packagess={bookingData?.packageId} />
+          <ResortOrderedSchedule
+            packagess={bookingData?.packageId}
+            price={bookingData.price}
+          />
 
           <OperatorDetails userInfo={bookingData?.operator} />
 

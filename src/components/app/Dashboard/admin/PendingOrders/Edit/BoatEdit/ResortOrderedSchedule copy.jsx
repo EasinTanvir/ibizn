@@ -2,7 +2,7 @@ import React from "react";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
-const ResortOrderedSchedule = ({ packagess }) => {
+const ResortOrderedSchedule = ({ packagess, price }) => {
   console.log(packagess);
   const schedule = {};
   return (
@@ -42,7 +42,7 @@ const ResortOrderedSchedule = ({ packagess }) => {
           </span>
         </h1>
         <h1 className="font-semibold text-slate-800">
-          Price : <span>{packagess?.price}</span>
+          Price : $<span>{price} USD</span>
         </h1>
       </div>
     </div>

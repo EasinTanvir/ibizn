@@ -30,7 +30,7 @@ function CabinModal({ cabins, setOpen, open }) {
               id="modal-modal-title"
               className="text-xl md:text-3xl text-primary font-[400]"
             >
-              Cabins
+              Cabinsss
             </Typography>
             <div className="w-full h-[1px] bg-slate-400 mt-2"></div>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
@@ -48,9 +48,13 @@ function CabinModal({ cabins, setOpen, open }) {
                     </Typography>
                     <Typography variant="subtitle2" className="text-xl">
                       <span className="text-primary text-xl font-light md:text-2xl">
-                        price
+                        Price
                       </span>{" "}
-                      : ${cabin.cabinPrice}
+                      :{" "}
+                      <span className="font-semibold">
+                        ${Number(cabin?.convertedPrice).toFixed(2)}
+                      </span>{" "}
+                      USD
                     </Typography>
                   </div>
                 ))

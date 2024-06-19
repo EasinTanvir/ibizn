@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Swal from "sweetalert2";
 const AddPackage = () => {
   const router = useRouter();
+  const [currency, setCurrency] = useState(null);
   const [packageData, setPackageData] = useState({
     fullBoard: false,
     breakfast: false,
@@ -15,6 +16,11 @@ const AddPackage = () => {
     const newPackageData = { ...packageData };
     newPackageData[e.target.name] = e.target.value;
     setPackageData(newPackageData);
+  };
+
+  const handleCurrencyChange = (event) => {
+    let myEvents = event !== "select" ? event : "USD";
+    setCurrency(myEvents);
   };
 
   /// handle package submit
@@ -40,6 +46,7 @@ const AddPackage = () => {
         // resortDailySchedule: packageData?.resortDailySchedule,
         divingCourses: packageData?.divingCourses,
         price: parseFloat(packageData?.price),
+        currency: currency,
       }),
     })
       .then((res) => res.json())
@@ -67,7 +74,7 @@ const AddPackage = () => {
   return (
     <div className="max-w-screen-lg mx-auto ">
       <h3 className="text-center font-semibold text-3xl">
-        Please add your accommodation and dive package
+        Accommodation And Dive Package
       </h3>
       <div className="mt-10">
         <form onSubmit={handlePackageSubmit}>
@@ -93,6 +100,31 @@ const AddPackage = () => {
                 placeholder="Price"
                 className="w-full rounded-md"
               />
+            </div>
+            <div className="mt-4 w-full">
+              <p className="text-lg font-semibold">Currency</p>
+              <select
+                required
+                className="font-semibold border border-slate-600"
+                onChange={(e) => handleCurrencyChange(e.target.value)}
+                value={currency}
+                name=""
+                id=""
+              >
+                <option value="select">Select Currency</option>
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="IDR">IDR</option>
+                <option value="GBP">GBP</option>
+                <option value="CAD">CAD</option>
+                <option value="AUD">AUD</option>
+                <option value="NZD">NZD</option>
+                <option value="THB">THB</option>
+                <option value="CHF">CHF</option>
+                <option value="PHP">PHP</option>
+
+                <option value="MYR">MYR</option>
+              </select>
             </div>
           </div>
           <div className="lg:flex gap-3 justify-between">

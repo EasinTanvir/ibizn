@@ -13,14 +13,25 @@ const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
-
   transform: "translate(-50%, -50%)",
-  width: "60vw",
-  height: "80vh",
+  width: "70vw",
+  height: "85vh",
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
+  borderRadius: "10px",
   overflow: "scroll",
+  "&::-webkit-scrollbar": {
+    width: "12px", // Set the width of the scrollbar
+  },
+  "&::-webkit-scrollbar-thumb": {
+    backgroundColor: "#888", // Set the color of the scrollbar thumb
+    borderRadius: "10px", // Set the border radius of the scrollbar thumb
+    border: "3px solid #f1f1f1", // Add a border around the scrollbar thumb
+  },
+  "&::-webkit-scrollbar-thumb:hover": {
+    background: "#555", // Set the color of the scrollbar thumb on hover
+  },
 };
 // console.log({ Questions });
 const PropertyModalView = ({
@@ -92,7 +103,7 @@ const PropertyModalView = ({
               onClick={() =>
                 window.open(`/secondPage/${resortData?._id}`, "_blank")
               }
-              className="text-2xl font-semibold underline cursor-pointer "
+              className="text-2xl w-full  py-5 font-semibold underline cursor-pointer "
             >
               {/* {singleData?.nameOfProperty
               ? singleData.nameOfProperty
@@ -101,7 +112,7 @@ const PropertyModalView = ({
               <LaunchIcon sx={{ ml: "10px" }} />
             </h2>
             <img
-              className="w-full h-[300px] rounded my-3 object-contain"
+              className="w-full h-[300px] pb-10 rounded my-3 object-cover"
               // src={featuredImage}
               src={resortData?.briefImage}
               alt="featured image"

@@ -42,7 +42,7 @@ function ResortAndPrice({ propertyData }) {
                     ({item?.numberOfDay} Days / {item?.numberOfNight} Nights)
                   </div>
                   <span className="inline-block text-[#09aafe] text-xl font-bold">
-                    (from {item.price} USD)
+                    (from {Number(item.ConvertedPrice).toFixed(2)} USD)
                   </span>
                 </div>
               </div>

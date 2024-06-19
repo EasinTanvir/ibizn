@@ -15,27 +15,29 @@ import Spinner from "@/src/components/core/shared/Loader/Spinner";
 
 export default function EditBoat({ id }) {
   const [boatData, setBoatData] = useState({});
+
   const [loader, setLoader] = useState(false);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   // console.log({ id });
-  console.log(boatData);
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     if (id) {
       fetch(`${baseUrl}/boats/single-boat/${id}`)
         .then((res) => res.json())
         .then((data) => {
           setBoatData(data.data);
-          setLoading(false)
+          setLoading(false);
         });
     }
   }, [id && !boatData]);
 
   // handler for update boat
 
+  console.log(boatData);
   const handleUpdateBoatData = () => {
+    console.log(boatData);
     setLoading(true);
     fetch(`${baseUrl}/boats/update-boat/${id}`, {
       method: "PUT",

@@ -13,7 +13,7 @@ import ResortOrderedSchedule from "./ResortOrderedSchedule copy";
 const ResortEdit = ({ id }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [bookingData, setBookingData] = useState({});
-  console.log(bookingData);
+  console.log(bookingData.price);
   useEffect(() => {
     setIsLoading(true);
     fetch(`${baseUrl}/resort-booking/${id}`, {
@@ -138,7 +138,10 @@ const ResortEdit = ({ id }) => {
               );
             })}
           </div>
-          <ResortOrderedSchedule packagess={bookingData?.packageId} />
+          <ResortOrderedSchedule
+            packagess={bookingData?.packageId}
+            price={bookingData.price}
+          />
           <OperatorDetails userInfo={bookingData?.operator} />
 
           <EditFormResort

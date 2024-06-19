@@ -43,12 +43,21 @@ const style = {
 };
 
 const BoardTable = ({ boatData, setBoatData }) => {
-  console.log("boatData", boatData);
   const [row, setRow] = useState(0);
   const [open, setOpen] = useState(false);
   const [itinerary, setItinerary] = useState([]);
   // console.log(itinerary);
-  const [formData, setFormData] = useState(initialState);
+  const [formData, setFormData] = useState({
+    tripStart: "null",
+    tripEnd: "null",
+    itinerary: "",
+    cost: 0,
+    discount: {
+      name: "",
+      percent: 0,
+    },
+    special: false,
+  });
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const incrementRow = () => {
@@ -58,6 +67,7 @@ const BoardTable = ({ boatData, setBoatData }) => {
 
   /// update row functionality
   const [updateItem, setUpdateItem] = useState({});
+  console.log(updateItem);
   const [updatedStartTrip, setUpdatedStartTrip] = useState(null);
   const [updatedEndTrip, setUpdatedEndTrip] = useState(null);
   // console.log("date", updatedStartTrip, updatedEndTrip);
@@ -66,13 +76,30 @@ const BoardTable = ({ boatData, setBoatData }) => {
   const [updatedDiscountName, setUpdatedDiscountName] = useState(null);
   const [updatedDiscountPercent, setUpdatedDiscountPercent] = useState(null);
   const [updatedSpecial, setUpdatedSpecial] = useState(null);
+  const [selectTedItinery, setSelectTedItinery] = useState("");
+  const [currency, setCurrency] = useState(updateItem?.currency);
 
   const [index, setIndex] = useState(0);
+  console.log(index);
   const [updateModalOpen, setUpdateModalOpen] = useState(false);
+
+  const handleCurrencyChange = (event) => {
+    let myEvents = event !== "select" ? event : "USD";
+
+    setCurrency(myEvents);
+  };
+
   const handleUpdateModalOpen = (item, index) => {
+    console.log(item);
     setUpdateItem(item);
     setIndex(index);
     setUpdateModalOpen(true);
+    setCurrency(item.currency);
+    // const selectData = boatData?.schedules[index];
+    // console.log(selectData.itinerary._id);
+    // const oneitinary = itinerary.filter(
+    //   (item) => item._id === selectData.itinerary._id
+    // );
   };
   const handleUpdateModalClose = () => setUpdateModalOpen(false);
 
@@ -91,6 +118,7 @@ const BoardTable = ({ boatData, setBoatData }) => {
 
     // Find the targeted schedule object using the index
     const targetedSchedule = updatedSchedules[index];
+    console.log(targetedSchedule);
 
     if (targetedSchedule) {
       // Update the properties of the targeted schedule object
@@ -99,14 +127,15 @@ const BoardTable = ({ boatData, setBoatData }) => {
         tripStart:
           updatedStartTrip !== null
             ? updatedStartTrip
-            : targetedSchedule.startTrip,
+            : targetedSchedule.tripStart,
         tripEnd:
-          updatedEndTrip !== null ? updatedEndTrip : targetedSchedule.endTrip,
+          updatedEndTrip !== null ? updatedEndTrip : targetedSchedule.tripEnd,
         itinerary:
           updatedItinerary !== null
             ? updatedItinerary
-            : targetedSchedule.itinerary,
+            : targetedSchedule.itinerary._id,
         cost: updatedCost !== null ? updatedCost : targetedSchedule.cost,
+        currency,
         discount: {
           name:
             updatedDiscountName !== null
@@ -131,6 +160,7 @@ const BoardTable = ({ boatData, setBoatData }) => {
       setUpdateModalOpen(false);
     }
   };
+  console.log(itinerary);
 
   useEffect(() => {
     fetch(`${baseUrl}/itineraries/`, {
@@ -287,6 +317,7 @@ const BoardTable = ({ boatData, setBoatData }) => {
                 <h1 className="font-bold text-xl border-b mb-2 pb-2">
                   Trip Start And End Date
                 </h1>
+
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DateRangePicker
                     value={[formData.tripStart, formData.tripEnd]}
@@ -422,6 +453,7 @@ const BoardTable = ({ boatData, setBoatData }) => {
                   <InputLabel id="demo-simple-select-label">
                     itinerary
                   </InputLabel>
+
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
@@ -449,6 +481,27 @@ const BoardTable = ({ boatData, setBoatData }) => {
                   onChange={(e) => setUpdatedCost(e.target.value)}
                   variant="outlined"
                 />
+                <select
+                  required
+                  className="font-semibold border border-slate-600"
+                  onChange={(e) => handleCurrencyChange(e.target.value)}
+                  value={currency}
+                  name=""
+                  id=""
+                >
+                  <option value="select">Select Currency</option>
+                  <option value="USD">USD</option>
+                  <option value="EUR">EUR</option>
+                  <option value="IDR">IDR</option>
+                  <option value="GBP">GBP</option>
+                  <option value="CAD">CAD</option>
+                  <option value="AUD">AUD</option>
+                  <option value="NZD">NZD</option>
+                  <option value="THB">THB</option>
+                  <option value="CHF">CHF</option>
+                  <option value="PHP">PHP</option>
+                  <option value="MYR">MYR</option>
+                </select>
               </div>
               <div>
                 <h1 className="font-bold mt-2 text-xl border-b mb-2">

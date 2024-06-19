@@ -102,7 +102,7 @@ function EnvironmentelPacket({ propertyData, resort }) {
                 sx={{ borderRadius: 0 }}
               >
                 <Typography className="font-outfit md:text-2xl md:font-extralight md:py-4 text-[#3a95ea]">
-                  Rsort Daily Schedule
+                  Resort Daily Schedule
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>

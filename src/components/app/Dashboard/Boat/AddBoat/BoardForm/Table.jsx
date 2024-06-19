@@ -52,6 +52,7 @@ const BoardTable = ({
   submitData,
 }) => {
   console.log({ boardData });
+  const [currency, setCurrency] = useState(null);
   const [row, setRow] = useState(0);
   const [open, setOpen] = useState(false);
   const [itinerary, setItinerary] = useState([]);
@@ -78,6 +79,17 @@ const BoardTable = ({
         console.log(err);
       });
   }, []);
+
+  const handleCurrencyChange = (event) => {
+    let myEvents = event !== "select" ? event : "USD";
+    console.log(myEvents);
+    setCurrency(myEvents);
+
+    setFormData({
+      ...formData,
+      currency: myEvents,
+    });
+  };
 
   const handleChange = (event) => {
     setItinerary(event.target.value);
@@ -149,7 +161,7 @@ const BoardTable = ({
   return (
     <div className="overflow-x-auto">
       <form onSubmit={submitData}>
-        <Button onClick={incrementRow}>(+) add new row</Button>
+        <Button onClick={incrementRow}>(+) add new Trip</Button>
         <table className="min-w-full bg-white border border-gray-300">
           <thead>
             <tr>
@@ -287,13 +299,37 @@ const BoardTable = ({
               <h1 className="font-bold text-xl border-b mb-2 mt-3 pb-2">
                 Trip Cost
               </h1>
-              <TextField
-                id="outlined-basic"
-                label="Trip Cost"
-                type="number"
-                onChange={handleCostChange}
-                variant="outlined"
-              />
+              <div className="flex items-center gap-3">
+                <TextField
+                  id="outlined-basic"
+                  label="Trip Cost"
+                  type="number"
+                  onChange={handleCostChange}
+                  variant="outlined"
+                />
+
+                <select
+                  required
+                  className="font-semibold border border-slate-600"
+                  onChange={(e) => handleCurrencyChange(e.target.value)}
+                  value={currency}
+                  name=""
+                  id=""
+                >
+                  <option value="select">Select Currency</option>
+                  <option value="USD">USD</option>
+                  <option value="EUR">EUR</option>
+                  <option value="IDR">IDR</option>
+                  <option value="GBP">GBP</option>
+                  <option value="CAD">CAD</option>
+                  <option value="AUD">AUD</option>
+                  <option value="NZD">NZD</option>
+                  <option value="THB">THB</option>
+                  <option value="CHF">CHF</option>
+                  <option value="PHP">PHP</option>
+                  <option value="MYR">MYR</option>
+                </select>
+              </div>
             </div>
             <div>
               <h1 className="font-bold mt-2 text-xl border-b mb-2">Discount</h1>

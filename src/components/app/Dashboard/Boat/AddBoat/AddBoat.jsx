@@ -30,6 +30,7 @@ const AddBoat = () => {
   const [cabinsData, setCabinsData] = useState([]);
   const totalSteps = 8;
   const [itineraryData, setItineraryData] = useState([]);
+  console.log(itineraryData);
   // const [fileError, setFileError] = useState('');
   console.log("current step =======================>", currentStep);
 

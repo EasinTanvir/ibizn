@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CabinModal from "./CabinModal";
 import BookingModal from "./BookingModal";
+import axios from "axios";
 
 function ItinerariesAndPrices({ propertyData }) {
   const [cabins, setCabins] = useState([]);
+  const [convertedAmounts, setConvertedAmounts] = useState({});
 
+  const [conPrice, setConPrice] = useState();
   const [open, setOpen] = useState(false);
   const handleOpen = (cabins) => {
     setOpen(true);
@@ -30,58 +33,64 @@ function ItinerariesAndPrices({ propertyData }) {
         </h1>
 
         {propertyData?.schedules?.length > 0 ? (
-          propertyData?.schedules?.map((schedule, index) => (
-            <div
-              key={index}
-              className="border-2 flex flex-col xl:flex-row gap-4 border-[#09aafe] text-white p-8 mb-4 rounded-lg md:justify-between items-start"
-            >
-              <div className="w-full">
-                <div className="md:text-white md:text-4xl items-end font-[400] flex flex-wrap gap-2 md:gap-8">
-                  <div className="inline-block text-xl md:text-xl lg:text-4xl">
-                    {new Date(schedule?.tripStart).toLocaleDateString("en-GB", {
-                      day: "2-digit",
-                      month: "short",
-                      year: "numeric",
-                    })}{" "}
-                    —{" "}
-                    {new Date(schedule?.tripEnd).toLocaleDateString("en-GB", {
-                      day: "2-digit",
-                      month: "short",
-                      year: "numeric",
-                    })}
+          propertyData?.schedules?.map((schedule, index) => {
+            return (
+              <div
+                key={index}
+                className="border-2 flex flex-col xl:flex-row gap-4 border-[#09aafe] text-white p-8 mb-4 rounded-lg md:justify-between items-start"
+              >
+                <div className="w-full">
+                  <div className="md:text-white md:text-4xl items-end font-[400] flex flex-wrap gap-2 md:gap-8">
+                    <div className="inline-block text-xl md:text-xl lg:text-4xl">
+                      {new Date(schedule?.tripStart).toLocaleDateString(
+                        "en-GB",
+                        {
+                          day: "2-digit",
+                          month: "short",
+                          year: "numeric",
+                        }
+                      )}{" "}
+                      —{" "}
+                      {new Date(schedule?.tripEnd).toLocaleDateString("en-GB", {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </div>
+                    <div className="inline-block text-2xl font-light">
+                      ({schedule?.itinerary?.numberOfDays} Days /{" "}
+                      {schedule?.itinerary?.numberOfNights} Nights)
+                    </div>
+                    <span className="inline-block text-[#09aafe] text-xl font-bold">
+                      (from <>${Number(schedule?.convertPrice).toFixed(2)}</>{" "}
+                      USD)
+                    </span>
                   </div>
-                  <div className="inline-block text-2xl font-light">
-                    ({schedule?.itinerary?.numberOfDays} Days /{" "}
-                    {schedule?.itinerary?.numberOfNights} Nights)
+                  <div className="mt-4">
+                    <span className="text-2xl md:text-5xl md:font-light">
+                      {schedule?.itinerary?.embarkationPoints} —{" "}
+                      {schedule?.itinerary?.disembarkationPoints}
+                    </span>
                   </div>
-                  <span className="inline-block text-[#09aafe] text-xl font-bold">
-                    (from {schedule.cost} USD)
-                  </span>
                 </div>
-                <div className="mt-4">
-                  <span className="text-2xl md:text-5xl md:font-light">
-                    {schedule?.itinerary?.embarkationPoints} —{" "}
-                    {schedule?.itinerary?.disembarkationPoints}
-                  </span>
-                </div>
-              </div>
 
-              <div className="flex gap-4 mt-4 md:mt-0">
-                <button
-                  onClick={() => handleOpen(schedule?.itinerary?.cabins)}
-                  className="bg-primary border-2 border-white text-white md:px-16 rounded-full px-6 py-2 text-sm md:text-xl lg:text-2xl"
-                >
-                  Itinerary
-                </button>
-                <button
-                  onClick={() => handleOpenBookingModal(schedule)}
-                  className="bg-white text-primary rounded-full px-6 py-2 md:px-16 text-sm md:text-xl lg:text-2xl"
-                >
-                  Select
-                </button>
+                <div className="flex gap-4 mt-4 md:mt-0">
+                  <button
+                    onClick={() => handleOpen(schedule?.itinerary?.cabins)}
+                    className="bg-primary border-2 border-white text-white md:px-16 rounded-full px-6 py-2 text-sm md:text-xl lg:text-2xl"
+                  >
+                    Itinerary
+                  </button>
+                  <button
+                    onClick={() => handleOpenBookingModal(schedule)}
+                    className="bg-white text-primary rounded-full px-6 py-2 md:px-16 text-sm md:text-xl lg:text-2xl"
+                  >
+                    Select
+                  </button>
+                </div>
               </div>
-            </div>
-          ))
+            );
+          })
         ) : (
           <p>No itineraries available.</p>
         )}

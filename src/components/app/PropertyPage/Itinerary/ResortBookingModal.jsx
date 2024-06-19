@@ -48,7 +48,7 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
       property: propertyData?._id,
       operator: propertyData?.user?._id,
       packageId: packages?._id,
-      price: packages?.price,
+      price: Number(packages?.ConvertedPrice),
       phone,
       email,
       whatsapp,
