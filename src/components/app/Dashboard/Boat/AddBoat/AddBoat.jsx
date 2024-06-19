@@ -27,7 +27,6 @@ const AddBoat = () => {
   const [selectedEquipments, setSelectedEquipments] = useState([]);
   const [selectedBoatDive, setSelectedBoatDive] = useState([]);
   const [currentStep, setCurrentStep] = useState(1);
-  const [cabinsData, setCabinsData] = useState([]);
   const totalSteps = 8;
   const [itineraryData, setItineraryData] = useState([]);
   console.log(itineraryData);
@@ -271,7 +270,6 @@ const AddBoat = () => {
       body: JSON.stringify({
         ...boardData,
         carousal: caruselImages,
-        cabins: cabinsData,
         schedules: itineraryData,
         exclusions: selectedExclusions,
         facilities: selectedFacilities,
@@ -311,8 +309,6 @@ const AddBoat = () => {
             setCurrentStep={setCurrentStep}
             increaseProgress={increaseProgress}
             handleInputChange={handleInputChange}
-            cabinsData={cabinsData}
-            setCabinsData={setCabinsData}
             caruselImages={caruselImages}
             setCaruselImages={setCaruselImages}
             handleImageChanges={handleImageChanges}

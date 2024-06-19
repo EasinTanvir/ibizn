@@ -7,9 +7,15 @@ import Loader from "@/src/components/core/shared/Loader/Loader";
 import OrderedSchedule from "../../admin/PendingOrders/Edit/BoatEdit/OrderedSchedule";
 import OperatorDetails from "../../admin/PendingProperty/OperatorDetails";
 import EditForm from "../../admin/PendingOrders/Edit/BoatEdit/EditForm";
+import { userContext } from "@/src/storage/contextApi";
+import { usePathname } from "next/navigation";
 const BoatOrderDetails = ({ id }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [bookingData, setBookingData] = useState({});
+
+  const path = usePathname();
+  console.log(path);
+
   useEffect(() => {
     setIsLoading(true);
     fetch(`${baseUrl}/boat-booking/${id}`, {

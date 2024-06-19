@@ -69,9 +69,6 @@ const OrderedSchedule = ({ scheduleId, schedules }) => {
             Number of days : {schedule?.itinerary?.numberOfDays}
           </h1>
           <h1 className="text-xl ">
-            Number of nights : {schedule?.itinerary?.numberOfNights}
-          </h1>
-          <h1 className="text-xl ">
             Number of dives : {schedule?.itinerary?.numberOfDives}
           </h1>
         </div>

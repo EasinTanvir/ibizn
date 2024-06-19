@@ -8,9 +8,22 @@ import Loader from "@/src/components/core/shared/Loader/Loader";
 import OperatorDetails from "../../../PendingProperty/OperatorDetails";
 import OrderedSchedule from "./OrderedSchedule";
 import EditForm from "./EditForm";
+import { usePathname } from "next/navigation";
 const BoatEdit = ({ id }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [bookingData, setBookingData] = useState({});
+
+  const [isAdminPath, setIsAdminPath] = useState(false);
+  const path = usePathname();
+
+  useEffect(() => {
+    if (path.includes("/admin")) {
+      setIsAdminPath(true);
+    } else {
+      setIsAdminPath(false);
+    }
+  }, [path]);
+
   useEffect(() => {
     setIsLoading(true);
     fetch(`${baseUrl}/boat-booking/${id}`, {
@@ -141,6 +154,7 @@ const BoatEdit = ({ id }) => {
           <OperatorDetails userInfo={bookingData?.operator} />
 
           <EditForm
+            role={isAdminPath}
             status={bookingData?.bookingStatus === "pending"}
             bookingData={bookingData}
             setBookingData={setBookingData}

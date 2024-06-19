@@ -10,10 +10,23 @@ import OrderedSchedule from "./OrderedSchedule";
 import EditForm from "./EditForm";
 import EditFormResort from "./EditFormResort";
 import ResortOrderedSchedule from "./ResortOrderedSchedule copy";
+import { usePathname } from "next/navigation";
 const ResortEdit = ({ id }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [bookingData, setBookingData] = useState({});
   console.log(bookingData.price);
+
+  const [isAdminPath, setIsAdminPath] = useState(false);
+  const path = usePathname();
+
+  useEffect(() => {
+    if (path.includes("/admin")) {
+      setIsAdminPath(true);
+    } else {
+      setIsAdminPath(false);
+    }
+  }, [path]);
+
   useEffect(() => {
     setIsLoading(true);
     fetch(`${baseUrl}/resort-booking/${id}`, {
@@ -145,6 +158,7 @@ const ResortEdit = ({ id }) => {
           <OperatorDetails userInfo={bookingData?.operator} />
 
           <EditFormResort
+            role={isAdminPath}
             status={bookingData?.bookingStatus === "pending"}
             bookingData={bookingData}
             setBookingData={setBookingData}

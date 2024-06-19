@@ -40,6 +40,7 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
     const end = updatedDate.endDate.format();
     e.preventDefault();
     const form = e.target;
+    const name = form.name.value;
     const phone = form.phone.value;
     const email = form.email.value;
     const whatsapp = form.whatsapp.value;
@@ -49,6 +50,7 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
       operator: propertyData?.user?._id,
       packageId: packages?._id,
       price: Number(packages?.ConvertedPrice),
+      name,
       phone,
       email,
       whatsapp,
@@ -95,6 +97,15 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
             <Typography sx={{ fontSize: "25px", fontWeight: 600 }}>
               Booking Package
             </Typography>
+            <div className="mt-3">
+              <p className="text-lg font-semibold">Name:</p>
+              <input
+                type="text"
+                name="name"
+                className="w-full rounded-md"
+                required
+              />
+            </div>
             <div className="mt-3">
               <p className="text-lg font-semibold">Phone:</p>
               <input

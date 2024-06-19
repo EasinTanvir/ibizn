@@ -27,6 +27,7 @@ const BookingModal = ({ open, setOpen, propertyData, schedule }) => {
     setLoading(true);
     e.preventDefault();
     const form = e.target;
+    const name = form.name.value;
     const phone = form.phone.value;
     const email = form.email.value;
     const whatsapp = form.whatsapp.value;
@@ -38,6 +39,7 @@ const BookingModal = ({ open, setOpen, propertyData, schedule }) => {
       startDate: schedule?.tripStart,
       endDate: schedule?.tripEnd,
       price: Number(schedule?.convertPrice),
+      name,
       phone,
       email,
       whatsapp,
@@ -78,8 +80,17 @@ const BookingModal = ({ open, setOpen, propertyData, schedule }) => {
         <Box sx={style}>
           <form onSubmit={handleBookingBoat}>
             <Typography sx={{ fontSize: "25px", fontWeight: 600 }}>
-              Booking Schedule
+              Booking Schedules
             </Typography>
+            <div className="mt-3">
+              <p className="text-lg font-semibold">Name:</p>
+              <input
+                type="text"
+                name="name"
+                className="w-full rounded-md"
+                required
+              />
+            </div>
             <div className="mt-3">
               <p className="text-lg font-semibold">Phone:</p>
               <input

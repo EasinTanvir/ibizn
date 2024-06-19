@@ -6,7 +6,12 @@ import dayjs from "dayjs";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 
-const EditFormResort = ({ bookingData, setBookingData, status }) => {
+const EditFormResort = ({
+  bookingData,
+  setBookingData,
+  status,
+  role = false,
+}) => {
   console.log(bookingData.startDate);
   console.log(bookingData.endDate);
   // Ensure startDate and endDate are dayjs objects
@@ -24,11 +29,13 @@ const EditFormResort = ({ bookingData, setBookingData, status }) => {
     const end = updatedDate.endDate.format();
     e.preventDefault();
     const form = e.target;
+    const name = form.name.value;
     const phone = form.phone.value;
     const email = form.email.value;
     const whatsapp = form.whatsapp.value;
     const numberOfGuest = form.numberOfGuest.value;
     const updatedBookingData = {
+      name,
       phone,
       email,
       whatsapp,
@@ -74,14 +81,14 @@ const EditFormResort = ({ bookingData, setBookingData, status }) => {
         </Typography>
         <div className="md:flex justify-between gap-5">
           <div className="mt-3 w-full">
-            <p className="text-lg font-semibold">Phone:</p>
+            <p className="text-lg font-semibold">Name:</p>
             <input
               type="text"
               disabled={!status}
-              name="phone"
+              name="name"
               className="w-full rounded-md"
               required
-              defaultValue={bookingData?.phone}
+              defaultValue={bookingData?.name}
               //   onChange={(e) => {
               //     () =>
               //       setBookingData({
@@ -91,44 +98,69 @@ const EditFormResort = ({ bookingData, setBookingData, status }) => {
               //   }}
             />
           </div>
-          <div className="mt-3 w-full">
-            <p className="text-lg font-semibold">Email:</p>
-            <input
-              disabled={!status}
-              type="email"
-              name="email"
-              className="w-full rounded-md"
-              required
-              defaultValue={bookingData?.email}
-              //   onChange={(e) => {
-              //     () =>
-              //       setBookingData({
-              //         ...bookingData,
-              //         email: e.target.value,
-              //       });
-              //   }}
-            />
-          </div>
+          {role && (
+            <>
+              {" "}
+              <div className="mt-3 w-full">
+                <p className="text-lg font-semibold">Phone:</p>
+                <input
+                  type="text"
+                  disabled={!status}
+                  name="phone"
+                  className="w-full rounded-md"
+                  required
+                  defaultValue={bookingData?.phone}
+                  //   onChange={(e) => {
+                  //     () =>
+                  //       setBookingData({
+                  //         ...bookingData,
+                  //         phone: e.target.value,
+                  //       });
+                  //   }}
+                />
+              </div>
+              <div className="mt-3 w-full">
+                <p className="text-lg font-semibold">Email:</p>
+                <input
+                  disabled={!status}
+                  type="email"
+                  name="email"
+                  className="w-full rounded-md"
+                  required
+                  defaultValue={bookingData?.email}
+                  //   onChange={(e) => {
+                  //     () =>
+                  //       setBookingData({
+                  //         ...bookingData,
+                  //         email: e.target.value,
+                  //       });
+                  //   }}
+                />
+              </div>
+            </>
+          )}
         </div>
         <div className="md:flex justify-between gap-5">
-          <div className="mt-3 w-full">
-            <p className="text-lg font-semibold">whatsapp:</p>
-            <input
-              disabled={!status}
-              type="text"
-              name="whatsapp"
-              className="w-full rounded-md"
-              required
-              defaultValue={bookingData?.whatsapp}
-              //   onChange={(e) => {
-              //     () =>
-              //       setBookingData({
-              //         ...bookingData,
-              //         whatsapp: e.target.value,
-              //       });
-              //   }}
-            />
-          </div>
+          {role && (
+            <div className="mt-3 w-full">
+              <p className="text-lg font-semibold">whatsapp:</p>
+              <input
+                disabled={!status}
+                type="text"
+                name="whatsapp"
+                className="w-full rounded-md"
+                required
+                defaultValue={bookingData?.whatsapp}
+                //   onChange={(e) => {
+                //     () =>
+                //       setBookingData({
+                //         ...bookingData,
+                //         whatsapp: e.target.value,
+                //       });
+                //   }}
+              />
+            </div>
+          )}
           <div className="mt-3 w-full">
             <p className="text-lg font-semibold">Number Of Guest:</p>
             <input

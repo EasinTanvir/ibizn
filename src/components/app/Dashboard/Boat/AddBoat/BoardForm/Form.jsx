@@ -26,13 +26,12 @@ const BasicInfo = ({
   minImages = 5,
   maxImages = 15,
   handleImageChanges,
-  setCabinsData,
-  cabinsData,
+
   totalSteps,
   currentStep,
   setCurrentStep,
   increaseProgress,
-  boardData
+  boardData,
 }) => {
   const [open, setOpen] = useState(false);
   const [cabinName, setCabinName] = useState("");
@@ -40,20 +39,15 @@ const BasicInfo = ({
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-
   // carusel images code here
   const onDrop = async (acceptedFiles) => {
-
-    
     if (caruselImages.length + acceptedFiles.length <= maxImages) {
-      let fileError = false
+      let fileError = false;
       const base64Images = await Promise.all(
         acceptedFiles.map((file) => {
-          if (file.size > (2 * 1024 * 1024)) {
-
-            return fileError = true
+          if (file.size > 2 * 1024 * 1024) {
+            return (fileError = true);
           } else {
-
             return compressAndConvertToBase64(file, 800, 600, 0.8);
           }
         })
@@ -64,14 +58,13 @@ const BasicInfo = ({
           icon: "error",
           title: "Oops...",
           text: "Something went wrong!",
-          footer: 'File size exceeds the limit (2MB). Please choose a smaller file.'
+          footer:
+            "File size exceeds the limit (2MB). Please choose a smaller file.",
         });
       } else {
-
         setCaruselImages([...caruselImages, ...base64Images]);
       }
     }
-
   };
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
@@ -81,19 +74,17 @@ const BasicInfo = ({
       // setFileError('File size exceeds the limit (2MB). Please choose a smaller file.');
 
       return Swal.fire({
-
         position: "top",
         timer: 1500,
         icon: "error",
         title: "Oops...",
         text: "Something went wrong!",
-        footer: 'File size exceeds the limit (2MB). Please choose a smaller file.',
+        footer:
+          "File size exceeds the limit (2MB). Please choose a smaller file.",
         customClass: {
-          container: 'custom-swal' // Apply custom CSS class to the container
+          container: "custom-swal", // Apply custom CSS class to the container
         },
-        
       });
-
     } else {
       const compressedBase64 = await compressAndConvertToBase64(
         files,
@@ -103,16 +94,6 @@ const BasicInfo = ({
       );
       setCabinImage(compressedBase64);
     }
-  };
-
-  const handleDone = () => {
-    setCabinsData((prevent) => [
-      ...prevent,
-      { name: cabinName, pictures: cabinImage },
-    ]);
-    setCabinImage(null);
-    setCabinName("");
-    handleClose();
   };
 
   // go to next step ------------
@@ -127,23 +108,41 @@ const BasicInfo = ({
       <form onSubmit={goToNextStep}>
         <div>
           <div className="my-4">
-            <h4 className="block mb-2 text-xl font-medium text-gray-900">Feature Image</h4>
+            <h4 className="block mb-2 text-xl font-medium text-gray-900">
+              Feature Image
+            </h4>
             <label className=" flex gap-4 w-full items-center px-4 py-2 bg-white text-blue rounded-lg border  tracking-wide uppercase  cursor-pointer ">
-              <svg className="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <svg
+                className="w-8 h-8"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
                 <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
               </svg>
-              <span className="mt-2 text-base leading-normal">Select a file</span>
-              <input type='file' className="hidden" accept=".png,.jpg" name="featureImage" required={boardData?.featuredImage ? false : true}
+              <span className="mt-2 text-base leading-normal">
+                Select a file
+              </span>
+              <input
+                type="file"
+                className="hidden"
+                accept=".png,.jpg"
+                name="featureImage"
+                required={boardData?.featuredImage ? false : true}
                 onChange={(e) =>
                   handleImageChanges("featuredImage", e.target.files[0])
-                } />
+                }
+              />
             </label>
-            {
-              boardData?.featuredImage && <img width={120} className="mt-5" src={boardData?.featuredImage} />
-            }
+            {boardData?.featuredImage && (
+              <img
+                width={120}
+                className="mt-5"
+                src={boardData?.featuredImage}
+              />
+            )}
           </div>
-          
-          
+
           <div className="mb-4">
             <label
               htmlFor="propertyName"
@@ -155,7 +154,7 @@ const BasicInfo = ({
               type="text"
               id="propertyName"
               name="nameOfProperty"
-              value={boardData?.nameOfProperty || ''}
+              value={boardData?.nameOfProperty || ""}
               required
               className="mt-1 p-2 border border-gray-300 rounded-md w-full"
               onChange={(e) => handleInputChange(e)}
@@ -207,37 +206,8 @@ const BasicInfo = ({
               )}
             </div>
           </div>
-          <h1 className="text-xl border-b mb-5">Cabins</h1>
-          <Button onClick={handleOpen}>(+) Add Cabin Info</Button>
-          <table className="min-w-full bg-white border border-gray-300">
-            <thead>
-              <tr>
-                <th className="py-2 px-1 border-b">Name</th>
-                <th className="py-2 px-1 border-b">Image</th>
 
-                {/* Add more headers as needed */}
-              </tr>
-            </thead>
-            <tbody>
-              {cabinsData?.map((item, index) => (
-                <tr>
-                  <td className="py-2 px-4 border-b text-center">
-                    {item?.name}
-                  </td>
-                  <td className="py-2 px-4 border-b flex justify-center">
-                    <img
-                      className="w-[100px] h-[100px]"
-                      src={item?.pictures}
-                      alt=""
-                    />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-           <div className="my-4">
-            
-            </div>       
+          <div className="my-4"></div>
           <Modal
             open={open}
             onClose={handleClose}
@@ -307,10 +277,7 @@ const BasicInfo = ({
                 >
                   Cancel
                 </button>
-                <button
-                  onClick={handleDone}
-                  className="bg-green-500 text-white px-4 py-2 rounded-md"
-                >
+                <button className="bg-green-500 text-white px-4 py-2 rounded-md">
                   Done
                 </button>
               </div>

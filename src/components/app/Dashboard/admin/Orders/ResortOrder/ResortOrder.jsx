@@ -77,7 +77,7 @@ const ResortOrder = () => {
               <td className="py-2 px-4 border-b">{booking?.bookingStatus}</td>
 
               <td className="py-2 px-4 border-b">
-                <div className="space-x-3 flex justify-end">
+                <div className="space-x-3 flex justify-center">
                   <button
                     className="bg-green-500 text-white rounded-md px-2 py-1"
                     onClick={() =>

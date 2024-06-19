@@ -161,7 +161,7 @@ export default function PersistentDrawerLeft({ children }) {
   const [expand, setExpand] = React.useState(-1);
   const [subExpend, setSubExpand] = React.useState(-1);
   const { user, control, setControl } = React.useContext(userContext);
-  //   console.log(user);
+  console.log(user);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
