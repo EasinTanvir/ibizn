@@ -1,6 +1,7 @@
 const httpStatus = require("http-status");
 const catchAsync = require("../utilities/catchAsync");
 const sendResponse = require("../utilities/sendResponse");
+const USER = require("../models/user.model");
 const transporter = require("../config/smtp");
 
 const sendSignUpRequestEmail = catchAsync(async (req, res) => {
@@ -34,6 +35,10 @@ const sendSignUpRequestEmail = catchAsync(async (req, res) => {
 });
 
 const sendContactUsRequestEmail = catchAsync(async (req, res) => {
+  let user;
+
+  user = await USER.findOne({ role: "admin" });
+
   const payload = req.body;
   const { name, email, message } = payload;
 
@@ -50,7 +55,7 @@ const sendContactUsRequestEmail = catchAsync(async (req, res) => {
   // Sending the email
   const mailer = await transporter.sendMail({
     from: email, // sender address
-    to: "maniksarker.official@gmail.com", // list of receivers
+    to: user.email, // list of receivers
     subject: "New Contact Us Request", // Subject line
     html: htmlMessage, // html body
   });

@@ -2,10 +2,31 @@ const httpStatus = require("http-status");
 const AppError = require("../error/appError");
 const Boat = require("../models/boat.model");
 const Itinerary = require("../models/itenary.model");
+const USER = require("../models/user.model");
+const transporter = require("../config/smtp");
 
 const createBoatIntoDB = async (userData, payload) => {
   const user = userData?.userId;
   const result = await Boat.create({ user, ...payload });
+
+  const htmlMessage = `
+    <div>
+      <h1>New Boat Has Been Added</h1>
+       <p> Check the property :  <a href=${`${process.env.FRONTEND_URL}/secondPage/${result?._id}`}>click here</a></p>
+    </div>
+  `;
+
+  let admin;
+
+  admin = await USER.findOne({ role: "admin" });
+  console.log(admin);
+  await transporter.sendMail({
+    from: "deeparture.reservations@gmail.com",
+    to: admin.email,
+    subject: "New Boat Added",
+    html: htmlMessage,
+  });
+
   return result;
 };
 
@@ -207,6 +228,23 @@ const updateBoatFromDB = async (id, payload) => {
     new: true,
     runValidators: true,
   });
+
+  const htmlMessage = `
+    <div>
+      <h1>Your Boat Has Been Approved</h1>
+       <p> Check the property :  <a href=${`${process.env.FRONTEND_URL}/secondPage/${result?._id}`}>click here</a></p>
+    </div>
+  `;
+
+  let user = await USER.findById(result.user);
+
+  await transporter.sendMail({
+    from: "deeparture.reservations@gmail.com",
+    to: user.email,
+    subject: "Boat Approved",
+    html: htmlMessage,
+  });
+
   return result;
 };
 

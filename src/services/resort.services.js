@@ -1,8 +1,28 @@
 const Resort = require("../models/resort.model");
+const USER = require("../models/user.model");
+const transporter = require("../config/smtp");
 
 const createResortIntoDB = async (userData, payload) => {
   const user = userData.userId;
   const result = await Resort.create({ user, ...payload });
+  const htmlMessage = `
+    <div>
+      <h1>New Resort Has Been Added</h1>
+       <p> Check the property <a href=${`${process.env.FRONTEND_URL}/secondPage/resort/${result?._id}`}>click here</a></p>
+    </div>
+  `;
+
+  let admin;
+
+  admin = await USER.findOne({ role: "admin" });
+  console.log(admin);
+  await transporter.sendMail({
+    from: "deeparture.reservations@gmail.com",
+    to: admin.email,
+    subject: "New Resort Added",
+    html: htmlMessage,
+  });
+
   return result;
 };
 
@@ -103,10 +123,29 @@ const updateResortFromDB = async (id, payload) => {
     new: true,
     runValidators: true,
   });
+
+  const htmlMessage = `
+    <div>
+      <h1>Your Resort Has Been Approved</h1>
+       <p> Check the property :  <a href=${`${process.env.FRONTEND_URL}/secondPage/resort/${result?._id}`}>click here</a></p>
+    </div>
+  `;
+
+  let user = await USER.findById(result.user);
+  console.log(user);
+
+  await transporter.sendMail({
+    from: "deeparture.reservations@gmail.com",
+    to: user.email,
+    subject: "Resort Approved",
+    html: htmlMessage,
+  });
+
   return result;
 };
 const updateSingleResortFromDB = async (id) => {
   const isExistResort = await Resort.findById(id);
+
   if (!isExistResort) {
     throw new AppError(httpStatus.NOT_FOUND, "resort not found");
   }

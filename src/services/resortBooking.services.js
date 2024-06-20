@@ -1,33 +1,39 @@
 const ResortBooking = require("../models/resortBooking.model");
+const USER = require("../models/user.model");
 const transporter = require("../config/smtp");
 const AppError = require("../error/appError");
 const createResortBookingIntoDB = async (payload) => {
   const result = await ResortBooking.create(payload);
   const htmlMessage = `
   <div>
-    <h1>You have a new booking request</h1>
-    <p><strong>Phone:</strong> ${payload?.phone}</p>
-    <p><strong>Email:</strong> ${payload?.email}</p>
-    <p><strong>Number Of Guest:</strong> ${payload?.numberOfGuest}</p>
-     <p>Check the property<a href=${`http://localhost:3000/secondPage/${payload?.property}`}>click here</a></p>
+    <h1>New booking Request</h1>
+    <p><strong>Name : </strong> ${payload?.name}</p>
+    <p><strong>Phone : </strong> ${payload?.phone}</p>
+    <p><strong>Email : </strong> ${payload?.email}</p>
+    <p><strong>Number Of Guest : </strong> ${payload?.numberOfGuest}</p>
+     <p>Check the property : <a href=${`${process.env.FRONTEND_URL}/secondPage/resort/${payload?.property}`}>click here</a></p>
   </div>
 `;
-
+  console.log(payload);
   const htmlMessage2 = `
   <div>
-    <h1>Booking successful</h1>
-    <p><strong>Phone:</strong> ${payload?.phone}</p>
-    <p><strong>Email:</strong> ${payload?.email}</p>
-    <p><strong>Number Of Guest:</strong> ${payload?.numberOfGuest}</p>
-    <p><strong>Number Of Guest:</strong> ${payload?.price}</p>
-     <p>Check the property<a href=${`http://localhost:3000/secondPage/${payload?.property}`}>click here</a></p>
+    <h1>Your New Booking Request Details</h1>
+    <p><strong>Name : </strong> ${payload?.name}</p>
+    <p><strong>Phone  :</strong> ${payload?.phone}</p>
+    <p><strong>Email : </strong> ${payload?.email}</p>
+    <p><strong>Number Of Guest : </strong> ${payload?.numberOfGuest}</p>
+    <p><strong>Price : </strong> ${payload?.price}</p>
+     <p>Check the property : <a href=${`${process.env.FRONTEND_URL}/secondPage/resort/${payload?.property}`}>click here</a></p>
   </div>
 `;
 
+  let admin;
+
+  admin = await USER.findOne({ role: "admin" });
   // Sending the email to admin
   const mailer = await transporter.sendMail({
-    from: "deeparture.reservations@gmail.com",
-    to: "maniksarker.official@gmail.com",
+    from: payload?.email,
+    to: admin.email,
     subject: "New Booking Request",
     html: htmlMessage,
   });
@@ -128,8 +134,8 @@ const updateBookingStatusByAdminFromDB = async (id, status) => {
   if (result?.bookingStatus === "approved") {
     const htmlMessage = `
     <div>
-      <h1>You have a new booking request</h1>
-       <p>Check the property<a href=${`http://localhost:3000/secondPage/${result?.property}`}>click here</a></p>
+      <h1>Your Booking Has Approved</h1>
+       <p> Check the property : <a href=${`${process.env.FRONTEND_URL}/secondPage/resort/${result?.property}`}>click here</a></p>
     </div>
   `;
     // Sending the email to operator
@@ -137,6 +143,31 @@ const updateBookingStatusByAdminFromDB = async (id, status) => {
       from: "deeparture.reservations@gmail.com",
       to: result?.operator?.email,
       subject: "New Booking Request",
+      html: htmlMessage,
+    });
+  } else if (result?.bookingStatus === "confirmed") {
+    const htmlMessage = `
+    <div>
+      <h1>Booking Successful</h1>
+       <p> Check the property <a href=${`${process.env.FRONTEND_URL}/secondPage/resort/${result?.property}`}>click here</a></p>
+    </div>
+  `;
+
+    // Sending the email to operator
+    await transporter.sendMail({
+      from: "deeparture.reservations@gmail.com",
+      to: result?.operator?.email,
+      subject: "Booking Successful",
+      html: htmlMessage,
+    });
+    let user;
+
+    user = await USER.findOne({ role: "admin" });
+
+    await transporter.sendMail({
+      from: result?.operator?.email,
+      to: user.email,
+      subject: "Booking Successful",
       html: htmlMessage,
     });
   }
@@ -161,21 +192,24 @@ const updateBookingStatusByOperatorIntoDB = async (id, status, userData) => {
       runValidators: true,
     }
   );
-  // if (result?.bookingStatus === "approved") {
-  //   const htmlMessage = `
-  //   <div>
-  //     <h1>You have a new booking request</h1>
-  //      <p>Check the property<a href=${`http://localhost:3000/secondPage/${result?.property}`}>click here</a></p>
-  //   </div>
-  // `;
-  //   // Sending the email to operator
-  //   await transporter.sendMail({
-  //     from: "deeparture.reservations@gmail.com",
-  //     to: result?.operator?.email,
-  //     subject: "New Booking Request",
-  //     html: htmlMessage,
-  //   });
-  // }
+  if (result?.bookingStatus === "accepted") {
+    const htmlMessage = `
+    <div>
+      <h1>Booking Request Accepted By Operator</h1>
+       <p> Check the property <a href=${`${process.env.FRONTEND_URL}/secondPage/resort/${result?.property}`}>click here</a></p>
+    </div>
+  `;
+    let user;
+
+    user = await USER.findOne({ role: "admin" });
+    // Sending the email to operator
+    await transporter.sendMail({
+      from: "deeparture.reservations@gmail.com",
+      to: user.email,
+      subject: "New Booking Request",
+      html: htmlMessage,
+    });
+  }
   return result;
 };
 
