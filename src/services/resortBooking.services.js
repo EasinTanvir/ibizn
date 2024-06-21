@@ -148,7 +148,7 @@ const updateBookingStatusByAdminFromDB = async (id, status) => {
   } else if (result?.bookingStatus === "confirmed") {
     const htmlMessage = `
     <div>
-      <h1>Booking Successful</h1>
+      <h1>Booking Confirmed</h1>
        <p> Check the property <a href=${`${process.env.FRONTEND_URL}/secondPage/resort/${result?.property}`}>click here</a></p>
     </div>
   `;
@@ -157,7 +157,7 @@ const updateBookingStatusByAdminFromDB = async (id, status) => {
     await transporter.sendMail({
       from: "deeparture.reservations@gmail.com",
       to: result?.operator?.email,
-      subject: "Booking Successful",
+      subject: "Booking Confirmed",
       html: htmlMessage,
     });
     let user;
@@ -167,7 +167,7 @@ const updateBookingStatusByAdminFromDB = async (id, status) => {
     await transporter.sendMail({
       from: result?.operator?.email,
       to: user.email,
-      subject: "Booking Successful",
+      subject: "Booking Confirmed",
       html: htmlMessage,
     });
   }

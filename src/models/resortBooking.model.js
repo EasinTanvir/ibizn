@@ -21,6 +21,10 @@ const resortBookingSchema = new Schema(
       type: String,
       required: true,
     },
+    text: {
+      type: String,
+      required: true,
+    },
     phone: {
       type: String,
       required: true,
