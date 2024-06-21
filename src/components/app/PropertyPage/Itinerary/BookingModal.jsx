@@ -32,6 +32,7 @@ const BookingModal = ({ open, setOpen, propertyData, schedule }) => {
     const email = form.email.value;
     const whatsapp = form.whatsapp.value;
     const numberOfGuest = form.numberOfGuest.value;
+    const text = form.text.value;
     const bookingData = {
       property: propertyData?._id,
       operator: propertyData?.user?._id,
@@ -41,6 +42,7 @@ const BookingModal = ({ open, setOpen, propertyData, schedule }) => {
       price: Number(schedule?.convertPrice),
       name,
       phone,
+      text,
       email,
       whatsapp,
       numberOfGuest,
@@ -82,7 +84,7 @@ const BookingModal = ({ open, setOpen, propertyData, schedule }) => {
             <Typography sx={{ fontSize: "25px", fontWeight: 600 }}>
               Booking Schedules
             </Typography>
-            <div className="mt-3">
+            <div className="mt-2">
               <p className="text-lg font-semibold">Name:</p>
               <input
                 type="text"
@@ -91,7 +93,7 @@ const BookingModal = ({ open, setOpen, propertyData, schedule }) => {
                 required
               />
             </div>
-            <div className="mt-3">
+            <div className="mt-2">
               <p className="text-lg font-semibold">Phone:</p>
               <input
                 type="text"
@@ -100,7 +102,7 @@ const BookingModal = ({ open, setOpen, propertyData, schedule }) => {
                 required
               />
             </div>
-            <div className="mt-3">
+            <div className="mt-2">
               <p className="text-lg font-semibold">Email:</p>
               <input
                 type="email"
@@ -109,7 +111,7 @@ const BookingModal = ({ open, setOpen, propertyData, schedule }) => {
                 required
               />
             </div>
-            <div className="mt-3">
+            <div className="mt-2">
               <p className="text-lg font-semibold">whatsapp:</p>
               <input
                 type="text"
@@ -118,7 +120,7 @@ const BookingModal = ({ open, setOpen, propertyData, schedule }) => {
                 required
               />
             </div>
-            <div className="mt-3">
+            <div className="mt-2">
               <p className="text-lg font-semibold">Number Of Guest:</p>
               <input
                 type="text"
@@ -127,11 +129,20 @@ const BookingModal = ({ open, setOpen, propertyData, schedule }) => {
                 required
               />
             </div>
+            <div className="mt-2">
+              <p className="text-lg font-semibold">Message : </p>
+              <textarea
+                type="text"
+                name="text"
+                className="w-full rounded-md"
+                required
+              />
+            </div>
             <div>
               <button
                 disabled={loading}
                 type="submit"
-                className="main-button py-3 w-full mt-4 flex justify-center items-center"
+                className="main-button py-3 w-full mt-1 flex justify-center items-center"
               >
                 {loading ? (
                   <ColorRing

@@ -22,6 +22,7 @@ const EditForm = ({ bookingData, setBookingData, status, role = false }) => {
     const form = e.target;
     const name = form.name.value;
     const phone = form.phone.value;
+    const text = form.text.value;
     const email = form.email.value;
     const whatsapp = form.whatsapp.value;
     const numberOfGuest = form.numberOfGuest.value;
@@ -30,6 +31,7 @@ const EditForm = ({ bookingData, setBookingData, status, role = false }) => {
       phone,
       email,
       whatsapp,
+      text,
       numberOfGuest,
       startDate: updatedDate.startDate || bookingData?.startDate,
       endDate: updatedDate.endDate || bookingData.endDate,
@@ -202,6 +204,18 @@ const EditForm = ({ bookingData, setBookingData, status, role = false }) => {
               />
             </div>
           </LocalizationProvider>
+        </div>
+        <div className="mt-2">
+          <p className="text-lg font-semibold">Message : </p>
+          <textarea
+            disabled={!status}
+            value={bookingData?.text}
+            type="text"
+            name="text"
+            className="w-full rounded-md"
+            required
+          />
+          {console.log(bookingData.text)}
         </div>
         {status && (
           <div>

@@ -41,6 +41,7 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
+    const text = form.text.value;
     const phone = form.phone.value;
     const email = form.email.value;
     const whatsapp = form.whatsapp.value;
@@ -51,6 +52,7 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
       packageId: packages?._id,
       price: Number(packages?.ConvertedPrice),
       name,
+      text,
       phone,
       email,
       whatsapp,
@@ -97,7 +99,7 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
             <Typography sx={{ fontSize: "25px", fontWeight: 600 }}>
               Booking Package
             </Typography>
-            <div className="mt-3">
+            <div className="mt-2">
               <p className="text-lg font-semibold">Name:</p>
               <input
                 type="text"
@@ -106,7 +108,7 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
                 required
               />
             </div>
-            <div className="mt-3">
+            <div className="mt-2">
               <p className="text-lg font-semibold">Phone:</p>
               <input
                 type="text"
@@ -115,7 +117,7 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
                 required
               />
             </div>
-            <div className="mt-3">
+            <div className="mt-2">
               <p className="text-lg font-semibold">Email:</p>
               <input
                 type="email"
@@ -124,7 +126,7 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
                 required
               />
             </div>
-            <div className="mt-3">
+            <div className="mt-2">
               <p className="text-lg font-semibold">whatsapp:</p>
               <input
                 type="text"
@@ -133,7 +135,7 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
                 required
               />
             </div>
-            <div className="mt-3">
+            <div className="mt-2">
               <p className="text-lg font-semibold">Number Of Guest:</p>
               <input
                 type="text"
@@ -143,7 +145,7 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
               />
             </div>
             <React.Fragment>
-              <div className="md:flex gap-6 my-4">
+              <div className="md:flex gap-6 my-1">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <div>
                     <p className="text-lg font-semibold">Start date:</p>
@@ -174,6 +176,15 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
                 </LocalizationProvider>
               </div>
             </React.Fragment>
+            <div className="mt-2">
+              <p className="text-lg font-semibold">Message : </p>
+              <textarea
+                type="text"
+                name="text"
+                className="w-full rounded-md"
+                required
+              />
+            </div>
             <div>
               <button
                 disabled={loading}

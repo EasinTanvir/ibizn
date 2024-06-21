@@ -222,7 +222,7 @@ const BankInformation = () => {
             )}
             <div>
               <div className="flex justify-between border-b-2 pb-2 border-indigo-200 mt-4">
-                <h1 className="text-xl font-semibold">Wise</h1>
+                <h1 className="text-xl font-semibold">Wise Email</h1>
                 <EditNoteIcon
                   onClick={handleWiseBankClick}
                   style={{ cursor: "pointer" }}
@@ -240,7 +240,7 @@ const BankInformation = () => {
                       onClick={handleWiseBankClick}
                       className="bg-green-500 text-white rounded-md px-3 py-1"
                     >
-                      Add wise bank
+                      Add wise Email
                     </button>
                   </div>
                 </div>

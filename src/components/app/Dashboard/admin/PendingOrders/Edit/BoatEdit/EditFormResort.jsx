@@ -31,6 +31,7 @@ const EditFormResort = ({
     const form = e.target;
     const name = form.name.value;
     const phone = form.phone.value;
+    const text = form.text.value;
     const email = form.email.value;
     const whatsapp = form.whatsapp.value;
     const numberOfGuest = form.numberOfGuest.value;
@@ -40,6 +41,7 @@ const EditFormResort = ({
       email,
       whatsapp,
       numberOfGuest,
+      text,
       startDate: start,
       endDate: end,
       property: bookingData?.property?._id,
@@ -211,6 +213,17 @@ const EditFormResort = ({
               />
             </div>
           </LocalizationProvider>
+        </div>
+        <div className="mt-2">
+          <p className="text-lg font-semibold">Message : </p>
+          <textarea
+            disabled={!status}
+            value={bookingData?.text}
+            type="text"
+            name="text"
+            className="w-full rounded-md"
+            required
+          />
         </div>
         {status && (
           <div>

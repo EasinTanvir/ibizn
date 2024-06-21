@@ -54,7 +54,10 @@ const ResortEdit = ({ id }) => {
         <div>
           <h2
             onClick={() =>
-              window.open(`/secondPage/${bookingData?.property?._id}`, "_blank")
+              window.open(
+                `/secondPage/resort/${bookingData?.property?._id}`,
+                "_blank"
+              )
             }
             className="text-2xl font-semibold  underline cursor-pointer"
           >

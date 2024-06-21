@@ -215,7 +215,7 @@ export default function PersistentDrawerLeft({ children }) {
           {/* <Typography variant="h6" noWrap component="div">
             INFINITE BLUE
           </Typography> */}
-          <img src="/logo.png" className="w-[150px]  object-cover" alt="" />
+          <img src="/dep.png" className="w-20 h-20 p-2  object-cover" alt="" />
         </Toolbar>
       </AppBar>
       <Drawer
