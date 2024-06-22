@@ -52,6 +52,7 @@ const BoardTable = ({ boatData, setBoatData }) => {
     tripEnd: "null",
     itinerary: "",
     cost: 0,
+    currency: "USD",
     discount: {
       name: "",
       percent: 0,
@@ -78,6 +79,7 @@ const BoardTable = ({ boatData, setBoatData }) => {
   const [updatedSpecial, setUpdatedSpecial] = useState(null);
   const [selectTedItinery, setSelectTedItinery] = useState("");
   const [currency, setCurrency] = useState(updateItem?.currency);
+  const [newRowcurrency, setNewRowCurrency] = useState("");
 
   const [index, setIndex] = useState(0);
   console.log(index);
@@ -198,6 +200,14 @@ const BoardTable = ({ boatData, setBoatData }) => {
       cost: event.target.value,
     });
   };
+  const handleNewRowCurrencyChange = (event) => {
+    let myEvents = event !== "select" ? event : "USD";
+    setFormData({
+      ...formData,
+      currency: myEvents,
+    });
+    setNewRowCurrency(myEvents);
+  };
 
   const handleDiscountChange = (field) => (event) => {
     setFormData({
@@ -272,7 +282,7 @@ const BoardTable = ({ boatData, setBoatData }) => {
                     <td className="py-2 text-center border-b">
                       {
                         itinerary?.find(
-                          (item) => item?._id === items?.itinerary
+                          (item) => item?._id === items?.itinerary._id
                         )?.itineraryName
                       }
                     </td>
@@ -354,10 +364,10 @@ const BoardTable = ({ boatData, setBoatData }) => {
                   </Select>
                 </FormControl>
               </div>
-              <div>
-                <h1 className="font-bold text-xl border-b mb-2 mt-3 pb-2">
-                  Trip Cost
-                </h1>
+              <h1 className="font-bold text-xl border-b mb-2 mt-3 pb-2">
+                Trip Cost
+              </h1>
+              <div className="flex gap-2 items-center">
                 <TextField
                   id="outlined-basic"
                   label="Trip Cost"
@@ -365,6 +375,29 @@ const BoardTable = ({ boatData, setBoatData }) => {
                   onChange={handleCostChange}
                   variant="outlined"
                 />
+                <div>
+                  <select
+                    required
+                    className="font-semibold border border-slate-600"
+                    onChange={(e) => handleNewRowCurrencyChange(e.target.value)}
+                    value={newRowcurrency}
+                    name=""
+                    id=""
+                  >
+                    <option value="select">Select Currency</option>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="IDR">IDR</option>
+                    <option value="GBP">GBP</option>
+                    <option value="CAD">CAD</option>
+                    <option value="AUD">AUD</option>
+                    <option value="NZD">NZD</option>
+                    <option value="THB">THB</option>
+                    <option value="CHF">CHF</option>
+                    <option value="PHP">PHP</option>
+                    <option value="MYR">MYR</option>
+                  </select>
+                </div>
               </div>
               <div>
                 <h1 className="font-bold mt-2 text-xl border-b mb-2">
