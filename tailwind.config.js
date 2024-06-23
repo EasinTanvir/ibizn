@@ -12,11 +12,12 @@ module.exports = {
   theme: {
     extend: {
       fontSize: {
-        title: "66px",
+        title: ["66px", "40px"],
         subtitle: "22px",
       },
       fontFamily: {
         outfit: ["Outfit", "sans-serif"],
+        roboto: ["Roboto", "sans-serif"],
       },
 
       colors: {

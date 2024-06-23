@@ -38,9 +38,9 @@ const Footer = () => {
           <div className="md:flex lg:flex-col justify-center md:ms-3 lg:ms-0">
             <div>
               <h1 className="text-primary text-lg font-bold font-outfit">
-                Drivers
+                For Divers
               </h1>
-              <div className="text-gray mt-3">
+              <div className="text-gray mt-1 font-roboto font-normal">
                 <h1>About Us</h1>
                 <h1>Groups or Charters</h1>
                 <h1>Contact Us</h1>
@@ -51,14 +51,14 @@ const Footer = () => {
           </div>
           <div className="">
             <h1 className="text-primary text-lg font-bold font-outfit">
-              Operators
+              For Operators
             </h1>
-            <div className="text-gray mt-3">
-              <Link className="mt-4 mr-4" href={"/auth"}>
-                Login
-              </Link>
-              <Link className="mt-4" href={"/auth"}>
-                SignUp
+            <div className="text-gray mt-1">
+              <Link
+                className="mt-4 mr-4 font-roboto font-normal"
+                href={"/auth"}
+              >
+                Login / SignUp
               </Link>
             </div>
           </div>
@@ -66,9 +66,9 @@ const Footer = () => {
             <div>
               <h1 className="text-primary text-lg font-bold font-outfit">
                 {" "}
-                Agents
+                For Agents
               </h1>
-              <div className="text-gray mt-3">
+              <div className="text-gray mt-1 font-roboto font-normal">
                 <h1>Sign Up</h1>
                 <h1>Login</h1>
               </div>

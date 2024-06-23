@@ -11,7 +11,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import SearchItemModal from "./SearchItemModal";
 import dayjs from "dayjs";
-import { Typography } from "@mui/material";
+import { Button, InputAdornment, Typography } from "@mui/material";
 import { userContext } from "@/src/storage/contextApi";
 import { useRouter } from "next/router";
 
@@ -56,16 +56,15 @@ const Banner = () => {
         <div className="lg:flex justify-between pt-10">
           <div className="md:flex flex-col justify-between">
             <div>
-              <h1 className="md:text-title text-4xl text-white font-extralight lg:leading-[70px] font-outfit">
-                Inclusive dive <br />
-                adventures start here
+              <h1 className="md:text-title md:w-[650px] w-[72%]  text-4xl md:leading-none leading-10 text-white font-extralight font-outfit lg:leading-[70px]">
+                Inclusive dive adventures start here
               </h1>
-              <h2 className="text-xl md:text-3xl  mt-5 text-white tracking-wide">
+              <h2 className="text-[22px] font-roboto font-[300] md:text-3xl  mt-2 text-white tracking-wide ">
                 Book your diving trip online
               </h2>
             </div>
             {/* test */}
-            <div className="flex items-center gap-2 md:gap-5 mt-8">
+            <div className="flex items-center justify-between gap-2 md:gap-5 mt-8">
               {tabItems?.map((item, index) => (
                 <div
                   onClick={() =>
@@ -78,8 +77,8 @@ const Banner = () => {
                   className={`${
                     searchValues?.tabValue === item
                       ? "text-[#0080ff]  bg-white"
-                      : "text-[#f1f2f2] bg-transparent border-2"
-                  } px-3 md:px-6 cursor-pointer py-2 rounded-full text-[14px] md:text-[22px] font-[400]`}
+                      : "text-[#f1f2f2] bg-transparent border"
+                  } text-center w-full cursor-pointer py-2 font-roboto font-normal rounded-full text-[14px] md:text-[22px] `}
                 >
                   {item}
                 </div>
@@ -91,8 +90,15 @@ const Banner = () => {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col md:flex-row md:space-y-0 space-y-2 gap-3 justify-between md:items-center pb-10 text-white">
+        <div className="mt-5 flex flex-col md:flex-row md:space-y-0 space-y-2 gap-3 justify-between md:items-center pb-10 text-white">
           <TextField
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <ArrowDropDown className="text-white cursor-pointer" />
+                </InputAdornment>
+              ),
+            }}
             onClick={() => setIsModalOpen(true)}
             id="outlined-basic"
             label="Destination"
@@ -176,41 +182,46 @@ const Banner = () => {
             </div>
           ) : (
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker
-                className="w-full lg:w-[25%]"
-                onChange={handleDateChange}
-                disablePast
-                label={"Select Month and Year"}
-                views={["month", "year"]}
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    "& fieldset": {
-                      borderColor: "lightblue", // Border color
+              <div className="relative w-full lg:w-[25%]">
+                <DatePicker
+                  className="w-full"
+                  onChange={handleDateChange}
+                  disablePast
+                  label={"Select Month and Year"}
+                  views={["month", "year"]}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "& fieldset": {
+                        borderColor: "lightblue",
+                      },
+                      "&:hover fieldset": {
+                        borderColor: "white",
+                      },
+                      "&.Mui-focused fieldset": {
+                        borderColor: "white",
+                      },
                     },
-                    "&:hover fieldset": {
-                      borderColor: "white", // Border color on hover
+                    "& .MuiInputBase-input": {
+                      height: "35px",
+                      color: "white",
+                      backgroundColor: "transparent",
                     },
-                    "&.Mui-focused fieldset": {
-                      borderColor: "white", // Border color when focused
+                    "& .MuiInputLabel-root": {
+                      color: "white",
                     },
-                  },
-                  "& .MuiInputBase-input": {
-                    height: "35px", // Height of the input element
-                    color: "white", // Text color
-                    backgroundColor: "transparent", // Ensure input background is transparent
-                  },
-                  "& .MuiInputLabel-root": {
-                    color: "white", // Label color
-                  },
-                  "& .MuiInputLabel-root.Mui-focused": {
-                    color: "white", // Label color when focused
-                  },
-                  "& .MuiSvgIcon-root": {
-                    color: "white", // Color of the calendar icon
-                  },
-                  width: "100%", // Width of the entire TextField
-                }}
-              />
+                    "& .MuiInputLabel-root.Mui-focused": {
+                      color: "white",
+                    },
+                    "& .MuiSvgIcon-root": {
+                      color: "white",
+                    },
+                    width: "100%",
+                  }}
+                />
+                <div className="absolute top-4 right-3 h-full text-white  ">
+                  <ArrowDropDown className="text-white cursor-pointer" />
+                </div>
+              </div>
             </LocalizationProvider>
           )}
 
@@ -231,7 +242,7 @@ const Banner = () => {
                 input={<OutlinedInput label="Name" />}
                 onChange={(e) => setRating(e.target.value)}
                 IconComponent={() => (
-                  <ArrowDropDown className="text-white cursor-pointer" />
+                  <ArrowDropDown className="text-white cursor-pointer mr-2" />
                 )}
                 sx={{
                   borderWidth: "0.5px",

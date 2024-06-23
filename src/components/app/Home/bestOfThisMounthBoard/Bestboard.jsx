@@ -7,10 +7,10 @@ const BestBoard = () => {
     <div className="bg-[#F1F2F2]  py-24">
       <div className="customContainer px-5 xl:px-0">
         <div>
-          <h1 className="lg:text-title md:text-5xl  text-4xl  font-[250] font-outfit text-primary mb-5">
+          <h1 className="lg:text-title md:text-5xl  text-4xl  font-[250] font-outfit text-primary mb-2">
             Best of this month
           </h1>
-          <h2 className="text-gray-500 md:text-2xl md:leading-[26px] text-lg   mt-3 text-secondary">
+          <h2 className="text-gray-500 md:text-2xl md:leading-[26px] text-lg   mt-1 text-secondary">
             Every month we select the best resorts and liveboards, according to
             your reviews
           </h2>

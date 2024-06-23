@@ -11,7 +11,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
-import { Typography } from "@mui/material";
+import { InputAdornment, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import SearchItemModal from "../../Home/Banner/SearchItemModal";
 import { baseUrl } from "@/src/config/serverConfig";
@@ -108,6 +108,13 @@ const Banner = ({ setSearchResult }) => {
 
           <div className="mt-10 flex flex-col md:flex-row md:space-y-0 space-y-2 gap-3 justify-between md:items-center pb-10 text-white">
             <TextField
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <ArrowDropDown className="text-white cursor-pointer" />
+                  </InputAdornment>
+                ),
+              }}
               onClick={() => setIsModalOpen(true)}
               id="outlined-basic"
               label="Destination"

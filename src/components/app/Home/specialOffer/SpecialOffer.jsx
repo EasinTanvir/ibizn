@@ -9,7 +9,7 @@ const board = [1, 2, 3];
 const SpecialOffer = () => {
   return (
     <div className="px-5 md:px-0 customContainer  ">
-      <h1 className="lg:text-title md:text-5xl text-4xl font-extralight font-outfit text-primary mb-5">
+      <h1 className="lg:text-title md:text-5xl text-4xl font-extralight font-outfit text-primary mb-6">
         Special Offer
       </h1>
       <div className="relative">
@@ -106,13 +106,13 @@ const SpecialOffer = () => {
                 </div>
                 <div className="lg:w-[65%] w-full p-5 lg:p-0  text-left">
                   <div>
-                    <h1 className="text-gray font-medium font-outfit text-xl md:text-xl lg:text-subtitle">
-                      Liveboard / Engyp
+                    <h1 className="text-gray mt-4 font-medium font-outfit text-xl md:text-xl lg:text-subtitle">
+                      Liveboard / Egypt
                     </h1>
-                    <h2 className="  md:text-[32px] mt-3 text-2xl font-light text-primary">
+                    <h2 className="  md:text-[32px]  text-2xl font-light text-primary">
                       Emperor Elite Liveaboard
                     </h2>
-                    <p className="text-secondary md:mt-2 xl:pe-12 lg:pe-5 font-light md:text-lg text-base md:w-full">
+                    <p className="text-secondary  md:mt-2 xl:pe-12 lg:pe-5 font-[400] md:text-lg text-base md:w-full">
                       Operating from Sharm El Sheikh, this liveaboard boasts a
                       professional and knowledgeable team of dive guides, ready
                       to take you to the best dive sites in the northern Red

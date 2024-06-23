@@ -39,7 +39,7 @@ const MyNavbar = () => {
             >
               <img
                 src="/images/client/logo.svg"
-                className="w-[120px] md:w-[180px]"
+                className="w-[140px] md:w-[180px]"
                 alt="Flowbite Logo"
               />
             </a>
@@ -80,7 +80,7 @@ const MyNavbar = () => {
           </div>
           <div className="md:hidden">
             <button onClick={menuOpen}>
-              <MenuIcon className="text-white" />
+              <MenuIcon className="text-white text-4xl" />
             </button>
           </div>
         </div>

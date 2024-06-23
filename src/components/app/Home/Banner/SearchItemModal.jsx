@@ -5,6 +5,7 @@ import Modal from "@mui/material/Modal";
 import { useContext, useEffect, useState } from "react";
 import { baseUrl } from "@/src/config/serverConfig";
 import { userContext } from "@/src/storage/contextApi";
+import { Blocks } from "react-loader-spinner";
 
 const style = {
   position: "absolute",
@@ -36,11 +37,9 @@ export default function SearchItemModal({
 }) {
   const handleClose = () => setIsModalOpen(false);
   const [searchItems, setSearchItems] = useState([]);
+  const [searchLoader, setSearchLoader] = useState(false);
   const { searchValues, setSearchValues } = useContext(userContext);
-  //   console.log(searchItems);
-  //   const [updatedSearchItems, setUpdatedSearchItems] = useState([]);
-  //   console.log(updatedSearchItems);
-  // Function to create unique regions with unique countries
+
   const getUniqueRegionsWithCountries = (searchItems) => {
     const result = [];
 
@@ -63,6 +62,7 @@ export default function SearchItemModal({
   const updateSearchItem = getUniqueRegionsWithCountries(searchItems);
   // get search item
   useEffect(() => {
+    setSearchLoader(true);
     console.log(searchValues);
     if (searchValues?.tabValue) {
       fetch(
@@ -74,7 +74,14 @@ export default function SearchItemModal({
         }/search-item`
       )
         .then((res) => res.json())
-        .then((data) => setSearchItems(data?.data));
+        .then((data) => {
+          setSearchItems(data?.data);
+          setSearchLoader(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setSearchLoader(false);
+        });
     }
   }, [searchValues]);
 
@@ -97,22 +104,41 @@ export default function SearchItemModal({
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
-            {updateSearchItem?.map((item, i) => (
-              <div key={i}>
-                <h4 className="font-semibold mb-3">{item?.region}</h4>
-                {item?.countries?.map((country, i) => (
-                  <p
-                    onClick={() => handleDestination(country)}
-                    className="my-2 cursor-pointer hover:text-blue-500"
-                    key={i}
-                  >
-                    {country}
-                  </p>
+          {searchLoader ? (
+            <div className=" flex justify-center items-center">
+              <div className="flex flex-col min-h-96 justify-center items-center">
+                <Blocks
+                  height="80"
+                  width="80"
+                  color="#4fa94d"
+                  ariaLabel="blocks-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="blocks-wrapper"
+                  visible={true}
+                />
+                <span className="font-semibold">Please Wait...</span>
+              </div>
+            </div>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+                {updateSearchItem?.map((item, i) => (
+                  <div key={i}>
+                    <h4 className="font-semibold mb-3">{item?.region}</h4>
+                    {item?.countries?.map((country, i) => (
+                      <p
+                        onClick={() => handleDestination(country)}
+                        className="my-2 cursor-pointer hover:text-blue-500"
+                        key={i}
+                      >
+                        {country}
+                      </p>
+                    ))}
+                  </div>
                 ))}
               </div>
-            ))}
-          </div>
+            </>
+          )}
         </Box>
       </Modal>
     </div>
