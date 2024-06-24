@@ -57,10 +57,10 @@ const Banner = () => {
         <div className="lg:flex justify-between pt-10">
           <div className="md:flex flex-col justify-between">
             <div>
-              <h1 className="md:text-title md:w-[650px] w-[72%]  text-4xl md:leading-none leading-10 text-white font-extralight font-outfit lg:leading-[70px]">
+              <h1 className="md:text-title md:w-[650px] w-[72%]  text-4xl md:leading-none leading-9 text-white font-extralight font-outfit lg:leading-[70px]">
                 Inclusive dive adventures start here
               </h1>
-              <h2 className="text-[22px] font-roboto font-[300] md:text-3xl  mt-2 text-white tracking-wide ">
+              <h2 className="text-[22px] font-roboto font-[400] md:text-3xl  mt-2 text-white tracking-wide ">
                 Book your diving trip online
               </h2>
             </div>
@@ -79,7 +79,9 @@ const Banner = () => {
                     searchValues?.tabValue === item
                       ? "text-[#0080ff]  bg-white"
                       : "text-[#f1f2f2] bg-transparent border"
-                  } text-center w-full cursor-pointer py-2 font-roboto font-normal rounded-full text-[14px] md:text-[22px] `}
+                  } text-center ${
+                    index === 1 ? "w-fit px-4" : "flex-1"
+                  }  cursor-pointer py-2 font-roboto font-normal rounded-full text-[14px] md:text-[22px] `}
                 >
                   {item}
                 </div>
@@ -91,7 +93,7 @@ const Banner = () => {
           </div>
         </div>
 
-        <div className="mt-5 flex flex-col md:flex-row md:space-y-0 space-y-2 gap-3 justify-between md:items-center pb-10 text-white">
+        <div className="mt-5 flex flex-col md:flex-row md:space-y-0 space-y-2 gap-3 justify-between md:items-center pb-6 text-white">
           <TextField
             InputProps={{
               endAdornment: (
@@ -102,7 +104,7 @@ const Banner = () => {
             }}
             onClick={() => setIsModalOpen(true)}
             id="outlined-basic"
-            label="Destination"
+            label="Destinations"
             value={searchValues?.destination}
             variant="outlined"
             size="large"
@@ -124,7 +126,7 @@ const Banner = () => {
                 },
               },
               "& .MuiInputBase-input": {
-                height: "35px", // Height of the input element
+                height: "34px", // Height of the input element
                 color: "white", // Text color
                 backgroundColor: "transparent", // Ensure input background is transparent
               },
@@ -188,7 +190,7 @@ const Banner = () => {
                   className="w-full"
                   onChange={handleDateChange}
                   disablePast
-                  label={"Select Month and Year"}
+                  label={"Year / Month"}
                   views={["month", "year"]}
                   sx={{
                     "& .MuiOutlinedInput-root": {
@@ -203,7 +205,7 @@ const Banner = () => {
                       },
                     },
                     "& .MuiInputBase-input": {
-                      height: "35px",
+                      height: "34px",
                       color: "white",
                       backgroundColor: "transparent",
                     },
@@ -235,7 +237,7 @@ const Banner = () => {
                 Vegan rating
               </InputLabel>
               <Select
-                className="border-2 border-white "
+                className="border border-light "
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 // value={rating}
@@ -268,9 +270,9 @@ const Banner = () => {
               </Select>
             </FormControl>
           </div>
-          <div className="w-[200px] lg:w-[15%] text-center ">
+          <div className="w-[200px] lg:w-[25%] text-center ">
             <div
-              className={` bg-white md:px-6 lg:px-0 py-2 rounded-full text-[#0080ff]  
+              className={` bg-white w-40 md:px-6 lg:px-0 py-2 rounded-full text-[#0080ff]  
                 text-[22px] font-[400] cursor-pointer mt-6 md:mt-0`}
               onClick={handleSearchValues}
             >

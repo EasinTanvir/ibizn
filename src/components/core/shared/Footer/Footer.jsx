@@ -25,7 +25,7 @@ const Footer = () => {
   };
 
   return (
-    <div className="bg-[#272727] py-16">
+    <div className="bg-[#272727] py-20">
       <div className="customContainer px-5 xl:px-0">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3  xl:space-y-3 lg:space-y-0 space-y-3">
           <div className="">

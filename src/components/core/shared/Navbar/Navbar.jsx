@@ -31,7 +31,7 @@ const MyNavbar = () => {
   return (
     <>
       <nav className="border-white border-b bg-primary ">
-        <div className="customContainer  xl:px-0 flex flex-row  gap-y-5 px-5 items-center justify-between py-4">
+        <div className="customContainer  xl:px-0 flex flex-row  gap-y-5 px-5 items-center justify-between py-3">
           <div className="cursor-pointer" onClick={() => router.push("/")}>
             <a
               // href="#"
@@ -80,7 +80,7 @@ const MyNavbar = () => {
           </div>
           <div className="md:hidden">
             <button onClick={menuOpen}>
-              <MenuIcon className="text-white text-4xl" />
+              <MenuIcon className="text-white md:text-4xl text-[32px]" />
             </button>
           </div>
         </div>
@@ -119,13 +119,13 @@ const MyNavbar = () => {
                 </button>
               </div>
             ) : ( */}
-            <div className="flex flex-col md:gap-5 gap-3 md:mt-0 ">
+            <div className="flex flex-col items-center md:gap-5 gap-3 md:mt-0 ">
               <div
                 // href={"/auth"}
                 onClick={() => setIsModalOpen(true)}
-                className="button text-[#f1f2f2] hover:text-[#0080ff] text-[12px] sm:text-base font-[300]"
+                className="button text-[#f1f2f2] w-fit hover:text-[#0080ff] text-base text-[12px] sm:text-base font-[300] text-center"
               >
-                SignUp
+                Sign Up
               </div>
               <div
                 onClick={() => setIsContactOpen(true)}
