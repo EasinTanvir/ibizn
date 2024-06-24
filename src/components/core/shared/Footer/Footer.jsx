@@ -142,6 +142,11 @@ const Footer = () => {
             </div>
           </div>
         </div>
+        <div className="lg:text-end  text-start pt-5">
+          <span className="text-white text-[14px]">
+            Developed By &copy; IBIZN
+          </span>
+        </div>
       </div>
     </div>
   );

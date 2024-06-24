@@ -14,6 +14,8 @@ const SpecialOffer = () => {
       </h1>
       <div className="relative">
         <Carousel
+          preventMovementUntilSwipeScrollTolerance={true}
+          swipeScrollTolerance={50}
           showStatus={false}
           infiniteLoop={true}
           renderArrowPrev={(onClickHandler, hasPrev, label) =>
@@ -69,30 +71,6 @@ const SpecialOffer = () => {
               </button>
             )
           }
-          // renderIndicator={(onClickHandler, isSelected, index, label) => {
-          //   const indicatorStyles = {
-          //     background: isSelected ? "bg-blue-500" : "bg-black", // Replace with desired color
-          //     width: 12,
-          //     height: 12,
-          //     marginTop: 10,
-          //     display: "inline-block",
-          //     margin: "0 8px",
-          //     borderRadius: "50%",
-          //   };
-
-          //   return (
-          //     <li
-          //       style={indicatorStyles}
-          //       onClick={onClickHandler}
-          //       onKeyDown={onClickHandler}
-          //       value={index}
-          //       key={index}
-          //       role="button"
-          //       tabIndex={0}
-          //       title={label}
-          //     />
-          //   );
-          // }}
         >
           {board.map((i, item) => (
             <div key={i} className="lg:flex mb-10 w-full">

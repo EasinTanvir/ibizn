@@ -99,3 +99,7 @@ body {
 .swiper-button-prev:hover {
   background-color: #f0f0f0; /* Light gray on hover */
 }
+
+.carousel-root {
+  touch-action: pan-y;
+}
