@@ -144,7 +144,16 @@ const Footer = () => {
         </div>
         <div className="lg:text-end  text-start pt-5">
           <span className="text-white text-[14px]">
-            Developed By &copy; IBIZN
+            Developed By &copy;{" "}
+            <a
+              href="https://ibizn.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-primary"
+            >
+              {" "}
+              IBIZN
+            </a>{" "}
           </span>
         </div>
       </div>

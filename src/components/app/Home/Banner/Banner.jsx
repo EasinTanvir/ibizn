@@ -5,6 +5,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import HorizontalRuleIcon from "@mui/icons-material/HorizontalRule";
 import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -18,9 +19,9 @@ import { useRouter } from "next/router";
 const tabItems = ["Liveaboards", "Resorts", "Special Offers"];
 const ratings = [
   { minRating: 1, maxRating: 2 },
-  { minRating: 2, maxRating: 3 },
-  { minRating: 3, maxRating: 4 },
-  { minRating: 4, maxRating: 5 },
+  { minRating: 1, maxRating: 3 },
+  { minRating: 1, maxRating: 4 },
+  { minRating: 1, maxRating: 5 },
 ];
 const Banner = () => {
   const [error, setError] = useState("");
@@ -182,7 +183,7 @@ const Banner = () => {
             </div>
           ) : (
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <div className="relative w-full lg:w-[25%]">
+              <div className="relative sm:static w-full lg:w-[25%]">
                 <DatePicker
                   className="w-full"
                   onChange={handleDateChange}
@@ -234,7 +235,7 @@ const Banner = () => {
                 Vegan rating
               </InputLabel>
               <Select
-                className="border-2 border-white"
+                className="border-2 border-white "
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 // value={rating}
@@ -254,8 +255,14 @@ const Banner = () => {
                 }}
               >
                 {ratings.map((r) => (
-                  <MenuItem key={`${r.minRating}-${r.maxRating}`} value={r}>
-                    {r.minRating}-{r.maxRating}
+                  <MenuItem
+                    className=""
+                    key={`${r.minRating}-${r.maxRating}`}
+                    value={r}
+                  >
+                    <span className="">{r.minRating} </span>
+                    <HorizontalRuleIcon className="w-8" />
+                    <span className=""> {r.maxRating}</span>
                   </MenuItem>
                 ))}
               </Select>

@@ -4,6 +4,7 @@ import { ArrowDropDown } from "@mui/icons-material";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
+import HorizontalRuleIcon from "@mui/icons-material/HorizontalRule";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
@@ -19,9 +20,9 @@ import { baseUrl } from "@/src/config/serverConfig";
 const tabItems = ["Liveaboards", "Resorts", "Special Offers"];
 const ratings = [
   { minRating: 1, maxRating: 2 },
-  { minRating: 2, maxRating: 3 },
-  { minRating: 3, maxRating: 4 },
-  { minRating: 4, maxRating: 5 },
+  { minRating: 1, maxRating: 3 },
+  { minRating: 1, maxRating: 4 },
+  { minRating: 1, maxRating: 5 },
 ];
 const Banner = ({ setSearchResult }) => {
   const { searchValues, setSearchValues } = useContext(userContext);
@@ -192,46 +193,51 @@ const Banner = ({ setSearchResult }) => {
               </div>
             ) : (
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                  className="w-full lg:w-[25%]"
-                  onChange={handleDateChange}
-                  disablePast
-                  value={
-                    searchValues?.date
-                      ? dayjs(new Date(searchValues.date).toISOString())
-                      : null
-                  }
-                  label={"Select Month and Year"}
-                  views={["month", "year"]}
-                  sx={{
-                    "& .MuiOutlinedInput-root": {
-                      "& fieldset": {
-                        borderColor: "lightblue", // Border color
+                <div className="relative sm:static w-full lg:w-[25%]">
+                  <DatePicker
+                    className="w-full"
+                    onChange={handleDateChange}
+                    disablePast
+                    value={
+                      searchValues?.date
+                        ? dayjs(new Date(searchValues.date).toISOString())
+                        : null
+                    }
+                    label={"Select Month and Year"}
+                    views={["month", "year"]}
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        "& fieldset": {
+                          borderColor: "lightblue", // Border color
+                        },
+                        "&:hover fieldset": {
+                          borderColor: "white", // Border color on hover
+                        },
+                        "&.Mui-focused fieldset": {
+                          borderColor: "white", // Border color when focused
+                        },
                       },
-                      "&:hover fieldset": {
-                        borderColor: "white", // Border color on hover
+                      "& .MuiInputBase-input": {
+                        height: "35px", // Height of the input element
+                        color: "white", // Text color
+                        backgroundColor: "transparent", // Ensure input background is transparent
                       },
-                      "&.Mui-focused fieldset": {
-                        borderColor: "white", // Border color when focused
+                      "& .MuiInputLabel-root": {
+                        color: "white", // Label color
                       },
-                    },
-                    "& .MuiInputBase-input": {
-                      height: "35px", // Height of the input element
-                      color: "white", // Text color
-                      backgroundColor: "transparent", // Ensure input background is transparent
-                    },
-                    "& .MuiInputLabel-root": {
-                      color: "white", // Label color
-                    },
-                    "& .MuiInputLabel-root.Mui-focused": {
-                      color: "white", // Label color when focused
-                    },
-                    "& .MuiSvgIcon-root": {
-                      color: "white", // Color of the calendar icon
-                    },
-                    width: "100%", // Width of the entire TextField
-                  }}
-                />
+                      "& .MuiInputLabel-root.Mui-focused": {
+                        color: "white", // Label color when focused
+                      },
+                      "& .MuiSvgIcon-root": {
+                        color: "white", // Color of the calendar icon
+                      },
+                      width: "100%", // Width of the entire TextField
+                    }}
+                  />
+                  <div className="absolute top-4 right-3 h-full text-white  ">
+                    <ArrowDropDown className="text-white cursor-pointer" />
+                  </div>
+                </div>
               </LocalizationProvider>
             )}
 
@@ -247,7 +253,7 @@ const Banner = ({ setSearchResult }) => {
                   className="border-2 border-white"
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={rating}
+                  //value={rating}
                   renderValue={renderSelectedValue}
                   input={<OutlinedInput label="Name" />}
                   onChange={(e) => setRating(e.target.value)}
@@ -265,7 +271,9 @@ const Banner = ({ setSearchResult }) => {
                 >
                   {ratings.map((r) => (
                     <MenuItem key={`${r.minRating}-${r.maxRating}`} value={r}>
-                      {r.minRating}-{r.maxRating}
+                      <span className="">{r.minRating} </span>
+                      <HorizontalRuleIcon className="w-8" />
+                      <span className=""> {r.maxRating}</span>
                     </MenuItem>
                   ))}
                 </Select>
