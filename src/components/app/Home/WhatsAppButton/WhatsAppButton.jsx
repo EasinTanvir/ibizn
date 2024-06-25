@@ -4,7 +4,7 @@ import whatsappImage from "../../../../../public/wp.svg"; //
 import hoverImage from "../../../../../public/hover.svg"; //
 const WhatsAppButton = () => {
   const [image, setImage] = useState(false);
-  const phoneNumber = "+8801775770439";
+  const phoneNumber = "+642102413170";
   const message = "Hello, I have a question!";
 
   return (

@@ -16,8 +16,8 @@ module.exports = {
         subtitle: "22px",
       },
       fontFamily: {
-        outfit: ["Outfit", "sans-serif"],
-        roboto: ["Roboto", "sans-serif"],
+        outfit: ["Outfit"],
+        roboto: ["Roboto"],
       },
 
       colors: {

@@ -97,8 +97,8 @@ const Banner = () => {
           <TextField
             InputProps={{
               endAdornment: (
-                <InputAdornment position="end">
-                  <ArrowDropDown className="text-white cursor-pointer" />
+                <InputAdornment className="" position="end">
+                  <ArrowDropDown className="text-white cursor-pointer " />
                 </InputAdornment>
               ),
             }}
@@ -107,7 +107,6 @@ const Banner = () => {
             label="Destinations"
             value={searchValues?.destination}
             variant="outlined"
-            size="large"
             fullWidth
             className="w-full lg:w-[45%]"
             sx={{
@@ -126,7 +125,7 @@ const Banner = () => {
                 },
               },
               "& .MuiInputBase-input": {
-                height: "34px", // Height of the input element
+                height: "33px", // Height of the input element
                 color: "white", // Text color
                 backgroundColor: "transparent", // Ensure input background is transparent
               },
@@ -141,7 +140,7 @@ const Banner = () => {
               "& .MuiInputBase-input::selection": {
                 background: "transparent", // Remove background color when text is selected
               },
-              width: "100%", // Width of the entire TextField
+              width: "100%",
             }}
           />
           {searchValues?.tabValue === "Special Offers" ? (
@@ -205,7 +204,7 @@ const Banner = () => {
                       },
                     },
                     "& .MuiInputBase-input": {
-                      height: "34px",
+                      height: "33px",
                       color: "white",
                       backgroundColor: "transparent",
                     },
@@ -221,7 +220,7 @@ const Banner = () => {
                     width: "100%",
                   }}
                 />
-                <div className="absolute top-4 right-3 h-full text-white  ">
+                <div className="absolute sm:hidden top-4 right-3 h-full text-white  ">
                   <ArrowDropDown className="text-white cursor-pointer" />
                 </div>
               </div>
@@ -229,33 +228,49 @@ const Banner = () => {
           )}
 
           <div className="w-full lg:w-[25%]">
-            <FormControl className=" w-full" style={{ color: "#f1f2f2" }}>
+            <FormControl className=" " fullWidth style={{ color: "#f1f2f2" }}>
               <InputLabel
                 style={{ color: "#f1f2f2" }}
                 id="demo-simple-select-label"
+                className=" "
               >
                 Vegan rating
               </InputLabel>
+              {console.log(rating)}
               <Select
-                className="border border-light "
+                className="h-12 "
+                label="Vegan rating"
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                // value={rating}
+                value={
+                  rating.minRating === "" || rating.maxRating === ""
+                    ? null
+                    : rating
+                }
                 renderValue={renderSelectedValue}
-                input={<OutlinedInput label="Name" />}
+                input={<OutlinedInput label="Vegan rating" />}
                 onChange={(e) => setRating(e.target.value)}
                 IconComponent={() => (
-                  <ArrowDropDown className="text-white cursor-pointer mr-2" />
+                  <ArrowDropDown className="text-white cursor-pointer mr-3" />
                 )}
                 sx={{
-                  borderWidth: "0.5px",
-                  height: 52, // Customize the height of the select field
-                  color: "white", // Customize the text color of the select field
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "white",
+                  },
+                  "&:hover .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "white",
+                  },
+                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "white",
+                  },
+
+                  color: "white",
                   ".MuiSelect-icon": {
-                    color: "white", // Customize the color of the dropdown icon
+                    color: "white",
                   },
                 }}
               >
+                {console.log(rating)}
                 {ratings.map((r) => (
                   <MenuItem
                     className=""

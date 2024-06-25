@@ -281,7 +281,7 @@ const Banner = ({ setSearchResult }) => {
             </div>
             <div className="w-[200px] lg:w-[15%] text-center">
               <div
-                className={` bg-white md:px-6 lg:px-0 py-2 rounded-full text-[#0080ff]  
+                className={` bg-white md:px-6 lg:px-0 py-2 rounded-full text-[#00afff]  
                 text-[22px] font-[400] cursor-pointer`}
                 onClick={handleSearchValues}
               >

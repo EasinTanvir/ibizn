@@ -1,3 +1,4 @@
+import { Tooltip } from "@mui/material";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -62,7 +63,7 @@ const Footer = () => {
               </Link>
             </div>
           </div>
-          <div className="md:flex lg:flex-col md:justify-center lg:justify-start md:me-3 lg:ms-0">
+          <div className="md:flex lg:flex-col pb-6 md:justify-center lg:justify-start md:me-3 lg:ms-0">
             <div>
               <h1 className="text-primary text-lg font-bold font-outfit">
                 {" "}
@@ -74,6 +75,8 @@ const Footer = () => {
               </div>
             </div>
           </div>
+          <hr className="text-primary md:hidden block   pb-8" />
+
           <div className="md:flex lg:flex-col md:justify-start lg:justify-start xl:text-end text-start">
             <div>
               <div className="flex gap-3 xl:justify-end text-start">
@@ -84,7 +87,7 @@ const Footer = () => {
                         ? "/images/client/twitterHover.svg"
                         : "/images/client/twitter.svg"
                     }
-                    className="size-10"
+                    className="size-10 cursor-pointer"
                     alt="Flowbite Logo"
                     onMouseEnter={() => handleMouseEnter("twitter")}
                     onMouseLeave={() => handleMouseLeave("twitter")}
@@ -97,7 +100,7 @@ const Footer = () => {
                         ? "/images/client/telegramHover.svg"
                         : "/images/client/telegram.svg"
                     }
-                    className="size-10"
+                    className="size-10 cursor-pointer"
                     alt="Flowbite Logo"
                     onMouseEnter={() => handleMouseEnter("telegram")}
                     onMouseLeave={() => handleMouseLeave("telegram")}
@@ -110,7 +113,7 @@ const Footer = () => {
                         ? "/images/client/facebookHover.svg"
                         : "/images/client/facebook.svg"
                     }
-                    className="size-10"
+                    className="size-10 cursor-pointer"
                     alt="Flowbite Logo"
                     onMouseEnter={() => handleMouseEnter("facebook")}
                     onMouseLeave={() => handleMouseLeave("facebook")}
@@ -123,17 +126,28 @@ const Footer = () => {
                         ? "/images/client/instagramHover.svg"
                         : "/images/client/instagram.svg"
                     }
-                    className="size-10"
+                    className="size-10 cursor-pointer"
                     alt="Flowbite Logo"
                     onMouseEnter={() => handleMouseEnter("instagram")}
                     onMouseLeave={() => handleMouseLeave("instagram")}
                   />
                 </div>
+                <div>
+                  <a href="tel:+642102413170">
+                    <img
+                      src={hoveredImages.phone ? "/phnh.svg" : "/phn.svg"}
+                      className="size-10 cursor-pointer"
+                      alt="Flowbite Logo"
+                      onMouseEnter={() => handleMouseEnter("phone")}
+                      onMouseLeave={() => handleMouseLeave("phone")}
+                    />
+                  </a>
+                </div>
               </div>
 
               <div className="mt-5">
                 <h1 className="text-[#f1f2f2] text-xl font-normal ">
-                  +64 2102413170
+                  +642102413170
                 </h1>
                 <h1 className="text-primary text-xl font-normal">
                   info@deeparture.travel
@@ -143,7 +157,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="lg:text-end  text-start pt-5">
-          <span className="text-white text-[14px]">
+          <span className="text-light text-[14px]">
             Developed By &copy;{" "}
             <a
               href="https://ibizn.com/"
