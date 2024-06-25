@@ -106,8 +106,8 @@ const BestBoard = () => {
             modules={[Pagination, Navigation]}
           >
             <SwiperSlide>
-              <div className="mt-10 text-center   min-w-52   max-w-52 ">
-                <div className=" w-40 h-40 mx-auto">
+              <div className="mt-10 text-center    w-fit   max-w-52 ">
+                <div className=" w-36 h-36 mx-auto">
                   <img
                     className="mx-auto w-full h-full rounded-full object-cover"
                     src="/images/client/boat.jpg"
@@ -141,7 +141,7 @@ const BestBoard = () => {
                     ))}
                   </div>
                   <div className="mt-3">
-                    <button className="button3 w-40 font-normal text-white  font-roboto  hover:bg-primary hover:text-white">
+                    <button className="button3 w-44 font-normal text-white  font-roboto  hover:bg-primary hover:text-white">
                       Details
                     </button>
                   </div>
@@ -149,8 +149,8 @@ const BestBoard = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className="mt-10 text-center   min-w-52   max-w-52 ">
-                <div className=" w-40 h-40 mx-auto">
+              <div className="mt-10 text-center    w-fit   max-w-52 ">
+                <div className=" w-36 h-36 mx-auto">
                   <img
                     className="mx-auto w-full h-full rounded-full object-cover"
                     src="/images/client/boat.jpg"
@@ -184,7 +184,7 @@ const BestBoard = () => {
                     ))}
                   </div>
                   <div className="mt-3">
-                    <button className="button3 w-40 font-normal text-white  font-roboto  hover:bg-primary hover:text-white">
+                    <button className="button3 w-44 font-normal text-white  font-roboto  hover:bg-primary hover:text-white">
                       Details
                     </button>
                   </div>
@@ -192,8 +192,8 @@ const BestBoard = () => {
               </div>
             </SwiperSlide>{" "}
             <SwiperSlide>
-              <div className="mt-10 text-center   min-w-52   max-w-52 ">
-                <div className=" w-40 h-40 mx-auto">
+              <div className="mt-10 text-center    w-fit   max-w-52 ">
+                <div className=" w-36 h-36 mx-auto">
                   <img
                     className="mx-auto w-full h-full rounded-full object-cover"
                     src="/images/client/boat.jpg"
@@ -227,7 +227,7 @@ const BestBoard = () => {
                     ))}
                   </div>
                   <div className="mt-3">
-                    <button className="button3 w-40 font-normal text-white  font-roboto  hover:bg-primary hover:text-white">
+                    <button className="button3 w-44 font-normal text-white  font-roboto  hover:bg-primary hover:text-white">
                       Details
                     </button>
                   </div>
@@ -235,8 +235,8 @@ const BestBoard = () => {
               </div>
             </SwiperSlide>{" "}
             <SwiperSlide>
-              <div className="mt-10 text-center   min-w-52   max-w-52 ">
-                <div className=" w-40 h-40 mx-auto">
+              <div className="mt-10 text-center    w-fit   max-w-52 ">
+                <div className=" w-36 h-36 mx-auto">
                   <img
                     className="mx-auto w-full h-full rounded-full object-cover"
                     src="/images/client/boat.jpg"
@@ -270,7 +270,7 @@ const BestBoard = () => {
                     ))}
                   </div>
                   <div className="mt-3">
-                    <button className="button3 w-40 font-normal text-white  font-roboto  hover:bg-primary hover:text-white">
+                    <button className="button3 w-44 font-normal text-white  font-roboto  hover:bg-primary hover:text-white">
                       Details
                     </button>
                   </div>
