@@ -57,10 +57,10 @@ const Banner = () => {
         <div className="lg:flex justify-between pt-10">
           <div className="md:flex flex-col justify-between">
             <div>
-              <h1 className="md:text-title md:w-[650px] w-[72%]  text-4xl md:leading-none leading-9 text-white font-extralight font-outfit lg:leading-[70px]">
+              <h1 className="md:text-title md:w-[650px] w-[72%]  text-4xl md:leading-none leading-9 text-white font-extralight font-outfit lg:leading-[63px]">
                 Inclusive dive adventures start here
               </h1>
-              <h2 className="text-[22px] font-roboto font-[400] md:text-3xl  mt-2 text-white tracking-wide ">
+              <h2 className="text-[22px] font-roboto font-[400] md:text-3xl  mt-2 md:mt-3  text-white tracking-wide ">
                 Book your diving trip online
               </h2>
             </div>
@@ -80,7 +80,7 @@ const Banner = () => {
                       ? "text-[#0080ff]  bg-white"
                       : "text-[#f1f2f2] bg-transparent border"
                   } text-center ${
-                    index === 1 ? "w-fit px-4" : "flex-1"
+                    index === 1 ? "w-fit px-4 sm:px-8" : "flex-1"
                   }  cursor-pointer py-2 font-roboto font-normal rounded-full text-[14px] md:text-[22px] `}
                 >
                   {item}

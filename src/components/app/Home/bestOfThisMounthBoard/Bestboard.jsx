@@ -27,8 +27,8 @@ const BestBoard = () => {
   return (
     <div className="bg-[#F1F2F2]  py-20">
       <div className="customContainer px-5 xl:px-0">
-        <div>
-          <h1 className="lg:text-title md:text-5xl  text-4xl  font-extralight font-outfit text-primary mb-2">
+        <div className="sm:mb-5">
+          <h1 className="lg:text-title md:text-5xl  text-4xl  font-extralight font-outfit text-primary mb-2 sm:mb-4">
             Best of this month
           </h1>
           <h2 className="md:text-2xl md:leading-[26px] leading-5 text-lg   mt-1 lg:mt-3 text-secondary">
