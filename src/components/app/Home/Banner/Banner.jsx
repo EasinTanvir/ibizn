@@ -102,6 +102,7 @@ const Banner = () => {
                 </InputAdornment>
               ),
             }}
+            focused={searchValues?.destination !== ""}
             onClick={() => setIsModalOpen(true)}
             id="outlined-basic"
             label="Destinations"
@@ -153,11 +154,12 @@ const Banner = () => {
                   Select Property
                 </InputLabel>
                 <Select
-                  className="border-2 border-white"
+                  className="h-12"
+                  label="Select Property"
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   value={searchValues?.property}
-                  input={<OutlinedInput label="Name" />}
+                  input={<OutlinedInput label="Select Property" />}
                   onChange={(e) =>
                     setSearchValues({
                       ...searchValues,
@@ -166,11 +168,19 @@ const Banner = () => {
                     })
                   }
                   IconComponent={() => (
-                    <ArrowDropDown className="text-white cursor-pointer" />
+                    <ArrowDropDown className="text-white cursor-pointer mr-3" />
                   )}
                   sx={{
-                    borderWidth: "0.5px",
-                    height: 52,
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "white",
+                    },
+                    "&:hover .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "white",
+                    },
+                    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "white",
+                    },
+
                     color: "white",
                     ".MuiSelect-icon": {
                       color: "white",

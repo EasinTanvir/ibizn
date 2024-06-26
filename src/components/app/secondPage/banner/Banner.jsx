@@ -118,7 +118,8 @@ const Banner = ({ setSearchResult }) => {
               }}
               onClick={() => setIsModalOpen(true)}
               id="outlined-basic"
-              label="Destination"
+              label="Destinations"
+              focused={searchValues?.destination !== ""}
               value={destination || searchValues?.destination}
               variant="outlined"
               size="large"
@@ -163,11 +164,12 @@ const Banner = ({ setSearchResult }) => {
                     Select Property
                   </InputLabel>
                   <Select
-                    className="border-2 border-white"
+                    className="h-12"
                     labelId="demo-simple-select-label"
+                    label="Select Property"
                     id="demo-simple-select"
                     value={searchValues?.property}
-                    input={<OutlinedInput label="Name" />}
+                    input={<OutlinedInput label="Select Property" />}
                     onChange={(e) =>
                       setSearchValues({
                         ...searchValues,
@@ -178,8 +180,16 @@ const Banner = ({ setSearchResult }) => {
                       <ArrowDropDown className="text-white cursor-pointer" />
                     )}
                     sx={{
-                      borderWidth: "0.5px",
-                      height: 52,
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        borderColor: "white",
+                      },
+                      "&:hover .MuiOutlinedInput-notchedOutline": {
+                        borderColor: "white",
+                      },
+                      "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                        borderColor: "white",
+                      },
+
                       color: "white",
                       ".MuiSelect-icon": {
                         color: "white",
@@ -250,22 +260,35 @@ const Banner = ({ setSearchResult }) => {
                   Vegan rating
                 </InputLabel>
                 <Select
-                  className="border-2 border-white"
+                  label="Vegan rating"
+                  className="h-12"
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  //value={rating}
+                  value={
+                    rating.minRating === "" || rating.maxRating === ""
+                      ? null
+                      : rating
+                  }
                   renderValue={renderSelectedValue}
-                  input={<OutlinedInput label="Name" />}
+                  input={<OutlinedInput label="Vegan rating" />}
                   onChange={(e) => setRating(e.target.value)}
                   IconComponent={() => (
                     <ArrowDropDown className="text-white cursor-pointer" />
                   )}
                   sx={{
-                    borderWidth: "0.5px",
-                    height: 52, // Customize the height of the select field
-                    color: "white", // Customize the text color of the select field
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "white",
+                    },
+                    "&:hover .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "white",
+                    },
+                    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "white",
+                    },
+
+                    color: "white",
                     ".MuiSelect-icon": {
-                      color: "white", // Customize the color of the dropdown icon
+                      color: "white",
                     },
                   }}
                 >

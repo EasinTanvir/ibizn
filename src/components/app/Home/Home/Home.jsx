@@ -13,7 +13,10 @@ const Home = () => {
       <Banner />
       <SpecialOffer />
       <BestBoard />
-      <WhyDeeparture />
+      <div style={{ marginTop: "0px" }}>
+        <WhyDeeparture />
+      </div>
+
       <WhatsAppButton />
     </div>
   );

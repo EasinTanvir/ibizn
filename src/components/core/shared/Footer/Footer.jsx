@@ -26,7 +26,7 @@ const Footer = () => {
   };
 
   return (
-    <div className="bg-[#272727] py-20">
+    <div className="bg-[#272727] relative py-20">
       <div className="customContainer px-5 xl:px-0">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3  xl:space-y-3 lg:space-y-0 space-y-3">
           <div className="">
@@ -75,9 +75,9 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <hr className="text-primary md:hidden block   pb-8" />
+          <hr className="text-primary md:hidden block  w-full  absolute left-0 bottom-72 pb-5 " />
 
-          <div className="md:flex lg:flex-col md:justify-start lg:justify-start xl:text-end text-start">
+          <div className="md:flex lg:flex-col md:justify-start md:pt-0 pt-16  lg:justify-start xl:text-end text-start">
             <div>
               <div className="flex gap-3 xl:justify-end text-start">
                 <div>
@@ -149,14 +149,19 @@ const Footer = () => {
                 <h1 className="text-[#f1f2f2] text-xl font-normal ">
                   +642102413170
                 </h1>
-                <h1 className="text-primary text-xl font-normal">
-                  info@deeparture.travel
+                <h1>
+                  <a
+                    href="mailto:info@deeparture.travel"
+                    className="text-primary text-xl font-normal"
+                  >
+                    info@deeparture.travel
+                  </a>
                 </h1>
               </div>
             </div>
           </div>
         </div>
-        <div className="lg:text-end  text-start pt-5">
+        <div className="lg:text-end  text-center sm:pt-5 pt-8">
           <span className="text-light text-[14px]">
             Developed By &copy;{" "}
             <a
