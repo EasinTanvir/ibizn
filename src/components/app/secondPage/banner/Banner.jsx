@@ -264,11 +264,7 @@ const Banner = ({ setSearchResult }) => {
                   className="h-12"
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={
-                    rating.minRating === "" || rating.maxRating === ""
-                      ? null
-                      : rating
-                  }
+                  value={rating}
                   renderValue={renderSelectedValue}
                   input={<OutlinedInput label="Vegan rating" />}
                   onChange={(e) => setRating(e.target.value)}
