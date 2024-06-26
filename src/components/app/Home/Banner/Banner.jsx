@@ -52,10 +52,10 @@ const Banner = () => {
   };
 
   return (
-    <div className="bg-primary">
+    <div className="bg-primary pb-6">
       <div className=" customContainer px-5 xl:px-0 pb-10 md:pb-6">
         <div className="lg:flex justify-between pt-10">
-          <div className="md:flex flex-col justify-between">
+          <div className="md:flex flex-col  gap-14 ">
             <div>
               <h1 className="md:text-title md:w-[650px] w-[72%]  text-4xl md:leading-none leading-9 text-white font-extralight font-outfit lg:leading-[63px]">
                 Inclusive dive adventures start here
@@ -65,7 +65,7 @@ const Banner = () => {
               </h2>
             </div>
             {/* test */}
-            <div className="flex items-center justify-between gap-2 md:gap-5 mt-8">
+            <div className="flex items-center justify-between gap-2 md:gap-5 mt-8 sm:mt-0 ">
               {tabItems?.map((item, index) => (
                 <div
                   onClick={() =>
@@ -88,62 +88,82 @@ const Banner = () => {
               ))}
             </div>
           </div>
-          <div className="md:mt-10 xl:block hidden lg:mt-0 mt-10">
-            <img className="h-80" src="/images/client/bannerImage.png" alt="" />
+          <div className="md:mt-10 xl:block hidden lg:mt-0 mt-10  md:pe-10">
+            <img className="h-64" src="/images/client/bannerImage.png" alt="" />
           </div>
         </div>
 
-        <div className="mt-5 flex flex-col md:flex-row md:space-y-0 space-y-2 gap-3 justify-between md:items-center pb-6 text-white">
-          <TextField
-            InputProps={{
-              endAdornment: (
-                <InputAdornment className="" position="end">
-                  <ArrowDropDown className="text-white cursor-pointer " />
-                </InputAdornment>
-              ),
-            }}
-            focused={searchValues?.destination !== ""}
+        <div className="sm:mt-6 mt-6  flex flex-col md:flex-row md:space-y-0 space-y-2 gap-3 justify-between md:items-center pb-6 text-white">
+          <div
             onClick={() => setIsModalOpen(true)}
-            id="outlined-basic"
-            label="Destinations"
-            value={searchValues?.destination}
-            variant="outlined"
-            fullWidth
-            className="w-full lg:w-[45%]"
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                "& fieldset": {
-                  borderColor: "lightblue", // Border color
+            className="w-full lg:w-[50%] relative "
+          >
+            <TextField
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment
+                    className="absolute left-0 top-2  h-12 w-full pe-3  flex justify-end"
+                    position="start"
+                  >
+                    <ArrowDropDown className="text-white cursor-pointer " />
+                  </InputAdornment>
+                ),
+              }}
+              id="outlined-basic"
+              disabled={searchValues?.destination === ""}
+              label="Destinations"
+              value={searchValues?.destination}
+              variant="outlined"
+              fullWidth
+              className="text-white"
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "white", // Border color
+                    background: "transparent",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "white", // Border color on hover
+                    background: "transparent",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "white", // Border color when focused
+                    background: "transparent",
+                  },
+                  "&.Mui-disabled": {
+                    "& fieldset": {
+                      borderColor: "white", // Border color when disabled
+                    },
+                    "& .MuiOutlinedInput-input": {
+                      color: "white", // Text color when disabled
+                      backgroundColor: "transparent", // Background color when disabled
+                    },
+                  },
+                },
+                "& .MuiFormLabel-root.Mui-disabled": {
+                  color: "white",
+                },
+                "& .MuiInputBase-input": {
+                  height: "31px", // Height of the input element
+                  color: "white", // Text color
+                  backgroundColor: "transparent", // Ensure input background is transparent
+                },
+                "& .MuiInputLabel-root": {
+                  color: "white", // Label color
                   background: "transparent",
                 },
-                "&:hover fieldset": {
-                  borderColor: "white", // Border color on hover
+                "& .MuiInputLabel-root.Mui-focused": {
+                  color: "white", // Label color when focused
                   background: "transparent",
                 },
-                "&.Mui-focused fieldset": {
-                  borderColor: "white", // Border color when focused
-                  background: "transparent",
+                "& .MuiInputBase-input::selection": {
+                  color: "white",
+                  background: "transparent", // Remove background color when text is selected
                 },
-              },
-              "& .MuiInputBase-input": {
-                height: "33px", // Height of the input element
-                color: "white", // Text color
-                backgroundColor: "transparent", // Ensure input background is transparent
-              },
-              "& .MuiInputLabel-root": {
-                color: "white", // Label color
-                background: "transparent",
-              },
-              "& .MuiInputLabel-root.Mui-focused": {
-                color: "white", // Label color when focused
-                background: "transparent",
-              },
-              "& .MuiInputBase-input::selection": {
-                background: "transparent", // Remove background color when text is selected
-              },
-              width: "100%",
-            }}
-          />
+                width: "100%",
+              }}
+            />
+          </div>
           {searchValues?.tabValue === "Special Offers" ? (
             <div className="w-full lg:w-[25%]">
               <FormControl className=" w-full" style={{ color: "#f1f2f2" }}>
@@ -194,9 +214,12 @@ const Banner = () => {
             </div>
           ) : (
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <div className="relative sm:static w-full lg:w-[25%]">
+              <div className="relative  sm:static w-full lg:w-[15%]">
                 <DatePicker
-                  className="w-full"
+                  slots={{
+                    openPickerIcon: ArrowDropDown,
+                  }}
+                  className="w-full  "
                   onChange={handleDateChange}
                   disablePast
                   label={"Year / Month"}
@@ -237,7 +260,7 @@ const Banner = () => {
             </LocalizationProvider>
           )}
 
-          <div className="w-full lg:w-[25%]">
+          <div className="w-full lg:w-[15%]">
             <FormControl className=" " fullWidth style={{ color: "#f1f2f2" }}>
               <InputLabel
                 style={{ color: "#f1f2f2" }}
@@ -295,7 +318,7 @@ const Banner = () => {
               </Select>
             </FormControl>
           </div>
-          <div className="w-[200px] lg:w-[25%] text-center ">
+          <div className="w-[200px] lg:w-[25%] text-center sm:ps-8 ">
             <div
               className={` bg-white w-40 md:px-6 lg:px-0 py-2 rounded-full text-[#0080ff]  
                 text-[22px] font-[400] cursor-pointer mt-6 md:mt-0`}

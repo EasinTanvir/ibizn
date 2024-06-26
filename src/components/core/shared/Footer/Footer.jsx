@@ -161,7 +161,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="lg:text-end  text-center sm:pt-5 pt-8">
+        <div className=" text-center sm:pt-6 pt-8">
           <span className="text-light text-[14px]">
             Developed By &copy;{" "}
             <a

@@ -108,52 +108,78 @@ const Banner = ({ setSearchResult }) => {
           </div>
 
           <div className="mt-10 flex flex-col md:flex-row md:space-y-0 space-y-2 gap-3 justify-between md:items-center pb-10 text-white">
-            <TextField
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <ArrowDropDown className="text-white cursor-pointer" />
-                  </InputAdornment>
-                ),
-              }}
+            <div
               onClick={() => setIsModalOpen(true)}
-              id="outlined-basic"
-              label="Destinations"
-              focused={searchValues?.destination !== ""}
-              value={destination || searchValues?.destination}
-              variant="outlined"
-              size="large"
-              fullWidth
-              className="w-full lg:w-[45%]"
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": {
-                    borderColor: "lightblue", // Border color
+              className="w-full lg:w-[50%] relative "
+            >
+              <TextField
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment
+                      className="absolute left-0 top-2  h-12 w-full pe-3  flex justify-end"
+                      position="start"
+                    >
+                      <ArrowDropDown className="text-white cursor-pointer " />
+                    </InputAdornment>
+                  ),
+                }}
+                id="outlined-basic"
+                disabled={
+                  searchValues?.destination === "" && destination === ""
+                }
+                label="Destinations"
+                value={searchValues?.destination || destination}
+                variant="outlined"
+                fullWidth
+                className="text-white"
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "white", // Border color
+                      background: "transparent",
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "white", // Border color on hover
+                      background: "transparent",
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "white", // Border color when focused
+                      background: "transparent",
+                    },
+                    "&.Mui-disabled": {
+                      "& fieldset": {
+                        borderColor: "white", // Border color when disabled
+                      },
+                      "& .MuiOutlinedInput-input": {
+                        color: "white", // Text color when disabled
+                        backgroundColor: "transparent", // Background color when disabled
+                      },
+                    },
                   },
-                  "&:hover fieldset": {
-                    borderColor: "white", // Border color on hover
+                  "& .MuiFormLabel-root.Mui-disabled": {
+                    color: "white",
                   },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "white", // Border color when focused
+                  "& .MuiInputBase-input": {
+                    height: "31px", // Height of the input element
+                    color: "white", // Text color
+                    backgroundColor: "transparent", // Ensure input background is transparent
                   },
-                },
-                "& .MuiInputBase-input": {
-                  height: "35px", // Height of the input element
-                  color: "white", // Text color
-                  backgroundColor: "transparent", // Ensure input background is transparent
-                },
-                "& .MuiInputLabel-root": {
-                  color: "white", // Label color
-                },
-                "& .MuiInputLabel-root.Mui-focused": {
-                  color: "white", // Label color when focused
-                },
-                "& .MuiSvgIcon-root": {
-                  color: "white", // Color of the calendar icon
-                },
-                width: "100%", // Width of the entire TextField
-              }}
-            />
+                  "& .MuiInputLabel-root": {
+                    color: "white", // Label color
+                    background: "transparent",
+                  },
+                  "& .MuiInputLabel-root.Mui-focused": {
+                    color: "white", // Label color when focused
+                    background: "transparent",
+                  },
+                  "& .MuiInputBase-input::selection": {
+                    color: "white",
+                    background: "transparent", // Remove background color when text is selected
+                  },
+                  width: "100%",
+                }}
+              />
+            </div>
             {searchValues?.tabValue === "Special Offers" ? (
               <div className="w-full lg:w-[25%]">
                 <FormControl className=" w-full" style={{ color: "#f1f2f2" }}>
@@ -203,8 +229,11 @@ const Banner = ({ setSearchResult }) => {
               </div>
             ) : (
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <div className="relative sm:static w-full lg:w-[25%]">
+                <div className="relative sm:static w-full lg:w-[15%]">
                   <DatePicker
+                    slots={{
+                      openPickerIcon: ArrowDropDown,
+                    }}
                     className="w-full"
                     onChange={handleDateChange}
                     disablePast
@@ -213,7 +242,7 @@ const Banner = ({ setSearchResult }) => {
                         ? dayjs(new Date(searchValues.date).toISOString())
                         : null
                     }
-                    label={"Select Month and Year"}
+                    label={"Year / Month"}
                     views={["month", "year"]}
                     sx={{
                       "& .MuiOutlinedInput-root": {
@@ -251,7 +280,7 @@ const Banner = ({ setSearchResult }) => {
               </LocalizationProvider>
             )}
 
-            <div className="w-full lg:w-[25%]">
+            <div className="w-full lg:w-[15%]">
               <FormControl className=" w-full" style={{ color: "#f1f2f2" }}>
                 <InputLabel
                   style={{ color: "#f1f2f2" }}
@@ -264,7 +293,11 @@ const Banner = ({ setSearchResult }) => {
                   className="h-12"
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={rating}
+                  value={
+                    rating.minRating === "" || rating.maxRating === ""
+                      ? null
+                      : rating
+                  }
                   renderValue={renderSelectedValue}
                   input={<OutlinedInput label="Vegan rating" />}
                   onChange={(e) => setRating(e.target.value)}
@@ -298,7 +331,7 @@ const Banner = ({ setSearchResult }) => {
                 </Select>
               </FormControl>
             </div>
-            <div className="w-[200px] lg:w-[15%] text-center">
+            <div className="w-[200px] lg:w-[15%] text-center sm:ps-5">
               <div
                 className={` bg-white md:px-6 lg:px-0 py-2 rounded-full text-[#00afff]  
                 text-[22px] font-[400] cursor-pointer`}

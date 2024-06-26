@@ -15,7 +15,7 @@ import { baseUrl } from "@/src/config/serverConfig";
 const ContactUsModal = ({ isModalOpen, setIsModalOpen }) => {
   const [isLoading, setIsLoading] = useState(false);
   const handleContactUsEmail = (e) => {
-    setIsLoading(true);
+    //setIsLoading(true);
     e.preventDefault();
 
     // Accessing form field values
@@ -24,6 +24,7 @@ const ContactUsModal = ({ isModalOpen, setIsModalOpen }) => {
     const message = e.target.message.value;
 
     const body = { name, email, message };
+    console.log(body);
     fetch(`${baseUrl}/send-email/contact-us`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -42,7 +43,7 @@ const ContactUsModal = ({ isModalOpen, setIsModalOpen }) => {
       });
   };
   return (
-    <UseBasicModal open={isModalOpen} setOpen={setIsModalOpen}>
+    <UseBasicModal c open={isModalOpen} setOpen={setIsModalOpen}>
       <div>
         <Container component="main" maxWidth="sm">
           <Box
@@ -55,39 +56,53 @@ const ContactUsModal = ({ isModalOpen, setIsModalOpen }) => {
             <form onSubmit={handleContactUsEmail} sx={{ mt: 3 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
-                  <TextField
-                    variant="outlined"
-                    required
-                    fullWidth
-                    id="name"
-                    label="Name"
-                    name="name"
-                    type="text"
-                  />
+                  <div className="flex flex-col gap-1">
+                    <label className="font-semibold text-slate-800" htmlFor="">
+                      Name
+                    </label>
+                    <input
+                      placeholder="type your name"
+                      required
+                      type="text"
+                      id="name"
+                      label="Name"
+                      name="name"
+                      className="border border-slate-800 rounded-md px-2"
+                    />
+                  </div>
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField
-                    variant="outlined"
-                    required
-                    fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    type="email"
-                  />
+                  <div className="flex flex-col gap-1">
+                    <label className="font-semibold text-slate-800" htmlFor="">
+                      Email
+                    </label>
+                    <input
+                      placeholder="type your email"
+                      required
+                      id="email"
+                      label="Email Address"
+                      name="email"
+                      type="email"
+                      className="border border-slate-800 rounded-md px-2"
+                    />
+                  </div>
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField
-                    variant="outlined"
-                    required
-                    fullWidth
-                    name="message"
-                    label="Message"
-                    id="message"
-                    type="text"
-                    multiline
-                    rows={4}
-                  />
+                  <div className="flex flex-col gap-1">
+                    <label className="font-semibold text-slate-800" htmlFor="">
+                      Message
+                    </label>
+                    <textarea
+                      placeholder="type your message"
+                      required
+                      className="border border-slate-800 rounded-md px-2"
+                      name="message"
+                      label="Message"
+                      id="message"
+                      type="text"
+                      rows={4}
+                    />
+                  </div>
                 </Grid>
               </Grid>
               <button

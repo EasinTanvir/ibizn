@@ -41,22 +41,30 @@ const BestBoard = () => {
           <>
             <div className="swiper-button image-swiper-button-next1">
               <ArrowBackIosNewIcon
+                sx={{
+                  stroke: "#ffffff",
+                  strokeWidth: 0.5,
+                }}
                 className={` text-primary ${
                   isBeginning ? "opacity-40" : "opacity-100"
                 }`}
                 style={{
-                  fontSize: "32px",
+                  fontSize: "36px",
                   cursor: "pointer",
                 }}
               />
             </div>
             <div className="swiper-button2 image-swiper-button-prev1">
               <ArrowForwardIosIcon
+                sx={{
+                  stroke: "#ffffff",
+                  strokeWidth: 0.5,
+                }}
                 className={`text-primary ${
                   isEnd ? "opacity-40" : "opacity-100"
                 } `}
                 style={{
-                  fontSize: "32px",
+                  fontSize: "36px",
                   cursor: "pointer",
                 }}
               />
