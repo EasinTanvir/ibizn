@@ -74,7 +74,7 @@ const SpecialOffer = () => {
         >
           {board.map((i, item) => (
             <div key={i} className="lg:flex mb-10 w-full">
-              <div className="lg:flex items-center border  sm:border border-r-2  border-primary lg:w-[80%] md:w-full gap-10">
+              <div className="lg:flex items-center border   border-primary lg:w-[80%] md:w-full gap-10">
                 <div className="h-full">
                   <img
                     className={` h-full inline-block lg:w-96 w-full object-cover`}
@@ -107,7 +107,7 @@ const SpecialOffer = () => {
                   </div>
                 </div>
               </div>
-              <div className="p-5 lg:p-0 border border-t-0 sm:border sm:border-l-0 border-primary border-r-2 flex justify-between items-center lg:flex-col lg:justify-center lg:w-[20%] ">
+              <div className="p-5 lg:p-0 border border-t-0 sm:border sm:border-l-0 border-primary  flex justify-between items-center lg:flex-col lg:justify-center lg:w-[20%] ">
                 <div className="text-center py-4">
                   <div>
                     <h1>
