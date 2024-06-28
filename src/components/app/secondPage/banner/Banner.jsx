@@ -16,6 +16,7 @@ import { InputAdornment, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import SearchItemModal from "../../Home/Banner/SearchItemModal";
 import { baseUrl } from "@/src/config/serverConfig";
+import StarIcons from "../../Home/Banner/StarIcon";
 
 const tabItems = ["Liveaboards", "Resorts", "Special Offers"];
 const ratings = [
@@ -286,18 +287,14 @@ const Banner = ({ setSearchResult }) => {
                   style={{ color: "#f1f2f2" }}
                   id="demo-simple-select-label"
                 >
-                  Vegan rating
+                  Vegan ratings
                 </InputLabel>
                 <Select
                   label="Vegan rating"
                   className="h-12"
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={
-                    rating.minRating === "" || rating.maxRating === ""
-                      ? null
-                      : rating
-                  }
+                  value={rating}
                   renderValue={renderSelectedValue}
                   input={<OutlinedInput label="Vegan rating" />}
                   onChange={(e) => setRating(e.target.value)}
@@ -322,10 +319,44 @@ const Banner = ({ setSearchResult }) => {
                   }}
                 >
                   {ratings.map((r) => (
-                    <MenuItem key={`${r.minRating}-${r.maxRating}`} value={r}>
-                      <span className="">{r.minRating} </span>
-                      <HorizontalRuleIcon className="w-8" />
-                      <span className=""> {r.maxRating}</span>
+                    <MenuItem
+                      className=""
+                      key={`${r.minRating}-${r.maxRating}`}
+                      value={r}
+                    >
+                      <div className="flex flex-col gap-4">
+                        {" "}
+                        {r.minRating === 1 && r.maxRating === 2 && (
+                          <div className="flex gap-0 items-center">
+                            <StarIcons />
+                            <StarIcons />
+                          </div>
+                        )}
+                        {r.minRating === 1 && r.maxRating === 3 && (
+                          <div className="flex gap-0 items-center">
+                            <StarIcons />
+                            <StarIcons />
+                            <StarIcons />
+                          </div>
+                        )}{" "}
+                        {r.minRating === 1 && r.maxRating === 4 && (
+                          <div className="flex gap-0 items-center">
+                            <StarIcons />
+                            <StarIcons />
+                            <StarIcons />
+                            <StarIcons />
+                          </div>
+                        )}
+                        {r.minRating === 1 && r.maxRating === 5 && (
+                          <div className="flex gap-0 items-center">
+                            <StarIcons />
+                            <StarIcons />
+                            <StarIcons />
+                            <StarIcons />
+                            <StarIcons />
+                          </div>
+                        )}
+                      </div>
                     </MenuItem>
                   ))}
                 </Select>

@@ -50,7 +50,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="">
+          <div className="sm:static absolute right-8 top-28">
             <h1 className="text-primary text-lg font-bold font-outfit">
               For Operators
             </h1>
@@ -64,7 +64,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="md:flex lg:flex-col pb-6 md:justify-center lg:justify-start md:me-3 lg:ms-0">
-            <div>
+            <div className="sm:static absolute right-16 top-52">
               <h1 className="text-primary text-lg font-bold font-outfit">
                 {" "}
                 For Agents
@@ -75,7 +75,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <hr className="text-primary md:hidden block  w-full  absolute left-0 bottom-72 pb-5 " />
+          <hr className="text-primary md:hidden block  w-full  absolute left-0 bottom-64 pb-5 " />
 
           <div className="md:flex lg:flex-col md:justify-start md:pt-0 pt-16  lg:justify-start xl:text-end text-start">
             <div>
@@ -161,8 +161,8 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className=" text-center sm:pt-6 pt-8">
-          <span className="text-light text-[14px]">
+        <div className=" text-center sm:pt-6 pt-8 ">
+          <span className="hidden text-[14px]">
             Developed By &copy;{" "}
             <a
               href="https://ibizn.com/"

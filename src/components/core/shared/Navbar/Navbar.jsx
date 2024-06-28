@@ -71,7 +71,7 @@ const MyNavbar = () => {
               </div>
               <div
                 onClick={() => setIsContactOpen(true)}
-                className="button text-[#f1f2f2] hover:text-[#0080ff] text-[12px] sm:text-base font-[300]"
+                className="button bg-white text-[#0080ff] font-[400]  hover:text-[#0080ff] text-[12px] sm:text-base font-[300]"
               >
                 Contact us
               </div>

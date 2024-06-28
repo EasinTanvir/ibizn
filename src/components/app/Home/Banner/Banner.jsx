@@ -3,6 +3,7 @@ import { ArrowDropDown } from "@mui/icons-material";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
+
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import HorizontalRuleIcon from "@mui/icons-material/HorizontalRule";
@@ -15,6 +16,8 @@ import dayjs from "dayjs";
 import { Button, InputAdornment, Typography } from "@mui/material";
 import { userContext } from "@/src/storage/contextApi";
 import { useRouter } from "next/router";
+
+import StarIcons from "./StarIcon";
 
 const tabItems = ["Liveaboards", "Resorts", "Special Offers"];
 const ratings = [
@@ -310,9 +313,39 @@ const Banner = () => {
                     key={`${r.minRating}-${r.maxRating}`}
                     value={r}
                   >
-                    <span className="">{r.minRating} </span>
-                    <HorizontalRuleIcon className="w-8" />
-                    <span className=""> {r.maxRating}</span>
+                    <div className="flex flex-col gap-4">
+                      {" "}
+                      {r.minRating === 1 && r.maxRating === 2 && (
+                        <div className="flex gap-0 items-center">
+                          <StarIcons />
+                          <StarIcons />
+                        </div>
+                      )}
+                      {r.minRating === 1 && r.maxRating === 3 && (
+                        <div className="flex gap-0 items-center">
+                          <StarIcons />
+                          <StarIcons />
+                          <StarIcons />
+                        </div>
+                      )}{" "}
+                      {r.minRating === 1 && r.maxRating === 4 && (
+                        <div className="flex gap-0 items-center">
+                          <StarIcons />
+                          <StarIcons />
+                          <StarIcons />
+                          <StarIcons />
+                        </div>
+                      )}
+                      {r.minRating === 1 && r.maxRating === 5 && (
+                        <div className="flex gap-0 items-center">
+                          <StarIcons />
+                          <StarIcons />
+                          <StarIcons />
+                          <StarIcons />
+                          <StarIcons />
+                        </div>
+                      )}
+                    </div>
                   </MenuItem>
                 ))}
               </Select>
