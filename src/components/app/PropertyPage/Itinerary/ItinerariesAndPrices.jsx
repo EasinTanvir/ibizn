@@ -1,9 +1,28 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import CabinModal from "./CabinModal";
 import BookingModal from "./BookingModal";
 import axios from "axios";
+import dayjs from "dayjs";
+import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import TextField from "@mui/material/TextField";
+import { ArrowDropDown } from "@mui/icons-material";
+
+dayjs.extend(isSameOrBefore);
+dayjs.extend(isSameOrAfter);
 function ItinerariesAndPrices({ propertyData }) {
+  //year
+  const [selectedYear, setSelectedYear] = useState(null);
+  const [selectedMonth, setSelectedMonth] = useState(null);
+  const [filteredTrips, setFilteredTrips] = useState(propertyData?.schedules);
+  console.log(selectedYear);
+  console.log(selectedMonth);
+
+  //month
+
   const [cabins, setCabins] = useState([]);
   const [convertedAmounts, setConvertedAmounts] = useState({});
 
@@ -25,23 +44,151 @@ function ItinerariesAndPrices({ propertyData }) {
     return <div>No itinerary data available</div>;
   }
 
+  const handleMonthChange = (newValue) => {
+    const formattedMonth = dayjs(newValue).format("YYYY-MM-DD");
+    setSelectedMonth(formattedMonth);
+    filterTripsByMonth(newValue);
+  };
+
+  const handleYearChange = (newValue) => {
+    const formattedYear = dayjs(newValue).format("YYYY-MM-DD");
+    setSelectedYear(formattedYear);
+    filterTripsByYear(newValue);
+  };
+
+  const filterTripsByMonth = (month) => {
+    const startOfMonth = dayjs(month).startOf("month");
+    const endOfMonth = dayjs(month).endOf("month");
+    const filtered = propertyData?.schedules.filter((trip) => {
+      const tripStart = dayjs(trip.tripStart);
+      const tripEnd = dayjs(trip.tripEnd);
+      return tripStart?.isBefore(endOfMonth) && tripEnd?.isAfter(startOfMonth);
+    });
+
+    setFilteredTrips(filtered);
+  };
+  const filterTripsByYear = (year) => {
+    const startOfYear = dayjs(year).startOf("year");
+    const endOfYear = dayjs(year).endOf("year");
+    const filtered = propertyData?.schedules.filter((trip) => {
+      const tripStart = dayjs(trip.tripStart);
+      const tripEnd = dayjs(trip.tripEnd);
+      return tripStart?.isBefore(endOfYear) && tripEnd?.isAfter(startOfYear);
+    });
+
+    setFilteredTrips(filtered);
+  };
+
+  //console.log(propertyData?.schedules);
   return (
     <div className="w-full bg-primary">
       <div className="customContainer mx-auto py-8 px-4">
-        <h1 className="text-2xl text-white font-light md:text-6xl md:font-light my-8">
+        <h1 className="text-2xl text-white font-[400] md:text-6xl md:font-light mt-8 mb-5">
           Itineraries and Prices
         </h1>
+        <React.Fragment>
+          <div className="pt-1">
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <div className=" mb-11 flex items-center gap-4">
+                <div className="relative">
+                  <DatePicker
+                    slots={{
+                      openPickerIcon: ArrowDropDown,
+                    }}
+                    views={["month"]}
+                    label="Month"
+                    value={selectedMonth}
+                    onChange={handleMonthChange}
+                    className="sm:w-40 w-28"
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        "& fieldset": {
+                          borderColor: "white",
+                        },
+                        "&:hover fieldset": {
+                          borderColor: "white",
+                        },
+                        "&.Mui-focused fieldset": {
+                          borderColor: "white",
+                        },
+                      },
+                      "& .MuiInputBase-input": {
+                        height: "35px",
+                        color: "white",
+                        backgroundColor: "transparent",
+                      },
+                      "& .MuiInputLabel-root": {
+                        color: "white",
+                      },
+                      "& .MuiInputLabel-root.Mui-focused": {
+                        color: "white",
+                      },
+                      "& .MuiSvgIcon-root": {
+                        color: "white",
+                      },
+                    }}
+                  />
+                  <div className="absolute sm:hidden top-4 right-3 h-full text-white  ">
+                    <ArrowDropDown className="text-white cursor-pointer" />
+                  </div>
+                </div>
+                <div className="relative">
+                  <DatePicker
+                    slots={{
+                      openPickerIcon: ArrowDropDown,
+                    }}
+                    views={["year"]}
+                    label="Year"
+                    className=" sm:w-48 w-36"
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        "& fieldset": {
+                          borderColor: "white",
+                        },
+                        "&:hover fieldset": {
+                          borderColor: "white",
+                        },
+                        "&.Mui-focused fieldset": {
+                          borderColor: "white",
+                        },
+                      },
+                      "& .MuiInputBase-input": {
+                        height: "33px",
+                        color: "white",
+                        backgroundColor: "transparent",
+                      },
+                      "& .MuiInputLabel-root": {
+                        color: "white",
+                      },
+                      "& .MuiInputLabel-root.Mui-focused": {
+                        color: "white",
+                      },
+                      "& .MuiSvgIcon-root": {
+                        color: "white",
+                      },
+                    }}
+                    value={selectedYear}
+                    onChange={handleYearChange}
+                  />
+                  <div className="absolute sm:hidden top-4 right-3 h-full text-white  ">
+                    <ArrowDropDown className="text-white cursor-pointer" />
+                  </div>
+                </div>
+              </div>
+            </LocalizationProvider>
+          </div>
+        </React.Fragment>
 
-        {propertyData?.schedules?.length > 0 ? (
-          propertyData?.schedules?.map((schedule, index) => {
+        {filteredTrips?.length > 0 ? (
+          filteredTrips?.map((schedule, index) => {
             return (
               <div
                 key={index}
-                className="border-2 flex flex-col xl:flex-row gap-4 border-[#09aafe] text-white p-8 mb-4 rounded-lg md:justify-between items-start"
+                className="border-2 flex flex-col xl:flex-row gap-4 border-[#09aafe] text-white px-6 py-5 mb-4 rounded-lg md:justify-between items-start"
               >
                 <div className="w-full">
-                  <div className="md:text-white md:text-4xl items-end font-[400] flex flex-wrap gap-2 md:gap-8">
-                    <div className="inline-block text-xl md:text-xl lg:text-4xl">
+                  <div className="md:text-white md:text-4xl items-end font-[400] flex flex-wrap  md:gap-4">
+                    <div className="inline-block text-xl md:text-xl lg:text-2xl">
                       {new Date(schedule?.tripStart).toLocaleDateString(
                         "en-GB",
                         {
@@ -57,33 +204,33 @@ function ItinerariesAndPrices({ propertyData }) {
                         year: "numeric",
                       })}
                     </div>
-                    <div className="inline-block text-2xl font-light">
+                    <div className="inline-block text-xl sm:font-light sm:text-light text-[#09aafe]  font-bold">
                       ({schedule?.itinerary?.numberOfDays} Days /{" "}
                       {schedule?.itinerary?.numberOfNights} Nights)
                     </div>
-                    <span className="inline-block text-[#09aafe] text-xl font-bold">
+                    <span className="inline-block text-[#09aafe] text-xl font-bold sm:mt-0 mt-4 -mb-3 sm:mb-0">
                       (from <>${Number(schedule?.convertPrice).toFixed(2)}</>{" "}
                       USD)
                     </span>
                   </div>
-                  <div className="mt-4">
-                    <span className="text-2xl md:text-5xl md:font-light">
+                  <div className="sm:mt-4 mt-2">
+                    <span className="text-2xl md:text-4xl md:font-light">
                       {schedule?.itinerary?.embarkationPoints} —{" "}
                       {schedule?.itinerary?.disembarkationPoints}
                     </span>
                   </div>
                 </div>
 
-                <div className="flex gap-4 mt-4 md:mt-0">
+                <div className="flex gap-4 sm:pt-7 ">
                   <button
                     onClick={() => handleOpen(schedule?.itinerary?.cabins)}
-                    className="bg-primary border-2 border-white text-white md:px-16 rounded-full px-6 py-2 text-sm md:text-xl lg:text-2xl"
+                    className="bg-primary border border-white text-white px-10 rounded-full  py-1 text-sm md:text-xl lg:text-2xl"
                   >
                     Itinerary
                   </button>
                   <button
                     onClick={() => handleOpenBookingModal(schedule)}
-                    className="bg-white text-primary rounded-full px-6 py-2 md:px-16 text-sm md:text-xl lg:text-2xl"
+                    className="bg-white text-primary rounded-full px-10 py-1 md:px-10 text-sm md:text-xl lg:text-2xl"
                   >
                     Select
                   </button>
@@ -92,7 +239,9 @@ function ItinerariesAndPrices({ propertyData }) {
             );
           })
         ) : (
-          <p>No itineraries available.</p>
+          <p className="text-2xl my-2 font-semibold">
+            Opps! No itineraries available.
+          </p>
         )}
       </div>
       <CabinModal cabins={cabins} setOpen={setOpen} open={open} />

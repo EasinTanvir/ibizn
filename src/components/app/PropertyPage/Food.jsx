@@ -2,10 +2,10 @@ import RatingPortion from "./RatingPortion";
 
 const Content = ({ title, description }) => (
   <div className="w-full lg:w-1/2  flex flex-col justify-center items-start  md:justify-start">
-    <h1 className="text-3xl  text-[#0080FF] md:text-6xl md:font-light md:text-[#0080FF] mb-5 font-outfit">
+    <h1 className="text-3xl  text-[#0080FF] md:text-6xl md:font-light md:text-[#0080FF] mb-3 font-outfit">
       {title}
     </h1>
-    <p className="text-[16px] md:text-xl md:font-light md:text-black md:leading-9">
+    <p className="text-[16px] md:text-xl font-light text-secondary font-roboto   ">
       {description}
     </p>
   </div>
@@ -33,7 +33,7 @@ const Food = ({ propertyData, resort }) => {
   };
 
   return (
-    <div className="flex flex-col gap-10 items-center lg:flex-row  my-16 lg:my-28  customContainer bg-white">
+    <div className="flex flex-col gap-10 items-center lg:flex-row  my-20 lg:my-24  customContainer bg-white">
       <div>
         <Content
           title={resort ? "Food" : "Food Onboard"}
@@ -42,7 +42,10 @@ const Food = ({ propertyData, resort }) => {
             propertyData?.food?.description
           }
         />
-        <RatingPortion rating={propertyData?.veganRating} />
+        <div className="pt-8">
+          {" "}
+          <RatingPortion rating={propertyData?.veganRating} />
+        </div>
       </div>
       <Image
         src={propertyData?.foodOnboard?.Picture || propertyData?.food?.image}

@@ -13,9 +13,9 @@ const Diving = {
 };
 
 const Image = ({ src, alt }) => (
-  <div className="w-full lg:w-1/2 overflow-hidden flex-shrink-0 py-8">
+  <div className="w-full lg:w-1/2 overflow-hidden flex-shrink-0 ">
     <img
-      className="w-full object-cover h-[350px] md:h-[500px] rounded-xl"
+      className="w-full object-cover h-[350px] md:h-[500px] "
       src={src}
       alt={alt}
     />
@@ -25,17 +25,17 @@ const Image = ({ src, alt }) => (
 const Content = ({ title, description }) => (
   <div
     id="diving"
-    className="lg:w-1/2 w-full md:overflow-hidden md:rounded-lg md:flex md:flex-col md:justify-between md:items-start md:pr-8"
+    className="lg:w-1/2 w-full md:overflow-hidden md:rounded-lg md:flex md:flex-col md:items-start md:pr-8"
   >
-    <div className="flex  flex-col items-start justify-between">
-      <h1 className="text-3xl mb-6 text-[#0080FF] md:text-6xl md:font-light md:text-[#0080FF] md:mb-5 font-outfit">
+    <div className="">
+      <h1 className="text-3xl  text-[#0080FF] md:text-6xl md:font-light md:text-[#0080FF] md:mb-4 mb-2  font-outfit">
         {title}
       </h1>
-      <p className="text-[16px] md:text-xl md:font-light md:text-black md:leading-9">
+      <p className="text-[16px] md:text-xl md:font-light text-secondary ">
         {description}
       </p>
     </div>
-    <div className="py-8 flex items-center justify-around gap-10 text-xl mt-5 text-[#0080FF]  font-regular  mb-5">
+    <div className="py-8 flex items-center sm:justify-around  sm:gap-10 gap-5 text-xl mt-5 text-[#0080FF]  font-regular  mb-5">
       <h1>Sharks</h1>
       <h1>Sea turtles</h1>
       <h1>Sea turtles</h1>
@@ -45,7 +45,7 @@ const Content = ({ title, description }) => (
 
 function Scuba({ propertyData }) {
   return (
-    <div className="customContainer flex justify-end flex-col-reverse md:gap-5 lg:flex-row md:items-center">
+    <div className="customContainer flex  flex-col-reverse md:gap-14 lg:flex-row ">
       <Image
         src={propertyData?.diving?.Picture || propertyData?.diving?.image}
         alt={Diving.imageAlt}

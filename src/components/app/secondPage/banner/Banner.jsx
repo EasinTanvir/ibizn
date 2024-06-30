@@ -274,7 +274,7 @@ const Banner = ({ setSearchResult }) => {
                       width: "100%", // Width of the entire TextField
                     }}
                   />
-                  <div className="absolute top-4 right-3 h-full text-white  ">
+                  <div className="absolute sm:hidden top-4 right-3 h-full text-white  ">
                     <ArrowDropDown className="text-white cursor-pointer" />
                   </div>
                 </div>

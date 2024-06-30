@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
 import Typography from "@mui/material/Typography";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 
 const Environmental = ({ items }) => {
   const [expanded, setExpanded] = useState("");
@@ -25,22 +26,40 @@ const Environmental = ({ items }) => {
         >
           <AccordionSummary
             expandIcon={
-              <AddCircleRoundedIcon className="md:text-[#3a95ea] text-[#3a95ea] md:text-5xl " />
+              expanded === `panel${index}` ? (
+                <>
+                  <RemoveCircleOutlineIcon
+                    sx={{
+                      stroke: "#ffffff",
+                      strokeWidth: 0.5,
+                    }}
+                    className="md:text-[#3a95ea] text-[#3a95ea] md:text-5xl   "
+                  />
+                </>
+              ) : (
+                <AddCircleOutlineIcon
+                  sx={{
+                    stroke: "#ffffff",
+                    strokeWidth: 0.5,
+                  }}
+                  className="md:text-[#3a95ea] text-[#3a95ea] md:text-5xl   "
+                />
+              )
             }
             aria-controls={`panel${index}d-content`}
             id={`panel${index}d-header`}
             className="bg-[#F1F2F2] flex-row-reverse md:flex-row-reverse"
             sx={{ borderRadius: 0 }}
           >
-            <Typography className="font-outfit md:text-2xl md:font-extralight md:py-4 text-[#3a95ea]">
+            <Typography className="font-outfit md:text-2xl md:font-extralight  text-primary ms-2 ">
               {item.title}
             </Typography>
           </AccordionSummary>
-          <AccordionDetails>
-            <Typography className="text-[#2f2f30] md:text-lg bg-[#F1F2F2] font-outfit">
+          <>
+            <Typography className="text-secondary pb-3    md:text-lg bg-[#F1F2F2] font-light leading-0 sm:ps-16 ps-10 ms-2  sm:-mt-2 -mt-1">
               {item.content}
             </Typography>
-          </AccordionDetails>
+          </>
         </Accordion>
       ))}
     </div>

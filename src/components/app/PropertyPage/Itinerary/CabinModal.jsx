@@ -30,7 +30,7 @@ function CabinModal({ cabins, setOpen, open }) {
               id="modal-modal-title"
               className="text-xl md:text-3xl text-primary font-[400]"
             >
-              Cabinsss
+              Cabin
             </Typography>
             <div className="w-full h-[1px] bg-slate-400 mt-2"></div>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>

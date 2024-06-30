@@ -28,7 +28,7 @@ const Accommodation = ({ propertyData, resort }) => {
 
   const Button = ({ label }) => (
     <button
-      className={`px-4 py-2 text-sm md:text-xl lg:text-2xl rounded-full border-2 ${
+      className={`px-4 py-1 text-sm md:text-xl  rounded-full border-2 ${
         activeButton === label
           ? "bg-[#0080FF] text-white border-[#0080FF]"
           : "text-[#0080FF] border-[#0080FF] hover:bg-[#0080FF] hover:text-white transition-colors duration-300"
@@ -40,8 +40,8 @@ const Accommodation = ({ propertyData, resort }) => {
   );
 
   return (
-    <div className="bg-[#F1F2F2]  py-20 px-4 lg:px-0">
-      <section className="customContainer flex flex-col-reverse lg:flex-row   items-center justify-center  lg:py-16  gap-8 lg:gap-12 ">
+    <div className="bg-[#F1F2F2]  sm:py-14 py-20 px-4 lg:px-0">
+      <section className="customContainer flex flex-col-reverse lg:flex-row    justify-center  lg:py-16  gap-8 lg:gap-12 ">
         <div className="w-full lg:w-1/2 h-[350px] lg:h-[500px] order-first lg:order-none">
           <img
             className="w-full h-full object-cover "
@@ -53,11 +53,11 @@ const Accommodation = ({ propertyData, resort }) => {
           />
         </div>
         <div className="w-full lg:w-1/2 flex flex-col justify-between h-full">
-          <div className="flex flex-col gap-4 lg:gap-6">
-            <h1 className="text-3xl  text-[#0080FF] md:text-6xl md:font-light md:text-[#0080FF] md:mb-5 font-outfit">
+          <div className="flex flex-col gap-4 ">
+            <h1 className="text-3xl -mt-2  text-[#0080FF] md:text-6xl md:font-light md:text-[#0080FF] font-outfit">
               Accommodation
             </h1>
-            <p className="text-[16px] md:text-xl md:font-light md:text-black md:leading-9">
+            <p className="text-[16px] md:text-xl font-light text-secondary    ">
               {propertyData?.accommodation?.description}
             </p>
           </div>
