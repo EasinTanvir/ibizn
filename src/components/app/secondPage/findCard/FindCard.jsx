@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 // Import Swiper React components
@@ -17,6 +17,8 @@ import Itineraries from "./Itineraries";
 import { Alert } from "@mui/material";
 import { useRouter } from "next/router";
 import Nitrox from "./Nitrox";
+import { userContext } from "@/src/storage/contextApi";
+import dayjs from "dayjs";
 
 const faqData = [
   {
@@ -64,6 +66,8 @@ const faqData = [
 ];
 
 const FindCard = ({ searchResult, isLoading, resort }) => {
+  const { searchValues } = useContext(userContext);
+  console.log(searchValues);
   console.log(resort);
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -71,15 +75,30 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
   const handleClose = () => setOpen(false);
   console.log(searchResult);
 
+  console.log(searchValues?.tripStart);
+
+  const [forMonth, setForMonth] = useState();
+  const [forYear, setForYear] = useState();
+  useEffect(() => {
+    const date = dayjs(searchValues?.tripStart);
+    const formattedMonth = date.format("MMMM");
+    const formattedYear = date.format("YYYY");
+
+    setForMonth(formattedMonth);
+    setForYear(formattedYear);
+  }, [searchValues]);
+
   return (
-    <div className="min-h-[70vh] lg:w-[85%] mx-auto px-5 lg:px-0 py-20">
+    <div className="min-h-[70vh] lg:w-[85%] mx-auto px-5 lg:px-0 py-12">
       <div>
         <h1 className="lg:text-title md:text-5xl text-4xl font-outfit font-[250] text-primary mb-5">
-          Egypt
+          {searchValues?.destination}
         </h1>
-        <p className="lg:text-subtitle md:text-2xl text-secondary text-xl font-outfit">
-          We found {searchResult?.length || 0} property for these dates
-        </p>
+        {!isLoading && (
+          <p className="lg:text-subtitle md:text-2xl text-secondary text-xl font-outfit">
+            We found {searchResult?.length || 0} property for these dates
+          </p>
+        )}
       </div>
       <div className="xl:flex gap-10 mt-10">
         <div className="xl:w-[75%] space-y-10 mb-16 lg:mb-0">
@@ -135,34 +154,49 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                             ))}
                       </Swiper>
                     </div>
-                    <div className="p-3">
-                      <div className="mt-6">
-                        <h1 className="lg:text-[32px] text-xl text-[#0080ff]">
+                    <div className="sm:pb-0 pb-10 px-5   border-b-2 sm:border-b-0 border-b-primary">
+                      <div className="mt-6 sm:mb-2">
+                        <div className="sm:hidden">
+                          <h1 className="lg:text-[32px] text-xl text-gray font-[500]">
+                            {!resort && <span>Liveboard / </span>}
+                            {item?.nameOfProperty || item?.propertyName}
+                          </h1>
+                        </div>
+                        <h1 className="lg:text-[32px] text-xl text-primary">
                           {item?.nameOfProperty || item?.propertyName}
                         </h1>
-                        <p className="mt-[20px] lg:text-[25px] text-sm text-gray-400 font-outfit md:w-full">
+
+                        <p className="sm:mt-[14px] lg:text-[22px] text-sm text-secondary font-outfit md:w-full leading-3 sm:leading-6 ">
                           Operating from Sharm El Sheikh, this liveaboard boasts
                           a professional and knowledgeable team of dive guides,
                           ready to take you to the best dive sites in the
                           northern Red Sea.
                         </p>
                       </div>
-                      <div className="mt-[22px]">
-                        <div className="flex gap-2 items-center">
-                          <h1 className="text-[#0080ff] text-[14px] md:text-[25px] font-outfit">
-                            Vegan raiting:
-                          </h1>
-                          <h1 className="md:text-[25px] text-[14px] text-[#0080ff]">
-                            {item?.veganRating}
-                          </h1>
-                        </div>
-                        <div className="flex gap-2 items-center">
-                          <Wifi facilities={item?.facilities} />
-                        </div>
-                        <div className="flex gap-2 items-center">
-                          <Nitrox facilities={item?.facilities} />
-                        </div>
-                        {/* <div className="flex gap-2 items-center">
+                      <div className="mt-5 flex justify-between">
+                        {searchValues?.tripStart && (
+                          <div className="sm:hidden">
+                            <h1 className="text-[#0080ff] text-[14px] md:text-[25px] font-outfit font-[700]">
+                              {forMonth} / {forYear}
+                            </h1>
+                          </div>
+                        )}
+                        <div className="sm:-mt-2">
+                          <div className="flex gap-2 items-center">
+                            <h1 className="text-[#0080ff] text-[14px] md:text-[25px] font-outfit font-[700] sm:font-[500]">
+                              Vegan raiting:
+                            </h1>
+                            <h1 className="md:text-[25px] text-[14px] text-[#0080ff]">
+                              {item?.veganRating}
+                            </h1>
+                          </div>
+                          <div className="flex gap-2 items-center">
+                            <Wifi facilities={item?.facilities} />
+                          </div>
+                          <div className="flex gap-2 items-center">
+                            <Nitrox facilities={item?.facilities} />
+                          </div>
+                          {/* <div className="flex gap-2 items-center">
                           <h1 className="text-[#0080ff] text-[14px] md:text-[25px] font-outfit">
                             Nitrox:
                           </h1>
@@ -170,13 +204,14 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                             Free
                           </h1>
                         </div> */}
-                        <div className="flex gap-2 items-center">
-                          <h1 className="text-[#0080ff] text-[14px] md:text-[25px]">
-                            Capacity:
-                          </h1>
-                          <h1 className="text-[14px] md:text-[25px] text-[#0080ff]">
-                            Free
-                          </h1>
+                          <div className="flex gap-2 items-center">
+                            <h1 className="text-[#0080ff] text-[14px] md:text-[25px] font-[700] sm:font-[500]">
+                              Capacity:
+                            </h1>
+                            <h1 className="text-[14px] md:text-[25px] text-[#0080ff]">
+                              Free
+                            </h1>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -192,9 +227,9 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
           )}
         </div>
         {/* from here code develope by hosaindev */}
-        <div className="xl:w-[25%] relative lg:mt-10 xl:mt-0">
+        <div className="xl:w-[25%] relative -mt-6 lg:mt-10 xl:mt-0">
           <div className="lg:text-[32px] md:text-3xl text-xl text-primary">
-            Tips and FAQ for your booking{" "}
+            How To Book
             <QuestionMarkIcon
               onMouseOver={handleOpen}
               className="animate-bounce"

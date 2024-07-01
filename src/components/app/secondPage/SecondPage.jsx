@@ -24,7 +24,7 @@ const SecondPage = () => {
 
     // Construct the query string from searchValues
     const queryString = objectToQueryString(searchValues);
-
+    console.log(queryString);
     fetch(
       `${baseUrl}/${
         searchValues?.tabValue === "Resorts" ||

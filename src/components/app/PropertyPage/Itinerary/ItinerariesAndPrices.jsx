@@ -47,6 +47,7 @@ function ItinerariesAndPrices({ propertyData }) {
   const handleMonthChange = (newValue) => {
     const formattedMonth = dayjs(newValue).format("YYYY-MM-DD");
     setSelectedMonth(formattedMonth);
+    console.log(formattedMonth);
     filterTripsByMonth(newValue);
   };
 

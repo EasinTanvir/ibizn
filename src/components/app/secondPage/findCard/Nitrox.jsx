@@ -5,7 +5,8 @@ const Nitrox = ({ facilities }) => {
   return (
     <div>
       <h1 className="text-[#0080ff] text-[14px] md:text-[25px] font-outfit">
-        Nitrox: {hasWifi ? "Available" : "Unavailable"}
+        <span className="font-[700] sm:font-[500]">Nitrox:</span>{" "}
+        {hasWifi ? "Available" : "Unavailable"}
       </h1>
     </div>
   );

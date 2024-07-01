@@ -41,9 +41,17 @@ const Banner = () => {
   };
 
   const handleDateChange = (date) => {
-    const formatted = date ? dayjs(date).format("YYYY-MM-DD") : "";
-
-    setSearchValues({ ...searchValues, date: formatted });
+    if (date) {
+      const startOfMonth = dayjs(date).startOf("month").format("YYYY-MM-DD");
+      const endOfMonth = dayjs(date).endOf("month").format("YYYY-MM-DD");
+      console.log(startOfMonth);
+      console.log(endOfMonth);
+      setSearchValues({
+        ...searchValues,
+        tripStart: startOfMonth,
+        tripEnd: endOfMonth,
+      });
+    }
   };
 
   const handleSearchValues = () => {
@@ -224,7 +232,6 @@ const Banner = () => {
                   }}
                   className="w-full  "
                   onChange={handleDateChange}
-                  disablePast
                   label={"Year / Month"}
                   views={["month", "year"]}
                   sx={{

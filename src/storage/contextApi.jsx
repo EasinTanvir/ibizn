@@ -13,7 +13,10 @@ const ContextApi = ({ children }) => {
     tabValue: "Liveaboards",
     destination: "",
     // property: "",
-    date: "",
+
+    tripStart: "",
+    tripEnd: "",
+
     minRating: "",
     maxRating: "",
   });

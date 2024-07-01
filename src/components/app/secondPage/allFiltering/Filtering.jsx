@@ -1,11 +1,20 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
-import { Box, Slider, TextField, Typography } from "@mui/material";
+import ImportExportIcon from "@mui/icons-material/ImportExport";
+import {
+  Box,
+  IconButton,
+  InputAdornment,
+  Slider,
+  TextField,
+  Typography,
+} from "@mui/material";
 import FacilityFilter from "./FacilityFilter";
 import { userContext } from "@/src/storage/contextApi";
 import DivingType from "./DivingType";
 import ResortStyle from "./ResortStyle";
-
+import { ArrowDropDown } from "@mui/icons-material";
+import { Menu, MenuItem } from "@mui/material";
 const Filtering = () => {
   const [isShowPriceField, setIsShowPriceField] = useState(false);
   const { searchValues } = useContext(userContext);
@@ -24,203 +33,35 @@ const Filtering = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <div className="bg-gray-100">
-      <div className="md:w-[85%] px-5 md:px-0 mx-auto py-[30px]">
-        {/* <form className="md:flex  gap-7 mt-5 space-y-3 md:space-y-0 md:flex-wrap lg:flex-row items-center ">
-          <div>
-            <select
-              className="block w-full p-3 border-2 space-y-5 border-indigo-500 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-[#0080ff] xl:text-xl bg-white "
-              defaultValue="0"
-            >
-              <option
-                className="bg-white text-[#0080ff] md:text-[10px] xl:text-[17px]"
-                value="0"
-                disabled
-                hidden
-              >
-                Price
-              </option>
-              <option
-                className="bg-white text-[#0080ff] xl:text-[16px]"
-                value="1"
-              >
-                Option 1
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="2">
-                Option 2
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="3">
-                Option 3
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="4">
-                Option 4
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="5">
-                Option 5
-              </option>
-            </select>
-          </div>
-          <div>
-            <select
-              className="block w-full p-3 border-2 space-y-5 border-indigo-500 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-[#0080ff] bg-white xl:text-xl"
-              defaultValue="0"
-            >
-              <option
-                className="bg-white text-[#0080ff] md:text-[10px] xl:text-[17px]"
-                value="0"
-                disabled
-                hidden
-              >
-                Duration
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="1">
-                Option 1
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="2">
-                Option 2
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="3">
-                Option 3
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="4">
-                Option 4
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="5">
-                Option 5
-              </option>
-            </select>
-          </div>
-          <div>
-            <select
-              className="block w-full p-3 border-2 space-y-5 border-indigo-500 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-[#0080ff] bg-white xl:text-xl"
-              defaultValue="0"
-            >
-              <option
-                className="bg-white text-[#0080ff] md:text-[10px] xl:text-[17px]"
-                value="0"
-                disabled
-                hidden
-              >
-                Deeparture port
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="1">
-                Option 1
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="2">
-                Option 2
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="3">
-                Option 3
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="4">
-                Option 4
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="5">
-                Option 5
-              </option>
-            </select>
-          </div>
-          <div>
-            <select
-              className="block w-full p-3 border-2 space-y-5 border-indigo-500 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-[#0080ff] bg-white xl:text-xl"
-              defaultValue="0"
-            >
-              <option
-                className="bg-white text-[#0080ff] md:text-[10px] xl:text-[17px]"
-                value="0"
-                disabled
-                hidden
-              >
-                Facilities
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="1">
-                Option 1
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="2">
-                Option 2
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="3">
-                Option 3
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="4">
-                Option 4
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="5">
-                Option 5
-              </option>
-            </select>
-          </div>
-          <div>
-            <select
-              className="block w-full p-3 border-2 space-y-5 border-indigo-500 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-[#0080ff] bg-white xl:text-xl"
-              defaultValue="0"
-            >
-              <option
-                className="bg-white text-[#0080ff] md:text-[10px] xl:text-[17px]"
-                value="0"
-                disabled
-                hidden
-              >
-                Capacity
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="1">
-                Option 1
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="2">
-                Option 2
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="3">
-                Option 3
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="4">
-                Option 4
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="5">
-                Option 5
-              </option>
-            </select>
-          </div>
-          <div>
-            <select
-              className="block w-full p-3 border-2 space-y-5 border-indigo-500 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-[#0080ff] bg-white xl:text-xl"
-              defaultValue="0"
-            >
-              <option
-                className="bg-white text-[#0080ff] md:text-[10px] xl:text-[17px]"
-                value="0"
-                disabled
-                hidden
-              >
-                Charter
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="1">
-                Option 1
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="2">
-                Option 2
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="3">
-                Option 3
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="4">
-                Option 4
-              </option>
-              <option className="bg-white text-[#0080ff] text-[16px]" value="5">
-                Option 5
-              </option>
-            </select>
-          </div>
-          <div className="text-center">
-            <button className=" border border-[#0080ff] lg:text-[10px] xl:text-lg rounded-full md:px-2 xl:px-8 px-8 py-3 md:py-2 xl:py-3 bg-[#0080ff] text-white font-semibold hover:bg-white hover:text-[#0080ff] duration-500 transition-all">
-              Sort by <FilterAltIcon sx={{ fontSize: "20px" }} />
-            </button>
-          </div>
-        </form> */}
-        <div className="md:flex  gap-7 mt-5 space-y-6 md:space-y-0 md:flex-wrap lg:flex-row items-center  ">
+      <div className="md:w-[85%] px-5 md:px-0 mx-auto py-[20px]">
+        <div className="flex  gap-4 mt-1   flex-wrap   ">
           <div>
             <div className="relative">
               <TextField
+                className="w-36"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment
+                      className="absolute left-0   h-12 w-full pe-3  flex justify-end"
+                      position="start"
+                    >
+                      <ArrowDropDown className="text-[#0080ff] cursor-pointer " />
+                    </InputAdornment>
+                  ),
+                }}
                 id="outlined-basic"
                 label="Price Range"
                 variant="outlined"
@@ -229,22 +70,37 @@ const Filtering = () => {
                 onClick={() => setIsShowPriceField(true)}
                 sx={{
                   "& .MuiOutlinedInput-root": {
-                    // "& fieldset": {
-                    //   borderColor: "#0080ff",
-                    // },
+                    "& fieldset": {
+                      borderColor: "#0080ff", // Border color
+                      background: "transparent",
+                    },
                     "&:hover fieldset": {
                       borderColor: "#0080ff", // Border color on hover
+                      background: "transparent",
                     },
                     "&.Mui-focused fieldset": {
-                      borderColor: "white", // Border color when focused
+                      borderColor: "#0080ff", // Border color when focused
+                      background: "transparent",
                     },
                   },
-                  // "& .MuiInputBase-input": {
-                  //   height: "35px", // Height of the input element
-                  //   color: "white", // Text color
-                  // },
 
-                  width: "100%", // Width of the entire TextField
+                  "& .MuiInputBase-input": {
+                    height: "24px", // Height of the input element
+                    color: "#0080ff", // Text color
+                    backgroundColor: "transparent", // Ensure input background is transparent
+                  },
+                  "& .MuiInputLabel-root": {
+                    color: "#0080ff", // Label color
+                    background: "transparent",
+                  },
+                  "& .MuiInputLabel-root.Mui-focused": {
+                    color: "#0080ff", // Label color when focused
+                    background: "transparent",
+                  },
+                  "& .MuiInputBase-input::selection": {
+                    color: "#0080ff",
+                    background: "transparent", // Remove background color when text is selected
+                  },
                 }}
               />
               {isShowPriceField && (
@@ -274,6 +130,84 @@ const Filtering = () => {
             </div>
           </div>
           <div>
+            {searchValues?.tabValue !== "Resorts" &&
+              searchValues?.property !== "resort" && (
+                <div>
+                  <TextField
+                    className="w-32"
+                    onClick={handleClick}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment
+                          className="absolute left-0 h-12 w-full pe-3 flex justify-end"
+                          position="start"
+                        >
+                          <IconButton>
+                            <ArrowDropDown className="text-[#0080ff] cursor-pointer" />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                    id="outlined-basic"
+                    label="Duration"
+                    variant="outlined"
+                    size="small"
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        "& fieldset": {
+                          borderColor: "#0080ff", // Border color
+                          background: "transparent",
+                        },
+                        "&:hover fieldset": {
+                          borderColor: "#0080ff", // Border color on hover
+                          background: "transparent",
+                        },
+                        "&.Mui-focused fieldset": {
+                          borderColor: "#0080ff", // Border color when focused
+                          background: "transparent",
+                        },
+                      },
+                      "& .MuiInputBase-input": {
+                        height: "24px", // Height of the input element
+                        color: "#0080ff", // Text color
+                        backgroundColor: "transparent", // Ensure input background is transparent
+                      },
+                      "& .MuiInputLabel-root": {
+                        color: "#0080ff", // Label color
+                        background: "transparent",
+                      },
+                      "& .MuiInputLabel-root.Mui-focused": {
+                        color: "#0080ff", // Label color when focused
+                        background: "transparent",
+                      },
+                      "& .MuiInputBase-input::selection": {
+                        color: "#0080ff",
+                        background: "transparent", // Remove background color when text is selected
+                      },
+                    }}
+                  />
+
+                  <Menu
+                    anchorEl={anchorEl}
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                  >
+                    <MenuItem onClick={handleClose}>
+                      <Box sx={{ width: 200 }}>
+                        <Typography>Number Of Nights</Typography>
+                        <Slider
+                          defaultValue={2}
+                          max={50}
+                          aria-label="Default"
+                          valueLabelDisplay="auto"
+                        />
+                      </Box>
+                    </MenuItem>
+                  </Menu>
+                </div>
+              )}
+          </div>
+          <div>
             <FacilityFilter />
           </div>
           {searchValues?.tabValue === "Resorts" ||
@@ -284,11 +218,55 @@ const Filtering = () => {
           ) : (
             <div>
               <TextField
+                className="w-32"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment
+                      className="absolute left-0   h-12 w-full pe-3  flex justify-end"
+                      position="start"
+                    >
+                      <ArrowDropDown className="text-[#0080ff] cursor-pointer " />
+                    </InputAdornment>
+                  ),
+                }}
                 id="outlined-basic"
                 label="Capacity "
                 variant="outlined"
-                fullWidth
                 size="small"
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "#0080ff", // Border color
+                      background: "transparent",
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "#0080ff", // Border color on hover
+                      background: "transparent",
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "#0080ff", // Border color when focused
+                      background: "transparent",
+                    },
+                  },
+
+                  "& .MuiInputBase-input": {
+                    height: "24px", // Height of the input element
+                    color: "#0080ff", // Text color
+                    backgroundColor: "transparent", // Ensure input background is transparent
+                  },
+                  "& .MuiInputLabel-root": {
+                    color: "#0080ff", // Label color
+                    background: "transparent",
+                  },
+                  "& .MuiInputLabel-root.Mui-focused": {
+                    color: "#0080ff", // Label color when focused
+                    background: "transparent",
+                  },
+                  "& .MuiInputBase-input::selection": {
+                    color: "#0080ff",
+                    background: "transparent", // Remove background color when text is selected
+                  },
+                }}
               />
             </div>
           )}
@@ -300,11 +278,55 @@ const Filtering = () => {
           ) : (
             <div>
               <TextField
+                className="w-32"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment
+                      className="absolute left-0 h-12 w-full pe-3 flex justify-end"
+                      position="start"
+                    >
+                      <ArrowDropDown className="text-[#0080ff] cursor-pointer" />
+                    </InputAdornment>
+                  ),
+                }}
                 id="outlined-basic"
-                label="Charter  "
+                label="Charter"
                 variant="outlined"
-                fullWidth
                 size="small"
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "#0080ff", // Border color
+                      background: "transparent",
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "#0080ff", // Border color on hover
+                      background: "transparent",
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "#0080ff", // Border color when focused
+                      background: "transparent",
+                    },
+                  },
+
+                  "& .MuiInputBase-input": {
+                    height: "24px", // Height of the input element
+                    color: "#0080ff", // Text color
+                    backgroundColor: "transparent", // Ensure input background is transparent
+                  },
+                  "& .MuiInputLabel-root": {
+                    color: "#0080ff", // Label color
+                    background: "transparent",
+                  },
+                  "& .MuiInputLabel-root.Mui-focused": {
+                    color: "#0080ff", // Label color when focused
+                    background: "transparent",
+                  },
+                  "& .MuiInputBase-input::selection": {
+                    color: "#0080ff",
+                    background: "transparent", // Remove background color when text is selected
+                  },
+                }}
               />
             </div>
           )}
@@ -312,27 +334,73 @@ const Filtering = () => {
             searchValues?.property !== "resort" && (
               <div>
                 <TextField
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment
+                        className="absolute left-0   h-12 w-full pe-3  flex justify-end"
+                        position="start"
+                      >
+                        <ArrowDropDown className="text-[#0080ff] cursor-pointer " />
+                      </InputAdornment>
+                    ),
+                  }}
+                  className="w-40"
                   id="outlined-basic"
                   label=" Departure Port"
                   variant="outlined"
                   fullWidth
                   size="small"
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "& fieldset": {
+                        borderColor: "#0080ff", // Border color
+                        background: "transparent",
+                      },
+                      "&:hover fieldset": {
+                        borderColor: "#0080ff", // Border color on hover
+                        background: "transparent",
+                      },
+                      "&.Mui-focused fieldset": {
+                        borderColor: "#0080ff", // Border color when focused
+                        background: "transparent",
+                      },
+                    },
+
+                    "& .MuiInputBase-input": {
+                      height: "24px", // Height of the input element
+                      color: "#0080ff", // Text color
+                      backgroundColor: "transparent", // Ensure input background is transparent
+                    },
+                    "& .MuiInputLabel-root": {
+                      color: "#0080ff", // Label color
+                      background: "transparent",
+                    },
+                    "& .MuiInputLabel-root.Mui-focused": {
+                      color: "#0080ff", // Label color when focused
+                      background: "transparent",
+                    },
+                    "& .MuiInputBase-input::selection": {
+                      color: "#0080ff",
+                      background: "transparent", // Remove background color when text is selected
+                    },
+                  }}
                 />
               </div>
             )}
-          <div>
-            {searchValues?.tabValue !== "Resorts" &&
-              searchValues?.property !== "resort" && (
-                <Box sx={{ width: 300 }}>
-                  <Typography>Duration(Number Of Night)</Typography>
-                  <Slider
-                    defaultValue={2}
-                    max={50}
-                    aria-label="Default"
-                    valueLabelDisplay="auto"
-                  />
-                </Box>
-              )}
+
+          <div className="sm:ps-14">
+            <button className="bg-primary text-white rounded-2xl sm:px-12 px-8 py-2 flex sm:justify-between justify-around  sm:w-44 w-40">
+              <span className="">Sort by</span>
+              <span className="-me-2">
+                <ImportExportIcon
+                  sx={{
+                    color: "white",
+                    strokeWidth: 0.5,
+                  }}
+                  className="text-white "
+                />
+              </span>
+            </button>
           </div>
         </div>
       </div>
