@@ -77,7 +77,7 @@ function PropertyPage({ id }) {
                 <Scuba propertyData={propertyData} />
               </div>
               <div className="py-6" id="exclusions">
-                <Exclusions />
+                <Exclusions propertyData={propertyData} />
               </div>
               <div className="bg-[#F1F2F2] py-20 px-4 lg:px-0">
                 <EnvironmentelPacket propertyData={propertyData} />

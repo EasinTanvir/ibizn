@@ -21,7 +21,7 @@ const Environmental = ({ items }) => {
           key={index}
           expanded={expanded === `panel${index}`}
           onChange={handleChange(`panel${index}`)}
-          className="border-t border-[#00afff] w-full md:w-full font-outfit"
+          className="border-t border-[#00afff] w-full md:w-full font-outfit  "
           sx={{ borderRadius: 0, backgroundColor: "#F1F2F2" }}
         >
           <AccordionSummary
@@ -33,16 +33,15 @@ const Environmental = ({ items }) => {
                       stroke: "#ffffff",
                       strokeWidth: 0.5,
                     }}
-                    className="md:text-[#3a95ea] text-[#3a95ea] md:text-5xl   "
+                    className="md:text-[#3a95ea] text-[#3a95ea] text-5xl    "
                   />
                 </>
               ) : (
                 <AddCircleOutlineIcon
                   sx={{
                     stroke: "#ffffff",
-                    strokeWidth: 0.5,
                   }}
-                  className="md:text-[#3a95ea] text-[#3a95ea] md:text-5xl   "
+                  className="md:text-[#3a95ea] text-[#3a95ea] text-5xl   -ml-6 sm:-ml-0"
                 />
               )
             }
