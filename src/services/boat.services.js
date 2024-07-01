@@ -67,8 +67,9 @@ const createBoatIntoDB = async (userData, payload) => {
 
 // another ------------
 const getAllBoatFromDB = async (queryData) => {
-  const { tabValue, destination, date, minRating, maxRating } = queryData;
-
+  const { tabValue, destination, tripStart, tripEnd, minRating, maxRating } =
+    queryData;
+  console.log("tabValue, =", tabValue);
   // Initialize an empty query object
   const query = {
     status: "approved",
@@ -94,10 +95,10 @@ const getAllBoatFromDB = async (queryData) => {
   }
 
   // Add date condition if provided
-  if (date) {
+  if (tripStart || tripEnd) {
     const dateCondition = {
-      tripStart: { $lte: new Date(date) },
-      tripEnd: { $gte: new Date(date) },
+      tripStart: { $lte: new Date(tripEnd) },
+      tripEnd: { $gte: new Date(tripStart) },
     };
 
     // Add the date condition to the existing schedules query
@@ -139,7 +140,18 @@ const getAllBoatFromDB = async (queryData) => {
     model: "Itinerary", // Make sure to replace 'Itinerary' with the actual model name
   });
 
-  return result;
+  if (tabValue === "Special Offers") {
+    const filteredResult = result.map((boat) => {
+      return {
+        ...boat.toObject(),
+        schedules: boat.schedules.filter((schedule) => schedule.special),
+      };
+    });
+
+    return filteredResult;
+  } else {
+    return result;
+  }
 };
 // get boats for operators --------
 const getBoatsFromDB = async (id) => {

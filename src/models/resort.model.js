@@ -118,22 +118,22 @@ const environmentalQuestionSchema = {
 const deactivationPeriodSchema = new Schema({
   startDate: {
     type: String,
-    required: true,
+    required: false,
   },
   endDate: {
     type: String,
-    required: true,
+    required: false,
   },
 });
 // discountTimeFrame schema --
 const discountTimeFrameSchema = new Schema({
   startDate: {
     type: String,
-    required: true,
+    required: false,
   },
   endDate: {
     type: String,
-    required: true,
+    required: false,
   },
 });
 const resortSchema = new Schema(
