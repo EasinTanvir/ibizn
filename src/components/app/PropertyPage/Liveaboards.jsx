@@ -1,7 +1,11 @@
+import { userContext } from "@/src/storage/contextApi";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 function Liveaboards({ propertyData }) {
+  const { searchValues } = useContext(userContext);
+  console.log(searchValues);
+
   const [activeButton, setActiveButton] = useState("Liveaboard");
   const router = useRouter();
   const buttons = [
@@ -36,7 +40,11 @@ function Liveaboards({ propertyData }) {
             <div className="bg-[#0080FF] text-white p-4 lg:w-[52%] md:rounded-tr-xl md:p-8">
               <div className=" lg:px-0 flex sm:flex-col flex-col-reverse gap-2 py-3 sm:py-0 sm:gap-0  customContainer">
                 <h1 className="md:text-3xl text-2xl md:font-light ">
-                  Raja Ampat | Liveaboards
+                  {searchValues?.destination} |{" "}
+                  {searchValues?.tabValue === "Resorts" ||
+                  searchValues?.property === "resort"
+                    ? "Resort"
+                    : "Liveaboards"}
                 </h1>
                 <h1 className="text-5xl  md:block md:text-8xl font-light mt-2">
                   {propertyData?.nameOfProperty || propertyData?.propertyName}

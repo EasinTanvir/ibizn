@@ -158,19 +158,26 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                       <div className="mt-6 sm:mb-2">
                         <div className="sm:hidden">
                           <h1 className="lg:text-[32px] text-xl text-gray font-[500]">
-                            {!resort && <span>Liveboard / </span>}
-                            {item?.nameOfProperty || item?.propertyName}
+                            {!resort && (
+                              <span>
+                                {item?.nameOfProperty || item?.propertyName} /{" "}
+                              </span>
+                            )}
+                            {searchValues?.destination}
+                            {console.log(item.destnation)}
                           </h1>
                         </div>
                         <h1 className="lg:text-[32px] text-xl text-primary">
                           {item?.nameOfProperty || item?.propertyName}
                         </h1>
+                        {console.log(item)}
 
                         <p className="sm:mt-[14px] lg:text-[22px] text-sm text-secondary font-outfit md:w-full leading-3 sm:leading-6 ">
-                          Operating from Sharm El Sheikh, this liveaboard boasts
-                          a professional and knowledgeable team of dive guides,
-                          ready to take you to the best dive sites in the
-                          northern Red Sea.
+                          {resort ? (
+                            item?.briefDescription
+                          ) : (
+                            <>{item?.liveABoard?.description}</>
+                          )}
                         </p>
                       </div>
                       <div className="mt-5 flex justify-between">
@@ -196,22 +203,6 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                           <div className="flex gap-2 items-center">
                             <Nitrox facilities={item?.facilities} />
                           </div>
-                          {/* <div className="flex gap-2 items-center">
-                          <h1 className="text-[#0080ff] text-[14px] md:text-[25px] font-outfit">
-                            Nitrox:
-                          </h1>
-                          <h1 className="text-[14px] md:text-[25px] text-[#0080ff]">
-                            Free
-                          </h1>
-                        </div> */}
-                          <div className="flex gap-2 items-center">
-                            <h1 className="text-[#0080ff] text-[14px] md:text-[25px] font-[700] sm:font-[500]">
-                              Capacity:
-                            </h1>
-                            <h1 className="text-[14px] md:text-[25px] text-[#0080ff]">
-                              Free
-                            </h1>
-                          </div>
                         </div>
                       </div>
                     </div>
@@ -227,7 +218,7 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
           )}
         </div>
         {/* from here code develope by hosaindev */}
-        <div className="xl:w-[25%] relative -mt-6 lg:mt-10 xl:mt-0">
+        <div className="xl:w-[25%] sm:relative hidden -mt-6 lg:mt-10 xl:mt-0">
           <div className="lg:text-[32px] md:text-3xl text-xl text-primary">
             How To Book
             <QuestionMarkIcon

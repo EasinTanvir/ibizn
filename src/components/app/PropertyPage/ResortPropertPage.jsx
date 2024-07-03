@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Liveaboards from "./Liveaboards";
 import LiveaboardDetails from "./LiveaboardDetails";
 import Accommodation from "./Accommodation";
@@ -13,9 +13,11 @@ import Itineraries from "../Dashboard/Boat/Itineraries";
 import ItinerariesAndPrices from "./Itinerary/ItinerariesAndPrices";
 import ResortAndPrice from "./Itinerary/PackageAndPrice";
 import { Blocks } from "react-loader-spinner";
+import { userContext } from "@/src/storage/contextApi";
 // import SwipeBoard from "@/src/components/app/PropertyPage/SwipeBoard";
 
 function ResortProperyPage({ rid }) {
+  const { searchValues } = useContext(userContext);
   const [propertyData, setPropertyData] = useState({});
   const [loader, setLoader] = useState(false);
 

@@ -53,10 +53,10 @@ function Facilities({ propertyData }) {
           </h1>
         </div>
         <div className="flex flex-row lg:flex-row gap-8">
-          <ul className=" grid md:grid-cols-2 justify-between space-y-4 md:space-y-0">
+          <ul className=" grid md:grid-cols-4  grid-cols-2  w-full justify-between space-y-2 md:space-y-1">
             {propertyData?.facilities?.map((item, index) => (
-              <li className="mr-10" key={index}>
-                <span className="opacity-[30%]">—</span> {item}
+              <li className="mr-10 text-xl" key={index}>
+                <span className="opacity-[70%]">—</span> {item}
               </li>
             ))}
           </ul>

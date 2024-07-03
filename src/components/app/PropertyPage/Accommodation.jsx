@@ -61,13 +61,13 @@ const Accommodation = ({ propertyData, resort }) => {
               {propertyData?.accommodation?.description}
             </p>
           </div>
-          {!resort && (
+          {/* {!resort && (
             <div className="flex flex-wrap gap-4 mt-12 lg:mt-16 text-[#2f2f30]">
               {Object.keys(accommodationTypes).map((button) => (
                 <Button key={button} label={button} />
               ))}
             </div>
-          )}
+          )} */}
         </div>
       </section>
     </div>

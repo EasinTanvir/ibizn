@@ -35,11 +35,11 @@ const Content = ({ title, description }) => (
         {description}
       </p>
     </div>
-    <div className="py-8 flex items-center sm:justify-around  sm:gap-10 gap-5 text-xl mt-5 text-[#0080FF]  font-regular  mb-5">
+    {/* <div className="py-8 flex items-center sm:justify-around  sm:gap-10 gap-5 text-xl mt-5 text-[#0080FF]  font-regular  mb-5">
       <h1>Sharks</h1>
       <h1>Sea turtles</h1>
       <h1>Sea turtles</h1>
-    </div>
+    </div> */}
   </div>
 );
 
