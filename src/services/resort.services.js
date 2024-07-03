@@ -34,7 +34,17 @@ const getResortsFromDB = async (id) => {
 // get all resorts from db
 const getAllResortFromDB = async (queryData) => {
   console.log("query data", queryData);
-  const { destination, tabValue, date, minRating, maxRating } = queryData;
+  const {
+    destination,
+    tabValue,
+    date,
+    minRating,
+    maxRating,
+    tripStart,
+    tripEnd,
+  } = queryData;
+  console.log(tripStart);
+  console.log(tripEnd);
   const andCondition = [];
 
   andCondition.push({
@@ -64,7 +74,33 @@ const getAllResortFromDB = async (queryData) => {
     andCondition.push({ veganRating: { $gte: minRating, $lte: maxRating } });
   }
 
-  console.log(JSON.stringify(andCondition, null, 2));
+  if (tripStart && tripEnd) {
+    const tripStartDate = new Date(tripStart);
+    const tripEndDate = new Date(tripEnd);
+
+    const tripStartMonth = tripStartDate.getMonth() + 1; // Months are zero-indexed
+
+    const tripEndMonth = tripEndDate.getMonth() + 1;
+
+    andCondition.push({
+      $expr: {
+        $or: [
+          {
+            $ne: [
+              { $month: { $toDate: "$deactivationPeriod.startDate" } },
+              tripStartMonth,
+            ],
+          },
+          {
+            $ne: [
+              { $month: { $toDate: "$deactivationPeriod.endDate" } },
+              tripEndMonth,
+            ],
+          },
+        ],
+      },
+    });
+  }
 
   const result = await Resort.find({
     $and: andCondition.length > 0 ? andCondition : [{}],
