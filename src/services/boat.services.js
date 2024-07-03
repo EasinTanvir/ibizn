@@ -97,14 +97,13 @@ const getAllBoatFromDB = async (queryData) => {
   // Add date condition if provided
   if (tripStart || tripEnd) {
     const dateCondition = {
-      tripStart: { $lte: new Date(tripEnd) },
-      tripEnd: { $gte: new Date(tripStart) },
+      tripStart: { $gte: new Date(tripStart) },
+      tripEnd: { $lte: new Date(tripEnd) },
     };
 
     // Add the date condition to the existing schedules query
     if (query.schedules && query.schedules.$elemMatch) {
       query.schedules.$elemMatch = {
-        ...query.schedules.$elemMatch,
         ...dateCondition,
       };
     } else {
@@ -150,6 +149,20 @@ const getAllBoatFromDB = async (queryData) => {
 
     return filteredResult;
   } else {
+    if (tripStart && tripEnd) {
+      const filteredBoats = result.map((boat) => ({
+        ...boat.toObject(),
+        schedules: boat.schedules.filter((schedule) => {
+          return (
+            schedule.tripStart <= new Date(tripEnd) &&
+            schedule.tripEnd >= new Date(tripStart)
+          );
+        }),
+      }));
+
+      return filteredBoats;
+    }
+
     return result;
   }
 };
