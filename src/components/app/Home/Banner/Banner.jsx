@@ -18,6 +18,7 @@ import { userContext } from "@/src/storage/contextApi";
 import { useRouter } from "next/router";
 
 import StarIcons from "./StarIcon";
+import toast from "react-hot-toast";
 
 const tabItems = ["Liveaboards", "Resorts", "Special Offers"];
 const ratings = [
@@ -59,7 +60,15 @@ const Banner = () => {
       searchValues.minRating = rating?.minRating;
       searchValues.maxRating = rating?.maxRating;
     }
-    router.push("/secondPage");
+    if (
+      searchValues.destination === "" ||
+      searchValues.tripStart === "" ||
+      searchValues.tripEnd === ""
+    ) {
+      toast.error("Please select Destination and Date to serach");
+    } else {
+      router.push("/secondPage");
+    }
   };
 
   return (
@@ -83,6 +92,7 @@ const Banner = () => {
                     setSearchValues({
                       ...searchValues,
                       tabValue: item,
+                      property: "",
                     })
                   }
                   key={index}

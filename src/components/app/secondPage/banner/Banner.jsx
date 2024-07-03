@@ -153,6 +153,7 @@ const Banner = ({ setSearchResult }) => {
                     setSearchValues({
                       ...searchValues,
                       tabValue: item,
+                      property: "",
                     })
                   }
                   key={index}
@@ -213,7 +214,7 @@ const Banner = ({ setSearchResult }) => {
                     searchValues?.destination === "" && destination === ""
                   }
                   label="Destinations"
-                  value={searchValues?.destination || destination}
+                  value={destination ? destination : searchValues?.destination}
                   variant="outlined"
                   fullWidth
                   className="text-white"
@@ -372,8 +373,9 @@ const Banner = ({ setSearchResult }) => {
                     style={{ color: "#f1f2f2" }}
                     id="demo-simple-select-label"
                   >
-                    Vegan ratings
+                    Vegan rating
                   </InputLabel>
+                  {console.log(rating)}
                   <Select
                     label="Vegan rating"
                     className="h-12"

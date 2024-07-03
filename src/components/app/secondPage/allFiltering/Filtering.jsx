@@ -17,7 +17,7 @@ import { ArrowDropDown } from "@mui/icons-material";
 import { Menu, MenuItem } from "@mui/material";
 const Filtering = () => {
   const [isShowPriceField, setIsShowPriceField] = useState(false);
-  const { searchValues } = useContext(userContext);
+  const { searchValues, setSearchValues } = useContext(userContext);
   const priceFieldRef = useRef(null);
   const handleClickOutside = (event) => {
     if (
@@ -44,12 +44,28 @@ const Filtering = () => {
     setAnchorEl(null);
   };
 
+  const [minPrice, setMinPrice] = useState();
+  const [maxPrice, setMaxPrice] = useState();
+
+  console.log(minPrice);
+  console.log(maxPrice);
+  const priceFieldHandler = () => {
+    setIsShowPriceField(false);
+  };
+
   return (
     <div className="bg-gray-100">
       <div className="md:w-[85%] px-5 md:px-0 mx-auto py-[20px]">
         <div className="flex  gap-4 mt-1   flex-wrap   ">
           <div>
-            <div className="relative">
+            <div
+              className={`relative  ${
+                searchValues?.tabValue === "Resorts" ||
+                searchValues?.property === "resort"
+                  ? "-me-4"
+                  : ""
+              }`}
+            >
               <TextField
                 className="w-36"
                 InputProps={{
@@ -104,28 +120,33 @@ const Filtering = () => {
                 }}
               />
               {isShowPriceField && (
-                <div
+                <form
                   ref={priceFieldRef}
                   className="w-full md:w-[760] h-56 rounded-md shadow-md absolute z-30 bg-white px-2"
                 >
                   {" "}
                   <input
                     type="text"
+                    required
+                    onChange={(e) => setMinPrice(e.target.value)}
                     placeholder="Min Price"
                     className="input input-bordered w-full max-w-xs mt-3"
                   />
                   <input
                     type="text"
+                    required
+                    onChange={(e) => setMaxPrice(e.target.value)}
                     placeholder="Max Price"
                     className="input input-bordered w-full max-w-xs mt-3"
                   />
                   <button
-                    onClick={() => setIsShowPriceField(false)}
+                    type="submit"
+                    onClick={priceFieldHandler}
                     className="bg-[#0080ff] text-white rounded-md  my-3 py-2 w-full"
                   >
                     Search
                   </button>
-                </div>
+                </form>
               )}
             </div>
           </div>
@@ -210,6 +231,8 @@ const Filtering = () => {
           <div>
             <FacilityFilter />
           </div>
+          {console.log(searchValues?.tabValue)}
+          {console.log(searchValues?.property)}
           {searchValues?.tabValue === "Resorts" ||
           searchValues?.property === "resort" ? (
             <div>

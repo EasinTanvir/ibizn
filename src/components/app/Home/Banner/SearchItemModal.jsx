@@ -86,12 +86,7 @@ export default function SearchItemModal({
   }, [searchValues]);
 
   const handleDestination = (destination) => {
-    // setSearchValues({ ...searchValues, destination });
-    if (setDestination) {
-      setDestination(destination);
-    } else {
-      setSearchValues({ ...searchValues, destination });
-    }
+    setSearchValues({ ...searchValues, destination });
     setIsModalOpen(false);
   };
 

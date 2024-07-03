@@ -67,7 +67,7 @@ const FacilityFilter = () => {
       });
   }, [searchValues]);
   return (
-    <div>
+    <div className="">
       <FormControl className="w-32">
         <InputLabel
           id="demo-multiple-checkbox-label"

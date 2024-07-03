@@ -14,16 +14,18 @@ const ResortStyle = () => {
     <Box sx={{ minWidth: 120 }}>
       <FormControl
         sx={{
-          width: { xs: "100%", sm: 250, position: "relative" },
+          width: { xs: "100%", sm: 140, position: "relative" },
         }}
       >
         <InputLabel
+          className="text-primary"
           id="demo-simple-select-label"
           sx={{ position: "absolute", top: "-7px" }}
         >
           Resort Style
         </InputLabel>
         <Select
+          className="text-primary"
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={age}
@@ -36,6 +38,16 @@ const ResortStyle = () => {
             alignItems: "center",
             paddingTop: 0,
             paddingBottom: 0,
+            borderRadius: "5px",
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: "#0080ff",
+            },
+            "&:hover .MuiOutlinedInput-notchedOutline": {
+              borderColor: "#0080ff",
+            },
+            "& .MuiSelect-icon": {
+              color: "#0080ff",
+            },
           }}
         >
           <MenuItem value={10}>Beach Resort</MenuItem>
