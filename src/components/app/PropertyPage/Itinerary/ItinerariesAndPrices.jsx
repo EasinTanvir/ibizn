@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CabinModal from "./CabinModal";
 import BookingModal from "./BookingModal";
 import axios from "axios";
@@ -10,12 +10,17 @@ import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import TextField from "@mui/material/TextField";
 import { ArrowDropDown } from "@mui/icons-material";
+import { userContext } from "@/src/storage/contextApi";
 
 dayjs.extend(isSameOrBefore);
 dayjs.extend(isSameOrAfter);
 function ItinerariesAndPrices({ propertyData }) {
+  const { searchValues, setSearchValues } = useContext(userContext);
+  console.log(searchValues.tripStart);
+
   //year
   const [selectedYear, setSelectedYear] = useState(null);
+  console.log(selectedYear);
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [filteredTrips, setFilteredTrips] = useState(propertyData?.schedules);
   console.log(selectedYear);
@@ -53,9 +58,29 @@ function ItinerariesAndPrices({ propertyData }) {
 
   const handleYearChange = (newValue) => {
     const formattedYear = dayjs(newValue).format("YYYY-MM-DD");
+    console.log(formattedYear);
     setSelectedYear(formattedYear);
     filterTripsByYear(newValue);
   };
+
+  useEffect(() => {
+    if (searchValues?.tripStart) {
+      console.log(searchValues?.tripStart);
+      const defaultYear = dayjs(searchValues?.tripStart).format("YYYY-MM-DD");
+      const defaultMonth = dayjs(searchValues?.tripStart).format("YYYY-MM-DD");
+      console.log(defaultYear);
+
+      if (defaultYear) {
+        setSelectedYear(dayjs(defaultYear));
+        filterTripsByYear(defaultYear);
+      }
+
+      if (defaultMonth) {
+        setSelectedMonth(dayjs(defaultMonth));
+        filterTripsByMonth(defaultMonth);
+      }
+    }
+  }, [searchValues]);
 
   const filterTripsByMonth = (month) => {
     const startOfMonth = dayjs(month).startOf("month");
@@ -245,7 +270,12 @@ function ItinerariesAndPrices({ propertyData }) {
           </p>
         )}
       </div>
-      <CabinModal cabins={cabins} setOpen={setOpen} open={open} />
+      <CabinModal
+        cabins={cabins}
+        shedules={propertyData?.schedules}
+        setOpen={setOpen}
+        open={open}
+      />
       <BookingModal
         open={isOpenBookingModal}
         setOpen={setIsOpenBookingModal}

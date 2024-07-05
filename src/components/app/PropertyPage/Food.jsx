@@ -33,7 +33,7 @@ const Food = ({ propertyData, resort }) => {
   };
 
   return (
-    <div className="flex flex-col gap-10 items-center lg:flex-row  my-20 lg:my-24  customContainer bg-white">
+    <div className="flex  flex-col gap-10 items-center lg:flex-row sm:justify-between  my-20 lg:my-24  customContainer bg-white">
       <div>
         <Content
           title={resort ? "Food" : "Food Onboard"}

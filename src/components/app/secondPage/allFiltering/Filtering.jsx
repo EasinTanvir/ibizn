@@ -15,7 +15,7 @@ import DivingType from "./DivingType";
 import ResortStyle from "./ResortStyle";
 import { ArrowDropDown } from "@mui/icons-material";
 import { Menu, MenuItem } from "@mui/material";
-const Filtering = () => {
+const Filtering = ({ sortListHandler }) => {
   const [isShowPriceField, setIsShowPriceField] = useState(false);
   const { searchValues, setSearchValues } = useContext(userContext);
   const priceFieldRef = useRef(null);
@@ -412,7 +412,10 @@ const Filtering = () => {
             )}
 
           <div className="sm:ps-14">
-            <button className="bg-primary text-white rounded-2xl sm:px-12 px-8 py-2 flex sm:justify-between justify-around  sm:w-44 w-40">
+            <button
+              onClick={sortListHandler}
+              className="bg-primary text-white rounded-2xl sm:px-12 px-8 py-2 flex sm:justify-between justify-around  sm:w-44 w-40"
+            >
               <span className="">Sort by</span>
               <span className="-me-2">
                 <ImportExportIcon

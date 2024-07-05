@@ -4,7 +4,7 @@ import Filtering from "./allFiltering/Filtering";
 import FindCard from "./findCard/FindCard";
 import { userContext } from "@/src/storage/contextApi";
 import { baseUrl } from "@/src/config/serverConfig";
-import { RotatingLines } from "react-loader-spinner";
+import { Blocks, RotatingLines } from "react-loader-spinner";
 
 const SecondPage = () => {
   const { searchValues } = useContext(userContext);
@@ -44,35 +44,56 @@ const SecondPage = () => {
         setIsLoading(false);
       });
   }, [searchValues]);
+
+  const [sortedLists, setSortedLists] = useState([]);
+  const [isAscending, setIsAscending] = useState(true);
+
+  const sortListHandler = () => {
+    const sorted = [...sortedLists].sort((a, b) => {
+      if (isAscending) {
+        return a.veganRating - b.veganRating;
+      } else {
+        return b.veganRating - a.veganRating;
+      }
+    });
+    setSortedLists(sorted);
+    setIsAscending(!isAscending);
+  };
+
+  useEffect(() => {
+    setSortedLists(searchResult);
+  }, [searchResult]);
+
   return (
     <div>
       <Banner setSearchResult={setSearchResult} />
 
       {!isLoading ? (
         <div>
-          <Filtering />
+          <Filtering sortListHandler={sortListHandler} />
           <FindCard
             resort={
               searchValues?.tabValue === "Resorts" ||
               searchValues?.property === "resort"
             }
-            searchResult={searchResult}
+            searchResult={sortedLists}
             isLoading={isLoading}
           />
         </div>
       ) : (
-        <div className="h-[300px] flex justify-center py-5">
-          <RotatingLines
-            visible={true}
-            height="80"
-            width="80"
-            color="#0080ff"
-            strokeWidth="5"
-            animationDuration="0.75"
-            ariaLabel="rotating-lines-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
-          />
+        <div className="min-h-72 flex justify-center items-center">
+          <div className="flex flex-col">
+            <Blocks
+              height="80"
+              width="80"
+              color="#4fa94d"
+              ariaLabel="blocks-loading"
+              wrapperStyle={{}}
+              wrapperClass="blocks-wrapper"
+              visible={true}
+            />
+            <span className="font-semibold">Please Wait...</span>
+          </div>
         </div>
       )}
     </div>

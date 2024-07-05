@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
-function CabinModal({ cabins, setOpen, open }) {
+function CabinModal({ cabins, setOpen, open, shedules }) {
   const handleClose = () => setOpen(false);
 
   return (

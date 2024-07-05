@@ -60,14 +60,24 @@ const Banner = () => {
       searchValues.minRating = rating?.minRating;
       searchValues.maxRating = rating?.maxRating;
     }
-    if (
-      searchValues.destination === "" ||
-      searchValues.tripStart === "" ||
-      searchValues.tripEnd === ""
-    ) {
-      toast.error("Please select Destination and Date to serach");
+
+    console.log(searchValues.tabValue);
+    if (searchValues.tabValue === "Special Offers") {
+      if (searchValues.property === "" || searchValues.destination === "") {
+        toast.error("Please select Destination and Property");
+      } else {
+        router.push("/secondPage");
+      }
     } else {
-      router.push("/secondPage");
+      if (
+        searchValues.destination === "" ||
+        searchValues.tripStart === "" ||
+        searchValues.tripEnd === ""
+      ) {
+        toast.error("Please select Destination and Date");
+      } else {
+        router.push("/secondPage");
+      }
     }
   };
 

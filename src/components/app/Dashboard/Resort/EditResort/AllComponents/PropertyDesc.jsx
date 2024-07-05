@@ -1,6 +1,7 @@
 import React from "react";
+import { useState } from "react";
 
-const PropertyDesc = ({ resortData, handleImageChanges }) => {
+const PropertyDesc = ({ resortData, handleImageChanges, setResortData }) => {
   return (
     <div>
       <h2 className="text-2xl text-center font-bold">
@@ -15,6 +16,12 @@ const PropertyDesc = ({ resortData, handleImageChanges }) => {
             Brief description
           </label>
           <textarea
+            onChange={(e) =>
+              setResortData({
+                ...resortData,
+                briefDescription: e.target.value,
+              })
+            }
             className="shadow appearance-none border  w-full py-2 px-3 rounded-md text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="propertyDesc"
             rows="4"
