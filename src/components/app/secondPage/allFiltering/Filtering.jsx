@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import debounce from "lodash.debounce";
 import ImportExportIcon from "@mui/icons-material/ImportExport";
 import {
   Box,
@@ -18,15 +19,33 @@ import { Menu, MenuItem } from "@mui/material";
 const Filtering = ({ sortListHandler }) => {
   const [isShowPriceField, setIsShowPriceField] = useState(false);
   const { searchValues, setSearchValues } = useContext(userContext);
+
+  const [duration, setDuration] = useState();
+  console.log(duration);
+
   const priceFieldRef = useRef(null);
-  const handleClickOutside = (event) => {
-    if (
-      priceFieldRef.current &&
-      !priceFieldRef.current.contains(event.target)
-    ) {
+
+  useEffect(() => {
+    const handleDebouncedUpdate = debounce(() => {
+      if (duration) {
+        setSearchValues({
+          ...searchValues,
+          duration,
+        });
+      }
+
       setIsShowPriceField(false);
-    }
-  };
+    }, 1500); // 2 seconds debounce time
+
+    handleDebouncedUpdate();
+
+    // Clean up the debounce function
+    return () => {
+      handleDebouncedUpdate.cancel();
+    };
+  }, [duration]);
+
+  const handleClickOutside = (event) => {};
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -47,11 +66,37 @@ const Filtering = ({ sortListHandler }) => {
   const [minPrice, setMinPrice] = useState();
   const [maxPrice, setMaxPrice] = useState();
 
-  console.log(minPrice);
-  console.log(maxPrice);
   const priceFieldHandler = () => {
     setIsShowPriceField(false);
+
+    console.log(minPrice);
+    console.log(maxPrice);
+
+    setSearchValues({
+      ...searchValues,
+      minPrice,
+      maxPrice,
+    });
   };
+
+  useEffect(() => {
+    const handleDebouncedUpdate = debounce(() => {
+      if (minPrice && maxPrice) {
+        setSearchValues({
+          ...searchValues,
+          minPrice,
+          maxPrice,
+        });
+      }
+    }, 1000); // 2 seconds debounce time
+
+    handleDebouncedUpdate();
+
+    // Clean up the debounce function
+    return () => {
+      handleDebouncedUpdate.cancel();
+    };
+  }, [minPrice, maxPrice]);
 
   return (
     <div className="bg-gray-100">
@@ -139,13 +184,6 @@ const Filtering = ({ sortListHandler }) => {
                     placeholder="Max Price"
                     className="input input-bordered w-full max-w-xs mt-3"
                   />
-                  <button
-                    type="submit"
-                    onClick={priceFieldHandler}
-                    className="bg-[#0080ff] text-white rounded-md  my-3 py-2 w-full"
-                  >
-                    Search
-                  </button>
                 </form>
               )}
             </div>
@@ -217,7 +255,8 @@ const Filtering = ({ sortListHandler }) => {
                       <Box sx={{ width: 200 }}>
                         <Typography>Number Of Nights</Typography>
                         <Slider
-                          defaultValue={2}
+                          value={duration}
+                          onChange={(e) => setDuration(e.target.value)}
                           max={50}
                           aria-label="Default"
                           valueLabelDisplay="auto"

@@ -8,7 +8,7 @@ import { Blocks, RotatingLines } from "react-loader-spinner";
 
 const SecondPage = () => {
   const { searchValues } = useContext(userContext);
-  // console.log(searchValues);
+  console.log(searchValues);
   const [isLoading, setIsLoading] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
   console.log(searchResult);
