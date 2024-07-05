@@ -25,7 +25,7 @@ const createBoat = catchAsync(async (req, res) => {
         item.currency === "USD"
           ? item.cost
           : await convertTedCurrency(item.cost, item.currency);
-      return { ...item, convertPrice: convertedPrice }; // Add converted price to the item
+      return { ...item, convertPrice: Number(convertedPrice).toFixed(2) }; // Add converted price to the item
     })
   );
 
@@ -130,7 +130,7 @@ const updateBoat = catchAsync(async (req, res) => {
           item.currency === "USD"
             ? item.cost
             : await convertTedCurrency(item.cost, item.currency);
-        return { ...item, convertPrice: convertedPrice }; // Add converted price to the item
+        return { ...item, convertPrice: Number(convertedPrice).toFixed(2) }; // Add converted price to the item
       })
     );
     req.body.schedules = convertedPrices;

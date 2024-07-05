@@ -21,7 +21,7 @@ const Schedules = new Schema({
     required: true,
   },
   convertPrice: {
-    type: String,
+    type: Number,
     required: true,
   },
 
