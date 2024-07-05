@@ -87,7 +87,7 @@ function EnvironmentelPacket({ propertyData, resort }) {
           ]}
         />
 
-        {resort && (
+        {/* {resort && (
           <div className="">
             <Accordion
               className="border-t border-[#00afff] w-full md:w-full font-outfit"
@@ -119,7 +119,7 @@ function EnvironmentelPacket({ propertyData, resort }) {
               </AccordionDetails>
             </Accordion>
           </div>
-        )}
+        )} */}
       </div>
     </>
   );

@@ -2,18 +2,22 @@ import { useState } from "react";
 import CabinModal from "./CabinModal";
 import BookingModal from "./BookingModal";
 import ResortBookingModal from "./ResortBookingModal";
+import PackageModal from "./PackageModal";
 
 function ResortAndPrice({ propertyData }) {
-  const [cabins, setCabins] = useState([]);
+  const [packages, setPackages] = useState();
 
   const [open, setOpen] = useState(false);
-  const handleOpen = (cabins) => {
-    setOpen(true);
-    setCabins(cabins);
-  };
+
   // for booking model;
   const [schedule, setSchedule] = useState({});
   const [isOpenBookingModal, setIsOpenBookingModal] = useState(false);
+
+  const handleOpenPackageModal = (item) => {
+    setOpen(true);
+    setPackages(item);
+  };
+
   const handleOpenBookingModal = (item) => {
     setSchedule(item);
     setIsOpenBookingModal(true);
@@ -49,6 +53,12 @@ function ResortAndPrice({ propertyData }) {
 
               <div className="flex gap-4 mt-4 md:mt-0">
                 <button
+                  onClick={() => handleOpenPackageModal(item)}
+                  className="bg-primary border border-white text-white px-10 rounded-full  py-1 text-sm md:text-xl lg:text-2xl"
+                >
+                  Package
+                </button>
+                <button
                   onClick={() => handleOpenBookingModal(item)}
                   className="bg-white text-primary rounded-full px-6 py-2 md:px-16 text-sm md:text-xl lg:text-2xl"
                 >
@@ -61,6 +71,8 @@ function ResortAndPrice({ propertyData }) {
           <p>No Package available.</p>
         )}
       </div>
+
+      <PackageModal open={open} setOpen={setOpen} packages={packages} />
 
       <ResortBookingModal
         open={isOpenBookingModal}

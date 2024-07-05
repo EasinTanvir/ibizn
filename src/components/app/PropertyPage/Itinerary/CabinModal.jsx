@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
-function CabinModal({ cabins, setOpen, open, shedules }) {
+function CabinModal({ cabins, setOpen, open, ititnary, tripDate }) {
   const handleClose = () => setOpen(false);
 
   return (
@@ -15,7 +15,7 @@ function CabinModal({ cabins, setOpen, open, shedules }) {
         aria-describedby="modal-modal-description"
       >
         <Box
-          className="w-11/12 sm:w-10/12 md:w-8/12 lg:w-6/12 xl:w-5/12 mx-auto max-h-[80vh] overflow-y-auto bg-white shadow-lg outline-none p-4"
+          className="w-11/12 sm:w-10/12 md:w-8/12 lg:w-9/12 mx-auto max-h-[80vh] overflow-y-auto bg-primary text-white shadow-lg outline-none p-4 rounded-md"
           sx={{
             position: "absolute",
             top: "50%",
@@ -25,16 +25,37 @@ function CabinModal({ cabins, setOpen, open, shedules }) {
           }}
         >
           <div className="p-6">
-            <Typography
-              variant="h6"
-              id="modal-modal-title"
-              className="text-xl md:text-3xl text-primary font-[400]"
-            >
-              Cabin
+            <Typography id="modal-modal-title" className="">
+              <h1 className="lg:text-5xl text-2xl font-roboto font-[300]">
+                {ititnary?.itineraryName}
+              </h1>
+
+              <div className="pt-5">
+                <div className="mt-1">
+                  <span className="text-2xl md:text-4xl md:font-light">
+                    {ititnary?.embarkationPoints} —{" "}
+                    {ititnary?.disembarkationPoints}
+                  </span>
+                </div>
+
+                <div className="inline-block text-xl md:text-xl ">
+                  {new Date(tripDate?.tripStart).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                  })}{" "}
+                  —{" "}
+                  {new Date(tripDate?.tripEnd).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                  })}
+                </div>
+              </div>
             </Typography>
-            <div className="w-full h-[1px] bg-slate-400 mt-2"></div>
+            <div className="w-full h-[1px] bg-white my-12"></div>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              {cabins && cabins.length > 0 ? (
+              {/* {cabins && cabins.length > 0 ? (
                 cabins.map((cabin) => (
                   <div
                     key={cabin._id}
@@ -60,7 +81,59 @@ function CabinModal({ cabins, setOpen, open, shedules }) {
                 ))
               ) : (
                 <Typography>No cabins available</Typography>
-              )}
+              )} */}
+              <div className="flex justify-between items-center">
+                <div>
+                  <div className="  text-white ">
+                    <span className="font-[400] text-2xl font-roboto">
+                      Length :{" "}
+                    </span>
+                    <span className="text-2xl font-roboto text-light font-[200]">
+                      {" "}
+                      ({ititnary?.numberOfDays} Days /{" "}
+                      {ititnary?.numberOfNights} Nights)
+                    </span>
+                  </div>
+                  <div className="  text-white ">
+                    <span className="font-[400] text-2xl font-roboto">
+                      Departure :{" "}
+                    </span>
+                    <span className="text-2xl font-roboto text-light font-[200]">
+                      {ititnary?.embarkationPoints}
+                    </span>
+                  </div>
+                  <div className="  text-white ">
+                    <span className="font-[400] text-2xl font-roboto">
+                      Return :{" "}
+                    </span>
+                    <span className="text-2xl font-roboto text-light font-[200]">
+                      {ititnary?.disembarkationPoints}
+                    </span>
+                  </div>
+                </div>
+                <div>
+                  <div className="  text-white ">
+                    <span className="font-[400] text-2xl font-roboto">
+                      Number of Dives :{" "}
+                    </span>
+                    <span className="text-2xl font-roboto text-light font-[200]">
+                      {" "}
+                      {ititnary?.numberOfDives}
+                    </span>
+                  </div>
+
+                  <div className="  text-white ">
+                    <span className="font-[400] text-2xl font-roboto">
+                      Location :{" "}
+                    </span>
+                    <span className="text-2xl font-roboto text-light font-[200]">
+                      {" "}
+                      {ititnary?.region}, {ititnary?.country},{" "}
+                      {ititnary?.district}
+                    </span>
+                  </div>
+                </div>
+              </div>
             </Typography>
           </div>
         </Box>

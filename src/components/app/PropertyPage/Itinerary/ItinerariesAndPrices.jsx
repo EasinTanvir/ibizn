@@ -29,12 +29,21 @@ function ItinerariesAndPrices({ propertyData }) {
   //month
 
   const [cabins, setCabins] = useState([]);
+
+  const [modalItinary, setModalItinary] = useState();
+
   const [convertedAmounts, setConvertedAmounts] = useState({});
 
   const [conPrice, setConPrice] = useState();
+
   const [open, setOpen] = useState(false);
-  const handleOpen = (cabins) => {
+
+  const [tripDate, setTripDate] = useState({});
+
+  const handleOpen = (cabins, itinary, tripStart, tripEnd) => {
+    setTripDate({ tripStart, tripEnd });
     setOpen(true);
+    setModalItinary(itinary);
     setCabins(cabins);
   };
   // for booking model;
@@ -207,6 +216,7 @@ function ItinerariesAndPrices({ propertyData }) {
 
         {filteredTrips?.length > 0 ? (
           filteredTrips?.map((schedule, index) => {
+            console.log(schedule?.itineraryName);
             return (
               <div
                 key={index}
@@ -249,7 +259,14 @@ function ItinerariesAndPrices({ propertyData }) {
 
                 <div className="flex gap-4 sm:pt-7 ">
                   <button
-                    onClick={() => handleOpen(schedule?.itinerary?.cabins)}
+                    onClick={() =>
+                      handleOpen(
+                        schedule?.itinerary?.cabins,
+                        schedule?.itinerary,
+                        schedule?.tripStart,
+                        schedule?.tripEnd
+                      )
+                    }
                     className="bg-primary border border-white text-white px-10 rounded-full  py-1 text-sm md:text-xl lg:text-2xl"
                   >
                     Itinerary
@@ -271,8 +288,9 @@ function ItinerariesAndPrices({ propertyData }) {
         )}
       </div>
       <CabinModal
+        tripDate={tripDate}
         cabins={cabins}
-        shedules={propertyData?.schedules}
+        ititnary={modalItinary}
         setOpen={setOpen}
         open={open}
       />
