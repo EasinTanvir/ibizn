@@ -42,8 +42,15 @@ const getAllResortFromDB = async (queryData) => {
     maxRating,
     tripStart,
     tripEnd,
+    minPrice,
+    maxPrice,
   } = queryData;
-  console.log(tripStart);
+  console.log("minPrice = ", minPrice);
+  console.log("maxPrice = ", maxPrice);
+
+  const fMinPrice = parseFloat(Number(minPrice).toFixed(2));
+  const fMaxPrice = parseFloat(Number(maxPrice).toFixed(2));
+
   console.log(tripEnd);
   const andCondition = [];
 
@@ -55,9 +62,16 @@ const getAllResortFromDB = async (queryData) => {
     andCondition.push({ country: destination });
   }
   if (tabValue === "Special Offers") {
-    console.log("console from tab value");
     andCondition.push({ special: true });
   }
+
+  // if (minPrice && maxPrice) {
+  //   const priceCondition = {
+  //     convertPrice: { $gte: Number(minPrice).toFixed(2) },
+  //     convertPrice: { $lte: Number(maxPrice).toFixed(2) },
+  //   };
+  //   andCondition.push(priceCondition);
+  // }
 
   if (date) {
     const formattedDate = new Date(date);
@@ -102,11 +116,72 @@ const getAllResortFromDB = async (queryData) => {
     });
   }
 
-  const result = await Resort.find({
-    $and: andCondition.length > 0 ? andCondition : [{}],
-  }).populate("listOfPackages");
+  if (minPrice !== undefined && maxPrice !== undefined) {
+    console.log("tukkkkkkk");
+    const fMinPrices = parseFloat(Number(minPrice).toFixed(2));
+    const fMaxPrices = parseFloat(Number(maxPrice).toFixed(2));
 
-  return result;
+    const andCondition = [];
+
+    andCondition.push({
+      $expr: {
+        $gte: [
+          {
+            $min: {
+              $map: {
+                input: "$listOfPackages",
+                as: "pkg",
+                in: {
+                  $convert: {
+                    input: "$$pkg.ConvertedPrice",
+                    to: "double",
+                    onError: null,
+                    onNull: null,
+                  },
+                },
+              },
+            },
+          },
+          fMinPrices,
+        ],
+      },
+    });
+
+    andCondition.push({
+      $expr: {
+        $lte: [
+          {
+            $max: {
+              $map: {
+                input: "$listOfPackages",
+                as: "pkg",
+                in: {
+                  $convert: {
+                    input: "$$pkg.ConvertedPrice",
+                    to: "double",
+                    onError: null,
+                    onNull: null,
+                  },
+                },
+              },
+            },
+          },
+          fMaxPrices,
+        ],
+      },
+    });
+
+    const result = await Resort.find({
+      $and: andCondition.length > 0 ? andCondition : [{}],
+    }).populate("listOfPackages");
+
+    return result;
+  } else {
+    const result = await Resort.find({
+      $and: andCondition.length > 0 ? andCondition : [{}],
+    }).populate("listOfPackages");
+    return result;
+  }
 };
 
 // get resort search item

@@ -79,9 +79,11 @@ const getAllBoatFromDB = async (queryData) => {
     duration,
   } = queryData;
 
-  const fMinPrice = Number(minPrice).toFixed(2);
-  const fMaxPrice = Number(maxPrice).toFixed(2);
+  const fMinPrice = parseFloat(Number(minPrice).toFixed(2));
+  const fMaxPrice = parseFloat(Number(maxPrice).toFixed(2));
+
   console.log("duration, =", duration);
+  console.log("tabValue, =", tabValue);
 
   // Initialize an empty query object
   const query = {
@@ -128,8 +130,8 @@ const getAllBoatFromDB = async (queryData) => {
 
   if (minPrice && maxPrice) {
     const priceCondition = {
-      convertPrice: { $gte: Number(minPrice).toFixed(2) },
-      convertPrice: { $lte: Number(maxPrice).toFixed(2) },
+      convertPrice: { $gte: parseFloat(Number(minPrice).toFixed(2)) },
+      convertPrice: { $lte: parseFloat(Number(maxPrice).toFixed(2)) },
     };
 
     // Add the date condition to the existing schedules query
@@ -178,26 +180,43 @@ const getAllBoatFromDB = async (queryData) => {
       };
     });
 
-    if (minPrice && maxPrice) {
-      console.log("fMinPrice = ", fMinPrice);
-      console.log("fMaxPrice = ", fMaxPrice);
-      const filteredBoats = result.map((boat) => ({
-        ...boat.toObject(),
+    if (minPrice && maxPrice && !duration) {
+      const filteredBoats = filteredResult.map((boat) => ({
+        ...boat,
         schedules: boat.schedules.filter((schedule) => {
-          const isWithinDateRange =
-            schedule.tripStart <= new Date(tripEnd) &&
-            schedule.tripEnd >= new Date(tripStart);
+          const isWithinPriceRange =
+            schedule.convertPrice >= fMinPrice &&
+            schedule.convertPrice <= fMaxPrice;
 
+          return isWithinPriceRange;
+        }),
+      }));
+
+      return filteredBoats;
+    } else if (minPrice && maxPrice && duration) {
+      const filteredBoats = filteredResult.map((boat) => ({
+        ...boat,
+        schedules: boat.schedules.filter((schedule) => {
           const isWithinPriceRange =
             schedule.convertPrice >= fMinPrice &&
             schedule.convertPrice <= fMaxPrice;
 
           const isMatchingDuration =
-            duration !== undefined
-              ? schedule.itinerary.numberOfNights === Number(duration)
-              : true; // If duration is undefined, this condition will be true
+            schedule.itinerary.numberOfNights === Number(duration);
 
-          return isWithinDateRange && isWithinPriceRange && isMatchingDuration;
+          return isWithinPriceRange && isMatchingDuration;
+        }),
+      }));
+
+      return filteredBoats;
+    } else if (!minPrice && !maxPrice && duration) {
+      const filteredBoats = filteredResult.map((boat) => ({
+        ...boat,
+        schedules: boat.schedules.filter((schedule) => {
+          const isMatchingDuration =
+            schedule.itinerary.numberOfNights === Number(duration);
+
+          return isMatchingDuration;
         }),
       }));
 
