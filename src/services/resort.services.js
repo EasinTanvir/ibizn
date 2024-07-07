@@ -116,70 +116,28 @@ const getAllResortFromDB = async (queryData) => {
     });
   }
 
-  if (minPrice !== undefined && maxPrice !== undefined) {
-    console.log("tukkkkkkk");
-    const fMinPrices = parseFloat(Number(minPrice).toFixed(2));
-    const fMaxPrices = parseFloat(Number(maxPrice).toFixed(2));
+  if (minPrice && maxPrice) {
+    const fMinPrices = parseFloat(minPrice);
+    const fMaxPrices = parseFloat(maxPrice);
 
-    const andCondition = [];
-
-    andCondition.push({
-      $expr: {
-        $gte: [
-          {
-            $min: {
-              $map: {
-                input: "$listOfPackages",
-                as: "pkg",
-                in: {
-                  $convert: {
-                    input: "$$pkg.ConvertedPrice",
-                    to: "double",
-                    onError: null,
-                    onNull: null,
-                  },
-                },
-              },
-            },
-          },
-          fMinPrices,
-        ],
-      },
-    });
-
-    andCondition.push({
-      $expr: {
-        $lte: [
-          {
-            $max: {
-              $map: {
-                input: "$listOfPackages",
-                as: "pkg",
-                in: {
-                  $convert: {
-                    input: "$$pkg.ConvertedPrice",
-                    to: "double",
-                    onError: null,
-                    onNull: null,
-                  },
-                },
-              },
-            },
-          },
-          fMaxPrices,
-        ],
-      },
-    });
-
-    const result = await Resort.find({
+    const resorts = await Resort.find({
       $and: andCondition.length > 0 ? andCondition : [{}],
     }).populate("listOfPackages");
 
-    return result;
+    const filteredResorts = resorts.filter((resort) =>
+      resort.listOfPackages.some(
+        (package) =>
+          package.ConvertedPrice >= fMinPrices &&
+          package.ConvertedPrice <= fMaxPrices
+      )
+    );
+
+    return filteredResorts;
   } else {
     const result = await Resort.find({
       $and: andCondition.length > 0 ? andCondition : [{}],
     }).populate("listOfPackages");
+
     return result;
   }
 };

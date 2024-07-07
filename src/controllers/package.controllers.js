@@ -18,7 +18,7 @@ const createPackage = catchAsync(async (req, res) => {
     currecny === "USD" ? price : await convertTedCurrency(price, currecny);
 
   //ConvertedPrice
-  req.body.ConvertedPrice = ConvertedPrice;
+  req.body.ConvertedPrice = Number(ConvertedPrice).toFixed(2);
 
   const result = await createPackageIntoDB(req.user, req.body);
   sendResponse(res, {
@@ -73,7 +73,7 @@ const updatetSinglePackage = catchAsync(async (req, res) => {
   console.log("price = ", price);
   console.log("packageCurrency = ", packageCurrency);
   console.log("convertedPrice = ", convertedPrice);
-  req.body.ConvertedPrice = convertedPrice;
+  req.body.ConvertedPrice = Number(convertedPrice).toFixed(2);
 
   const { id } = req.params;
   const result = await updatePackageIntoDB(id, req.body);
