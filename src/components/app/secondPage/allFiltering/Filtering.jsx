@@ -98,6 +98,27 @@ const Filtering = ({ sortListHandler }) => {
     };
   }, [minPrice, maxPrice]);
 
+  const priceFieldRefs = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        priceFieldRefs.current &&
+        !priceFieldRefs.current.contains(event.target) &&
+        priceFieldRef.current &&
+        !priceFieldRef.current.contains(event.target) &&
+        isShowPriceField
+      ) {
+        setIsShowPriceField(!isShowPriceField);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [isShowPriceField]);
+
   return (
     <div className="bg-gray-100">
       <div className="md:w-[85%] px-5 md:px-0 mx-auto py-[20px]">
@@ -125,6 +146,7 @@ const Filtering = ({ sortListHandler }) => {
                 }}
                 id="outlined-basic"
                 label="Price Range"
+                ref={priceFieldRefs}
                 variant="outlined"
                 size="small"
                 fullWidth
@@ -167,7 +189,7 @@ const Filtering = ({ sortListHandler }) => {
               {isShowPriceField && (
                 <form
                   ref={priceFieldRef}
-                  className="w-full md:w-[760] h-56 rounded-md shadow-md absolute z-30 bg-white px-2"
+                  className="w-full md:w-[760] h-20 rounded-md shadow-md absolute z-30 bg-white px-2"
                 >
                   {" "}
                   <input

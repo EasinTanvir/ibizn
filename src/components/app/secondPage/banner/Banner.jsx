@@ -151,9 +151,16 @@ const Banner = ({ setSearchResult }) => {
                 <div
                   onClick={() =>
                     setSearchValues({
-                      ...searchValues,
                       tabValue: item,
                       property: "",
+                      minPrice: "",
+                      maxPrice: "",
+                      duration: "",
+                      destination: "",
+                      tripStart: "",
+                      tripEnd: "",
+                      minRating: "",
+                      maxRating: "",
                     })
                   }
                   key={index}

@@ -8,6 +8,7 @@ import {
   MenuItem,
   OutlinedInput,
   Select,
+  Tooltip,
 } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 const ITEM_HEIGHT = 48;
@@ -39,8 +40,11 @@ const FacilityFilter = () => {
   const names = facilities?.map((facility) => facility.name);
   const [facility, setFacility] = React.useState([]);
   const { searchValues } = useContext(userContext);
+  const [label, setLabel] = React.useState(false);
   console.log(searchValues);
   const handleChange = (event) => {
+    setLabel(!label);
+
     const {
       target: { value },
     } = event;
@@ -71,14 +75,7 @@ const FacilityFilter = () => {
       <FormControl className="w-32">
         <InputLabel
           id="demo-multiple-checkbox-label"
-          sx={{
-            transform:
-              facility.length > 0
-                ? "translate(14px, -9px) scale(0.75)"
-                : "translate(14px, 12px) scale(1)",
-            transition: "0.2s ease-out",
-          }}
-          className="text-primary  "
+          className={`text-primary ${!label ? "-mt-1" : " mt-0 "}  `}
         >
           Facilities
         </InputLabel>
@@ -112,7 +109,9 @@ const FacilityFilter = () => {
           {names.map((name) => (
             <MenuItem key={name} value={name}>
               <Checkbox checked={facility.indexOf(name) > -1} />
-              <ListItemText primary={name} />
+              <Tooltip title={name}>
+                <ListItemText primary={name} />
+              </Tooltip>
             </MenuItem>
           ))}
         </Select>
