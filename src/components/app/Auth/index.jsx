@@ -135,8 +135,6 @@ const Auth = () => {
                   type={showPass ? "text" : "password"}
                   {...register("password", {
                     required: true,
-                    minLength: 6,
-                    maxLength: 20,
                   })}
                   placeholder="password"
                   className="w-full rounded-md"
@@ -323,11 +321,19 @@ const Auth = () => {
               )}
             </div>
             {error && <p className="text-red-600 my-2">{error}</p>}
-            <input
-              className="w-full cursor-pointer rounded-md custom_red_color py-3 my-4 text-white font-semibold"
-              type="submit"
-              value="Sign Up"
-            />
+            <div>
+              <button
+                disabled={submitLoader}
+                className="w-full rounded-md  custom_red_color py-3 my-4 text-white font-semibold"
+                type="submit"
+              >
+                {submitLoader ? (
+                  <ClipLoader className="text-2xl" color="#ffff" />
+                ) : (
+                  "Sign Up"
+                )}
+              </button>
+            </div>
             <p className="text-center">
               Already have an account?
               <span

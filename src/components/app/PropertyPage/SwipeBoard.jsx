@@ -6,10 +6,19 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 // import "./styles.css";
-
 // import required modules
 import { Navigation } from "swiper/modules";
+import SliderModal from "./SliderModal";
+
 const SwipeBoard = ({ propertyData }) => {
+  const [open, setOpen] = React.useState(false);
+  const [selectedImage, setSelectedImage] = React.useState("");
+
+  const openHandler = (imageUrl) => {
+    setOpen(true);
+    setSelectedImage(imageUrl);
+  };
+
   return (
     <div className="mt-12 ">
       <Swiper
@@ -40,16 +49,23 @@ const SwipeBoard = ({ propertyData }) => {
         className="mySwiper"
       >
         {propertyData?.carousal?.map((image) => (
-          <SwiperSlide>
-            <img className="h-56 w-full md:w-96" src={image} />
+          <SwiperSlide onClick={() => openHandler(image)}>
+            <img className="h-56 w-full md:w-96 cursor-pointer" src={image} />
           </SwiperSlide>
         ))}
         {propertyData?.carousalImages?.map((image) => (
-          <SwiperSlide>
-            <img className="h-56 w-full md:w-96" src={image} />
+          <SwiperSlide onClick={() => openHandler(image)}>
+            <img className="h-56 w-full md:w-96 cursor-pointer" src={image} />
           </SwiperSlide>
         ))}
       </Swiper>
+      <SliderModal
+        propertyData={propertyData}
+        open={open}
+        setOpen={setOpen}
+        selectedImage={selectedImage}
+        setSelectedImage={setSelectedImage}
+      />
     </div>
   );
 };
