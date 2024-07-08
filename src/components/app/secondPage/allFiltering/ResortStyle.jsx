@@ -25,6 +25,7 @@ const ResortStyle = () => {
           Resort Style
         </InputLabel>
         <Select
+          disabled
           className="text-primary"
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -46,6 +47,12 @@ const ResortStyle = () => {
               borderColor: "#0080ff",
             },
             "& .MuiSelect-icon": {
+              color: "#0080ff",
+            },
+            "&.Mui-disabled .MuiOutlinedInput-notchedOutline": {
+              borderColor: "#0080ff",
+            },
+            "&.Mui-disabled .MuiSelect-icon": {
               color: "#0080ff",
             },
           }}
