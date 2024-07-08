@@ -15,7 +15,7 @@ function Exclusions({ propertyData }) {
             </h1>
           </div>
 
-          <div className="md:space-y-4  space-y-2">
+          <div className="md:space-y-4  space-y-2 mt-1">
             {propertyData?.inclusions?.map((item, i) => (
               <p key={i} className="text-xl font-light text-secondary ">
                 <span className="opacity-[70%]">—</span> {item}
@@ -31,7 +31,7 @@ function Exclusions({ propertyData }) {
             </h1>
           </div>
 
-          <div className="md:space-y-4  space-y-2">
+          <div className="md:space-y-4  space-y-2 mt-1">
             {propertyData?.exclusions?.map((item, i) => (
               <p key={i} className="text-xl font-light text-secondary ">
                 <span className="opacity-[70%]">—</span> {item}

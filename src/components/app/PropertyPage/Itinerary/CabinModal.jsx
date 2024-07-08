@@ -55,33 +55,6 @@ function CabinModal({ cabins, setOpen, open, ititnary, tripDate }) {
             </Typography>
             <div className="w-full h-[1px] bg-white my-12"></div>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              {/* {cabins && cabins.length > 0 ? (
-                cabins.map((cabin) => (
-                  <div
-                    key={cabin._id}
-                    className="mb-4 flex flex-col md:flex-row md:items-center justify-between outline-none border-b-primary border-b-[1px] py-4"
-                  >
-                    <Typography
-                      variant="subtitle1"
-                      className="text-xl md:text-2xl"
-                    >
-                      {cabin.cabinName}
-                    </Typography>
-                    <Typography variant="subtitle2" className="text-xl">
-                      <span className="text-primary text-xl font-light md:text-2xl">
-                        Price
-                      </span>{" "}
-                      :{" "}
-                      <span className="font-semibold">
-                        ${Number(cabin?.convertedPrice).toFixed(2)}
-                      </span>{" "}
-                      USD
-                    </Typography>
-                  </div>
-                ))
-              ) : (
-                <Typography>No cabins available</Typography>
-              )} */}
               <div className="flex justify-between items-center">
                 <div>
                   <div className="  text-white ">
@@ -99,7 +72,15 @@ function CabinModal({ cabins, setOpen, open, ititnary, tripDate }) {
                       Departure :{" "}
                     </span>
                     <span className="text-2xl font-roboto text-light font-[200]">
-                      {ititnary?.embarkationPoints}
+                      {new Date(tripDate?.tripStart).toLocaleDateString(
+                        "en-GB",
+                        {
+                          day: "2-digit",
+                          month: "short",
+                          year: "numeric",
+                        }
+                      )}{" "}
+                      / {ititnary?.embarkationPoints}
                     </span>
                   </div>
                   <div className="  text-white ">
@@ -107,7 +88,12 @@ function CabinModal({ cabins, setOpen, open, ititnary, tripDate }) {
                       Return :{" "}
                     </span>
                     <span className="text-2xl font-roboto text-light font-[200]">
-                      {ititnary?.disembarkationPoints}
+                      {new Date(tripDate?.tripEnd).toLocaleDateString("en-GB", {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric",
+                      })}{" "}
+                      / {ititnary?.disembarkationPoints}
                     </span>
                   </div>
                 </div>
