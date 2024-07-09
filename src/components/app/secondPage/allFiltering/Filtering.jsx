@@ -189,10 +189,11 @@ const Filtering = ({ sortListHandler }) => {
               {isShowPriceField && (
                 <form
                   ref={priceFieldRef}
-                  className="w-full md:w-[760] h-20 rounded-md shadow-md absolute z-30 bg-white px-2"
+                  className="w-full md:w-[760] h-[120px] rounded-md shadow-md absolute z-30 bg-white px-2"
                 >
                   {" "}
                   <input
+                    value={searchValues.minPrice}
                     type="text"
                     required
                     onChange={(e) => setMinPrice(e.target.value)}
@@ -202,6 +203,7 @@ const Filtering = ({ sortListHandler }) => {
                   <input
                     type="text"
                     required
+                    value={searchValues.maxPrice}
                     onChange={(e) => setMaxPrice(e.target.value)}
                     placeholder="Max Price"
                     className="input input-bordered w-full max-w-xs mt-3"

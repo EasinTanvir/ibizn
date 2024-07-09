@@ -36,8 +36,8 @@ const Itineraries = ({ schedules }) => {
           <div className="sm:w-52 w-1/2">
             <h1 className="text-[#0080ff] text-[14px] md:text-[18px] lg:text-subtitle font-outfit sm:border-l-2 pl-5">
               from usd{" "}
-              <span className="text-[#0080ff] ms-2 text-xl md:text-[32px] font-outfit">
-                {item?.cost}
+              <span className="text-[#0080ff] ms-2 text-[22px]  font-outfit">
+                {item?.convertPrice}
               </span>
             </h1>
             <div className="text-center sm:hidden">

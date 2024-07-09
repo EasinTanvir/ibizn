@@ -1,6 +1,7 @@
 const Wifi = ({ facilities }) => {
+  console.log(facilities);
   const hasWifi = facilities.some(
-    (facility) => facility.toLowerCase() === "wifi"
+    (facility) => facility.toLowerCase() === "wi-fi onboard"
   );
   return (
     <div>
