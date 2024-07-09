@@ -110,23 +110,27 @@ const getAllBoatFromDB = async (queryData) => {
   }
 
   // Add date condition if provided
-  if (tripStart || tripEnd) {
-    const dateCondition = {
-      tripStart: { $gte: new Date(tripStart) },
-      tripEnd: { $lte: new Date(tripEnd) },
-    };
+  // if (tripStart || tripEnd) {
+  //   const dateCondition = {
+  //     $and: [
+  //       {
+  //         tripStart: { $gte: new Date(tripStart) },
+  //         tripEnd: { $lte: new Date(tripEnd) },
+  //       },
+  //     ],
+  //   };
 
-    // Add the date condition to the existing schedules query
-    if (query.schedules && query.schedules.$elemMatch) {
-      query.schedules.$elemMatch = {
-        ...dateCondition,
-      };
-    } else {
-      query.schedules = {
-        $elemMatch: dateCondition,
-      };
-    }
-  }
+  //   // Add the date condition to the existing schedules query
+  //   if (query.schedules && query.schedules.$elemMatch) {
+  //     query.schedules.$elemMatch = {
+  //       ...dateCondition,
+  //     };
+  //   } else {
+  //     query.schedules = {
+  //       $elemMatch: dateCondition,
+  //     };
+  //   }
+  // }
 
   if (minPrice && maxPrice) {
     const priceCondition = {
@@ -226,46 +230,117 @@ const getAllBoatFromDB = async (queryData) => {
     }
   } else {
     if (tripStart && tripEnd && !minPrice && !maxPrice) {
+      const getStartMonth = new Date(tripStart).getMonth() + 1;
+      const getEndMonth = new Date(tripEnd).getMonth() + 1;
+
       // corrected to maxPrice
-      const filteredBoats = result.map((boat) => ({
-        ...boat.toObject(),
-        schedules: boat.schedules.filter((schedule) => {
-          const isWithinDateRange =
-            schedule.tripStart <= new Date(tripEnd) &&
-            schedule.tripEnd >= new Date(tripStart);
+      const filteredBoats = result
+        .map((boat) => {
+          const filteredSchedules = boat.schedules.filter((schedule) => {
+            const getdbStartMonth = new Date(schedule.tripStart).getMonth() + 1;
+            const getEndDbMonth = new Date(schedule.tripEnd).getMonth() + 1;
 
-          const isMatchingDuration =
-            duration !== undefined
-              ? schedule.itinerary.numberOfNights === Number(duration)
-              : true; // If duration is undefined, this condition will be true
+            let isWithinDateRange;
 
-          return isWithinDateRange && isMatchingDuration;
-        }),
-      }));
+            if (
+              getEndDbMonth !== getEndMonth &&
+              getStartMonth === getdbStartMonth
+            ) {
+              isWithinDateRange =
+                schedule.tripStart >= new Date(tripStart) &&
+                schedule.tripEnd >= new Date(tripEnd);
+            } else if (
+              getStartMonth !== getdbStartMonth &&
+              getEndDbMonth === getEndMonth
+            ) {
+              isWithinDateRange =
+                schedule.tripStart <= new Date(tripStart) &&
+                schedule.tripEnd <= new Date(tripEnd);
+            } else {
+              isWithinDateRange =
+                schedule.tripStart >= new Date(tripStart) &&
+                schedule.tripEnd <= new Date(tripEnd);
+            }
+
+            const isMatchingDuration =
+              duration !== undefined
+                ? schedule.itinerary.numberOfNights === Number(duration)
+                : true; // If duration is undefined, this condition will be true
+
+            return isWithinDateRange && isMatchingDuration;
+          });
+
+          // Check if there are any schedules left after filtering
+          if (filteredSchedules.length > 0) {
+            return {
+              ...boat.toObject(),
+              schedules: filteredSchedules,
+            };
+          } else {
+            return null; // Skip this boat object
+          }
+        })
+        .filter(Boolean);
 
       return filteredBoats;
     } else {
-      console.log("fMinPrice = ", fMinPrice);
-      console.log("fMaxPrice = ", fMaxPrice);
-      const filteredBoats = result.map((boat) => ({
-        ...boat.toObject(),
-        schedules: boat.schedules.filter((schedule) => {
-          const isWithinDateRange =
-            schedule.tripStart <= new Date(tripEnd) &&
-            schedule.tripEnd >= new Date(tripStart);
+      const getStartMonth = new Date(tripStart).getMonth() + 1;
+      const getEndMonth = new Date(tripEnd).getMonth() + 1;
 
-          const isWithinPriceRange =
-            schedule.convertPrice >= fMinPrice &&
-            schedule.convertPrice <= fMaxPrice;
+      // corrected to maxPrice
+      const filteredBoats = result
+        .map((boat) => {
+          const filteredSchedules = boat.schedules.filter((schedule) => {
+            const getdbStartMonth = new Date(schedule.tripStart).getMonth() + 1;
+            const getEndDbMonth = new Date(schedule.tripEnd).getMonth() + 1;
 
-          const isMatchingDuration =
-            duration !== undefined
-              ? schedule.itinerary.numberOfNights === Number(duration)
-              : true; // If duration is undefined, this condition will be true
+            let isWithinDateRange;
 
-          return isWithinDateRange && isWithinPriceRange && isMatchingDuration;
-        }),
-      }));
+            if (
+              getEndDbMonth !== getEndMonth &&
+              getStartMonth === getdbStartMonth
+            ) {
+              isWithinDateRange =
+                schedule.tripStart >= new Date(tripStart) &&
+                schedule.tripEnd >= new Date(tripEnd);
+            } else if (
+              getStartMonth !== getdbStartMonth &&
+              getEndDbMonth === getEndMonth
+            ) {
+              isWithinDateRange =
+                schedule.tripStart <= new Date(tripStart) &&
+                schedule.tripEnd <= new Date(tripEnd);
+            } else {
+              isWithinDateRange =
+                schedule.tripStart >= new Date(tripStart) &&
+                schedule.tripEnd <= new Date(tripEnd);
+            }
+
+            const isWithinPriceRange =
+              schedule.convertPrice >= fMinPrice &&
+              schedule.convertPrice <= fMaxPrice;
+
+            const isMatchingDuration =
+              duration !== undefined
+                ? schedule.itinerary.numberOfNights === Number(duration)
+                : true; // If duration is undefined, this condition will be true
+
+            return (
+              isWithinDateRange && isMatchingDuration && isWithinPriceRange
+            );
+          });
+
+          // Check if there are any schedules left after filtering
+          if (filteredSchedules.length > 0) {
+            return {
+              ...boat.toObject(),
+              schedules: filteredSchedules,
+            };
+          } else {
+            return null; // Skip this boat object
+          }
+        })
+        .filter(Boolean);
 
       return filteredBoats;
     }
