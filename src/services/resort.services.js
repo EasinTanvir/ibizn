@@ -33,7 +33,6 @@ const getResortsFromDB = async (id) => {
 
 // get all resorts from db
 const getAllResortFromDB = async (queryData) => {
-  console.log("query data", queryData);
   const {
     destination,
     tabValue,
@@ -45,13 +44,13 @@ const getAllResortFromDB = async (queryData) => {
     minPrice,
     maxPrice,
   } = queryData;
-  console.log("minPrice = ", minPrice);
-  console.log("maxPrice = ", maxPrice);
+  //console.log("minPrice = ", minPrice);
+  //console.log("maxPrice = ", maxPrice);
 
   const fMinPrice = parseFloat(Number(minPrice).toFixed(2));
   const fMaxPrice = parseFloat(Number(maxPrice).toFixed(2));
 
-  console.log(tripEnd);
+  //console.log(tripEnd);
   const andCondition = [];
 
   andCondition.push({
@@ -73,24 +72,26 @@ const getAllResortFromDB = async (queryData) => {
   //   andCondition.push(priceCondition);
   // }
 
-  if (date) {
-    const formattedDate = new Date(date);
-    andCondition.push({
-      $or: [
-        { "deactivationPeriod.startDate": { $gt: formattedDate } },
-        { "deactivationPeriod.endDate": { $lt: formattedDate } },
-      ],
-    });
-  }
-  // Add veganRating condition if provided
-  if (minRating && maxRating) {
-    console.log("ratingggg");
-    andCondition.push({ veganRating: { $gte: minRating, $lte: maxRating } });
-  }
+  // if (date) {
+  //   const formattedDate = new Date(date);
+  //   andCondition.push({
+  //     $or: [
+  //       { "deactivationPeriod.startDate": { $gt: formattedDate } },
+  //       { "deactivationPeriod.endDate": { $lt: formattedDate } },
+  //     ],
+  //   });
+  // }
+  // // Add veganRating condition if provided
+  // if (minRating && maxRating) {
+  //   console.log("ratingggg");
+  //   andCondition.push({ veganRating: { $gte: minRating, $lte: maxRating } });
+  // }
 
   if (tripStart && tripEnd) {
     const tripStartDate = new Date(tripStart);
     const tripEndDate = new Date(tripEnd);
+    console.log("tripStartDate = ", tripStartDate);
+    console.log("tripEndDate = ", tripEndDate);
 
     const tripStartMonth = tripStartDate.getMonth() + 1; // Months are zero-indexed
 
@@ -98,7 +99,7 @@ const getAllResortFromDB = async (queryData) => {
 
     andCondition.push({
       $expr: {
-        $or: [
+        $and: [
           {
             $ne: [
               { $month: { $toDate: "$deactivationPeriod.startDate" } },
