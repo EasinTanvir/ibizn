@@ -96,7 +96,13 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
         </h1>
         {!isLoading && (
           <p className="lg:text-subtitle md:text-2xl text-secondary text-xl font-outfit">
-            We found {searchResult?.length || 0} property for these dates
+            <span> We found {searchResult?.length || 0} property</span>{" "}
+            {searchValues?.minPrice && (
+              <span>
+                for price range ({searchValues?.minPrice} -
+                {searchValues?.maxPrice})$
+              </span>
+            )}
           </p>
         )}
       </div>

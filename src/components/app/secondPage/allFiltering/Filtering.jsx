@@ -64,6 +64,7 @@ const Filtering = ({ sortListHandler }) => {
   };
 
   const [minPrice, setMinPrice] = useState();
+  console.log(minPrice);
   const [maxPrice, setMaxPrice] = useState();
 
   const priceFieldHandler = () => {
@@ -186,6 +187,8 @@ const Filtering = ({ sortListHandler }) => {
                   },
                 }}
               />
+              {console.log(minPrice)}
+              {console.log(maxPrice)}
               {isShowPriceField && (
                 <form
                   ref={priceFieldRef}
@@ -193,7 +196,6 @@ const Filtering = ({ sortListHandler }) => {
                 >
                   {" "}
                   <input
-                    value={searchValues.minPrice}
                     type="text"
                     required
                     onChange={(e) => setMinPrice(e.target.value)}
@@ -203,7 +205,6 @@ const Filtering = ({ sortListHandler }) => {
                   <input
                     type="text"
                     required
-                    value={searchValues.maxPrice}
                     onChange={(e) => setMaxPrice(e.target.value)}
                     placeholder="Max Price"
                     className="input input-bordered w-full max-w-xs mt-3"
@@ -279,7 +280,7 @@ const Filtering = ({ sortListHandler }) => {
                       <Box sx={{ width: 200 }}>
                         <Typography>Number Of Nights</Typography>
                         <Slider
-                          value={duration}
+                          value={searchValues?.duration}
                           onChange={(e) => setDuration(e.target.value)}
                           max={50}
                           aria-label="Default"

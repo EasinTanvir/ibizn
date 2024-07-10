@@ -31,8 +31,6 @@ const Banner = ({ setSearchResult }) => {
   const { searchValues, setSearchValues } = useContext(userContext);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
-  console.log(searchValues);
-
   const date = dayjs(searchValues?.tripStart);
   const formattedMonth = date.format("MMMM");
   const formattedYear = date.format("YYYY");
@@ -80,6 +78,8 @@ const Banner = ({ setSearchResult }) => {
     };
 
     const queryString = objectToQueryString(searchValues);
+    console.log(searchValues);
+    console.log("queryString = ", queryString);
 
     fetch(
       `${baseUrl}/${
@@ -152,10 +152,6 @@ const Banner = ({ setSearchResult }) => {
                   onClick={() =>
                     setSearchValues({
                       tabValue: item,
-                      property: "",
-                      minPrice: "",
-                      maxPrice: "",
-                      duration: "",
                       destination: "",
                       tripStart: "",
                       tripEnd: "",

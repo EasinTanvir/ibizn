@@ -3,7 +3,7 @@ import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 function Exclusions({ propertyData }) {
-  console.log();
+  console.log(propertyData);
   return (
     <>
       <div className="  customContainer py-5 flex flex-col md:flex-row  justify-between gap-8  md:gap-12   md:py-20 md:bg-white px-4 lg:px-0">

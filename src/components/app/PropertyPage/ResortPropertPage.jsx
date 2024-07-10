@@ -21,6 +21,8 @@ function ResortProperyPage({ rid }) {
   const [propertyData, setPropertyData] = useState({});
   const [loader, setLoader] = useState(false);
 
+  console.log(propertyData);
+
   useEffect(() => {
     setLoader(true);
 
@@ -84,7 +86,7 @@ function ResortProperyPage({ rid }) {
                   <Scuba propertyData={propertyData} />
                 </div>
                 <div className="py-6" id="exclusions">
-                  <Exclusions />
+                  <Exclusions propertyData={propertyData} />
                 </div>
                 <div className="bg-[#F1F2F2] py-20 px-4 lg:px-0">
                   <EnvironmentelPacket
