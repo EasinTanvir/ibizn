@@ -280,9 +280,8 @@ const Filtering = ({ sortListHandler }) => {
                       <Box sx={{ width: 200 }}>
                         <Typography>Number Of Nights</Typography>
                         <Slider
-                          value={searchValues?.duration}
                           onChange={(e) => setDuration(e.target.value)}
-                          max={50}
+                          max={30}
                           aria-label="Default"
                           valueLabelDisplay="auto"
                         />

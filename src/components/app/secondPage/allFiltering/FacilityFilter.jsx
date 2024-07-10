@@ -1,5 +1,6 @@
 import { baseUrl } from "@/src/config/serverConfig";
 import { userContext } from "@/src/storage/contextApi";
+import { truncateText } from "@/utils/truncateText";
 import {
   Checkbox,
   FormControl,
@@ -39,10 +40,24 @@ const FacilityFilter = () => {
   const [facilities, setFacilities] = useState([]);
   const names = facilities?.map((facility) => facility.name);
   const [facility, setFacility] = React.useState([]);
-  const { searchValues } = useContext(userContext);
+  const { searchValues, setSearchValues } = useContext(userContext);
   const [label, setLabel] = React.useState(false);
   console.log(searchValues);
+
+  const [selectedFacility, setSelectedFacility] = useState();
+
+  console.log(selectedFacility);
   const handleChange = (event) => {
+    if (
+      searchValues?.tabValue === "Resorts" ||
+      searchValues?.property === "resort"
+    ) {
+      setSearchValues({
+        ...searchValues,
+        facility: event.target.value,
+      });
+    }
+
     setLabel(!label);
 
     const {
@@ -70,6 +85,7 @@ const FacilityFilter = () => {
         console.log(err);
       });
   }, [searchValues]);
+
   return (
     <div className="">
       <FormControl className="w-32">
@@ -110,7 +126,7 @@ const FacilityFilter = () => {
             <MenuItem key={name} value={name}>
               <Checkbox checked={facility.indexOf(name) > -1} />
               <Tooltip title={name}>
-                <ListItemText primary={name} />
+                <ListItemText primary={truncateText(name)} />
               </Tooltip>
             </MenuItem>
           ))}

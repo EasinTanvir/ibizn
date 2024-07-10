@@ -102,6 +102,12 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                 for price range ({searchValues?.minPrice} -
                 {searchValues?.maxPrice})$
               </span>
+            )}{" "}
+            {searchValues?.duration && (
+              <span>
+                {searchValues?.minPrice ? "and" : "for"} duration (
+                {searchValues?.duration} nights )
+              </span>
             )}
           </p>
         )}
