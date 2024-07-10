@@ -43,9 +43,11 @@ const getAllResortFromDB = async (queryData) => {
     tripEnd,
     minPrice,
     maxPrice,
+    facility,
   } = queryData;
   //console.log("minPrice = ", minPrice);
   //console.log("maxPrice = ", maxPrice);
+  console.log("facility = ", facility);
 
   const fMinPrice = parseFloat(Number(minPrice).toFixed(2));
   const fMaxPrice = parseFloat(Number(maxPrice).toFixed(2));
@@ -86,6 +88,10 @@ const getAllResortFromDB = async (queryData) => {
   //   console.log("ratingggg");
   //   andCondition.push({ veganRating: { $gte: minRating, $lte: maxRating } });
   // }
+
+  if (facility && facility.length > 0) {
+    andCondition.push({ facilities: { $in: facility } });
+  }
 
   if (tripStart && tripEnd) {
     const tripStartDate = new Date(tripStart);
