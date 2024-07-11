@@ -13,7 +13,7 @@ const WhyDeeparture = () => {
             Why Deeparture
           </h1>
           <p className="text-[#f1f2f2] font-light  text-[18px] md:text-[24px] leading-[26px] md:w-full lg:w-3/4 w-full">
-            We are a team of professional scuba divers, free divers, artists and
+            We are a team of professional scuba dives, free dives, artists and
             environmental advocates who work tirelessly to provide you with
             incredible, inclusive dive experiences, from experience, that you
             deserve. Explore adventures and book easily online for your next

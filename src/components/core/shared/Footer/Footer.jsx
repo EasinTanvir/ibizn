@@ -39,7 +39,7 @@ const Footer = () => {
           <div className="md:flex lg:flex-col justify-center md:ms-3 lg:ms-0">
             <div>
               <h1 className="text-primary text-lg font-bold font-outfit">
-                For Divers
+                For Dives
               </h1>
               <div className="text-gray mt-1 font-roboto font-normal">
                 <h1>About Us</h1>

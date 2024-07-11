@@ -6,11 +6,11 @@ const Itineraries = ({ schedules }) => {
       {schedules?.map((item, index) => (
         <div
           key={index}
-          className={`flex justify-between py-4 px-5 md:px-5 ${
+          className={`flex  py-4 px-5 md:px-5 ${
             index % 2 === 0 ? "bg-slate-100" : ""
           }`}
         >
-          <div className="flex sm:flex-row flex-col sm:flex-1 w-1/2 ">
+          <div className="flex sm:flex-row flex-col sm:w-fit  w-1/2 ">
             <h1 className="text-[#0080ff] sm:pe-5 text-[14px] md:text-[18px] lg:text-subtitle font-outfit font-[500] sm:font-light">
               {new Date(item?.tripStart).toLocaleDateString("en-GB", {
                 day: "2-digit",
@@ -29,11 +29,11 @@ const Itineraries = ({ schedules }) => {
             </h1>
 
             <h1 className="text-[#0080ff] text-[14px] md:text-[18px] lg:text-subtitle font-outfit sm:border-l-2 sm:pl-5 font-[500] sm:font-light">
-              approx. 18 divers
+              approx. {item?.itinerary?.numberOfDives} dives
             </h1>
           </div>
 
-          <div className="sm:w-52 w-1/2">
+          <div className="sm:w-52  w-1/2  sm:ml-5">
             <h1 className="text-[#0080ff] text-[14px] md:text-[18px] lg:text-subtitle font-outfit sm:border-l-2 pl-5">
               from usd{" "}
               <span className="text-[#0080ff] ms-2 text-[22px]  font-outfit">
