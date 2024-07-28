@@ -82,7 +82,7 @@ const SecondPage = () => {
         </div>
       ) : (
         <div className="min-h-72 flex justify-center items-center">
-          <div className="flex flex-col">
+          <div className="flex flex-col h-[520px] justify-center">
             <Blocks
               height="80"
               width="80"
