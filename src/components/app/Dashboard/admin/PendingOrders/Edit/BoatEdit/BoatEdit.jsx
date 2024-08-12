@@ -12,7 +12,7 @@ import { usePathname } from "next/navigation";
 const BoatEdit = ({ id }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [bookingData, setBookingData] = useState({});
-
+  console.log(bookingData.cabin);
   const [isAdminPath, setIsAdminPath] = useState(false);
   const path = usePathname();
 
@@ -105,7 +105,7 @@ const BoatEdit = ({ id }) => {
               </ul>
             </div>
             <div>
-              <h2 className="font-semibold capitalize">equipments</h2>
+              <h2 className="font-semibold capitalize">equipment available</h2>
               <ul>
                 {bookingData?.property?.equipment?.map((item, index) => (
                   <li key={index}>{item}</li>
@@ -122,32 +122,65 @@ const BoatEdit = ({ id }) => {
             </div>
           </div>
           <div className="my-5">
-            <h2 className="text-2xl mt-10 underline">Environment Questions</h2>
+            <h2 className="text-2xl mt-10 underline">Environmental</h2>
             {Questions.map((item, index) => {
-              return (
-                <div key={index}>
-                  {bookingData?.property?.environmentalQuestions?.hasOwnProperty(
-                    item?.id
-                  ) && (
-                    <div className="my-4">
-                      <h2>
-                        <strong className="mr-2">question:</strong>{" "}
-                        {item?.question}
-                      </h2>
-                      <p className="">
-                        <strong className="mr-2">Answer: </strong>{" "}
-                        {bookingData?.property?.environmentalQuestions &&
-                          bookingData?.property?.environmentalQuestions[
-                            item?.id
-                          ]}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              );
+              if (!item.extra) {
+                return (
+                  <div key={index}>
+                    {bookingData?.property?.environmentalQuestions?.hasOwnProperty(
+                      item?.id
+                    ) && (
+                      <div className="my-4">
+                        <h2>
+                          <strong className="mr-2">question:</strong>{" "}
+                          {item?.question}
+                        </h2>
+                        <p className="">
+                          <strong className="mr-2">Answer: </strong>{" "}
+                          {bookingData?.property?.environmentalQuestions &&
+                            bookingData?.property?.environmentalQuestions[
+                              item?.id
+                            ]}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+            })}
+          </div>
+          <div className="my-5">
+            <h2 className="text-2xl mt-10 underline">
+              Plant-based | Vegan food and Adapted Diets
+            </h2>
+            {Questions.map((item, index) => {
+              if (item.extra) {
+                return (
+                  <div key={index}>
+                    {bookingData?.property?.environmentalQuestions?.hasOwnProperty(
+                      item?.id
+                    ) && (
+                      <div className="my-4">
+                        <h2>
+                          <strong className="mr-2">question:</strong>{" "}
+                          {item?.question}
+                        </h2>
+                        <p className="">
+                          <strong className="mr-2">Answer: </strong>{" "}
+                          {bookingData?.property?.environmentalQuestions &&
+                            bookingData?.property?.environmentalQuestions[
+                              item?.id
+                            ]}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                );
+              }
             })}
           </div>
           <OrderedSchedule
+            cabin={bookingData.cabin}
             scheduleId={bookingData?.scheduleId}
             schedules={bookingData?.property?.schedules}
           />

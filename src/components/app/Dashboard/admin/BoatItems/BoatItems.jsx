@@ -62,7 +62,7 @@ const BoatItems = () => {
             <Tab label="Facilities" {...a11yProps(0)} />
             <Tab label="Inclusions" {...a11yProps(1)} />
             <Tab label="Exclusions" {...a11yProps(2)} />
-            <Tab label="Equipments" {...a11yProps(3)} />
+            <Tab label="Equipment" {...a11yProps(3)} />
             <Tab label="Dive courses" {...a11yProps(3)} />
           </Tabs>
         </Box>

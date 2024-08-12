@@ -47,7 +47,7 @@ function SliderModal({
         className="border flex items-center min-h-screen"
       >
         <div
-          style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
+          style={{ backgroundColor: "rgba(0, 0, 0, 0.7)" }}
           className=" w-full h-full mx-auto p-4 rounded-md   relative "
         >
           <div className="absolute right-4 top-4">

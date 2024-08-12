@@ -77,7 +77,7 @@ const ResortTable = () => {
       {resorts?.length <= 0 ? (
         <p className="text-xl font-bold text-center">
           {" "}
-          There is no approve resorts
+          There are no approved resorts
         </p>
       ) : (
         <div className="overflow-x-auto">

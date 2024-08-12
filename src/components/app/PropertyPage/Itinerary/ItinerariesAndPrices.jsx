@@ -16,15 +16,12 @@ dayjs.extend(isSameOrBefore);
 dayjs.extend(isSameOrAfter);
 function ItinerariesAndPrices({ propertyData }) {
   const { searchValues, setSearchValues } = useContext(userContext);
-  console.log(searchValues.tripStart);
 
   //year
   const [selectedYear, setSelectedYear] = useState(null);
-  console.log(selectedYear);
+
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [filteredTrips, setFilteredTrips] = useState(propertyData?.schedules);
-  console.log(selectedYear);
-  console.log(selectedMonth);
 
   //month
 
@@ -39,19 +36,59 @@ function ItinerariesAndPrices({ propertyData }) {
   const [open, setOpen] = useState(false);
 
   const [tripDate, setTripDate] = useState({});
+  // for booking model;
+  const [schedule, setSchedule] = useState({});
+  const [isOpenBookingModal, setIsOpenBookingModal] = useState(false);
+
+  const [selectItitany, setSelectItinary] = useState();
+  const [selectedcabin, setSelectedCabin] = useState([]);
+  const [cabinId, setCabinId] = useState();
+  const [discount, setDiscount] = useState();
+  const [discountPrice, setDiscountPrice] = React.useState();
+
+  const handleOpenBookingModal = (schedule, cId) => {
+    setSchedule(schedule);
+    setCabinId(cId);
+    setIsOpenBookingModal(true);
+  };
+
+  React.useEffect(() => {
+    if (discount) {
+      const myPrice = Math.round(
+        Number(schedule?.convertPrice) -
+          (Number(schedule?.convertPrice) * Number(discount)) / 100
+      );
+      setDiscountPrice(myPrice);
+    } else {
+      setDiscountPrice(Number(schedule?.convertPrice));
+    }
+  }, [selectItitany, discount, cabinId]);
+
+  useEffect(() => {
+    if (selectItitany) {
+      const filterResult = propertyData?.schedules.find(
+        (data) => data._id === selectItitany
+      );
+
+      if (filterResult?.discount?.percent !== null) {
+        console.log(filterResult?.discount?.percent);
+        setDiscount(filterResult?.discount?.percent);
+      } else {
+        console.log(filterResult?.discount?.percent);
+        setDiscount(0);
+      }
+
+      console.log(filterResult?.itinerary?.cabins);
+
+      setSelectedCabin(filterResult?.itinerary?.cabins);
+    }
+  }, [selectItitany]);
 
   const handleOpen = (cabins, itinary, tripStart, tripEnd) => {
     setTripDate({ tripStart, tripEnd });
     setOpen(true);
     setModalItinary(itinary);
     setCabins(cabins);
-  };
-  // for booking model;
-  const [schedule, setSchedule] = useState({});
-  const [isOpenBookingModal, setIsOpenBookingModal] = useState(false);
-  const handleOpenBookingModal = (schedule) => {
-    setSchedule(schedule);
-    setIsOpenBookingModal(true);
   };
 
   if (!propertyData || !propertyData.schedules) {
@@ -216,68 +253,181 @@ function ItinerariesAndPrices({ propertyData }) {
 
         {filteredTrips?.length > 0 ? (
           filteredTrips?.map((schedule, index) => {
-            console.log(schedule?.itineraryName);
+            console.log(schedule?._id);
             return (
-              <div
-                key={index}
-                className="border-2 flex flex-col xl:flex-row gap-4 border-[#09aafe] text-white px-6 py-5 mb-4 rounded-lg md:justify-between items-start"
-              >
-                <div className="w-full">
-                  <div className="md:text-white md:text-4xl items-end font-[400] flex flex-wrap  md:gap-4">
-                    <div className="inline-block text-xl md:text-xl lg:text-2xl">
-                      {new Date(schedule?.tripStart).toLocaleDateString(
-                        "en-GB",
-                        {
-                          day: "2-digit",
-                          month: "short",
-                          year: "numeric",
-                        }
-                      )}{" "}
-                      —{" "}
-                      {new Date(schedule?.tripEnd).toLocaleDateString("en-GB", {
-                        day: "2-digit",
-                        month: "short",
-                        year: "numeric",
-                      })}
+              <div>
+                <div
+                  key={index}
+                  className={`border-2 flex flex-col xl:flex-row gap-4 mt-2 ${
+                    schedule._id === selectItitany ? "bg-white" : ""
+                  }  border-[#09aafe] text-white px-6 py-5  rounded-lg md:justify-between items-start`}
+                >
+                  <div className="w-full">
+                    <div
+                      className={` ${
+                        schedule._id === selectItitany
+                          ? "text-primary"
+                          : "text-white"
+                      } md:text-4xl items-end font-[400] flex flex-wrap  md:gap-4`}
+                    >
+                      <div className="inline-block text-xl md:text-xl lg:text-2xl">
+                        {new Date(schedule?.tripStart).toLocaleDateString(
+                          "en-GB",
+                          {
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric",
+                          }
+                        )}{" "}
+                        —{" "}
+                        {new Date(schedule?.tripEnd).toLocaleDateString(
+                          "en-GB",
+                          {
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric",
+                          }
+                        )}
+                      </div>
+                      <div
+                        className={`inline-block text-xl sm:font-light  ${
+                          schedule._id === selectItitany
+                            ? "text-primary"
+                            : "text-light"
+                        }   font-bold`}
+                      >
+                        ({schedule?.itinerary?.numberOfDays} Days /{" "}
+                        {schedule?.itinerary?.numberOfNights} Nights)
+                      </div>
+                      <span
+                        className={`inline-block ${
+                          schedule._id === selectItitany
+                            ? "text-primary"
+                            : "text-light"
+                        }  text-xl font-bold sm:mt-0 mt-4 -mb-3 sm:mb-0`}
+                      >
+                        (from <>${Number(schedule?.convertPrice).toFixed(2)}</>{" "}
+                        USD)
+                      </span>
                     </div>
-                    <div className="inline-block text-xl sm:font-light sm:text-light text-[#09aafe]  font-bold">
-                      ({schedule?.itinerary?.numberOfDays} Days /{" "}
-                      {schedule?.itinerary?.numberOfNights} Nights)
+                    <div className="sm:mt-4 mt-2">
+                      <span
+                        className={`text-2xl md:text-4xl md:font-light ${
+                          schedule._id === selectItitany
+                            ? "text-primary"
+                            : "text-light"
+                        }`}
+                      >
+                        {schedule?.itinerary?.embarkationPoints} —{" "}
+                        {schedule?.itinerary?.disembarkationPoints}
+                      </span>
                     </div>
-                    <span className="inline-block text-[#09aafe] text-xl font-bold sm:mt-0 mt-4 -mb-3 sm:mb-0">
-                      (from <>${Number(schedule?.convertPrice).toFixed(2)}</>{" "}
-                      USD)
-                    </span>
                   </div>
-                  <div className="sm:mt-4 mt-2">
-                    <span className="text-2xl md:text-4xl md:font-light">
-                      {schedule?.itinerary?.embarkationPoints} —{" "}
-                      {schedule?.itinerary?.disembarkationPoints}
-                    </span>
-                  </div>
-                </div>
 
-                <div className="flex gap-4 sm:pt-7 ">
-                  <button
-                    onClick={() =>
-                      handleOpen(
-                        schedule?.itinerary?.cabins,
-                        schedule?.itinerary,
-                        schedule?.tripStart,
-                        schedule?.tripEnd
-                      )
-                    }
-                    className="bg-primary border border-white text-white px-10 rounded-full  py-1 text-sm md:text-xl lg:text-2xl"
-                  >
-                    Itinerary
-                  </button>
-                  <button
+                  <div className="flex gap-4 sm:pt-7 ">
+                    <button
+                      onClick={() =>
+                        handleOpen(
+                          schedule?.itinerary?.cabins,
+                          schedule?.itinerary,
+                          schedule?.tripStart,
+                          schedule?.tripEnd
+                        )
+                      }
+                      className={` border  ${
+                        schedule._id === selectItitany
+                          ? "text-primary border-primary"
+                          : "text-light border-white"
+                      } px-10 rounded-full  py-1 text-sm md:text-xl lg:text-2xl`}
+                    >
+                      Itinerary
+                    </button>
+                    {/* <button
                     onClick={() => handleOpenBookingModal(schedule)}
                     className="bg-white text-primary rounded-full px-10 py-1 md:px-10 text-sm md:text-xl lg:text-2xl"
                   >
                     Select
-                  </button>
+                  </button> */}
+                    <button
+                      onClick={() => setSelectItinary(schedule._id)}
+                      className={`${
+                        schedule._id === selectItitany
+                          ? "text-white border-none bg-primary"
+                          : "text-primary border-none bg-white"
+                      } rounded-full px-10 py-1 md:px-10 text-sm md:text-xl lg:text-2xl `}
+                    >
+                      Select
+                    </button>
+                  </div>
                 </div>
+                {selectItitany === schedule._id && selectedcabin.length > 0 && (
+                  <div className=" grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 mb-5 gap-3">
+                    {selectedcabin.map((data) => (
+                      <div className="border border-white py-4 px-6 rounded-md  ">
+                        <h1 className="text-xl text-white font-medium  ">
+                          {data?.cabinName}
+                        </h1>
+
+                        {discount ? (
+                          <>
+                            <div className="mt-2">
+                              <span className="text-[#3a95ea] text-2xl md:text-3xl line-through">
+                                1500
+                              </span>
+                              <span className="inline-block text-[#3a95ea] ms-1 line-through font-semibold text-sm">
+                                USD
+                              </span>
+                            </div>
+                            <div className="">
+                              {/* <span className="text-white text-2xl md:text-3xl ">
+                                {Math.round(
+                                  Number(data?.convertedPrice) -
+                                    (Number(data?.convertedPrice) *
+                                      Number(discount)) /
+                                      100
+                                )}
+                              </span> */}
+                              <span className="text-white text-2xl md:text-3xl ">
+                                {data?.convertedPrice}
+                              </span>
+                              <span className="inline-block text-white ms-1  font-semibold text-sm">
+                                USD
+                              </span>
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <div className="mt-2">
+                              <span className="text-[#3a95ea] text-2xl md:text-3xl">
+                                {data?.convertedPrice}
+                              </span>
+                              <span className="inline-block text-[#3a95ea] ms-1  font-semibold text-sm">
+                                USD
+                              </span>
+                            </div>
+                          </>
+                        )}
+                        {console.log(data)}
+
+                        <div className="pt-5">
+                          <button
+                            onClick={() => {
+                              return handleOpenBookingModal(
+                                schedule,
+                                data?._id
+                              );
+                            }}
+                            className="bg-white text-primary rounded-full px-6 py-1 text-sm lg:text-xl "
+                          >
+                            Book Now
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+
+                    <span></span>
+                  </div>
+                )}
               </div>
             );
           })
@@ -299,6 +449,8 @@ function ItinerariesAndPrices({ propertyData }) {
         setOpen={setIsOpenBookingModal}
         propertyData={propertyData}
         schedule={schedule}
+        cabinId={cabinId}
+        discountPrice={discountPrice}
       />
     </div>
   );

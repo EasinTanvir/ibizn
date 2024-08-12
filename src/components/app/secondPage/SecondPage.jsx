@@ -45,38 +45,19 @@ const SecondPage = () => {
       });
   }, [searchValues]);
 
-  const [sortedLists, setSortedLists] = useState([]);
-  const [isAscending, setIsAscending] = useState(true);
-
-  const sortListHandler = () => {
-    const sorted = [...sortedLists].sort((a, b) => {
-      if (isAscending) {
-        return a.veganRating - b.veganRating;
-      } else {
-        return b.veganRating - a.veganRating;
-      }
-    });
-    setSortedLists(sorted);
-    setIsAscending(!isAscending);
-  };
-
-  useEffect(() => {
-    setSortedLists(searchResult);
-  }, [searchResult]);
-
   return (
     <div>
       <Banner setSearchResult={setSearchResult} />
 
       {!isLoading ? (
         <div>
-          <Filtering sortListHandler={sortListHandler} />
+          <Filtering />
           <FindCard
             resort={
               searchValues?.tabValue === "Resorts" ||
               searchValues?.property === "resort"
             }
-            searchResult={sortedLists}
+            searchResult={searchResult}
             isLoading={isLoading}
           />
         </div>

@@ -20,6 +20,7 @@ const initialState = {
   tripStart: null,
   tripEnd: null,
   itinerary: "",
+  currency: "USD",
   cost: 0,
   discount: {
     name: "",
@@ -56,11 +57,15 @@ const BoardTable = ({
   const [row, setRow] = useState(0);
   const [open, setOpen] = useState(false);
   const [itinerary, setItinerary] = useState([]);
+  const [discountName, setDiscountName] = useState();
+  const [discountAmount, setDiscountAmount] = useState();
   console.log(itinerary);
   const [formData, setFormData] = useState(initialState);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const incrementRow = () => {
+    setDiscountAmount(undefined);
+    setDiscountAmount(undefined);
     setRow(row + 1);
     handleOpen();
   };
@@ -117,16 +122,7 @@ const BoardTable = ({
       cost: event.target.value,
     });
   };
-
-  const handleDiscountChange = (field) => (event) => {
-    setFormData({
-      ...formData,
-      discount: {
-        ...formData.discount,
-        [field]: event.target.value,
-      },
-    });
-  };
+  console.log(discountAmount);
 
   const handleSpecialChange = (event) => {
     setFormData({
@@ -134,15 +130,44 @@ const BoardTable = ({
       special: event.target.checked,
     });
   };
+  console.log(discountName);
+  console.log(discountAmount);
+  console.log(formData);
+  console.log(itineraryData);
+
+  useEffect(() => {
+    if (discountName) {
+      setFormData({
+        ...formData,
+        discount: {
+          ...formData.discount,
+          name: discountName,
+        },
+      });
+    }
+    if (discountAmount) {
+      setFormData({
+        ...formData,
+        discount: {
+          ...formData.discount,
+
+          percent: discountAmount,
+        },
+      });
+    }
+  }, [discountName, discountAmount]);
 
   const handleDone = () => {
     setItineraryData((prevent) => [...prevent, formData]);
+    setDiscountAmount(0);
+    setDiscountName(undefined);
+    setFormData(initialState);
     handleClose();
   };
   console.log({ itineraryData });
 
   const removeRow = (index) => {
-    const newItineraryData = itineraryData.filter((item, index));
+    const newItineraryData = itineraryData.filter((item, i) => i !== index);
 
     setItineraryData(newItineraryData);
   };
@@ -161,7 +186,7 @@ const BoardTable = ({
   return (
     <div className="overflow-x-auto">
       <form onSubmit={submitData}>
-        <Button onClick={incrementRow}>(+) add new Trip</Button>
+        <Button onClick={incrementRow}>(+) Add New Trip Itinerary</Button>
         <table className="min-w-full bg-white border border-gray-300">
           <thead>
             <tr>
@@ -192,7 +217,13 @@ const BoardTable = ({
                 </td>
                 <td className="py-2 text-center border-b">{items?.cost}</td>
                 <td className="py-2 text-center border-b">
-                  {items?.discount?.name} - {items?.discount?.percent}%
+                  {items?.discount?.name && items?.discount?.percent ? (
+                    <>
+                      {items?.discount?.name} - {items?.discount?.percent}%
+                    </>
+                  ) : (
+                    <>-</>
+                  )}
                 </td>
                 <td className="py-2 text-center border-b">
                   {items?.special ? (
@@ -231,7 +262,7 @@ const BoardTable = ({
           <Box sx={style}>
             <div>
               <h1 className="font-bold text-xl border-b mb-2 pb-2">
-                Trip Start And End Date
+                Trip Start and End Dates
               </h1>
               {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DateRangePicker
@@ -331,26 +362,32 @@ const BoardTable = ({
                 </select>
               </div>
             </div>
-            <div>
-              <h1 className="font-bold mt-2 text-xl border-b mb-2">Discount</h1>
+            <div className="pt-2 pb-1">
+              <h1 className="font-bold mt-2 text-xl border-b mb-2">
+                Discount for this Trip (if any)
+              </h1>
               <div className="flex gap-2">
                 <TextField
                   id="outlined-basic"
-                  label="Name"
+                  label="Discount name
+"
                   variant="outlined"
-                  onChange={handleDiscountChange("name")}
+                  onChange={(e) => setDiscountName(e.target.value)}
                 />
                 <TextField
                   type="number"
                   id="outlined-basic"
                   label="Percentage"
+                  value={discountAmount}
                   variant="outlined"
-                  onChange={handleDiscountChange("percent")}
+                  onChange={(e) => setDiscountAmount(e.target.value)}
                 />
               </div>
             </div>
-            <div>
-              <h1 className="font-bold mt-2 text-xl border-b mb-2">Sepecial</h1>
+            <div className="py-1">
+              <h1 className="font-bold mt-2 text-xl border-b mb-2">
+                Special Offer
+              </h1>
               <FormControlLabel
                 control={
                   <Switch
@@ -358,7 +395,7 @@ const BoardTable = ({
                     onChange={handleSpecialChange}
                   />
                 }
-                label="SPECIAL FEATURE?"
+                label="Slide to add this trip to Special Offers"
               />
             </div>
             <div className="flex gap-2">

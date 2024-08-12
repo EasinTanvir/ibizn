@@ -22,10 +22,10 @@ import toast from "react-hot-toast";
 
 const tabItems = ["Liveaboards", "Resorts", "Special Offers"];
 const ratings = [
-  { minRating: 1, maxRating: 2 },
-  { minRating: 1, maxRating: 3 },
-  { minRating: 1, maxRating: 4 },
   { minRating: 1, maxRating: 5 },
+  { minRating: 2, maxRating: 5 },
+  { minRating: 3, maxRating: 5 },
+  { minRating: 4, maxRating: 5 },
 ];
 const Banner = () => {
   const [error, setError] = useState("");
@@ -84,10 +84,10 @@ const Banner = () => {
   return (
     <div className="bg-primary pb-6">
       <div className=" customContainer px-5 xl:px-0 pb-10 md:pb-6">
-        <div className="lg:flex justify-between pt-10">
+        <div className="lg:flex justify-between pt-[90px]">
           <div className="md:flex flex-col  gap-14 ">
             <div>
-              <h1 className="md:text-title md:w-[650px] w-[72%]  text-4xl md:leading-none leading-9 text-white font-extralight font-outfit lg:leading-[63px]">
+              <h1 className="md:text-title md:w-[650px] w-[72%]  text-[62px] md:leading-none leading-[62px] text-white font-extralight font-outfit lg:leading-[63px]">
                 Inclusive dive adventures start here
               </h1>
               <h2 className="text-[22px] font-roboto font-[400] md:text-3xl  mt-2 md:mt-3  text-white tracking-wide ">
@@ -252,6 +252,7 @@ const Banner = () => {
                   }}
                   className="w-full  "
                   onChange={handleDateChange}
+                  format="MMM YYYY"
                   label={"Year / Month"}
                   views={["month", "year"]}
                   sx={{
@@ -313,9 +314,7 @@ const Banner = () => {
                 renderValue={renderSelectedValue}
                 input={<OutlinedInput label="Vegan rating" />}
                 onChange={(e) => setRating(e.target.value)}
-                IconComponent={() => (
-                  <ArrowDropDown className="text-white cursor-pointer mr-3" />
-                )}
+                IconComponent={ArrowDropDown}
                 sx={{
                   "& .MuiOutlinedInput-notchedOutline": {
                     borderColor: "white",
@@ -342,30 +341,26 @@ const Banner = () => {
                   >
                     <div className="flex flex-col gap-4">
                       {" "}
-                      {r.minRating === 1 && r.maxRating === 2 && (
+                      {r.minRating === 1 && r.maxRating === 5 && (
                         <div className="flex gap-0 items-center">
-                          <StarIcons />
                           <StarIcons />
                         </div>
                       )}
-                      {r.minRating === 1 && r.maxRating === 3 && (
+                      {r.minRating === 2 && r.maxRating === 5 && (
                         <div className="flex gap-0 items-center">
-                          <StarIcons />
                           <StarIcons />
                           <StarIcons />
                         </div>
                       )}{" "}
-                      {r.minRating === 1 && r.maxRating === 4 && (
+                      {r.minRating === 3 && r.maxRating === 5 && (
                         <div className="flex gap-0 items-center">
-                          <StarIcons />
                           <StarIcons />
                           <StarIcons />
                           <StarIcons />
                         </div>
                       )}
-                      {r.minRating === 1 && r.maxRating === 5 && (
+                      {r.minRating === 4 && r.maxRating === 5 && (
                         <div className="flex gap-0 items-center">
-                          <StarIcons />
                           <StarIcons />
                           <StarIcons />
                           <StarIcons />

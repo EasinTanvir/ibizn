@@ -364,13 +364,15 @@ const EditItenaries = ({
                         />
                       </div>
                       <div className="mt-3 w-full">
-                        <p className="text-lg font-semibold">Cabin Price</p>
+                        <p className="text-lg font-semibold">
+                          Price per person
+                        </p>
                         <input
                           type="number"
                           value={cabin.cabinPrice}
                           onChange={(e) => handleCabinChange(index, e)}
                           name="cabinPrice"
-                          placeholder="Cabin Price"
+                          placeholder="Price per person"
                           className="w-full rounded-md"
                         />
                       </div>
@@ -431,7 +433,7 @@ const EditItenaries = ({
                   </div>
                 </div>
                 <div className="mt-3 w-full">
-                  <p className="text-lg font-semibold">Number of Dives</p>
+                  <p className="text-lg font-semibold">Up to how many dives</p>
                   <input
                     onChange={(e) =>
                       setItineraries({
@@ -443,7 +445,7 @@ const EditItenaries = ({
                     required
                     defaultValue={parseInt(itineraries?.numberOfDives)}
                     name="numberOfDives"
-                    placeholder="Number of Dives"
+                    placeholder="Up to how many dives"
                     className="w-full rounded-md"
                     min={0}
                   />

@@ -15,6 +15,7 @@ const Auth = () => {
   const [active, setActive] = useState("Sign Up");
   const { submitLoader, setSubmitLoader } = useContext(userContext);
   const [isSignUp, setIsSingUp] = React.useState(false);
+  const [isForgotPass, setIsForgotPass] = React.useState(false);
   const [value, setValue] = useState();
   const router = useRouter();
   const [showPass, setShowPass] = useState(false);
@@ -44,7 +45,9 @@ const Auth = () => {
       .then((data) => {
         if (data?.success) {
           // handleClose();
-          Swal.fire("Sign up successful.Please check email for verification");
+          Swal.fire(
+            "Sign up successful.Please check email for verification. If you cannot see a verification email in your inbox, please check your spam folder, as sometimes it will end up there."
+          );
           reset();
 
           setIsSingUp(false);
@@ -78,7 +81,7 @@ const Auth = () => {
           // console.log(data?.data);
           const token = data?.data?.token;
           localStorage.setItem("access-token", token);
-          toast.success("login successfully");
+          toast.success("Logged in successfully");
           setControl(!control);
           setSubmitLoader(false);
 
@@ -101,137 +104,261 @@ const Auth = () => {
       });
   };
 
+  const forgotPassword = (data) => {
+    console.log("pass", data);
+    setLoginError("");
+    setSubmitLoader(true);
+    fetch(`${baseUrl}/users/password-reset-email`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        if (data?.success) {
+          // console.log(data?.data);
+
+          toast.success("An email has been sent to you");
+          reset();
+          setSubmitLoader(false);
+        } else {
+          setSubmitLoader(false);
+          console.log(data);
+          setLoginError(data?.message);
+        }
+      })
+      .catch((err) => {
+        console.error("Error during sign-in:", err);
+        setSubmitLoader(false);
+      });
+  };
+
   return (
-    <div
-      className={`bg-white rounded p-8 text-black w-10/12 md:w-8/12 lg:w-[500px] mx-auto mt-16 md:mt-24 lg:mt-36 shadow-lg shadow-gray-400 ${
-        isSignUp === "signIn" ? "mt-32" : "mt-4"
-      } `}
-    >
-      {!isSignUp ? (
-        <div>
-          <h1 className="text-center text-2xl font-semibold">
-            Sign in to your account
-          </h1>
-          <form onSubmit={handleSubmit(signInUser)}>
-            <div className="mt-4 w-full">
-              <p className="text-lg font-semibold">Your email</p>
-              <input
-                type="text"
-                placeholder="Email"
-                {...register("email", {
-                  required: true,
-                  pattern: /^\S+@\S+$/i,
-                })}
-                className="w-full rounded-md"
-              />
-              {errors.email?.type === "required" && (
-                <p className="text-red-600">Email is required</p>
-              )}
-            </div>
-            <div className="mt-3 w-full">
-              <p className="text-lg font-semibold">Password</p>
-              <label className="flex items-center">
-                <input
-                  type={showPass ? "text" : "password"}
-                  {...register("password", {
-                    required: true,
-                  })}
-                  placeholder="password"
-                  className="w-full rounded-md"
-                />
-                <button
-                  type="button"
-                  className="-ms-7"
-                  onClick={() => setShowPass(!showPass)}
-                >
-                  {showPass ? <RemoveRedEyeIcon /> : <VisibilityOffIcon />}
-                </button>
-              </label>
-              {errors.password?.type === "required" && (
-                <p className="text-red-600">Password is required</p>
-              )}
-              {errors.password?.type === "minLength" && (
-                <p className="text-red-600">Password must be 6 characters</p>
-              )}
-            </div>
-            {loginError && <p className="text-red-600 my-2">{loginError}</p>}
-            {/* <input
+    <>
+      <div className="p-4">
+        <button
+          onClick={() => {
+            router.push("/");
+          }}
+          className="bg-primary text-white rounded-md px-3 py-1"
+        >
+          Go Back
+        </button>
+      </div>
+
+      <div
+        className={`bg-white  rounded p-8 text-black w-10/12 md:w-8/12 lg:w-[500px] mx-auto mt-16 md:mt-24 lg:mt-36 shadow-lg shadow-gray-400 ${
+          isSignUp === "signIn" ? "mt-32" : "mt-4"
+        } `}
+      >
+        {!isSignUp ? (
+          <>
+            {!isForgotPass ? (
+              <>
+                {" "}
+                <div>
+                  <h1 className="text-center text-2xl font-semibold">
+                    Sign in to your account
+                  </h1>
+                  <form onSubmit={handleSubmit(signInUser)}>
+                    <div className="mt-4 w-full">
+                      <p className="text-lg font-semibold">Your email</p>
+                      <input
+                        type="text"
+                        placeholder="Email"
+                        {...register("email", {
+                          required: true,
+                          pattern: /^\S+@\S+$/i,
+                        })}
+                        className="w-full rounded-md"
+                      />
+                      {errors.email?.type === "required" && (
+                        <p className="text-red-600">Email is required</p>
+                      )}
+                    </div>
+                    <div className="mt-3 w-full">
+                      <p className="text-lg font-semibold">Password</p>
+                      <label className="flex items-center">
+                        <input
+                          type={showPass ? "text" : "password"}
+                          {...register("password", {
+                            required: true,
+                          })}
+                          placeholder="password"
+                          className="w-full rounded-md"
+                        />
+                        <button
+                          type="button"
+                          className="-ms-7"
+                          onClick={() => setShowPass(!showPass)}
+                        >
+                          {showPass ? (
+                            <RemoveRedEyeIcon />
+                          ) : (
+                            <VisibilityOffIcon />
+                          )}
+                        </button>
+                      </label>
+                      {errors.password?.type === "required" && (
+                        <p className="text-red-600">Password is required</p>
+                      )}
+                      {errors.password?.type === "minLength" && (
+                        <p className="text-red-600">
+                          Password must be 6 characters
+                        </p>
+                      )}
+                    </div>
+                    {loginError && (
+                      <p className="text-red-600 my-2">{loginError}</p>
+                    )}
+                    {/* <input
               className="w-full rounded-md cursor-pointer custom_red_color py-3 my-4 text-white font-semibold"
               type="submit"
               value="Sign In"
             /> */}
-            <div>
-              <button
-                disabled={submitLoader}
-                className="w-full rounded-md  custom_red_color py-3 my-4 text-white font-semibold"
-                type="submit"
-              >
-                {submitLoader ? <ClipLoader color="#ffff" /> : "Sign In"}
-              </button>
-            </div>
-            <p className="text-center">
-              Don’t have an account yet?
-              <span
-                onClick={() => {
-                  setIsSingUp(true), setShowPass(false), reset();
-                }}
-                className="font-semibold cursor-pointer"
-              >
-                {" "}
-                Sign Up
-              </span>
-            </p>
-          </form>
-        </div>
-      ) : (
-        <div>
-          <h1 className="text-xl font-semibold text-center">
-            Create an account
-          </h1>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="mt-3">
-              <p className="text-lg font-semibold">Your Full Name</p>
-              <input
-                type="text"
-                placeholder="Full Name"
-                {...register("fullName", {
-                  required: true,
-                  minLength: 2,
-                  maxLength: 80,
-                })}
-                className="w-full rounded-md"
-              />
-              {errors.name?.type === "required" && (
-                <p className="text-red-600">Name is required</p>
-              )}
-              {errors.name?.type === "minLength" && (
-                <p className="text-red-600">
-                  Name must be at least 2 characters
-                </p>
-              )}
-              {errors.name?.type === "maxLength" && (
-                <p className="text-red-600">Name cannot exceed 80 characters</p>
-              )}
-            </div>
-            <div className="mt-3">
-              <p className="text-lg font-semibold">Your Email</p>
-              <input
-                type="text"
-                placeholder="Email"
-                {...register("email", {
-                  required: true,
-                  pattern: /^\S+@\S+$/i,
-                })}
-                className="w-full rounded-md"
-              />
-              {errors.email?.type === "required" && (
-                <p className="text-red-600">Email is required</p>
-              )}
-            </div>
-            <div className="mt-3">
-              <p className="text-lg font-semibold">Your Phone</p>
+                    <div>
+                      <button
+                        disabled={submitLoader}
+                        className="w-full rounded-md  custom_red_color py-3 mt-4 text-white font-semibold"
+                        type="submit"
+                      >
+                        {submitLoader ? (
+                          <ClipLoader color="#ffff" />
+                        ) : (
+                          "Sign In"
+                        )}
+                      </button>
+                    </div>
+                    <div className="mb-3">
+                      <span
+                        onClick={() => {
+                          setIsForgotPass(true), reset();
+                        }}
+                        className="font-normal underline text-sm cursor-pointer"
+                      >
+                        Forgot Password?
+                      </span>
+                    </div>
+                    <div className="text-center">
+                      Don’t have an account yet?
+                      <span
+                        onClick={() => {
+                          setIsSingUp(true), setShowPass(false), reset();
+                        }}
+                        className="font-semibold cursor-pointer"
+                      >
+                        Sign Up
+                      </span>
+                    </div>
+                  </form>
+                </div>
+              </>
+            ) : (
+              <>
+                <div>
+                  <h1 className="text-center text-2xl font-semibold">
+                    Forgot Password?
+                  </h1>
 
-              {/* <PhoneInput
+                  <form onSubmit={handleSubmit(forgotPassword)}>
+                    <div className="mt-4 w-full">
+                      <p className="text-lg font-semibold">Your email</p>
+                      <input
+                        type="text"
+                        placeholder="Email"
+                        {...register("email", {
+                          required: true,
+                          pattern: /^\S+@\S+$/i,
+                        })}
+                        className="w-full rounded-md"
+                      />
+                      {errors.email?.type === "required" && (
+                        <p className="text-red-600">Email is required</p>
+                      )}
+                    </div>
+
+                    {loginError && (
+                      <p className="text-red-600 my-2">{loginError}</p>
+                    )}
+
+                    <div>
+                      <button
+                        disabled={submitLoader}
+                        className="w-full rounded-md  custom_red_color py-3 mt-4 text-white font-semibold"
+                        type="submit"
+                      >
+                        {submitLoader ? <ClipLoader color="#ffff" /> : "Send"}
+                      </button>
+                    </div>
+                    <div className="mt-1">
+                      <span
+                        onClick={() => {
+                          setIsForgotPass(false), reset();
+                        }}
+                        className="font-normal underline text-sm cursor-pointer"
+                      >
+                        Back To Login
+                      </span>
+                    </div>
+                  </form>
+                </div>
+              </>
+            )}
+          </>
+        ) : (
+          <div>
+            <h1 className="text-xl font-semibold text-center">
+              Create an account
+            </h1>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="mt-3">
+                <p className="text-lg font-semibold">Your Full Name</p>
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  {...register("fullName", {
+                    required: true,
+                    minLength: 2,
+                    maxLength: 80,
+                  })}
+                  className="w-full rounded-md"
+                />
+                {errors.name?.type === "required" && (
+                  <p className="text-red-600">Name is required</p>
+                )}
+                {errors.name?.type === "minLength" && (
+                  <p className="text-red-600">
+                    Name must be at least 2 characters
+                  </p>
+                )}
+                {errors.name?.type === "maxLength" && (
+                  <p className="text-red-600">
+                    Name cannot exceed 80 characters
+                  </p>
+                )}
+              </div>
+              <div className="mt-3">
+                <p className="text-lg font-semibold">Your Email</p>
+                <input
+                  type="text"
+                  placeholder="Email"
+                  {...register("email", {
+                    required: true,
+                    pattern: /^\S+@\S+$/i,
+                  })}
+                  className="w-full rounded-md"
+                />
+                {errors.email?.type === "required" && (
+                  <p className="text-red-600">Email is required</p>
+                )}
+              </div>
+              <div className="mt-3">
+                <p className="text-lg font-semibold">Your Phone</p>
+
+                {/* <PhoneInput
                 international
                 countryCallingCodeEditable={false}
                 defaultCountry="BD"
@@ -241,116 +368,119 @@ const Auth = () => {
                 onlyCountries={['bd']}
                 flags={false}
               /> */}
-              <PhoneInput
-                country={"us"}
-                value={value}
-                onChange={setValue}
-                enableAreaCodes={true}
-                inputStyle={{ width: "100%" }}
-                inputProps={{
-                  name: "phone",
-                  required: true,
-                  autoFocus: true,
-                }}
-              />
+                <PhoneInput
+                  country={"us"}
+                  value={value}
+                  onChange={setValue}
+                  enableAreaCodes={true}
+                  inputStyle={{ width: "100%" }}
+                  inputProps={{
+                    name: "phone",
+                    required: true,
+                    autoFocus: true,
+                  }}
+                />
 
-              {errors.number?.type === "required" && (
-                <p className="text-red-600">Number is required</p>
-              )}
-              {errors.number?.type === "minLength" && (
-                <p className="text-red-600">
-                  Number must be at least 6 characters
-                </p>
-              )}
-              {/* {errors.number?.type === "maxLength" && (
+                {errors.number?.type === "required" && (
+                  <p className="text-red-600">Number is required</p>
+                )}
+                {errors.number?.type === "minLength" && (
+                  <p className="text-red-600">
+                    Number must be at least 6 characters
+                  </p>
+                )}
+                {/* {errors.number?.type === "maxLength" && (
                 <p className="text-red-600">
                   Number cannot exceed 12 characters
                 </p>
               )} */}
-            </div>
-            <div className="mt-3">
-              <p className="text-lg font-semibold">Company Name</p>
-              <input
-                type="text"
-                placeholder="Company Name"
-                {...register("companyName", {
-                  required: true,
-                  minLength: 2,
-                  maxLength: 80,
-                })}
-                className="w-full rounded-md"
-              />
-              {errors.company_name?.type === "required" && (
-                <p className="text-red-600">Company Name is required</p>
-              )}
-              {errors.company_name?.type === "minLength" && (
-                <p className="text-red-600">
-                  Name must be at least 2 characters
-                </p>
-              )}
-              {errors.company_name?.type === "maxLength" && (
-                <p className="text-red-600">Name cannot exceed 80 characters</p>
-              )}
-            </div>
-            <div className="mt-3">
-              <p className="text-lg font-semibold">Password</p>
-              <label className="flex justify-center items-center">
+              </div>
+              <div className="mt-3">
+                <p className="text-lg font-semibold">Company Name</p>
                 <input
-                  type={showPass ? "text" : "password"}
-                  {...register("password", {
+                  type="text"
+                  placeholder="Company Name"
+                  {...register("companyName", {
                     required: true,
-                    minLength: 6,
-                    maxLength: 20,
+                    minLength: 2,
+                    maxLength: 80,
                   })}
-                  placeholder="password"
                   className="w-full rounded-md"
                 />
-                <button
-                  type="button"
-                  className="-ms-7"
-                  onClick={() => setShowPass(!showPass)}
-                >
-                  {showPass ? <RemoveRedEyeIcon /> : <VisibilityOffIcon />}
-                </button>
-              </label>
-              {errors.password?.type === "required" && (
-                <p className="text-red-600">Password is required</p>
-              )}
-              {errors.password?.type === "minLength" && (
-                <p className="text-red-600">Password must be 6 characters</p>
-              )}
-            </div>
-            {error && <p className="text-red-600 my-2">{error}</p>}
-            <div>
-              <button
-                disabled={submitLoader}
-                className="w-full rounded-md  custom_red_color py-3 my-4 text-white font-semibold"
-                type="submit"
-              >
-                {submitLoader ? (
-                  <ClipLoader className="text-2xl" color="#ffff" />
-                ) : (
-                  "Sign Up"
+                {errors.company_name?.type === "required" && (
+                  <p className="text-red-600">Company Name is required</p>
                 )}
-              </button>
-            </div>
-            <p className="text-center">
-              Already have an account?
-              <span
-                onClick={() => {
-                  setIsSingUp(false);
-                  setShowPass(false), reset();
-                }}
-                className="font-semibold cursor-pointer"
-              >
-                {" "}
-                Sign In
-              </span>
-            </p>
-          </form>
-        </div>
-      )}
-    </div>
+                {errors.company_name?.type === "minLength" && (
+                  <p className="text-red-600">
+                    Name must be at least 2 characters
+                  </p>
+                )}
+                {errors.company_name?.type === "maxLength" && (
+                  <p className="text-red-600">
+                    Name cannot exceed 80 characters
+                  </p>
+                )}
+              </div>
+              <div className="mt-3">
+                <p className="text-lg font-semibold">Password</p>
+                <label className="flex justify-center items-center">
+                  <input
+                    type={showPass ? "text" : "password"}
+                    {...register("password", {
+                      required: true,
+                      minLength: 6,
+                      maxLength: 20,
+                    })}
+                    placeholder="password"
+                    className="w-full rounded-md"
+                  />
+                  <button
+                    type="button"
+                    className="-ms-7"
+                    onClick={() => setShowPass(!showPass)}
+                  >
+                    {showPass ? <RemoveRedEyeIcon /> : <VisibilityOffIcon />}
+                  </button>
+                </label>
+                {errors.password?.type === "required" && (
+                  <p className="text-red-600">Password is required</p>
+                )}
+                {errors.password?.type === "minLength" && (
+                  <p className="text-red-600">Password must be 6 characters</p>
+                )}
+              </div>
+              {error && <p className="text-red-600 my-2">{error}</p>}
+              <div>
+                <button
+                  disabled={submitLoader}
+                  className="w-full rounded-md  custom_red_color py-3 my-4 text-white font-semibold"
+                  type="submit"
+                >
+                  {submitLoader ? (
+                    <ClipLoader className="text-2xl" color="#ffff" />
+                  ) : (
+                    "Sign Up"
+                  )}
+                </button>
+              </div>
+              <p className="text-center">
+                Already have an account?
+                <span
+                  onClick={() => {
+                    setIsSingUp(false);
+                    setShowPass(false), reset();
+                  }}
+                  className="font-semibold cursor-pointer"
+                >
+                  {" "}
+                  Sign In
+                </span>
+              </p>
+            </form>
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

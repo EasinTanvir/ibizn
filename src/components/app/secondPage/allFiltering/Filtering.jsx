@@ -16,34 +16,14 @@ import DivingType from "./DivingType";
 import ResortStyle from "./ResortStyle";
 import { ArrowDropDown } from "@mui/icons-material";
 import { Menu, MenuItem } from "@mui/material";
-const Filtering = ({ sortListHandler }) => {
+const Filtering = () => {
   const [isShowPriceField, setIsShowPriceField] = useState(false);
   const { searchValues, setSearchValues } = useContext(userContext);
 
-  const [duration, setDuration] = useState();
+  const [duration, setDuration] = useState(0);
   console.log(duration);
 
   const priceFieldRef = useRef(null);
-
-  useEffect(() => {
-    const handleDebouncedUpdate = debounce(() => {
-      if (duration) {
-        setSearchValues({
-          ...searchValues,
-          duration,
-        });
-      }
-
-      setIsShowPriceField(false);
-    }, 1500); // 2 seconds debounce time
-
-    handleDebouncedUpdate();
-
-    // Clean up the debounce function
-    return () => {
-      handleDebouncedUpdate.cancel();
-    };
-  }, [duration]);
 
   const handleClickOutside = (event) => {};
   useEffect(() => {
@@ -63,41 +43,9 @@ const Filtering = ({ sortListHandler }) => {
     setAnchorEl(null);
   };
 
-  const [minPrice, setMinPrice] = useState();
-  console.log(minPrice);
+  const [minPrice, setMinPrice] = useState(0);
+
   const [maxPrice, setMaxPrice] = useState();
-
-  const priceFieldHandler = () => {
-    setIsShowPriceField(false);
-
-    console.log(minPrice);
-    console.log(maxPrice);
-
-    setSearchValues({
-      ...searchValues,
-      minPrice,
-      maxPrice,
-    });
-  };
-
-  useEffect(() => {
-    const handleDebouncedUpdate = debounce(() => {
-      if (minPrice && maxPrice) {
-        setSearchValues({
-          ...searchValues,
-          minPrice,
-          maxPrice,
-        });
-      }
-    }, 1000); // 2 seconds debounce time
-
-    handleDebouncedUpdate();
-
-    // Clean up the debounce function
-    return () => {
-      handleDebouncedUpdate.cancel();
-    };
-  }, [minPrice, maxPrice]);
 
   const priceFieldRefs = useRef(null);
 
@@ -120,8 +68,27 @@ const Filtering = ({ sortListHandler }) => {
     };
   }, [isShowPriceField]);
 
+  const searchHandler = () => {
+    if (maxPrice) {
+      console.log(maxPrice);
+      setSearchValues({
+        ...searchValues,
+        minPrice,
+        maxPrice,
+      });
+    }
+
+    if (Number(duration) > 0) {
+      setSearchValues({
+        ...searchValues,
+        duration,
+      });
+      setDuration(duration);
+    }
+  };
+
   return (
-    <div className="bg-gray-100">
+    <div className="bg-gray-100  pt-3 pb-5 bg-stone-200">
       <div className="md:w-[85%] px-5 md:px-0 mx-auto py-[20px]">
         <div className="flex  gap-4 mt-1   flex-wrap   ">
           <div>
@@ -134,7 +101,7 @@ const Filtering = ({ sortListHandler }) => {
               }`}
             >
               <TextField
-                className="w-36"
+                className="w-32"
                 InputProps={{
                   endAdornment: (
                     <InputAdornment
@@ -146,7 +113,7 @@ const Filtering = ({ sortListHandler }) => {
                   ),
                 }}
                 id="outlined-basic"
-                label="Price Range"
+                label="Price"
                 ref={priceFieldRefs}
                 variant="outlined"
                 size="small"
@@ -192,19 +159,12 @@ const Filtering = ({ sortListHandler }) => {
               {isShowPriceField && (
                 <form
                   ref={priceFieldRef}
-                  className="w-full md:w-[760] h-[120px] rounded-md shadow-md absolute z-30 bg-white px-2"
+                  className="w-full  h-[60px] rounded-md shadow-md absolute z-30 bg-white px-2"
                 >
-                  {" "}
                   <input
                     type="text"
                     required
-                    onChange={(e) => setMinPrice(e.target.value)}
-                    placeholder="Min Price"
-                    className="input input-bordered w-full max-w-xs mt-3"
-                  />
-                  <input
-                    type="text"
-                    required
+                    value={maxPrice}
                     onChange={(e) => setMaxPrice(e.target.value)}
                     placeholder="Max Price"
                     className="input input-bordered w-full max-w-xs mt-3"
@@ -280,8 +240,9 @@ const Filtering = ({ sortListHandler }) => {
                       <Box sx={{ width: 200 }}>
                         <Typography>Number Of Nights</Typography>
                         <Slider
+                          defaultValue={duration}
                           onChange={(e) => setDuration(e.target.value)}
-                          max={30}
+                          max={50}
                           aria-label="Default"
                           valueLabelDisplay="auto"
                         />
@@ -476,7 +437,7 @@ const Filtering = ({ sortListHandler }) => {
 
           <div className="sm:ps-14">
             <button
-              onClick={sortListHandler}
+              onClick={searchHandler}
               className="bg-primary text-white rounded-2xl sm:px-12 px-8 py-2 flex sm:justify-between justify-around  sm:w-44 w-40"
             >
               <span className="">Sort by</span>

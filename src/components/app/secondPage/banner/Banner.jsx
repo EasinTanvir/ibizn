@@ -20,10 +20,10 @@ import StarIcons from "../../Home/Banner/StarIcon";
 
 const tabItems = ["Liveaboards", "Resorts", "Special Offers"];
 const ratings = [
-  { minRating: 1, maxRating: 2 },
-  { minRating: 1, maxRating: 3 },
-  { minRating: 1, maxRating: 4 },
   { minRating: 1, maxRating: 5 },
+  { minRating: 2, maxRating: 5 },
+  { minRating: 3, maxRating: 5 },
+  { minRating: 4, maxRating: 5 },
 ];
 const Banner = ({ setSearchResult }) => {
   //click event
@@ -57,7 +57,8 @@ const Banner = ({ setSearchResult }) => {
     }
   };
   const handleSearchValues = () => {
-    if (rating.minRating) {
+    if (rating.minRating || rating?.maxRating) {
+      console.log(rating);
       searchValues.minRating = rating?.minRating;
       searchValues.maxRating = rating?.maxRating;
     }
@@ -94,11 +95,14 @@ const Banner = ({ setSearchResult }) => {
   };
 
   useEffect(() => {
-    setRating({
-      minRating: searchValues.minRating,
-      maxRating: searchValues.maxRating,
-    });
-  }, [searchValues]);
+    if (rating.minRating || rating?.maxRating) {
+      setSearchValues({
+        ...searchValues,
+        minRating: searchValues.minRating,
+        maxRating: searchValues.maxRating,
+      });
+    }
+  }, [rating?.minRating]);
 
   console.log(isSmallScreen);
   console.log(isMobileMode);
@@ -333,6 +337,7 @@ const Banner = ({ setSearchResult }) => {
                           : null
                       }
                       label={"Year / Month"}
+                      format="MMM YYYY"
                       views={["month", "year"]}
                       sx={{
                         "& .MuiOutlinedInput-root": {
@@ -416,30 +421,26 @@ const Banner = ({ setSearchResult }) => {
                       >
                         <div className="flex flex-col gap-4">
                           {" "}
-                          {r.minRating === 1 && r.maxRating === 2 && (
+                          {r.minRating === 1 && r.maxRating === 5 && (
                             <div className="flex gap-0 items-center">
-                              <StarIcons />
                               <StarIcons />
                             </div>
                           )}
-                          {r.minRating === 1 && r.maxRating === 3 && (
+                          {r.minRating === 2 && r.maxRating === 5 && (
                             <div className="flex gap-0 items-center">
-                              <StarIcons />
                               <StarIcons />
                               <StarIcons />
                             </div>
                           )}{" "}
-                          {r.minRating === 1 && r.maxRating === 4 && (
+                          {r.minRating === 3 && r.maxRating === 5 && (
                             <div className="flex gap-0 items-center">
-                              <StarIcons />
                               <StarIcons />
                               <StarIcons />
                               <StarIcons />
                             </div>
                           )}
-                          {r.minRating === 1 && r.maxRating === 5 && (
+                          {r.minRating === 4 && r.maxRating === 5 && (
                             <div className="flex gap-0 items-center">
-                              <StarIcons />
                               <StarIcons />
                               <StarIcons />
                               <StarIcons />
@@ -600,6 +601,7 @@ const Banner = ({ setSearchResult }) => {
                           : null
                       }
                       label={"Year / Month"}
+                      format="MMM YYYY"
                       views={["month", "year"]}
                       sx={{
                         "& .MuiOutlinedInput-root": {

@@ -76,7 +76,7 @@ const BoatTable = () => {
       {boats?.length <= 0 ? (
         <p className="text-xl font-bold text-center">
           {" "}
-          There is no approve boats
+          There are no approved boats
         </p>
       ) : (
         <div className="overflow-x-auto">

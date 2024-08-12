@@ -118,7 +118,7 @@ const Packages = () => {
         </div>
       ) : (
         <Typography component={"h4"} variant="h4">
-          There is no package{" "}
+          There are currently no packages, please add at least one.
         </Typography>
       )}
       {open && (

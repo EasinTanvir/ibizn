@@ -70,8 +70,7 @@ const Footer = () => {
                 For Agents
               </h1>
               <div className="text-gray mt-1 font-roboto font-normal">
-                <h1>Sign Up</h1>
-                <h1>Login</h1>
+                Login / SignUp
               </div>
             </div>
           </div>
@@ -80,8 +79,9 @@ const Footer = () => {
           <div className="md:flex lg:flex-col md:justify-start md:pt-0 pt-16  lg:justify-start xl:text-end text-start">
             <div>
               <div className="flex gap-3 xl:justify-end text-start">
-                <div>
+                <a href="https://twitter.com/Deeparture_dive/">
                   <img
+                    target="_blank"
                     src={
                       hoveredImages.twitter
                         ? "/images/client/twitterHover.svg"
@@ -92,9 +92,10 @@ const Footer = () => {
                     onMouseEnter={() => handleMouseEnter("twitter")}
                     onMouseLeave={() => handleMouseLeave("twitter")}
                   />
-                </div>
-                <div>
+                </a>
+                <a href="">
                   <img
+                    target="_blank"
                     src={
                       hoveredImages.telegram
                         ? "/images/client/telegramHover.svg"
@@ -105,8 +106,11 @@ const Footer = () => {
                     onMouseEnter={() => handleMouseEnter("telegram")}
                     onMouseLeave={() => handleMouseLeave("telegram")}
                   />
-                </div>
-                <div>
+                </a>
+                <a
+                  target="_blank"
+                  href="https://www.facebook.com/Deeparture.dive/"
+                >
                   <img
                     src={
                       hoveredImages.facebook
@@ -118,8 +122,11 @@ const Footer = () => {
                     onMouseEnter={() => handleMouseEnter("facebook")}
                     onMouseLeave={() => handleMouseLeave("facebook")}
                   />
-                </div>
-                <div>
+                </a>
+                <a
+                  href="https://www.instagram.com/deeparture_dive/"
+                  target="_blank"
+                >
                   <img
                     src={
                       hoveredImages.instagram
@@ -131,7 +138,7 @@ const Footer = () => {
                     onMouseEnter={() => handleMouseEnter("instagram")}
                     onMouseLeave={() => handleMouseLeave("instagram")}
                   />
-                </div>
+                </a>
                 <div>
                   <a href="tel:+642102413170">
                     <img

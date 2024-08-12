@@ -174,7 +174,7 @@ export default function PersistentDrawerLeft({ children }) {
   const handleLogout = () => {
     localStorage.removeItem("access-token");
     setControl(!control);
-    toast.success("Log out successfully");
+    toast.success("Logged out successfully");
     router.push("/auth");
   };
   const handleRouter = (path) => {

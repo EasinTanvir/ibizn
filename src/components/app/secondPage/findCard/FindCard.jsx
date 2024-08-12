@@ -19,6 +19,7 @@ import { useRouter } from "next/router";
 import Nitrox from "./Nitrox";
 import { userContext } from "@/src/storage/contextApi";
 import dayjs from "dayjs";
+import { truncateDescription } from "@/utils/truncateText";
 
 const faqData = [
   {
@@ -66,6 +67,7 @@ const faqData = [
 ];
 
 const FindCard = ({ searchResult, isLoading, resort }) => {
+  const [readMore, setReadMore] = useState(false);
   const { searchValues } = useContext(userContext);
   console.log(searchValues);
   console.log(resort);
@@ -75,7 +77,7 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
   const handleClose = () => setOpen(false);
   console.log(searchResult);
 
-  console.log(searchValues?.tripStart);
+  console.log(searchValues);
 
   const [forMonth, setForMonth] = useState();
   const [forYear, setForYear] = useState();
@@ -91,21 +93,27 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
   return (
     <div className="min-h-[70vh] lg:w-[85%] mx-auto px-5 lg:px-0 py-12">
       <div>
-        <h1 className="lg:text-title md:text-5xl text-4xl font-outfit font-[250] text-primary mb-5">
-          {searchValues?.destination}
-        </h1>
+        {searchValues?.destination && searchValues?.tabValue && (
+          <h1 className="lg:text-title md:text-5xl text-4xl font-outfit font-[250] text-primary mb-5">
+            {searchValues?.tabValue} | {searchValues?.destination}
+          </h1>
+        )}
         {!isLoading && (
           <p className="lg:text-subtitle md:text-2xl text-secondary text-xl font-outfit">
-            <span> We found {searchResult?.length || 0} property</span>{" "}
-            {searchValues?.minPrice && (
-              <span>
-                for price range ({searchValues?.minPrice} -
-                {searchValues?.maxPrice})$
-              </span>
+            <span>
+              {" "}
+              We found {searchResult?.length || 0}{" "}
+              {searchValues?.tabValue === "Resorts" ||
+              searchValues?.property === "resort"
+                ? "resort for you"
+                : "boats for you "}{" "}
+            </span>{" "}
+            {searchValues?.maxPrice && (
+              <span> among price $({searchValues?.maxPrice})</span>
             )}{" "}
             {searchValues?.duration && (
               <span>
-                {searchValues?.minPrice ? "and" : "for"} duration (
+                {searchValues?.maxPrice ? "and" : "among"} duration (
                 {searchValues?.duration} nights )
               </span>
             )}
@@ -134,7 +142,7 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                   <div className="md:flex gap-5">
                     <div>
                       <Swiper
-                        className="md:w-[384px] w-full"
+                        className="md:w-[384px] w-full border"
                         spaceBetween={30}
                         pagination={{
                           clickable: true,
@@ -143,24 +151,28 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                       >
                         {item?.carousal
                           ? item?.carousal?.map((img, index) => (
-                              <SwiperSlide>
-                                <div>
-                                  <img
-                                    className={`xl:h-96 lg:h-[350px] inline-block lg:w-96 w-full object-cover`}
-                                    src={img}
-                                    alt="carousalImages"
-                                  />
+                              <SwiperSlide key={index}>
+                                <div className="border border-rose-900">
+                                  <div className="aspect-[2/3] w-full">
+                                    <img
+                                      className="w-full h-full object-cover"
+                                      src={img}
+                                      alt="carousalImages"
+                                    />
+                                  </div>
                                 </div>
                               </SwiperSlide>
                             ))
                           : item?.carousalImages?.map((img, index) => (
-                              <SwiperSlide>
+                              <SwiperSlide key={index}>
                                 <div>
-                                  <img
-                                    className={`xl:h-96 lg:h-[350px] inline-block lg:w-96 w-full object-cover`}
-                                    src={img}
-                                    alt="carousalImages"
-                                  />
+                                  <div className="aspect-[2/3] w-full">
+                                    <img
+                                      className="w-full h-full object-cover"
+                                      src={img}
+                                      alt="carousalImages"
+                                    />
+                                  </div>
                                 </div>
                               </SwiperSlide>
                             ))}
@@ -186,9 +198,34 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
 
                         <p className="sm:mt-[14px] lg:text-[22px] text-sm text-secondary font-outfit md:w-full leading-3 sm:leading-6 ">
                           {resort ? (
-                            item?.briefDescription
+                            <>
+                              {readMore ? (
+                                item?.briefDescription
+                              ) : (
+                                <>
+                                  {truncateDescription(item?.briefDescription)}
+                                  {/* <button>Read More</button> */}
+                                </>
+                              )}
+                            </>
                           ) : (
-                            <>{item?.liveABoard?.description}</>
+                            <>
+                              {readMore ? (
+                                item?.briefDescription
+                              ) : (
+                                <>
+                                  {truncateDescription(
+                                    item?.liveABoard?.description
+                                  )}
+                                  {/* <button
+                                    className="ps-2 text-slate-800 text-lg"
+                                    onClick={() => setReadMore(!readMore)}
+                                  >
+                                    Read More
+                                  </button> */}
+                                </>
+                              )}
+                            </>
                           )}
                         </p>
                       </div>
@@ -203,7 +240,7 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                         <div className="sm:-mt-2">
                           <div className="flex gap-2 items-center">
                             <h1 className="text-[#0080ff] text-[14px] md:text-[25px] font-outfit font-[700] sm:font-[500]">
-                              Vegan raiting:
+                              Vegan Rating:
                             </h1>
                             <h1 className="md:text-[25px] text-[14px] text-[#0080ff]">
                               {item?.veganRating}
@@ -230,14 +267,35 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
           )}
         </div>
         {/* from here code develope by hosaindev */}
-        <div className="xl:w-[25%] sm:relative hidden -mt-6 lg:mt-10 xl:mt-0">
-          <div className="lg:text-[32px] md:text-3xl text-xl text-primary">
+        <div className="xl:w-[25%]  -mt-6 lg:mt-10 xl:mt-0">
+          <div className="lg:text-[32px] lg:hidden  block  md:text-3xl text-xl text-primary">
             How To Book
             <QuestionMarkIcon
               onMouseOver={handleOpen}
               className="animate-bounce"
               sx={{ cursor: "pointer" }}
             />
+          </div>
+
+          <div className="lg:text-[32px] md:text-3xl text-xl lg:block  hidden ">
+            <span className="text-primary">How To Book</span>
+            <QuestionMarkIcon className="animate-bounce text-primary" />
+            <div className="pt-5 space-y-5">
+              <p className="text-gray text-2xl font-normal">
+                Explore your options and discover your perfect dive adventure.
+                Submit your booking to us by xxxxxxxx.
+              </p>
+              <p className="text-gray text-2xl font-normal">
+                We will check the most up-to-date availability and options for
+                you and hold your reservation. Afterwards, we will contact you
+                with your trip details, answer all your queries, and confirm
+                everything. Next, we will review payment methods and other terms
+                and conditions, and you will receive access to your diver’s hub
+                account. We will be available at any time to answer questions
+                and discuss your diving thoughts with you, we have heard them
+                all over our time, so don’t be shy
+              </p>
+            </div>
           </div>
 
           <Modal
@@ -256,10 +314,9 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                 maxHeight: "80vh",
                 overflowY: "auto",
                 bgcolor: "background.paper",
-                border: "none",
-                boxShadow: 24,
-                outline: "none",
-                p: 2,
+                borderRadius: 2,
+
+                p: 4,
               }}
             >
               <Typography>

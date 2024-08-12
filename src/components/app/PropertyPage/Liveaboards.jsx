@@ -27,18 +27,18 @@ function Liveaboards({ propertyData }) {
 
   return (
     <>
-      <div className="w-full h-[90vh] relative overflow-hidden">
-        <div className="w-full h-1/2  md:h-full">
+      <div className="w-full h-[94vh]  pb-48 ">
+        <div className="w-full h-[83%]    ">
           <img
             className="w-full h-full object-cover"
             src={propertyData?.featuredImage || propertyData?.featureImage}
             alt="Liveaboard"
           />
         </div>
-        <div className=" w-full h-full">
-          <div className="absolute sm:bottom-0 w-full flex flex-col md:absolute md:flex-col md:flex md:w-full">
-            <div className="bg-[#0080FF] text-white p-4 lg:w-[52%] md:rounded-tr-xl md:p-8">
-              <div className=" lg:px-0 flex sm:flex-col flex-col-reverse gap-2 py-3 sm:py-0 sm:gap-0  customContainer">
+        <div className="w-full h-[17%] ">
+          <div className=" w-full  flex flex-col  md:flex-col md:flex md:w-full">
+            <div className="bg-[#0080FF] text-white    ">
+              <div className=" flex sm:flex-col flex-col-reverse gap-2  sm:gap-0  customContainer md:py-8 py-4 sm:px-0 px-4">
                 <h1 className="md:text-3xl text-2xl md:font-light ">
                   {searchValues?.destination} |{" "}
                   {searchValues?.tabValue === "Resorts" ||
@@ -52,7 +52,7 @@ function Liveaboards({ propertyData }) {
               </div>
             </div>
 
-            <div className=" bg-[#0080FF] text-white sm:h-16    border-t-[1px] md:border-white md:flex md:items-center md:justify-between md:pl-8 md:w-full md:py-0 md:px-8 px-4">
+            <div className=" bg-[#0080FF] text-white xl:h-16 h-auto    border-t-[1px] md:border-white md:flex md:items-center md:justify-between md:pl-8 md:w-full md:py-0 md:px-8 px-4">
               <div className="flex flex-wrap justify-start  py-4  gap-3 sm:ps-4  customContainer ">
                 {buttons.map((button) => (
                   <button
@@ -81,7 +81,7 @@ function Liveaboards({ propertyData }) {
                 className="text-white  -mt-2 sm:mt-0 md:ml-8"
               >
                 <ul className="underline font-[200] px-2 md:py-8 py-2 cursor-pointer text-nowrap">
-                  Back to results
+                  Back to Results
                 </ul>
               </div>
             </div>

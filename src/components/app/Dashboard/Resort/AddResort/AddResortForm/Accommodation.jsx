@@ -26,17 +26,32 @@ const Accommodation = ({
       <h2 className="my-4 text-xl pb-2 border-b-2">Accommodation</h2>
       {/* accommodation picture */}
       <form onSubmit={goToNextStep}>
-      <div className="my-4">
-          <h4 className="block mb-2 text-xl font-medium text-gray-900"> Resort Image</h4>
+        <div className="my-4">
+          <h4 className="block mb-2 text-xl font-medium text-gray-900">
+            Room Image{" "}
+            <span className="font-normal">
+              (Please upload 2:3 sized images or it will be automatically
+              cropped)
+            </span>
+          </h4>
           <label className=" flex gap-4 w-full items-center px-4 py-2 bg-white text-blue rounded-lg border  tracking-wide uppercase  cursor-pointer ">
-            <svg className="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <svg
+              className="w-8 h-8"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
               <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
             </svg>
             <span className="mt-2 text-base leading-normal">Select a file</span>
-            <input type='file' className="hidden" accept=".jpg,.png,.jpeg,.webp" name="image"
-               required={resortData?.accommodation?.image ? false : true}
-               onChange={(e) => handleAccommodationChange(e)}
-              />
+            <input
+              type="file"
+              className="hidden"
+              accept=".jpg,.png,.jpeg,.webp"
+              name="image"
+              required={resortData?.accommodation?.image ? false : true}
+              onChange={(e) => handleAccommodationChange(e)}
+            />
           </label>
           {resortData?.accommodation?.image && (
             <img
@@ -46,7 +61,7 @@ const Accommodation = ({
             />
           )}
         </div>
-        
+
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"

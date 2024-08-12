@@ -127,7 +127,7 @@ const Itineraries = () => {
           </div>
         ) : (
           <Typography component={"h4"} variant="h4">
-            There is no itineraries{" "}
+            There are no current itineraries; please add some
           </Typography>
         )}
       </Box>

@@ -6,6 +6,7 @@ import Loader from "../../../core/shared/Loader/Loader";
 import { DeleteOutline, EditNoteOutlined } from "@mui/icons-material";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { MdRemoveRedEye } from "react-icons/md";
 import { Typography } from "@mui/material";
 const Resorts = () => {
   const router = useRouter();
@@ -98,13 +99,19 @@ const Resorts = () => {
                       >
                         <span>Edit</span> <EditNoteOutlined />
                       </button>
-
                       <button
                         onClick={() => handleResortDelete(item?._id)}
                         className="px-3 py-1 rounded bg-red-400 text-white flex gap-2 items-center"
                       >
                         <span>Delete</span> <DeleteOutline />
-                      </button>
+                      </button>{" "}
+                      <a
+                        target="_blank"
+                        href={`http://localhost:3000/secondPage/resort/${item?._id}`}
+                        className="px-3 py-1 rounded bg-primary text-white flex gap-2 items-center"
+                      >
+                        <span>View</span> <MdRemoveRedEye />
+                      </a>
                     </div>
                   </td>
                   {/* Add more columns as needed */}
@@ -115,7 +122,7 @@ const Resorts = () => {
         </div>
       ) : (
         <Typography component={"h4"} variant="h4">
-          There is no resort{" "}
+          There are no resorts added
         </Typography>
       )}
     </div>

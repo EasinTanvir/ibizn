@@ -84,7 +84,7 @@ const BankAccount = () => {
       .then((data) => {
         console.log(data);
         if (data.success) {
-          toast.success("Wise Bank Information added successfully");
+          toast.success("Bank Information added successfully");
           setControl(!control);
           router.push("/dashboard/profile");
         } else {

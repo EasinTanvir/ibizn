@@ -14,7 +14,7 @@ const DivingType = () => {
     <Box sx={{ minWidth: 120 }}>
       <FormControl
         sx={{
-          width: { xs: "100%", sm: 140, position: "relative" },
+          width: { xs: "105%", position: "relative" },
         }}
       >
         <InputLabel

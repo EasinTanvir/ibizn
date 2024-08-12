@@ -1,7 +1,18 @@
 import React, { useState } from "react";
 
 const Accommodation = ({ propertyData, resort }) => {
+  console.log(propertyData?.schedules);
   const [activeButton, setActiveButton] = useState("Regular room");
+
+  const lists = propertyData?.schedules?.flatMap((data) => {
+    if (data?.itinerary?.cabins.length > 0) {
+      return data?.itinerary?.cabins?.map((list) => ({
+        id: list?._id,
+        cabinName: list?.cabinName,
+      }));
+    }
+    return []; // return an empty array if no cabins
+  });
 
   const accommodationTypes = {
     "Regular room": {
@@ -42,9 +53,9 @@ const Accommodation = ({ propertyData, resort }) => {
   return (
     <div className="bg-[#F1F2F2]  sm:py-14 py-20 px-4 lg:px-0">
       <section className="customContainer flex flex-col-reverse lg:flex-row    justify-center  lg:py-16  gap-8 lg:gap-12 ">
-        <div className="w-full lg:w-1/2 h-[350px] lg:h-[500px] order-first lg:order-none">
+        <div className="w-full lg:w-1/2 aspect-[2/3] lg:aspect-[2/3] order-first lg:order-none">
           <img
-            className="w-full h-full object-cover "
+            className="w-full h-full object-cover"
             src={
               propertyData?.accommodation?.Picture ||
               propertyData?.accommodation?.image
@@ -52,6 +63,7 @@ const Accommodation = ({ propertyData, resort }) => {
             alt={activeButton}
           />
         </div>
+
         <div className="w-full lg:w-1/2 flex flex-col justify-between h-full">
           <div className="flex flex-col gap-4 ">
             <h1 className="text-3xl -mt-2  text-[#0080FF] md:text-6xl md:font-light md:text-[#0080FF] font-outfit">
@@ -61,13 +73,13 @@ const Accommodation = ({ propertyData, resort }) => {
               {propertyData?.accommodation?.description}
             </p>
           </div>
-          {/* {!resort && (
+          {!resort && (
             <div className="flex flex-wrap gap-4 mt-12 lg:mt-16 text-[#2f2f30]">
-              {Object.keys(accommodationTypes).map((button) => (
-                <Button key={button} label={button} />
+              {lists?.map((button) => (
+                <Button key={button?.id} label={button?.cabinName} />
               ))}
             </div>
-          )} */}
+          )}
         </div>
       </section>
     </div>

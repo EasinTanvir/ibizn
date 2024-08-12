@@ -1,5 +1,5 @@
 import React from "react";
-
+import dayjs from "dayjs";
 const Itineraries = ({ schedules }) => {
   return (
     <div className="">
@@ -12,30 +12,23 @@ const Itineraries = ({ schedules }) => {
         >
           <div className="flex sm:flex-row flex-col sm:w-fit  w-1/2 ">
             <h1 className="text-[#0080ff] sm:pe-5 text-[14px] md:text-[18px] lg:text-subtitle font-outfit font-[500] sm:font-light">
-              {new Date(item?.tripStart).toLocaleDateString("en-GB", {
-                day: "2-digit",
-                month: "short",
-              })}
-              -{" "}
-              {new Date(item?.tripEnd).toLocaleDateString("en-GB", {
-                day: "2-digit",
-                month: "short",
-              })}
+              {dayjs(item?.tripStart).format("MMM DD")} -{" "}
+              {dayjs(item?.tripEnd).format("MMM DD")}
             </h1>
 
             <h1 className="text-[#0080ff] sm:pe-5 text-[14px] md:text-[18px] lg:text-subtitle font-outfit sm:border-l-2 sm:pl-5 font-[500] sm:font-light">
-              {item?.itinerary?.numberOfDays + " "}days,{" "}
-              {item?.itinerary?.numberOfNights + " "}nights
+              {item?.itinerary?.numberOfDays + " "}Days,{" "}
+              {item?.itinerary?.numberOfNights + " "}Nights
             </h1>
 
             <h1 className="text-[#0080ff] text-[14px] md:text-[18px] lg:text-subtitle font-outfit sm:border-l-2 sm:pl-5 font-[500] sm:font-light">
-              approx. {item?.itinerary?.numberOfDives} dives
+              approx. {item?.itinerary?.numberOfDives} Up to x dives
             </h1>
           </div>
 
           <div className="sm:w-52  w-1/2  sm:ml-5">
             <h1 className="text-[#0080ff] text-[14px] md:text-[18px] lg:text-subtitle font-outfit sm:border-l-2 pl-5">
-              from usd{" "}
+              From USD{" "}
               <span className="text-[#0080ff] ms-2 text-[22px]  font-outfit">
                 {item?.convertPrice}
               </span>

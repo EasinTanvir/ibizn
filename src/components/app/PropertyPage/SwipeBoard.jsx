@@ -24,7 +24,7 @@ const SwipeBoard = ({ propertyData }) => {
       <Swiper
         navigation={true}
         modules={[Navigation]}
-        slidesPerView={2} // Default to 3 slides per view
+        slidesPerView={2} // Default to 2 slides per view
         breakpoints={{
           // when window width is >= 640px
           640: {
@@ -50,15 +50,22 @@ const SwipeBoard = ({ propertyData }) => {
       >
         {propertyData?.carousal?.map((image) => (
           <SwiperSlide onClick={() => openHandler(image)}>
-            <img className="h-56 w-full md:w-96 cursor-pointer" src={image} />
+            <img
+              className="h-72 w-48 md:w-64 md:h-96 cursor-pointer object-cover"
+              src={image}
+            />
           </SwiperSlide>
         ))}
         {propertyData?.carousalImages?.map((image) => (
           <SwiperSlide onClick={() => openHandler(image)}>
-            <img className="h-56 w-full md:w-96 cursor-pointer" src={image} />
+            <img
+              className="h-72 w-48 md:w-64 md:h-96 cursor-pointer object-cover"
+              src={image}
+            />
           </SwiperSlide>
         ))}
       </Swiper>
+
       <SliderModal
         propertyData={propertyData}
         open={open}

@@ -59,7 +59,7 @@ const BankInformation = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data?.success) {
-          toast.success("Wise bank added successfully");
+          toast.success("Bank added successfully");
           setControlBank(!controlBank);
           setOpen(false);
           setSubmitLoader(false);

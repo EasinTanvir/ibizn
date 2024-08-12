@@ -7,7 +7,7 @@ import { DeleteOutline, EditNoteOutlined } from "@mui/icons-material";
 import Link from "next/link";
 import EditBoatModal from "./EditBoat/EditBoat";
 import { Typography } from "@mui/material";
-
+import { MdRemoveRedEye } from "react-icons/md";
 const Boats = () => {
   const { loader, setLoader } = useContext(userContext);
   const [boats, setBoats] = useState([]);
@@ -100,6 +100,13 @@ const Boats = () => {
                       >
                         Delete <DeleteOutline />
                       </button>
+                      <a
+                        target="_blank"
+                        href={`http://localhost:3000/secondPage/${item?._id}`}
+                        className="px-3 py-1 rounded bg-primary text-white flex gap-2 items-center"
+                      >
+                        <span>View</span> <MdRemoveRedEye />
+                      </a>
                     </div>
                   </td>
                 </tr>

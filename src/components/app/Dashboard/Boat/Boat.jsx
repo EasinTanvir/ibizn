@@ -65,7 +65,7 @@ const Boat = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setItineraries(data?.data)
+        setItineraries(data?.data);
         // setLoader(false)
       })
       .catch((err) => {
@@ -79,24 +79,18 @@ const Boat = () => {
   };
 
   // add board
-  const handleAddBoard = ()=> {
-    if(itineraries.length ===0){
+  const handleAddBoard = () => {
+    if (itineraries.length === 0) {
       Swal.fire("To add a boat, kindly add an itinerary first");
-    }else{
-
-      router.push("/dashboard/boat/add-boat")
+    } else {
+      router.push("/dashboard/boat/add-boat");
     }
-  }
+  };
   //----------------
-
-
 
   return (
     <div>
-      
-      <h1 className="text-2xl text-center my-3 text-black font-bold">
-        Boat
-      </h1>
+      <h1 className="text-2xl text-center my-3 text-black font-bold">Boat</h1>
       <div className="flex items-center gap-2">
         <button
           onClick={() => router.push("/dashboard/boat/add-itenary")}

@@ -157,29 +157,57 @@ const BoatModal = ({
                 </div>
               </div>
               <div className="my-5">
+                <h2 className="text-2xl mt-10 underline">Environmental</h2>
+                {Questions.map((item, index) => {
+                  if (!item.extra) {
+                    return (
+                      <div key={index}>
+                        {boatData?.environmentalQuestions?.hasOwnProperty(
+                          item?.id
+                        ) && (
+                          <div className="my-4">
+                            <h2>
+                              <strong className="mr-2">question:</strong>{" "}
+                              {item?.question}
+                            </h2>
+                            <p className="">
+                              <strong className="mr-2">Answer: </strong>{" "}
+                              {boatData?.environmentalQuestions &&
+                                boatData?.environmentalQuestions[item?.id]}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  }
+                })}
+              </div>
+              <div className="my-5">
                 <h2 className="text-2xl mt-10 underline">
-                  Environment Questions
+                  Plant-based | Vegan food and Adapted Diets
                 </h2>
                 {Questions.map((item, index) => {
-                  return (
-                    <div key={index}>
-                      {boatData?.environmentalQuestions?.hasOwnProperty(
-                        item?.id
-                      ) && (
-                        <div className="my-4">
-                          <h2>
-                            <strong className="mr-2">question:</strong>{" "}
-                            {item?.question}
-                          </h2>
-                          <p className="">
-                            <strong className="mr-2">Answer: </strong>{" "}
-                            {boatData?.environmentalQuestions &&
-                              boatData?.environmentalQuestions[item?.id]}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  );
+                  if (item.extra) {
+                    return (
+                      <div key={index}>
+                        {boatData?.environmentalQuestions?.hasOwnProperty(
+                          item?.id
+                        ) && (
+                          <div className="my-4">
+                            <h2>
+                              <strong className="mr-2">question:</strong>{" "}
+                              {item?.question}
+                            </h2>
+                            <p className="">
+                              <strong className="mr-2">Answer: </strong>{" "}
+                              {boatData?.environmentalQuestions &&
+                                boatData?.environmentalQuestions[item?.id]}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  }
                 })}
               </div>
               <OperatorDetails userInfo={boatData?.user} />

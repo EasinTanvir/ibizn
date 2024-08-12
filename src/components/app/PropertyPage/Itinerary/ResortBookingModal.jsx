@@ -9,15 +9,18 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import dayjs from "dayjs";
 import { ColorRing } from "react-loader-spinner";
+import { RxCross2 } from "react-icons/rx";
+
 const style = {
-  position: "absolute",
+  position: "relative",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: { xs: "100%", sm: 450 }, // 'xs' for small devices, 'sm' and larger for medium/large devices
   bgcolor: "background.paper",
   boxShadow: 24,
-  p: 4,
+  p: 3,
+  borderRadius: 1,
 };
 
 const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
@@ -95,7 +98,13 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <form onSubmit={handleBookingBoat}>
+          <form
+            className="h-[450px] px-4 py-2 overflow-y-auto"
+            onSubmit={handleBookingBoat}
+          >
+            <button onClick={handleClose} className="absolute right-2 top-2">
+              <RxCross2 className="text-2xl text-slate-800" />
+            </button>
             <Typography sx={{ fontSize: "25px", fontWeight: 600 }}>
               Booking Package
             </Typography>
@@ -144,6 +153,9 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
                 required
               />
             </div>
+            <div className="mt-4">
+              <p className="text-lg font-semibold">Planned travel dates</p>
+            </div>
             <React.Fragment>
               <div className="md:flex gap-6 my-1">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -161,7 +173,7 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
                     />
                   </div>
                   <div>
-                    <p className="text-lg font-semibold">End Date:</p>
+                    <p className="text-lg font-semibold">End date:</p>
                     <DatePicker
                       value={updatedDate.endDate}
                       onChange={(newDate) =>
@@ -183,6 +195,7 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
                 name="text"
                 className="w-full rounded-md"
                 required
+                rows={3}
               />
             </div>
             <div>

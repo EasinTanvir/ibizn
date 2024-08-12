@@ -1,8 +1,8 @@
 import React from "react";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-const OrderedSchedule = ({ scheduleId, schedules }) => {
+const OrderedSchedule = ({ scheduleId, schedules, cabin }) => {
   const schedule = schedules?.find((s) => s._id === scheduleId);
-  console.log(schedule);
+  console.log(cabin);
   return (
     <div>
       <h1 className="text-3xl font-semibold  my-3">
@@ -74,22 +74,17 @@ const OrderedSchedule = ({ scheduleId, schedules }) => {
         </div>
         <div>
           <h1 className="text-2xl font-semibold mt-4">Cabins:</h1>
-          {schedule?.itinerary?.cabins?.map((cabin, index) => (
-            <div
-              key={index}
-              className="md:flex justify-between items-center space-y-4"
-            >
-              <p className="text-xl  ">Name:{cabin?.cabinName}</p>
-              <p className="text-xl ">
-                Price :
-                <span className="font-semibold">
-                  ${Number(cabin?.convertedPrice).toFixed(2)}
-                </span>{" "}
-                USD
-              </p>
-              <img className="w-20 h-20 rounded-md" src={cabin?.cabinPicture} />
-            </div>
-          ))}
+          <div className="md:flex justify-between items-center space-y-4">
+            <p className="text-xl  ">Name:{cabin?.cabinName}</p>
+            <p className="text-xl ">
+              Price :
+              <span className="font-semibold">
+                ${Number(cabin?.convertedPrice).toFixed(2)}
+              </span>{" "}
+              USD
+            </p>
+            <img className="w-20 h-20 rounded-md" src={cabin?.cabinPicture} />
+          </div>
         </div>
       </div>
     </div>

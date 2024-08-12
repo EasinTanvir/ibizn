@@ -241,14 +241,14 @@ const CheckFeilds = ({
   return (
     <>
       <form onSubmit={goToNextStep}>
-        <h1 className="font-bold mt-2 text-xl border-b mb-2">Sepecial</h1>
+        <h1 className="font-bold mt-2 text-xl border-b mb-2"> Special Offer</h1>
         <FormControlLabel
           name="special"
           checked={
             resortData?.special && resortData?.special === true ? true : false
           }
           control={<Switch onChange={(e) => handleInputChange(e)} />}
-          label="SPECIAL FEATURE?"
+          label="Slide to Add This Property to Special Offers"
         />
 
         <h2 className="my-4 text-xl pb-2 border-b-2">Facilities</h2>
@@ -569,7 +569,9 @@ const CheckFeilds = ({
           )}
         </div>
         <div className="mb-4">
-          <h2 className="my-4 text-xl pb-2 border-b-2">Dive ON Course</h2>
+          <h2 className="my-4 text-xl pb-2 border-b-2">
+            Diving Courses Available
+          </h2>
 
           {diveCourses?.map((diveCourse) => (
             <div key={diveCourse?._id}>

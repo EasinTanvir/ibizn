@@ -50,7 +50,7 @@ const ResortItems = () => {
   return (
     <div>
       <h1 className="text-2xl text-center my-3 text-black font-bold">
-        Add Resort Item
+        Add Resort Items
       </h1>
       <Box sx={{ width: "100%" }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -62,7 +62,7 @@ const ResortItems = () => {
             <Tab label="Facilities" {...a11yProps(0)} />
             <Tab label="Inclusions" {...a11yProps(1)} />
             <Tab label="Exclusions" {...a11yProps(2)} />
-            <Tab label="Equipments" {...a11yProps(3)} />
+            <Tab label="Equipment" {...a11yProps(3)} />
             <Tab label="Dive courses" {...a11yProps(3)} />
           </Tabs>
         </Box>

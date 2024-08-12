@@ -243,7 +243,9 @@ const EditPackageModal = ({
                     </select>
                   </div>
                   <div className="mt-4 w-full">
-                    <p className="text-lg font-semibold">Diving Courses</p>
+                    <p className="text-lg font-semibold">
+                      Dive Courses Available
+                    </p>
                     <select
                       onChange={(e) =>
                         setPackageData({

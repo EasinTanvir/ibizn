@@ -6,14 +6,11 @@ function LiveaboardDetails({ propertyData, resort }) {
       <div className="flex  flex-col items-start justify-start gap-2 font-light w-full  text-[#2f2f30]">
         <h1 className="text-3xl sm:mt-14 text-[#0080FF] md:text-6xl md:font-light md:text-[#0080FF] md:mb-2 font-outfit">
           {resort ? (
-            <span>
-              {propertyData?.nameOfProperty || propertyData?.propertyName}{" "}
-              Resort
-            </span>
+            <span>The Resort</span>
           ) : (
             <span>
-              {propertyData?.nameOfProperty || propertyData?.propertyName}{" "}
-              Liveaboard
+              {/* {propertyData?.nameOfProperty || propertyData?.propertyName}{" "} */}
+              The Liveaboard
             </span>
           )}
         </h1>
@@ -24,9 +21,9 @@ function LiveaboardDetails({ propertyData, resort }) {
             : propertyData?.liveABoard?.description}
         </p>
       </div>
-      <div className="w-full  md:h-auto md:pt-16">
+      <div className="w-full aspect-[2/3] md:aspect-[2/3]">
         <img
-          className="w-full  h-[350px] md:h-[500px] object-cover overflow-hidden"
+          className="w-full h-full object-cover"
           src={
             resort
               ? propertyData?.featureImage

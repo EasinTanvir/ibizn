@@ -101,7 +101,7 @@ const PropertyModalView = ({
               //   router.push(`/secondPage/${resortData?._id}`, "_blank")
               // }
               onClick={() =>
-                window.open(`/secondPage/${resortData?._id}`, "_blank")
+                window.open(`/secondPage/resort/${resortData?._id}`, "_blank")
               }
               className="text-2xl w-full  py-5 font-semibold underline cursor-pointer "
             >
@@ -174,29 +174,57 @@ const PropertyModalView = ({
               </div>
             </div>
             <div className="my-5">
+              <h2 className="text-2xl mt-10 underline">Environmental</h2>
+              {Questions.map((item, index) => {
+                if (!item.extra) {
+                  return (
+                    <div key={index}>
+                      {resortData?.environmentalQuestions?.hasOwnProperty(
+                        item?.id
+                      ) && (
+                        <div className="my-4">
+                          <h2>
+                            <strong className="mr-2">question:</strong>{" "}
+                            {item?.question}
+                          </h2>
+                          <p className="">
+                            <strong className="mr-2">Answer: </strong>{" "}
+                            {resortData?.environmentalQuestions &&
+                              resortData?.environmentalQuestions[item?.id]}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+              })}
+            </div>
+            <div className="my-5">
               <h2 className="text-2xl mt-10 underline">
-                Environment Questions
+                Plant-based | Vegan food and Adapted Diets
               </h2>
               {Questions.map((item, index) => {
-                return (
-                  <div key={index}>
-                    {resortData?.environmentalQuestions?.hasOwnProperty(
-                      item?.id
-                    ) && (
-                      <div className="my-4">
-                        <h2>
-                          <strong className="mr-2">question:</strong>{" "}
-                          {item?.question}
-                        </h2>
-                        <p className="">
-                          <strong className="mr-2">Answer: </strong>{" "}
-                          {resortData?.environmentalQuestions &&
-                            resortData?.environmentalQuestions[item?.id]}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                );
+                if (item.extra) {
+                  return (
+                    <div key={index}>
+                      {resortData?.environmentalQuestions?.hasOwnProperty(
+                        item?.id
+                      ) && (
+                        <div className="my-4">
+                          <h2>
+                            <strong className="mr-2">question:</strong>{" "}
+                            {item?.question}
+                          </h2>
+                          <p className="">
+                            <strong className="mr-2">Answer: </strong>{" "}
+                            {resortData?.environmentalQuestions &&
+                              resortData?.environmentalQuestions[item?.id]}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
               })}
             </div>
             {/* <div className="my-8">

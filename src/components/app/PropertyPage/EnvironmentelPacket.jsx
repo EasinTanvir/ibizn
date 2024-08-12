@@ -11,78 +11,73 @@ function EnvironmentelPacket({ propertyData, resort }) {
         <Environmental
           items={[
             {
-              title:
-                "   Which conservation organisations does the operation support? If any.",
+              title: "Which conservation organisations do you support?",
               content: propertyData?.environmentalQuestions?.q1,
             },
             {
               title:
-                "  Which efforts are taken to minimise overall environmental impact?",
+                "Which efforts do you take to minimise negative environmental impact?",
               content: propertyData?.environmentalQuestions?.q2,
             },
             {
-              title: " Which responsible diving practices are followed?",
+              title: "Which responsible diving practices are followed?",
               content: propertyData?.environmentalQuestions?.q3,
             },
             {
-              title: " Which sustainable practices are adhered to?",
+              title: "Which sustainable practices do you follow?",
               content: propertyData?.environmentalQuestions?.q4,
             },
             {
-              title:
-                "  Which environmental impact assessments are taken? If any.",
+              title: "Do you make any environmental impact assessments?",
               content: propertyData?.environmentalQuestions?.q5,
             },
             {
-              title:
-                "  Which community initiatives is the operator involved in? If any.",
-              content: propertyData?.environmentalQuestions?.q5,
-            },
-            {
-              title:
-                "Which sustainable tourism initiatives is the operator involved in?",
+              title: "Which community initiatives are you involved in?",
               content: propertyData?.environmentalQuestions?.q6,
             },
             {
-              title: "Does the operator have any self-authored initiatives? ",
+              title:
+                "Which sustainable tourism initiatives are you involved in?",
               content: propertyData?.environmentalQuestions?.q7,
             },
             {
-              title: "Plant Base / Vegan Meal Questions: ",
+              title:
+                "Do you have any self-authored or self-created environmental projects?",
               content: propertyData?.environmentalQuestions?.q8,
             },
             {
               title:
                 "Do you provide plant-based meals for vegans or those on adapted diets?",
               content: propertyData?.environmentalQuestions?.q9,
+              extra: true,
             },
             {
-              title: "   Do you have a separate plant-based menu prepared? ",
+              title: "Do you have a separate, plant-based menu?",
               content: propertyData?.environmentalQuestions?.q10,
+              extra: true,
             },
             {
               title:
-                "  Can you give five examples of your kitchen's best plant-based dishes?  ",
+                "Can you give examples of your kitchen’s finest, plant-based dishes?",
               content: propertyData?.environmentalQuestions?.q11,
+              extra: true,
             },
             {
-              title: " Do you provide plant-based ‘milk’?  ",
+              title: "Do you provide plant-based milk?",
               content: propertyData?.environmentalQuestions?.q12,
+              extra: true,
             },
             {
               title:
-                "For a full board package, resort or liveaboard, how many days can you provide a changing, revolving plant-based menu? ",
+                "For full board packages, how many days can you provide a changing or revolving, plant-based menu for?",
               content: propertyData?.environmentalQuestions?.q13,
+              extra: true,
             },
             {
               title:
-                " People talk about a ‘protein’ alternative; what do you usually provide as the ‘protein’ alternative for vegan meals? Do you procure meat alternatives?  ",
-              content: propertyData?.environmentalQuestions?.q13,
-            },
-            {
-              title:
-                " Do you need any help or advice for your plant-based preparation or menu?  ",
+                " Which ‘protein’ alternatives can you, or do you usually provide?",
               content: propertyData?.environmentalQuestions?.q14,
+              extra: true,
             },
           ]}
         />

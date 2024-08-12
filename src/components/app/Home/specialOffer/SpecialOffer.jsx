@@ -10,7 +10,7 @@ const SpecialOffer = () => {
   return (
     <div className="px-5 md:px-0 customContainer  ">
       <h1 className="lg:text-title md:text-5xl  text-4xl font-extralight font-outfit text-primary mb-6 sm:mb-10">
-        Special Offers
+        Special Offer
       </h1>
       <div className="relative">
         <Carousel
@@ -102,7 +102,7 @@ const SpecialOffer = () => {
                       15 Mar — 21 Mar
                     </h1>
                     <h1 className="text-primary text-xl font-outfit font-light md:text-2xl pb-6">
-                      Vegan Raiting : 4.6
+                      Vegan Raiting: 4.6
                     </h1>
                   </div>
                 </div>
@@ -111,6 +111,9 @@ const SpecialOffer = () => {
                 <div className="text-center py-4">
                   <div>
                     <h1>
+                      <span className="inline-block text-[#c6c6c6] ms-1 me-1 font-semibold text-sm">
+                        FROM
+                      </span>
                       <span className="text-[#c6c6c6] text-2xl md:text-3xl line-through">
                         890
                       </span>{" "}
@@ -119,6 +122,9 @@ const SpecialOffer = () => {
                       </span>
                     </h1>
                     <div className="text-primary">
+                      <span className=" inline-block ms-1 font-semibold text-sm me-1">
+                        FROM
+                      </span>
                       <span className="text-2xl md:text-4xl font-semibold font-outfit">
                         655
                       </span>

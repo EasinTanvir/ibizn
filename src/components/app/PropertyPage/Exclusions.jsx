@@ -10,7 +10,7 @@ function Exclusions({ propertyData }) {
         <div className="md:w-1/2 md:h-full flex flex-col items-start">
           <div className="flex gap-1 items-center mb-3">
             <img className="w-10" src="/as15.svg" alt="" />
-            <h1 className="md:text-[3vw] md:text-[#0080FF]  text-[#0080FF] text-3xl">
+            <h1 className="md:text-[3vw] md:text-[#0080FF]   text-[#0080FF] text-3xl">
               Trip Inclusions
             </h1>
           </div>

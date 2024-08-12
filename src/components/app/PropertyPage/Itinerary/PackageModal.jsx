@@ -49,7 +49,7 @@ function PackageModal({ packages, setOpen, open }) {
                   </div>
                   <div className="  text-white ">
                     <span className="font-[400] text-2xl font-roboto">
-                      RoomType :{" "}
+                      Room Type :{" "}
                     </span>
                     <span className="text-2xl font-roboto text-light font-[200]">
                       {packages?.roomType}
@@ -57,7 +57,7 @@ function PackageModal({ packages, setOpen, open }) {
                   </div>{" "}
                   <div className="  text-white ">
                     <span className="font-[400] text-2xl font-roboto">
-                      FullBoard :{" "}
+                      Full Board :{" "}
                     </span>
                     <span className="text-2xl font-roboto text-light font-[200]">
                       {packages?.fullBoard ? (
@@ -104,7 +104,7 @@ function PackageModal({ packages, setOpen, open }) {
                   </div>{" "}
                   <div className="  text-white ">
                     <span className="font-[400] text-2xl font-roboto">
-                      DivingCourses :{" "}
+                      Diving Courses :{" "}
                     </span>
                     <span className="text-2xl font-roboto text-light font-[200]">
                       {packages?.divingCourses ? (

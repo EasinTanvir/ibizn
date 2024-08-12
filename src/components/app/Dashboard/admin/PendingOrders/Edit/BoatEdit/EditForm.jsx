@@ -215,7 +215,6 @@ const EditForm = ({ bookingData, setBookingData, status, role = false }) => {
             className="w-full rounded-md"
             required
           />
-          {console.log(bookingData.text)}
         </div>
         {status && (
           <div>

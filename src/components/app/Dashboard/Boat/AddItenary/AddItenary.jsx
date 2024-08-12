@@ -119,7 +119,7 @@ const AddItenary = () => {
   return (
     <div className="max-w-screen-lg mx-auto">
       <h3 className="text-center font-semibold text-3xl">
-        Please Add an Itinerary For Your Boat
+        Please add an itinerary for your boat
       </h3>
       <form onSubmit={handleItinerarySubmit}>
         <div className="lg:flex gap-3 items-center">
@@ -260,13 +260,13 @@ const AddItenary = () => {
                 />
               </div>
               <div className="mt-3 w-full">
-                <p className="text-lg font-semibold">Cabin Price</p>
+                <p className="text-lg font-semibold">Price per person</p>
                 <input
                   type="text"
                   value={cabin.cabinPrice}
                   onChange={(e) => handleCabinChange(index, e)}
                   name="cabinPrice"
-                  placeholder="Cabin Price"
+                  placeholder="Price per person"
                   className="w-full rounded-md"
                 />
               </div>{" "}
@@ -319,13 +319,14 @@ const AddItenary = () => {
           </div>
         </div>
         <div className="mt-3 w-full">
-          <p className="text-lg font-semibold">Number of Dives</p>
+          <p className="text-lg font-semibold">Up to how many dives.</p>
           <input
             onChange={handleItineraryDataChange}
             type="number"
             required
             name="numberOfDivies"
-            placeholder="Number of Dives"
+            placeholder="Up to how many dives.
+"
             className="w-full rounded-md"
             min={0}
           />

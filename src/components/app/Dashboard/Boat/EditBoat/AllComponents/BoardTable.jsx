@@ -325,7 +325,7 @@ const BoardTable = ({ boatData, setBoatData }) => {
             <Box sx={style}>
               <div>
                 <h1 className="font-bold text-xl border-b mb-2 pb-2">
-                  Trip Start And End Date
+                  Trip Start and End Dates
                 </h1>
 
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -401,12 +401,12 @@ const BoardTable = ({ boatData, setBoatData }) => {
               </div>
               <div>
                 <h1 className="font-bold mt-2 text-xl border-b mb-2">
-                  Discount
+                  Discount for this Trip (if any)
                 </h1>
                 <div className="flex gap-2">
                   <TextField
                     id="outlined-basic"
-                    label="Name"
+                    label="Discount name"
                     variant="outlined"
                     onChange={handleDiscountChange("name")}
                   />
@@ -421,7 +421,7 @@ const BoardTable = ({ boatData, setBoatData }) => {
               </div>
               <div>
                 <h1 className="font-bold mt-2 text-xl border-b mb-2">
-                  Sepecial
+                  Special Offer
                 </h1>
                 <FormControlLabel
                   control={
@@ -430,7 +430,7 @@ const BoardTable = ({ boatData, setBoatData }) => {
                       onChange={handleSpecialChange}
                     />
                   }
-                  label="SPECIAL FEATURE?"
+                  label="Slide to add this trip to Special Offers"
                 />
               </div>
               <div className="flex gap-2">
@@ -459,7 +459,7 @@ const BoardTable = ({ boatData, setBoatData }) => {
             <Box sx={style}>
               <div>
                 <h1 className="font-bold text-xl border-b mb-2 pb-2">
-                  Trip Start And End Date
+                  Trip Start and End Dates
                 </h1>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DateRangePicker
@@ -538,7 +538,7 @@ const BoardTable = ({ boatData, setBoatData }) => {
               </div>
               <div>
                 <h1 className="font-bold mt-2 text-xl border-b mb-2">
-                  Discount
+                  Discount for this Trip (if any)
                 </h1>
                 <div className="flex gap-2">
                   <TextField

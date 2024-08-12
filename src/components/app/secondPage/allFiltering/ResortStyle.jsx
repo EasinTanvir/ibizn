@@ -11,10 +11,11 @@ const ResortStyle = () => {
     setAge(event.target.value);
   };
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box sx={{ minWidth: 140 }}>
       <FormControl
+        className="ml-1"
         sx={{
-          width: { xs: "100%", sm: 140, position: "relative" },
+          width: { xs: "95%", position: "relative" },
         }}
       >
         <InputLabel

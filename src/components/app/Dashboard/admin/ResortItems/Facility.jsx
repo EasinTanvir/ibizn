@@ -98,17 +98,30 @@ const Facility = () => {
   return (
     <div className="max-w-screen-lg mx-auto px-2 md:px-6">
       <div>
-        {data?.map((item, index) => (
-          <div
-            key={index}
-            className="flex justify-between mt-3 border-b-2 pb-2"
-          >
-            <h3>{item?.name}</h3>
-            <button onClick={() => handleDelete(item?._id)}>
-              <DeleteOutlinedIcon />
-            </button>
-          </div>
-        ))}
+        {data?.length > 0 ? (
+          <>
+            {" "}
+            {data?.map((item, index) => (
+              <div
+                key={index}
+                className="flex justify-between mt-3 border-b-2 pb-2"
+              >
+                <h3>{item?.name}</h3>
+                <button onClick={() => handleDelete(item?._id)}>
+                  <DeleteOutlinedIcon />
+                </button>
+              </div>
+            ))}
+          </>
+        ) : (
+          <>
+            {" "}
+            <h3 className="text-center text-2xl font-semibold">
+              There is not data available , please add{" "}
+            </h3>
+          </>
+        )}
+
         <div className="flex justify-end  my-4">
           <button
             onClick={handleOpen}

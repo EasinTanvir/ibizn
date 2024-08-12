@@ -43,9 +43,9 @@ const ContactUsModal = ({ isModalOpen, setIsModalOpen }) => {
       });
   };
   return (
-    <UseBasicModal c open={isModalOpen} setOpen={setIsModalOpen}>
+    <UseBasicModal open={isModalOpen} setOpen={setIsModalOpen}>
       <div>
-        <Container component="main" maxWidth="sm">
+        <Container component="main" maxWidth="lg">
           <Box
             sx={{
               display: "flex",
@@ -58,10 +58,10 @@ const ContactUsModal = ({ isModalOpen, setIsModalOpen }) => {
                 <Grid item xs={12}>
                   <div className="flex flex-col gap-1">
                     <label className="font-semibold text-slate-800" htmlFor="">
-                      Name
+                      Let us know your preferred name
                     </label>
                     <input
-                      placeholder="type your name"
+                      placeholder="Please type your name"
                       required
                       type="text"
                       id="name"
@@ -74,10 +74,11 @@ const ContactUsModal = ({ isModalOpen, setIsModalOpen }) => {
                 <Grid item xs={12}>
                   <div className="flex flex-col gap-1">
                     <label className="font-semibold text-slate-800" htmlFor="">
-                      Email
+                      Kindly provide us with your email address
                     </label>
                     <input
-                      placeholder="type your email"
+                      placeholder="Please type your email
+"
                       required
                       id="email"
                       label="Email Address"
@@ -90,10 +91,29 @@ const ContactUsModal = ({ isModalOpen, setIsModalOpen }) => {
                 <Grid item xs={12}>
                   <div className="flex flex-col gap-1">
                     <label className="font-semibold text-slate-800" htmlFor="">
-                      Message
+                      Another preferred contact?
                     </label>
                     <textarea
-                      placeholder="type your message"
+                      placeholder="Please enter another contact method
+"
+                      required
+                      className="border border-slate-800 rounded-md px-2"
+                      name="message"
+                      label="Message"
+                      id="message"
+                      type="text"
+                      rows={2}
+                    />
+                  </div>
+                </Grid>{" "}
+                <Grid item xs={12}>
+                  <div className="flex flex-col gap-1">
+                    <label className="font-semibold text-slate-800" htmlFor="">
+                      Ask us anything
+                    </label>
+                    <textarea
+                      placeholder="Please type your message
+"
                       required
                       className="border border-slate-800 rounded-md px-2"
                       name="message"

@@ -27,22 +27,24 @@ const EnvQAndA = ({
   };
   return (
     <div>
-      <h2 className="my-4 text-xl pb-2 border-b-2">Environmental Questions</h2>
+      <h2 className="my-4 text-xl pb-2 border-b-2">
+        Environmental Questions (Kindly enter N/A if not applicable)
+      </h2>
       <form onSubmit={handleResortSubmit}>
         <div className="mb-4">
           <label
             htmlFor="q1"
             className="block text-sm font-medium text-gray-700"
           >
-            Which conservation organisations does the operation support? If any.
+            Which conservation organisations do you support?
           </label>
           <input
             type="text"
             id="q1"
             name="q1"
             defaultValue={resortData?.environmentalQuestionSchema?.q1}
-            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             required
+            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             onChange={(e) => handleEnvChange(e)}
           />
         </div>
@@ -51,15 +53,15 @@ const EnvQAndA = ({
             htmlFor="q2"
             className="block text-sm font-medium text-gray-700"
           >
-            Which efforts are taken to minimise overall environmental impact?
+            Which efforts do you take to minimise negative environmental impact?
           </label>
           <input
             type="text"
             id="q2"
             name="q2"
             defaultValue={resortData?.environmentalQuestionSchema?.q2}
-            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             required
+            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             onChange={(e) => handleEnvChange(e)}
           />
         </div>
@@ -73,10 +75,10 @@ const EnvQAndA = ({
           <input
             type="text"
             id="q3"
+            required
             name="q3"
             defaultValue={resortData?.environmentalQuestionSchema?.q3}
             className="mt-1 p-2 border border-gray-300 rounded-md w-full"
-            required
             onChange={(e) => handleEnvChange(e)}
           />
         </div>
@@ -85,15 +87,15 @@ const EnvQAndA = ({
             htmlFor="q4"
             className="block text-sm font-medium text-gray-700"
           >
-            Which sustainable practices are adhered to?
+            Which sustainable practices do you follow?
           </label>
           <input
             type="text"
             id="q4"
             name="q4"
             defaultValue={resortData?.environmentalQuestionSchema?.q4}
-            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             required
+            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             onChange={(e) => handleEnvChange(e)}
           />
         </div>
@@ -102,15 +104,15 @@ const EnvQAndA = ({
             htmlFor="q5"
             className="block text-sm font-medium text-gray-700"
           >
-            Which environmental impact assessments are taken? If any.
+            Do you make any environmental impact assessments?
           </label>
           <input
             type="text"
             id="q5"
             name="q5"
             defaultValue={resortData?.environmentalQuestionSchema?.q5}
-            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             required
+            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             onChange={(e) => handleEnvChange(e)}
           />
         </div>
@@ -119,15 +121,15 @@ const EnvQAndA = ({
             htmlFor="q6"
             className="block text-sm font-medium text-gray-700"
           >
-            Which community initiatives is the operator involved in? If any.
+            Which community initiatives are you involved in?
           </label>
           <input
             type="text"
             id="q6"
+            required
             name="q6"
             defaultValue={resortData?.environmentalQuestionSchema?.q6}
             className="mt-1 p-2 border border-gray-300 rounded-md w-full"
-            required
             onChange={(e) => handleEnvChange(e)}
           />
         </div>
@@ -136,38 +138,42 @@ const EnvQAndA = ({
             htmlFor="q7"
             className="block text-sm font-medium text-gray-700"
           >
-            Which sustainable tourism initiatives is the operator involved in?
+            Which sustainable tourism initiatives are you involved in?
           </label>
           <input
             type="text"
             id="q7"
             name="q7"
             defaultValue={resortData?.environmentalQuestionSchema?.q7}
-            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             required
+            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             onChange={(e) => handleEnvChange(e)}
           />
         </div>
+
         <div className="mb-4">
           <label
             htmlFor="q8"
             className="block text-sm font-medium text-gray-700"
           >
-            Does the operator have any self-authored initiatives?
+            Do you have any self-authored or self-created environmental
+            projects?
           </label>
           <input
             type="text"
             id="q8"
             name="q8"
             defaultValue={resortData?.environmentalQuestionSchema?.q8}
-            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             required
+            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             onChange={(e) => handleEnvChange(e)}
           />
         </div>
         <h2 className="my-5 text-xl pb-2 border-b-2">
-          Plant Base / Vegan Meal Questions:
+          Plant-based | Vegan Meal Questions (Kindly enter N/A if not
+          applicable)
         </h2>
+
         <div className="mb-4">
           <label
             htmlFor="q9"
@@ -181,8 +187,8 @@ const EnvQAndA = ({
             id="q9"
             name="q9"
             defaultValue={resortData?.environmentalQuestionSchema?.q9}
-            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             required
+            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             onChange={(e) => handleEnvChange(e)}
           />
         </div>
@@ -191,15 +197,15 @@ const EnvQAndA = ({
             htmlFor="q10"
             className="block text-sm font-medium text-gray-700"
           >
-            Do you have a separate plant-based menu prepared?
+            Do you have a separate, plant-based menu?
           </label>
           <input
             type="text"
             id="q10"
             name="q10"
             defaultValue={resortData?.environmentalQuestionSchema?.q10}
-            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             required
+            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             onChange={(e) => handleEnvChange(e)}
           />
         </div>
@@ -208,16 +214,15 @@ const EnvQAndA = ({
             htmlFor="q11"
             className="block text-sm font-medium text-gray-700"
           >
-            Can you give five examples of your kitchen's best plant-based
-            dishes?
+            Can you give examples of your kitchen’s finest, plant-based dishes?
           </label>
           <input
             type="text"
             id="q11"
             name="q11"
             defaultValue={resortData?.environmentalQuestionSchema?.q11}
-            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             required
+            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             onChange={(e) => handleEnvChange(e)}
           />
         </div>
@@ -226,15 +231,15 @@ const EnvQAndA = ({
             htmlFor="q12"
             className="block text-sm font-medium text-gray-700"
           >
-            Do you provide plant-based ‘milk’?
+            Do you provide plant-based milk?
           </label>
           <input
             type="text"
             id="q12"
             name="q12"
             defaultValue={resortData?.environmentalQuestionSchema?.q12}
-            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             required
+            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             onChange={(e) => handleEnvChange(e)}
           />
         </div>
@@ -243,16 +248,16 @@ const EnvQAndA = ({
             htmlFor="q13"
             className="block text-sm font-medium text-gray-700"
           >
-            For a full board package, resort or liveaboard, how many days can
-            you provide a changing, revolving plant-based menu?
+            For full board packages, how many days can you provide a changing or
+            revolving, plant-based menu for?
           </label>
           <input
             type="text"
             id="q13"
             name="q13"
             defaultValue={resortData?.environmentalQuestionSchema?.q13}
-            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             required
+            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             onChange={(e) => handleEnvChange(e)}
           />
         </div>
@@ -261,35 +266,15 @@ const EnvQAndA = ({
             htmlFor="q14"
             className="block text-sm font-medium text-gray-700"
           >
-            People talk about a ‘protein’ alternative; what do you usually
-            provide as the ‘protein’ alternative for vegan meals? Do you procure
-            meat alternatives?
+            Which ‘protein’ alternatives can you, or do you usually provide?
           </label>
           <input
             type="text"
             id="q14"
             name="q14"
             defaultValue={resortData?.environmentalQuestionSchema?.q14}
-            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             required
-            onChange={(e) => handleEnvChange(e)}
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            htmlFor="q15"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Do you need any help or advice for your plant-based
-            preparation or menu?
-          </label>
-          <input
-            type="text"
-            id="q15"
-            name="q15"
-            defaultValue={resortData?.environmentalQuestionSchema?.q15}
             className="mt-1 p-2 border border-gray-300 rounded-md w-full"
-            required
             onChange={(e) => handleEnvChange(e)}
           />
         </div>
