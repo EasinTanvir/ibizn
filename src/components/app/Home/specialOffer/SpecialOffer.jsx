@@ -8,7 +8,7 @@ const board = [1, 2, 3];
 
 const SpecialOffer = () => {
   return (
-    <div className="px-5 md:px-0 customContainer  ">
+    <div className="px-5 md:px-0 customContainer  pb-5    ">
       <h1 className="lg:text-title md:text-5xl  text-4xl font-extralight font-outfit text-primary mb-6 sm:mb-10">
         Special Offer
       </h1>
@@ -73,7 +73,7 @@ const SpecialOffer = () => {
           }
         >
           {board.map((i, item) => (
-            <div key={i} className="lg:flex mb-10 w-full">
+            <div key={i} className="lg:flex mb-10 w-full border">
               <div className="lg:flex items-center border   border-primary lg:w-[80%] md:w-full gap-10">
                 <div className="h-full">
                   <img
@@ -82,22 +82,22 @@ const SpecialOffer = () => {
                     alt=""
                   />
                 </div>
-                <div className="lg:w-[65%] w-full p-5 lg:p-0  text-left">
-                  <div>
+                <div className="lg:w-[65%] w-full p-5 lg:p-0  text-left  h-full   relative ">
+                  <div className="pt-8">
                     <h1 className="text-gray mt-4 font-medium font-outfit text-xl md:text-xl lg:text-subtitle">
                       Liveboard / Egypt
                     </h1>
-                    <h2 className="  md:text-[32px]  text-2xl font-[400] text-primary">
+                    <h2 className="  md:text-[32px]  text-2xl font-outfit font-light  text-primary">
                       Emperor Elite Liveaboard
                     </h2>
-                    <p className="text-secondary  md:mt-2 xl:pe-12 lg:pe-5 font-[400] md:text-lg text-base md:w-full">
+                    <p className="text-secondary font-roboto font-light  md:mt-2 xl:pe-12 lg:pe-5  md:text-[18px] leading-[20px] text-base md:w-full">
                       Operating from Sharm El Sheikh, this liveaboard boasts a
                       professional and knowledgeable team of dive guides, ready
                       to take you to the best dive sites in the northern Red
                       Sea.
                     </p>
                   </div>
-                  <div className="md:flex gap-10 mt-5">
+                  <div className="md:flex gap-10 mt-5 absolute bottom-0 left-0 w-full  ">
                     <h1 className="text-primary text-xl font-outfit font-light md:text-2xl ">
                       15 Mar — 21 Mar
                     </h1>

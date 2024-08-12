@@ -122,8 +122,8 @@ const Banner = ({ setSearchResult }) => {
     };
   }, []); // Empty dependency array ensures the effect runs only once on mount
   return (
-    <div className="bg-primary">
-      <div className="w-[90%] sm:w-[85%] mx-auto py-10">
+    <div className="bg-primary py-[90px]">
+      <div className="w-[90%] sm:w-[85%] mx-auto ">
         <div>
           {isSmallScreen && (
             <React.Fragment>
@@ -150,7 +150,7 @@ const Banner = ({ setSearchResult }) => {
           {console.log(isMobileMode)}
 
           {!isSmallScreen ? (
-            <div className="flex items-center gap-2 md:gap-5 mt-10">
+            <div className="flex items-center gap-2 md:gap-5 ">
               {tabItems?.map((item, index) => (
                 <div
                   onClick={() =>
@@ -200,7 +200,7 @@ const Banner = ({ setSearchResult }) => {
           )}
 
           {!isSmallScreen ? (
-            <div className="mt-10 flex flex-col md:flex-row md:space-y-0 space-y-2 gap-3 justify-between md:items-center pb-10 text-white">
+            <div className="mt-[30px] flex flex-col md:flex-row md:space-y-0 space-y-2 gap-3 justify-between md:items-center  text-white">
               <div
                 onClick={() => setIsModalOpen(true)}
                 className="w-full lg:w-[50%] relative "

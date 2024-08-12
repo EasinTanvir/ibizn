@@ -88,9 +88,9 @@ const Filtering = () => {
   };
 
   return (
-    <div className="bg-gray-100  pt-3 pb-5 bg-stone-200">
-      <div className="md:w-[85%] px-5 md:px-0 mx-auto py-[20px]">
-        <div className="flex  gap-4 mt-1   flex-wrap   ">
+    <div className="bg-gray-100  pt-3 pb-5 bg-stone-200 ">
+      <div className="md:w-[85%] px-5 md:px-0 mx-auto py-[20px] relative">
+        <div className="flex  lg:pe-40  gap-4 mt-1 flex-wrap xl:flex-row   ">
           <div>
             <div
               className={`relative  ${
@@ -435,7 +435,7 @@ const Filtering = () => {
               </div>
             )}
 
-          <div className="sm:ps-14">
+          <div className="sm:ps-14 lg:absolute static right-0">
             <button
               onClick={searchHandler}
               className="bg-primary text-white rounded-2xl sm:px-12 px-8 py-2 flex sm:justify-between justify-around  sm:w-44 w-40"

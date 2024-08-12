@@ -10,8 +10,8 @@ module.exports = {
   theme: {
     extend: {
       fontSize: {
-        title: ["66px", "40px"],
-        subtitle: "22px",
+        title: ["62px", "62px"],
+        subtitle: "20px",
       },
       fontFamily: {
         outfit: ["Outfit"],

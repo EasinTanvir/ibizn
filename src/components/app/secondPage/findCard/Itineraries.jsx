@@ -11,25 +11,25 @@ const Itineraries = ({ schedules }) => {
           }`}
         >
           <div className="flex sm:flex-row flex-col sm:w-fit  w-1/2 ">
-            <h1 className="text-[#0080ff] sm:pe-5 text-[14px] md:text-[18px] lg:text-subtitle font-outfit font-[500] sm:font-light">
+            <h1 className="text-[#0080ff] font-outfit font-light sm:pe-5 text-[14px]  lg:text-subtitle ">
               {dayjs(item?.tripStart).format("MMM DD")} -{" "}
               {dayjs(item?.tripEnd).format("MMM DD")}
             </h1>
 
-            <h1 className="text-[#0080ff] sm:pe-5 text-[14px] md:text-[18px] lg:text-subtitle font-outfit sm:border-l-2 sm:pl-5 font-[500] sm:font-light">
+            <h1 className="   sm:border-l-2 sm:pl-5  text-[#0080ff] font-outfit font-light sm:pe-5 text-[14px]  lg:text-subtitle">
               {item?.itinerary?.numberOfDays + " "}Days,{" "}
               {item?.itinerary?.numberOfNights + " "}Nights
             </h1>
 
-            <h1 className="text-[#0080ff] text-[14px] md:text-[18px] lg:text-subtitle font-outfit sm:border-l-2 sm:pl-5 font-[500] sm:font-light">
+            <h1 className="  sm:border-l-2 sm:pl-5  text-[#0080ff] font-outfit font-light text-[14px]  lg:text-subtitle">
               approx. {item?.itinerary?.numberOfDives} Up to x dives
             </h1>
           </div>
 
           <div className="sm:w-52  w-1/2  sm:ml-5">
-            <h1 className="text-[#0080ff] text-[14px] md:text-[18px] lg:text-subtitle font-outfit sm:border-l-2 pl-5">
+            <h1 className="text-[#0080ff] font-outfit font-light  text-[14px]  lg:text-subtitle sm:border-l-2 pl-5">
               From USD{" "}
-              <span className="text-[#0080ff] ms-2 text-[22px]  font-outfit">
+              <span className="text-[#0080ff] ms-2   font-outfit font-light  text-[14px]  lg:text-subtitle">
                 {item?.convertPrice}
               </span>
             </h1>

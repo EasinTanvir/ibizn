@@ -82,15 +82,15 @@ const Banner = () => {
   };
 
   return (
-    <div className="bg-primary pb-6">
+    <div className="bg-primary  py-[90px]">
       <div className=" customContainer px-5 xl:px-0 pb-10 md:pb-6">
-        <div className="lg:flex justify-between pt-[90px]">
+        <div className="lg:flex justify-between ">
           <div className="md:flex flex-col  gap-14 ">
             <div>
-              <h1 className="md:text-title md:w-[650px] w-[72%]  text-[62px] md:leading-none leading-[62px] text-white font-extralight font-outfit lg:leading-[63px]">
+              <h1 className="md:text-title md:w-[650px] w-[72%]  text-4xl md:leading-none leading-9 text-white font-extralight font-outfit ">
                 Inclusive dive adventures start here
               </h1>
-              <h2 className="text-[22px] font-roboto font-[400] md:text-3xl  mt-2 md:mt-3  text-white tracking-wide ">
+              <h2 className="text-[22px] font-roboto font-[400]   mt-2 md:mt-3  text-white tracking-wide ">
                 Book your diving trip online
               </h2>
             </div>
@@ -112,7 +112,7 @@ const Banner = () => {
                       : "text-[#f1f2f2] bg-transparent border"
                   } text-center ${
                     index === 1 ? "w-fit px-4 sm:px-8" : "flex-1"
-                  }  cursor-pointer py-2 font-roboto font-normal rounded-full text-[14px] md:text-[22px] `}
+                  }  cursor-pointer py-2 font-roboto font-normal rounded-full text-[14px] md:text-[20px]  hover:bg-white hover:text-primary`}
                 >
                   {item}
                 </div>
@@ -146,12 +146,13 @@ const Banner = () => {
               value={searchValues?.destination}
               variant="outlined"
               fullWidth
-              className="text-white"
+              className="text-white "
               sx={{
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
                     borderColor: "white", // Border color
                     background: "transparent",
+                    textAlign: "center",
                   },
                   "&:hover fieldset": {
                     borderColor: "white", // Border color on hover
@@ -182,6 +183,8 @@ const Banner = () => {
                 "& .MuiInputLabel-root": {
                   color: "white", // Label color
                   background: "transparent",
+                  paddingLeft: "10px",
+                  transform: "translate(0, 12px) scale(1)", // Adjust transform to center vertically
                 },
                 "& .MuiInputLabel-root.Mui-focused": {
                   color: "white", // Label color when focused
@@ -260,6 +263,7 @@ const Banner = () => {
                       "& fieldset": {
                         borderColor: "lightblue",
                       },
+
                       "&:hover fieldset": {
                         borderColor: "white",
                       },

@@ -91,10 +91,10 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
   }, [searchValues]);
 
   return (
-    <div className="min-h-[70vh] lg:w-[85%] mx-auto px-5 lg:px-0 py-12">
+    <div className="min-h-[70vh] lg:w-[85%] mx-auto px-5 lg:px-0  pt-[65px]  pb-[120px]">
       <div>
         {searchValues?.destination && searchValues?.tabValue && (
-          <h1 className="lg:text-title md:text-5xl text-4xl font-outfit font-[250] text-primary mb-5">
+          <h1 className="lg:text-title md:text-5xl text-4xl font-outfit  text-primary  mb-[30px]">
             {searchValues?.tabValue} | {searchValues?.destination}
           </h1>
         )}
@@ -120,7 +120,7 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
           </p>
         )}
       </div>
-      <div className="xl:flex gap-10 mt-10">
+      <div className="xl:flex gap-10 mt-[60px]">
         <div className="xl:w-[75%] space-y-10 mb-16 lg:mb-0">
           {isLoading ? (
             <LoadingCard />
@@ -142,7 +142,7 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                   <div className="md:flex gap-5">
                     <div>
                       <Swiper
-                        className="md:w-[384px] w-full border"
+                        className="md:w-[384px] w-full "
                         spaceBetween={30}
                         pagination={{
                           clickable: true,
@@ -152,7 +152,7 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                         {item?.carousal
                           ? item?.carousal?.map((img, index) => (
                               <SwiperSlide key={index}>
-                                <div className="border border-rose-900">
+                                <div className="">
                                   <div className="aspect-[2/3] w-full">
                                     <img
                                       className="w-full h-full object-cover"
@@ -181,7 +181,7 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                     <div className="sm:pb-0 pb-10 px-5   border-b-2 sm:border-b-0 border-b-primary">
                       <div className="mt-6 sm:mb-2">
                         <div className="sm:hidden">
-                          <h1 className="lg:text-[32px] text-xl text-gray font-[500]">
+                          <h1 className="lg:text-[28px] text-xl text-gray font-light font-outfit">
                             {!resort && (
                               <span>
                                 {item?.nameOfProperty || item?.propertyName} /{" "}
@@ -213,7 +213,7 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                               {readMore ? (
                                 item?.briefDescription
                               ) : (
-                                <>
+                                <p className="text-[18px] font-light font-roboto leading-[20px]">
                                   {truncateDescription(
                                     item?.liveABoard?.description
                                   )}
@@ -223,7 +223,7 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                                   >
                                     Read More
                                   </button> */}
-                                </>
+                                </p>
                               )}
                             </>
                           )}
@@ -239,10 +239,10 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                         )}
                         <div className="sm:-mt-2">
                           <div className="flex gap-2 items-center">
-                            <h1 className="text-[#0080ff] text-[14px] md:text-[25px] font-outfit font-[700] sm:font-[500]">
+                            <h1 className="text-[#0080ff] text-[14px] md:text-[20px] font-light font-outfit leading-[24px]">
                               Vegan Rating:
                             </h1>
-                            <h1 className="md:text-[25px] text-[14px] text-[#0080ff]">
+                            <h1 className="md:text-[20px] font-light font-outfit leading-[24px] text-[14px] text-[#0080ff]">
                               {item?.veganRating}
                             </h1>
                           </div>

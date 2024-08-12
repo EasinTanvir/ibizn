@@ -9,13 +9,12 @@ const Home = () => {
   const [isPropertyShow, setIsPropertyShow] = useState(false);
 
   return (
-    <div className="space-y-16 ">
+    <div className="space-y-[90px] ">
       <Banner />
       <SpecialOffer />
       <BestBoard />
-      <div style={{ marginTop: "0px" }}>
-        <WhyDeeparture />
-      </div>
+
+      <WhyDeeparture />
 
       <WhatsAppButton />
     </div>
