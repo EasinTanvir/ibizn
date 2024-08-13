@@ -169,9 +169,10 @@ function ItinerariesAndPrices({ propertyData }) {
                     }}
                     views={["month"]}
                     label="Month"
+                    format="MMM YYYY"
                     value={selectedMonth}
                     onChange={handleMonthChange}
-                    className="sm:w-40 w-28"
+                    className="sm:w-40 w-36"
                     sx={{
                       "& .MuiOutlinedInput-root": {
                         "& fieldset": {
@@ -211,7 +212,7 @@ function ItinerariesAndPrices({ propertyData }) {
                     }}
                     views={["year"]}
                     label="Year"
-                    className=" sm:w-48 w-36"
+                    className=" sm:w-40 w-36"
                     sx={{
                       "& .MuiOutlinedInput-root": {
                         "& fieldset": {
@@ -269,7 +270,7 @@ function ItinerariesAndPrices({ propertyData }) {
                           schedule._id === selectItitany
                             ? "text-primary"
                             : "text-white"
-                        } items-end  flex flex-wrap  md:gap-4`}
+                        } items-center  flex flex-wrap  md:gap-4`}
                       >
                         <div className="inline-block  sm:text-2xl text-[20px] font-roboto font-light leading-[22px] mb-1">
                           {new Date(schedule?.tripStart).toLocaleDateString(
