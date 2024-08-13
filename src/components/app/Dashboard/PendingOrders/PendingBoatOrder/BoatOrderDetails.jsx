@@ -119,7 +119,7 @@ const BoatOrderDetails = ({ id }) => {
               if (!item.extra) {
                 return (
                   <div key={index}>
-                    {boatData?.environmentalQuestions?.hasOwnProperty(
+                    {bookingData?.environmentalQuestions?.hasOwnProperty(
                       item?.id
                     ) && (
                       <div className="my-4">
@@ -129,8 +129,8 @@ const BoatOrderDetails = ({ id }) => {
                         </h2>
                         <p className="">
                           <strong className="mr-2">Answer: </strong>{" "}
-                          {boatData?.environmentalQuestions &&
-                            boatData?.environmentalQuestions[item?.id]}
+                          {bookingData?.environmentalQuestions &&
+                            bookingData?.environmentalQuestions[item?.id]}
                         </p>
                       </div>
                     )}
@@ -147,7 +147,7 @@ const BoatOrderDetails = ({ id }) => {
               if (item.extra) {
                 return (
                   <div key={index}>
-                    {boatData?.environmentalQuestions?.hasOwnProperty(
+                    {bookingData?.environmentalQuestions?.hasOwnProperty(
                       item?.id
                     ) && (
                       <div className="my-4">
@@ -157,8 +157,8 @@ const BoatOrderDetails = ({ id }) => {
                         </h2>
                         <p className="">
                           <strong className="mr-2">Answer: </strong>{" "}
-                          {boatData?.environmentalQuestions &&
-                            boatData?.environmentalQuestions[item?.id]}
+                          {bookingData?.environmentalQuestions &&
+                            bookingData?.environmentalQuestions[item?.id]}
                         </p>
                       </div>
                     )}
