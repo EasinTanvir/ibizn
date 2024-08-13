@@ -2,13 +2,13 @@ import React from "react";
 import dayjs from "dayjs";
 const Itineraries = ({ schedules }) => {
   return (
-    <div className=" sm:pt-2 pt-[45px]">
+    <div className=" sm:pt-3 pt-[45px]">
       {schedules?.map((item, index) => (
         <div
           key={index}
-          className={`flex   pb-6 px-5 md:px-5 ${
-            index % 2 === 0 ? "bg-slate-100" : ""
-          }`}
+          className={`flex ${
+            index !== schedules?.length - 1 ? "pb-6" : "pb-2"
+          }    px-5 md:px-5 ${index % 2 === 0 ? "bg-slate-100" : ""}`}
         >
           <div className="flex sm:flex-row flex-col sm:w-fit  w-1/2 ">
             <h1 className="text-[#0080ff] font-outfit font-light sm:pe-5 text-[16px]   leading-[20px]  lg:text-subtitle ">
