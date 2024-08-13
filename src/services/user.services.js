@@ -5,7 +5,8 @@ const User = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const Resort = require("../models/resort.model");
 const Boat = require("../models/boat.model");
-
+const jwt = require("jsonwebtoken");
+const config = require("../config/index");
 // create user ------------------------------
 const createUserIntoDB = async (payload) => {
   const isExists = await User.exists({ email: payload.email });
@@ -15,6 +16,38 @@ const createUserIntoDB = async (payload) => {
   const result = await User.create(payload);
 
   return result;
+};
+
+const passwordResetEmail = async (payload) => {
+  const user = await User.exists({ email: payload.email });
+  if (!user) {
+    throw new AppError(httpStatus.BAD_REQUEST, "Invalid email address");
+  }
+
+  return user;
+};
+
+const updateNewPasswordContrl = async (payload) => {
+  const token = payload.token;
+  console.log("token =", token);
+  if (!token) {
+    throw new AppError(httpStatus.UNAUTHORIZED, "Your are not authorized");
+  }
+  const decoded = jwt.verify(token, config.jwt_secret);
+  console.log("decoded =", decoded);
+  const { userId } = decoded;
+  const user = await User.findById(userId);
+
+  user.password = payload.password;
+  await user.save();
+
+  console.log("token userId =", user);
+  console.log("user =", user);
+  if (!user) {
+    throw new AppError(httpStatus.BAD_REQUEST, "Invalid email address");
+  }
+
+  return user;
 };
 
 // login user -------------------------
@@ -37,7 +70,7 @@ const loginUserIntoDB = async (payload) => {
     isExists.password
   );
   if (!isPasswordMatched) {
-    throw new AppError(httpStatus.NOT_FOUND, "Password does not match");
+    throw new AppError(httpStatus.NOT_FOUND, "Invalid Password");
   }
   // Generate a JWT token
   const token = generateToken(isExists);
@@ -117,4 +150,6 @@ module.exports = {
   getAllOperatorFromDB,
   restrictUserIntoDB,
   unRestrictUserIntoDB,
+  passwordResetEmail,
+  updateNewPasswordContrl,
 };

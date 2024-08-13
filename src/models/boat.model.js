@@ -137,9 +137,6 @@ const environmentalQuestionSchema = {
   q14: {
     type: String,
   },
-  q15: {
-    type: String,
-  },
 };
 const cabinsSchema = new Schema(
   {

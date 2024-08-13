@@ -16,6 +16,11 @@ const boatBookingSchema = new Schema(
       type: String,
       required: true,
     },
+    cabinId: {
+      type: Schema.Types.ObjectId,
+      ref: "Itinerary",
+      required: true,
+    },
     name: {
       type: String,
       required: true,

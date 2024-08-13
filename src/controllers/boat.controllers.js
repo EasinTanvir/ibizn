@@ -21,14 +21,27 @@ const createBoat = catchAsync(async (req, res) => {
 
   const convertedPrices = await Promise.all(
     scheduleItems.map(async (item) => {
+      console.log("percent = ", item.discount?.percent);
+
+      // Convert currency if needed
       const convertedPrice =
         item.currency === "USD"
           ? item.cost
           : await convertTedCurrency(item.cost, item.currency);
-      return { ...item, convertPrice: Number(convertedPrice).toFixed(2) }; // Add converted price to the item
+
+      // Calculate discount if it exists
+      const discountPercent = item.discount?.percent
+        ? Number(item.discount.percent)
+        : 0;
+      const finalPrice =
+        convertedPrice - (convertedPrice * discountPercent) / 100;
+
+      return {
+        ...item,
+        convertPrice: Number(finalPrice).toFixed(2), // Add final price after discount to the item
+      };
     })
   );
-
   // Update req.body.schedules with converted prices
   console.log("convertedPrices = ", convertedPrices);
   req.body.schedules = convertedPrices;

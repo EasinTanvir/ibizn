@@ -206,7 +206,7 @@ const getAllBoatFromDB = async (queryData) => {
             schedule.convertPrice <= fMaxPrice;
 
           const isMatchingDuration =
-            schedule.itinerary.numberOfNights === Number(duration);
+            schedule.itinerary.numberOfNights <= Number(duration);
 
           return isWithinPriceRange && isMatchingDuration;
         }),
@@ -218,7 +218,7 @@ const getAllBoatFromDB = async (queryData) => {
         ...boat,
         schedules: boat.schedules.filter((schedule) => {
           const isMatchingDuration =
-            schedule.itinerary.numberOfNights === Number(duration);
+            schedule.itinerary.numberOfNights <= Number(duration);
 
           return isMatchingDuration;
         }),
@@ -264,7 +264,7 @@ const getAllBoatFromDB = async (queryData) => {
 
             const isMatchingDuration =
               duration !== undefined
-                ? schedule.itinerary.numberOfNights === Number(duration)
+                ? schedule.itinerary.numberOfNights <= Number(duration)
                 : true; // If duration is undefined, this condition will be true
 
             return isWithinDateRange && isMatchingDuration;
@@ -322,7 +322,7 @@ const getAllBoatFromDB = async (queryData) => {
 
             const isMatchingDuration =
               duration !== undefined
-                ? schedule.itinerary.numberOfNights === Number(duration)
+                ? schedule.itinerary.numberOfNights <= Number(duration)
                 : true; // If duration is undefined, this condition will be true
 
             return (

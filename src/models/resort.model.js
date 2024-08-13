@@ -92,9 +92,6 @@ const environmentalQuestionSchema = {
   q14: {
     type: String,
   },
-  q15: {
-    type: String,
-  },
 };
 
 // schema for rooms ----------

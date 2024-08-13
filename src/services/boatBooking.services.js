@@ -1,5 +1,6 @@
 const BoatBooking = require("../models/boatBooking.model");
 const USER = require("../models/user.model");
+const Itineray = require("../models/itenary.model");
 
 const transporter = require("../config/smtp");
 const AppError = require("../error/appError");
@@ -93,13 +94,28 @@ const getAllConfirmBoatOrderFromDB = async (userData) => {
 const getSingleBoatBookingFromDB = async (id) => {
   const result = await BoatBooking.findById(id)
     .populate({
-      path: "property", // First level: populates the property field
+      path: "property",
       populate: {
-        path: "schedules.itinerary", // Second level: populates schedules within property
+        path: "schedules.itinerary",
         model: "Itinerary",
       },
     })
-    .populate("operator");
+    .populate("operator") // Keep the existing populate for operator
+    .lean();
+
+  if (result && result.cabinId) {
+    const itinerary = await Itineray.findOne(
+      {
+        "cabins._id": result.cabinId, // Look for the itinerary with the matching cabinId
+      },
+      { "cabins.$": 1 }
+    ); // Return only the matching cabin
+
+    if (itinerary && itinerary.cabins.length > 0) {
+      result.cabin = itinerary.cabins[0];
+    }
+  }
+
   return result;
 };
 
