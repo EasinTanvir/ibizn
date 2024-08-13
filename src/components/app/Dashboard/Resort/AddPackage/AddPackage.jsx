@@ -207,7 +207,7 @@ const AddPackage = () => {
                 type="number"
                 required
                 name="numberOfDay"
-                placeholder="Number of Days"
+                placeholder="number of days"
                 className="w-full rounded-md"
               />
             </div>
@@ -218,7 +218,7 @@ const AddPackage = () => {
                 type="number"
                 required
                 name="numberOfNight"
-                placeholder="Number of Days"
+                placeholder="number of nights"
                 className="w-full rounded-md"
               />
             </div>

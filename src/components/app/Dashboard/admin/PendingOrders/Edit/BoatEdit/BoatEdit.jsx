@@ -12,12 +12,12 @@ import { usePathname } from "next/navigation";
 const BoatEdit = ({ id }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [bookingData, setBookingData] = useState({});
-  console.log(bookingData.cabin);
+
   const [isAdminPath, setIsAdminPath] = useState(false);
   const path = usePathname();
 
   useEffect(() => {
-    if (path.includes("/admin")) {
+    if (path?.includes("/admin")) {
       setIsAdminPath(true);
     } else {
       setIsAdminPath(false);
@@ -44,6 +44,7 @@ const BoatEdit = ({ id }) => {
   if (isLoading) {
     return <Loader />;
   }
+  console.log(bookingData);
   return (
     <div className="max-w-screen-lg mx-auto">
       <Box>
@@ -180,7 +181,7 @@ const BoatEdit = ({ id }) => {
             })}
           </div>
           <OrderedSchedule
-            cabin={bookingData.cabin}
+            cabin={bookingData?.cabin}
             scheduleId={bookingData?.scheduleId}
             schedules={bookingData?.property?.schedules}
           />

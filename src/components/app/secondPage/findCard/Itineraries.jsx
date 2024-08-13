@@ -2,7 +2,7 @@ import React from "react";
 import dayjs from "dayjs";
 const Itineraries = ({ schedules }) => {
   return (
-    <div className=" sm:pt-0 pt-[45px]">
+    <div className=" sm:pt-2 pt-[45px]">
       {schedules?.map((item, index) => (
         <div
           key={index}

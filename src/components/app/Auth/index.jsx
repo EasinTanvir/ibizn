@@ -187,7 +187,7 @@ const Auth = () => {
                           {...register("password", {
                             required: true,
                           })}
-                          placeholder="password"
+                          placeholder="Password"
                           className="w-full rounded-md"
                         />
                         <button
@@ -431,7 +431,7 @@ const Auth = () => {
                       minLength: 6,
                       maxLength: 20,
                     })}
-                    placeholder="password"
+                    placeholder="Password"
                     className="w-full rounded-md"
                   />
                   <button

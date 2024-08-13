@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -26,7 +26,7 @@ const style = {
 const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
   const startDate = dayjs();
   const endDate = dayjs().add(1, "day");
-
+  const currentDate = dayjs();
   const [updatedDate, setUpdatedDate] = React.useState({
     startDate,
     endDate,
@@ -36,7 +36,40 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  // handle booking boat
+
+  const [finalPrice, setFinalPrice] = useState();
+
+  React.useEffect(() => {
+    const startDate = dayjs(propertyData?.discountTimeFrame?.startDate);
+    const endDate = dayjs(propertyData?.discountTimeFrame?.endDate);
+
+    // Convert discount to number
+    const discountPercentage = Number(propertyData?.discount);
+    const defaultPrice = Number(packages?.ConvertedPrice);
+
+    const isDiscountActive =
+      currentDate.isAfter(startDate) && currentDate.isBefore(endDate);
+
+    if (
+      isDiscountActive &&
+      propertyData?.discount &&
+      propertyData?.discountTimeFrame?.startDate
+    ) {
+      const discountedPrice =
+        defaultPrice - (defaultPrice * discountPercentage) / 100;
+      setFinalPrice(discountedPrice);
+    } else {
+      const defaultPrice = Number(packages?.ConvertedPrice);
+      setFinalPrice(defaultPrice);
+    }
+  }, [propertyData, finalPrice, open, packages]);
+
+  const myPrice = Number(packages?.ConvertedPrice);
+  console.log(myPrice);
+  console.log(propertyData?.discountTimeFrame);
+  console.log(propertyData?.discount);
+  console.log(finalPrice);
+
   const handleBookingBoat = (e) => {
     setLoading(true);
     const start = updatedDate.startDate.format();
@@ -53,7 +86,7 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
       property: propertyData?._id,
       operator: propertyData?.user?._id,
       packageId: packages?._id,
-      price: Number(packages?.ConvertedPrice),
+      price: finalPrice,
       name,
       text,
       phone,
@@ -106,10 +139,10 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
               <RxCross2 className="text-2xl text-slate-800" />
             </button>
             <Typography sx={{ fontSize: "25px", fontWeight: 600 }}>
-              Booking Package
+              Interested in this trip?
             </Typography>
             <div className="mt-2">
-              <p className="text-lg font-semibold">Name:</p>
+              <p className="text-lg font-semibold">Let us know your name</p>
               <input
                 type="text"
                 name="name"
@@ -118,7 +151,7 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
               />
             </div>
             <div className="mt-2">
-              <p className="text-lg font-semibold">Phone:</p>
+              <p className="text-lg font-semibold">Phone number</p>
               <input
                 type="text"
                 name="phone"
@@ -127,7 +160,7 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
               />
             </div>
             <div className="mt-2">
-              <p className="text-lg font-semibold">Email:</p>
+              <p className="text-lg font-semibold">Email</p>
               <input
                 type="email"
                 name="email"
@@ -136,7 +169,7 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
               />
             </div>
             <div className="mt-2">
-              <p className="text-lg font-semibold">whatsapp:</p>
+              <p className="text-lg font-semibold">WhatsApp contact number</p>
               <input
                 type="text"
                 name="whatsapp"
@@ -145,7 +178,7 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
               />
             </div>
             <div className="mt-2">
-              <p className="text-lg font-semibold">Number Of Guest:</p>
+              <p className="text-lg font-semibold">Number of guests</p>
               <input
                 type="text"
                 name="numberOfGuest"
@@ -189,7 +222,9 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
               </div>
             </React.Fragment>
             <div className="mt-2">
-              <p className="text-lg font-semibold">Message : </p>
+              <p className="text-lg font-semibold">
+                Anything you would like to add?
+              </p>
               <textarea
                 type="text"
                 name="text"
