@@ -178,7 +178,14 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                             ))}
                       </Swiper>
                     </div>
-                    <div className="sm:pb-0 pb-10 px-5   border-b-2 sm:border-b-0 border-b-primary">
+                    <div
+                      className={` px-5 ${
+                        searchValues?.tabValue !== "Resorts" &&
+                        searchValues?.property !== "resort"
+                          ? "border-b-2 sm:border-b-0 border-b-primary sm:pb-0 pb-10"
+                          : "pb-2"
+                      }  `}
+                    >
                       <div className="sm:mt-6 mt-[45px] sm:mb-2">
                         <div className="sm:hidden">
                           <h1 className="sm:text-[28px] text-subtitle2 text-gray font-light font-outfit">
@@ -256,7 +263,11 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                       </div>
                     </div>
                   </div>
-                  <Itineraries schedules={item?.schedules} />
+
+                  {searchValues?.tabValue !== "Resorts" &&
+                    searchValues?.property !== "resort" && (
+                      <Itineraries schedules={item?.schedules} />
+                    )}
                 </div>
               ))}
             </div>

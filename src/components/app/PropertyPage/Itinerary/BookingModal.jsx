@@ -12,7 +12,7 @@ const style = {
   left: "50%",
   position: "relative",
   transform: "translate(-50%, -50%)",
-  width: { sm: 480, xs: 380 }, // 'xs' for small devices, 'sm' and larger for medium/large devices
+  width: { sm: 480, xs: 350 }, // 'xs' for small devices, 'sm' and larger for medium/large devices
   bgcolor: "background.paper",
   boxShadow: 24,
   borderRadius: 1,
