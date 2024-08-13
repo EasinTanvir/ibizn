@@ -9,7 +9,7 @@ function Exclusions({ propertyData }) {
       <div className="  sm:pt-[90px] pt-[75px] sm:pb-[120px] pb-[90px]  customContainer  flex flex-col lg:flex-row  justify-between gap-[75px]  sm:gap-12    md:bg-white px-4 lg:px-0">
         <div className=" flex-1 md:h-full flex flex-col items-start">
           <div className="flex gap-1 items-center ">
-            <img className="w-10" src="/as15.svg" alt="" />
+            <img className="w-10" src="/ea2.svg" alt="" />
             <h1 className="sm:text-[48px] text-title2 font-outfit font-light    text-primary ">
               Trip Inclusions
             </h1>
@@ -29,7 +29,7 @@ function Exclusions({ propertyData }) {
         </div>
         <div className="flex-1 md:h-full flex flex-col items-start ">
           <div className="flex  gap-1 items-center ">
-            <img className="w-10" src="/as14.svg" alt="" />
+            <img className="w-10" src="/ea1.svg" alt="" />
             <h1 className="sm:text-[48px] text-title2 font-outfit font-light  text-primary ">
               Trip Exclusions
             </h1>
