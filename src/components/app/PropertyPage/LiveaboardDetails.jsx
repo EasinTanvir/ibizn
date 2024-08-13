@@ -2,9 +2,9 @@ import React from "react";
 
 function LiveaboardDetails({ propertyData, resort }) {
   return (
-    <div className="flex flex-col gap-20 lg:flex-row bg-white pb-16   sm:mt-16 mt-10   customContainer  justify-center px-4 lg:px-0">
-      <div className="flex  flex-col items-start justify-start gap-2 font-light w-full  text-[#2f2f30]">
-        <h1 className="text-3xl sm:mt-14 text-[#0080FF] md:text-6xl md:font-light md:text-[#0080FF] md:mb-2 font-outfit">
+    <div className="flex   flex-col lg:gap-20 gap-0 lg:flex-row bg-white  sm:pb-[120px] pb-[90px]  sm:pt-[90px] pt-[75px]    customContainer  justify-center px-4 lg:px-0">
+      <div className="flex   flex-col items-start justify-start  sm:gap-2 gap-0 font-light w-full  text-[#2f2f30]">
+        <h1 className="  text-primary sm:text-title  text-title2 font-light    font-outfit">
           {resort ? (
             <span>The Resort</span>
           ) : (
@@ -14,16 +14,16 @@ function LiveaboardDetails({ propertyData, resort }) {
             </span>
           )}
         </h1>
-        <p className=" text-secondary">
+        <p className=" text-secondary sm:text-subtitle text-subtitle3 font-roboto font-light sm:mt-[30px] mt-[25px]">
           {" "}
           {resort
             ? propertyData?.briefDescription
             : propertyData?.liveABoard?.description}
         </p>
       </div>
-      <div className="w-full aspect-[2/3] md:aspect-[2/3]">
+      <div className="w-full  sm:mt-0 mt-[45px] aspect-[2/3] md:aspect-[2/3]">
         <img
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover mt-1"
           src={
             resort
               ? propertyData?.featureImage

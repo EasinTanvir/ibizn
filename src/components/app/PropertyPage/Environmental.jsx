@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
 import Typography from "@mui/material/Typography";
@@ -13,67 +13,83 @@ const Environmental = ({ items }) => {
     setExpanded(newExpanded ? panel : "");
   };
 
+  const [lastIndex, setLastIndex] = useState(null);
+
+  useEffect(() => {
+    // Find the last index where extra is undefined or false
+    const lastFalseIndex = filterItems
+      .map((item, index) => ({
+        index,
+        extra: item.extra,
+      }))
+      .reverse()
+      .find((item) => !item.extra)?.index;
+
+    setLastIndex(lastFalseIndex);
+  }, [filterItems]);
+
   return (
     <div>
-      <h1 className="text-3xl mb-6 text-[#0080ff] font-light md:text-6xl md:font-light md:py-4 font-outfit">
+      <h1 className="sm:text-title text-title2  text-primary   font-light  sm:mb-[60px] mb-[45px] font-outfit">
         Environmental
       </h1>
-      {filterItems.map((item, index) => {
-        if (!item.extra)
-          return (
-            <Accordion
-              key={index}
-              expanded={expanded === `panel${index}`}
-              onChange={handleChange(`panel${index}`)}
-              className={`border-t  ${
-                index === filterItems.length - 1 ? "border-b" : ""
-              } border-[#00afff] w-full md:w-full font-outfit`}
-              sx={{
-                borderRadius: 0,
-                backgroundColor: "#F1F2F2",
-                boxShadow: "none",
-              }}
-            >
-              <AccordionSummary
-                expandIcon={
-                  expanded === `panel${index}` ? (
-                    <>
-                      <RemoveCircleOutlineIcon
+      <div className="border-b-[1px]    border-[#0080ff]">
+        {filterItems.map((item, index) => {
+          if (!item.extra)
+            return (
+              <Accordion
+                key={index}
+                expanded={expanded === `panel${index}`}
+                onChange={handleChange(`panel${index}`)}
+                className={`border-t-[1px]    border-[#0080ff] w-full md:w-full font-outfit`}
+                sx={{
+                  borderRadius: 0,
+                  backgroundColor: "#F1F2F2",
+                  boxShadow: "none",
+                }}
+              >
+                <AccordionSummary
+                  expandIcon={
+                    expanded === `panel${index}` ? (
+                      <>
+                        <RemoveCircleOutlineIcon
+                          sx={{
+                            stroke: "#ffffff",
+                            strokeWidth: 0.5,
+                          }}
+                          className=" text-primary text-5xl    "
+                        />
+                      </>
+                    ) : (
+                      <AddCircleOutlineIcon
                         sx={{
                           stroke: "#ffffff",
                           strokeWidth: 0.5,
                         }}
-                        className="md:text-[#3a95ea] text-[#3a95ea] text-5xl    "
+                        className="md:text-[#3a95ea] text-[#3a95ea] text-5xl   -ml-6 sm:-ml-0"
                       />
-                    </>
-                  ) : (
-                    <AddCircleOutlineIcon
-                      sx={{
-                        stroke: "#ffffff",
-                      }}
-                      className="md:text-[#3a95ea] text-[#3a95ea] text-5xl   -ml-6 sm:-ml-0"
-                    />
-                  )
-                }
-                aria-controls={`panel${index}d-content`}
-                id={`panel${index}d-header`}
-                className="bg-[#F1F2F2] flex-row-reverse md:flex-row-reverse"
-                sx={{ borderRadius: 0 }}
-              >
-                <Typography className="font-outfit md:text-2xl md:font-extralight  text-primary ms-2  ">
-                  {item.title}
-                </Typography>
-              </AccordionSummary>
-              <>
-                <Typography className="text-secondary pb-3    md:text-lg bg-[#F1F2F2] font-light leading-0 sm:ps-16 ps-10 ms-2  sm:-mt-2 -mt-1 pt-1">
-                  {item.content}
-                </Typography>
-              </>
-            </Accordion>
-          );
-      })}
-      <div className="mt-4">
-        <h1 className="text-2xl mb-5 text-[#0080ff] font-light md:text-5xl md:font-light md:pt-5 font-outfit">
+                    )
+                  }
+                  aria-controls={`panel${index}d-content`}
+                  id={`panel${index}d-header`}
+                  className="bg-[#F1F2F2] flex-row-reverse md:flex-row-reverse"
+                  sx={{ borderRadius: 0 }}
+                >
+                  <Typography className="font-outfit sm:text-[24px] text-[18px] sm:leading-[24px] leading-[18px] font-light  text-primary ms-2 py-1  ">
+                    {item.title}
+                  </Typography>
+                </AccordionSummary>
+                <>
+                  <Typography className="text-secondary pb-3    sm:text-subtitle text-[16px] leading-[18px] font-roboto bg-[#F1F2F2] font-light  sm:ps-16 ps-10 ms-2  sm:mt-[30px] ">
+                    {item.content}
+                  </Typography>
+                </>
+              </Accordion>
+            );
+        })}
+      </div>
+      <div className="mt-6">
+        <h1 className="sm:text-title text-title2 sm:mb-[60px] mb-[45px] text-[#0080ff] font-light md:pt-5 font-outfit">
           Plant-based | Vegan Meal Questions
         </h1>
         {filterItems.map((item, index) => {
@@ -84,8 +100,8 @@ const Environmental = ({ items }) => {
                 expanded={expanded === `panel${index}`}
                 onChange={handleChange(`panel${index}`)}
                 className={`border-t ${
-                  index === filterItems.length - 1 ? "border-b" : ""
-                }  border-[#00afff] w-full md:w-full font-outfit  `}
+                  index === filterItems.length - 1 ? "border-b-[1px]" : ""
+                }  border-[#0080ff] w-full md:w-full font-outfit  `}
                 sx={{
                   borderRadius: 0,
                   backgroundColor: "#F1F2F2",
@@ -108,6 +124,7 @@ const Environmental = ({ items }) => {
                       <AddCircleOutlineIcon
                         sx={{
                           stroke: "#ffffff",
+                          strokeWidth: 0.5,
                         }}
                         className="md:text-[#3a95ea] text-[#3a95ea] text-5xl   -ml-6 sm:-ml-0"
                       />
@@ -118,12 +135,12 @@ const Environmental = ({ items }) => {
                   className="bg-[#F1F2F2] flex-row-reverse md:flex-row-reverse"
                   sx={{ borderRadius: 0 }}
                 >
-                  <Typography className="font-outfit md:text-2xl md:font-extralight  text-primary ms-2 ">
+                  <Typography className="font-outfit  sm:text-subtitle text-[16px] leading-[18px] font-light  text-primary ms-2 py-1">
                     {item.title}
                   </Typography>
                 </AccordionSummary>
                 <>
-                  <Typography className="text-secondary pb-3    md:text-lg bg-[#F1F2F2] font-light leading-0 sm:ps-16 ps-10 ms-2  sm:-mt-2 -mt-1 pt-1">
+                  <Typography className="text-secondary pb-3    sm:text-subtitle font-roboto bg-[#F1F2F2] font-light  sm:ps-16 ps-10 ms-2  sm:mt-[30px]">
                     {item.content}
                   </Typography>
                 </>

@@ -7,7 +7,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 function EnvironmentelPacket({ propertyData, resort }) {
   return (
     <>
-      <div className="h-auto  md:h-auto customContainer pb-2">
+      <div className=" sm:pt-[90px] pt-[75px] sm:pb-[120px] pb-[90px]   customContainer ">
         <Environmental
           items={[
             {
@@ -81,40 +81,6 @@ function EnvironmentelPacket({ propertyData, resort }) {
             },
           ]}
         />
-
-        {/* {resort && (
-          <div className="">
-            <Accordion
-              className="border-t border-[#00afff] w-full md:w-full font-outfit"
-              sx={{ borderRadius: 0, backgroundColor: "#F1F2F2" }}
-            >
-              <AccordionSummary
-                expandIcon={
-                  <AddCircleOutlineIcon
-                    sx={{
-                      stroke: "#ffffff",
-                      strokeWidth: 0.5,
-                    }}
-                    className="text-primary md:text-5xl   "
-                  />
-                }
-                aria-controls={`panel d-content`}
-                id={`panel d-header`}
-                className="bg-[#F1F2F2] flex-row-reverse md:flex-row-reverse"
-                sx={{ borderRadius: 0 }}
-              >
-                <Typography className="font-outfit ps-2 md:text-2xl md:font-extralight  text-[#3a95ea]">
-                  Resort Daily Schedule
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography className="text-secondary md:text-lg bg-[#F1F2F2] font-outfit sm:ps-14 ps-10 sm:-mt-2 -mt-1">
-                  {propertyData?.resortDailySchedule}
-                </Typography>
-              </AccordionDetails>
-            </Accordion>
-          </div>
-        )} */}
       </div>
     </>
   );

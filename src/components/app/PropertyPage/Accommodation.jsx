@@ -51,8 +51,8 @@ const Accommodation = ({ propertyData, resort }) => {
   );
 
   return (
-    <div className="bg-[#F1F2F2]  sm:py-14 py-20 px-4 lg:px-0">
-      <section className="customContainer flex flex-col-reverse lg:flex-row    justify-center  lg:py-16  gap-8 lg:gap-12 ">
+    <div className="bg-[#F1F2F2]    sm:pt-[90px] pt-[75px] sm:pb-[120px] pb-[90px] px-4 lg:px-0">
+      <section className="customContainer flex flex-col-reverse lg:flex-row    justify-center  lg:py-16  gap-[45px] lg:gap-12 ">
         <div className="w-full lg:w-1/2 aspect-[2/3] lg:aspect-[2/3] order-first lg:order-none">
           <img
             className="w-full h-full object-cover"
@@ -65,16 +65,16 @@ const Accommodation = ({ propertyData, resort }) => {
         </div>
 
         <div className="w-full lg:w-1/2 flex flex-col justify-between h-full">
-          <div className="flex flex-col gap-4 ">
-            <h1 className="text-3xl -mt-2  text-[#0080FF] md:text-6xl md:font-light md:text-[#0080FF] font-outfit">
+          <div className=" ">
+            <h1 className=" sm:text-title text-title2 -mt-2  text-primary   md:font-light  font-outfit">
               Accommodation
             </h1>
-            <p className="text-[16px] md:text-xl font-light text-secondary    ">
+            <p className="text-[16px] md:text-subtitle font-light sm:pt-[30px]  pt-[25px] font-roboto  text-secondary    ">
               {propertyData?.accommodation?.description}
             </p>
           </div>
           {!resort && (
-            <div className="flex flex-wrap gap-4 mt-12 lg:mt-16 text-[#2f2f30]">
+            <div className="flex flex-wrap gap-4 mt-[20px] lg:mt-16 text-[#2f2f30]">
               {lists?.map((button) => (
                 <Button key={button?.id} label={button?.cabinName} />
               ))}

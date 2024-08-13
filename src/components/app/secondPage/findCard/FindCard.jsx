@@ -91,15 +91,15 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
   }, [searchValues]);
 
   return (
-    <div className="min-h-[70vh] lg:w-[85%] mx-auto px-5 lg:px-0  pt-[65px]  pb-[120px]">
+    <div className="min-h-[70vh] lg:w-[85%] mx-auto px-5 lg:px-0  sm:pt-[65px] pt-[75px]  sm:pb-[120px] pb-[60px] ">
       <div>
         {searchValues?.destination && searchValues?.tabValue && (
-          <h1 className="lg:text-title md:text-5xl text-4xl font-outfit  text-primary  mb-[30px]">
+          <h1 className="sm:text-title  text-title2 font-outfit  text-primary  sm:mb-[30px] mb-[25px]">
             {searchValues?.tabValue} | {searchValues?.destination}
           </h1>
         )}
         {!isLoading && (
-          <p className="lg:text-subtitle md:text-2xl text-secondary text-xl font-outfit">
+          <p className="sm:text-subtitle  text-secondary text-subtitle2 font-outfit">
             <span>
               {" "}
               We found {searchResult?.length || 0}{" "}
@@ -120,7 +120,7 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
           </p>
         )}
       </div>
-      <div className="xl:flex gap-10 mt-[60px]">
+      <div className="xl:flex gap-10 sm:mt-[60px] mt-[45px]">
         <div className="xl:w-[75%] space-y-10 mb-16 lg:mb-0">
           {isLoading ? (
             <LoadingCard />
@@ -179,24 +179,24 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                       </Swiper>
                     </div>
                     <div className="sm:pb-0 pb-10 px-5   border-b-2 sm:border-b-0 border-b-primary">
-                      <div className="mt-6 sm:mb-2">
+                      <div className="sm:mt-6 mt-[45px] sm:mb-2">
                         <div className="sm:hidden">
-                          <h1 className="lg:text-[28px] text-xl text-gray font-light font-outfit">
+                          <h1 className="sm:text-[28px] text-subtitle2 text-gray font-light font-outfit">
                             {!resort && (
                               <span>
-                                {item?.nameOfProperty || item?.propertyName} /{" "}
+                                {item?.nameOfProperty || item?.propertyName} |{" "}
                               </span>
                             )}
                             {searchValues?.destination}
                             {console.log(item.destnation)}
                           </h1>
                         </div>
-                        <h1 className="lg:text-[32px] text-xl text-primary">
+                        <h1 className="lg:text-[32px] text-[24px] leading-[24px] sm:mt-0 mt-2 text-primary">
                           {item?.nameOfProperty || item?.propertyName}
                         </h1>
                         {console.log(item)}
 
-                        <p className="sm:mt-[14px] lg:text-[22px] text-sm text-secondary font-outfit md:w-full leading-3 sm:leading-6 ">
+                        <p className="sm:mt-[14px] mt-1 sm:text-[22px] text-[16px] text-secondary font-outfit md:w-full leading-[18px] sm:leading-6 ">
                           {resort ? (
                             <>
                               {readMore ? (
@@ -237,9 +237,9 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                             </h1>
                           </div>
                         )}
-                        <div className="sm:-mt-2">
+                        <div className="sm:-mt-2  sm:mr-0 mr-6">
                           <div className="flex gap-2 items-center">
-                            <h1 className="text-[#0080ff] text-[14px] md:text-[20px] font-light font-outfit leading-[24px]">
+                            <h1 className="text-[#0080ff] text-[16px] sm:text-[20px] font-light font-outfit sm:leading-[24px] leading-[20px]">
                               Vegan Rating:
                             </h1>
                             <h1 className="md:text-[20px] font-light font-outfit leading-[24px] text-[14px] text-[#0080ff]">
@@ -267,7 +267,7 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
           )}
         </div>
         {/* from here code develope by hosaindev */}
-        <div className="xl:w-[25%]  -mt-6 lg:mt-10 xl:mt-0">
+        <div className="xl:w-[25%]  -mt-10 lg:mt-10 xl:mt-0">
           <div className="lg:text-[32px] lg:hidden  block  md:text-3xl text-xl text-primary">
             How To Book
             <QuestionMarkIcon
@@ -281,11 +281,11 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
             <span className="text-primary">How To Book</span>
             <QuestionMarkIcon className="animate-bounce text-primary" />
             <div className="pt-5 space-y-5">
-              <p className="text-gray text-2xl font-normal">
+              <p className="text-gray text-subtitle font-outfit font-normal">
                 Explore your options and discover your perfect dive adventure.
                 Submit your booking to us by xxxxxxxx.
               </p>
-              <p className="text-gray text-2xl font-normal">
+              <p className="text-gray text-subtitle font-outfit font-normal">
                 We will check the most up-to-date availability and options for
                 you and hold your reservation. Afterwards, we will contact you
                 with your trip details, answer all your queries, and confirm

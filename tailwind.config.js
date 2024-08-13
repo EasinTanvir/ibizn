@@ -11,7 +11,10 @@ module.exports = {
     extend: {
       fontSize: {
         title: ["62px", "62px"],
-        subtitle: "20px",
+        title2: ["40px", "40px"],
+        subtitle: ["20px", "24px"],
+        subtitle2: ["20px", "22px"],
+        subtitle3: ["18px", "22px"],
       },
       fontFamily: {
         outfit: ["Outfit"],

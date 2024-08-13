@@ -82,20 +82,20 @@ const Banner = () => {
   };
 
   return (
-    <div className="bg-primary  py-[90px]">
-      <div className=" customContainer px-5 xl:px-0 pb-10 md:pb-6">
+    <div className="bg-primary  sm:py-[90px] pt-[45px] pb-[90px] ">
+      <div className=" customContainer px-5 xl:px-0 ">
         <div className="lg:flex justify-between ">
           <div className="md:flex flex-col  gap-14 ">
             <div>
-              <h1 className="md:text-title md:w-[650px] w-[72%]  text-4xl md:leading-none leading-9 text-white font-extralight font-outfit ">
+              <h1 className="md:text-title md:w-[650px] w-[72%]  text-[40px]  leading-[40px] text-white font-light font-outfit ">
                 Inclusive dive adventures start here
               </h1>
-              <h2 className="text-[22px] font-roboto font-[400]   mt-2 md:mt-3  text-white tracking-wide ">
+              <h2 className="text-[22px] font-roboto font-[400]   mt-[25px] md:mt-3  text-white tracking-wide ">
                 Book your diving trip online
               </h2>
             </div>
             {/* test */}
-            <div className="flex items-center justify-between gap-2 md:gap-5 mt-8 sm:mt-0 ">
+            <div className="flex items-center justify-between gap-2 md:gap-5 mt-[35px] sm:mt-0 ">
               {tabItems?.map((item, index) => (
                 <div
                   onClick={() =>
@@ -119,12 +119,12 @@ const Banner = () => {
               ))}
             </div>
           </div>
-          <div className="md:mt-10 xl:block hidden lg:mt-0 mt-10  md:pe-10">
+          <div className="md:mt-10 xl:block hidden lg:mt-0 mt-[25px]  md:pe-10">
             <img className="h-64" src="/images/client/bannerImage.png" alt="" />
           </div>
         </div>
 
-        <div className="sm:mt-6 mt-6  flex flex-col md:flex-row md:space-y-0 space-y-2 gap-3 justify-between md:items-center pb-6 text-white">
+        <div className="sm:mt-6 mt-6  flex flex-col md:flex-row md:space-y-0 space-y-2 gap-3 justify-between md:items-center  text-white">
           <div
             onClick={() => setIsModalOpen(true)}
             className="w-full lg:w-[50%] relative "
@@ -152,7 +152,6 @@ const Banner = () => {
                   "& fieldset": {
                     borderColor: "white", // Border color
                     background: "transparent",
-                    textAlign: "center",
                   },
                   "&:hover fieldset": {
                     borderColor: "white", // Border color on hover
@@ -183,8 +182,7 @@ const Banner = () => {
                 "& .MuiInputLabel-root": {
                   color: "white", // Label color
                   background: "transparent",
-                  paddingLeft: "10px",
-                  transform: "translate(0, 12px) scale(1)", // Adjust transform to center vertically
+                  marginTop: "-4px",
                 },
                 "& .MuiInputLabel-root.Mui-focused": {
                   color: "white", // Label color when focused
@@ -192,8 +190,10 @@ const Banner = () => {
                 },
                 "& .MuiInputBase-input::selection": {
                   color: "white",
+                  marginTop: "0px",
                   background: "transparent", // Remove background color when text is selected
                 },
+
                 width: "100%",
               }}
             />
@@ -300,9 +300,9 @@ const Banner = () => {
               <InputLabel
                 style={{ color: "#f1f2f2" }}
                 id="demo-simple-select-label"
-                className=" "
+                className="-mt-1"
               >
-                Vegan rating
+                Vegan ratings
               </InputLabel>
               {console.log(rating)}
               <Select
@@ -380,7 +380,7 @@ const Banner = () => {
           <div className="w-[200px] lg:w-[25%] text-center sm:ps-8 ">
             <div
               className={` bg-white w-40 md:px-6 lg:px-0 py-2 rounded-full text-[#0080ff]  
-                text-[22px] font-[400] cursor-pointer mt-6 md:mt-0`}
+                text-[22px] font-[400] cursor-pointer mt-[30px] md:mt-0`}
               onClick={handleSearchValues}
             >
               Search

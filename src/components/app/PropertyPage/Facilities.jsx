@@ -45,10 +45,10 @@ function Facilities({ propertyData }) {
   );
 
   return (
-    <div className="bg-[#0080FF] text-white py-8 md:py-32 ">
+    <div className="bg-[#0080FF] text-white   sm:pt-[90px] pt-[75px] sm:pb-[120px] pb-[90px] ">
       <div className="customContainer px-4">
-        <div className="text-start mb-8 ">
-          <h1 className="text-3xl md:text-5xl lg:text-7xl font-light">
+        <div className="text-start sm:mb-8 mb-[25px] ">
+          <h1 className="sm:text-title text-title2  font-light font-outfit">
             Facilities
           </h1>
         </div>
@@ -56,7 +56,10 @@ function Facilities({ propertyData }) {
           <ul className=" grid md:grid-cols-4  grid-cols-2  w-full justify-between space-y-2 md:space-y-1">
             {propertyData?.facilities?.map((item, index) => (
               <li className="mr-10 text-xl" key={index}>
-                <span className="opacity-[70%]">—</span> {item}
+                <span className="opacity-[70%]">—</span>{" "}
+                <span className="font-roboto font-light text-[20px] leading-[26px]">
+                  {item}
+                </span>
               </li>
             ))}
           </ul>

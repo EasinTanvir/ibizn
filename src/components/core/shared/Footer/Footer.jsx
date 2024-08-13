@@ -26,10 +26,10 @@ const Footer = () => {
   };
 
   return (
-    <div className="bg-[#272727] relative pt-[90px] pb-[120px]">
+    <div className="bg-[#272727] relative sm:pt-[90px] pt-[75px] sm:pb-[120px] pb-[90px]">
       <div className="customContainer px-5 xl:px-0 ">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3  xl:space-y-3 lg:space-y-0 space-y-3">
-          <div className=" pt-3">
+          <div className=" sm:pt-3 pt-2">
             <img
               src="/images/client/footerLogo.svg"
               className="w-[120px] xl:w-[150px]"
@@ -50,7 +50,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="sm:static absolute right-8 top-28">
+          <div className="sm:static absolute right-8 top-16">
             <h1 className="text-primary text-lg font-bold font-outfit">
               For Operators
             </h1>
@@ -64,7 +64,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="md:flex lg:flex-col pb-6 md:justify-center lg:justify-start md:me-3 lg:ms-0">
-            <div className="sm:static absolute right-16 top-52">
+            <div className="sm:static absolute right-12 top-44">
               <h1 className="text-primary text-lg font-bold font-outfit">
                 {" "}
                 For Agents
@@ -74,7 +74,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <hr className="text-primary md:hidden block  w-full  absolute left-0 bottom-64 pb-5 " />
+          <hr className="text-primary md:hidden block  w-full  absolute left-0 bottom-[265px] pb-5 " />
 
           <div className="md:flex lg:flex-col md:justify-start md:pt-0 pt-16  lg:justify-start xl:text-end text-start">
             <div>

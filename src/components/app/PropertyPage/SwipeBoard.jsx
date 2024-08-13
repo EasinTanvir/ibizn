@@ -20,7 +20,7 @@ const SwipeBoard = ({ propertyData }) => {
   };
 
   return (
-    <div className="mt-12 ">
+    <div className="">
       <Swiper
         navigation={true}
         modules={[Navigation]}

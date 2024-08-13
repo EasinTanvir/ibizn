@@ -73,13 +73,13 @@ function PropertyPage({ id }) {
               <div className="px-4 lg:px-0" id="food">
                 <Food propertyData={propertyData} />
               </div>
-              <div className="bg-[#F1F2F2] py-20 px-4 lg:px-0" id="scuba">
+              <div className="bg-[#F1F2F2] px-4 lg:px-0" id="scuba">
                 <Scuba propertyData={propertyData} />
               </div>
-              <div className="py-6" id="exclusions">
+              <div id="exclusions">
                 <Exclusions propertyData={propertyData} />
               </div>
-              <div className="bg-[#F1F2F2] py-20 px-4 lg:px-0">
+              <div className="bg-[#F1F2F2]  px-4 lg:px-0">
                 <EnvironmentelPacket propertyData={propertyData} />
               </div>
               <div id="itinerariesandprices">

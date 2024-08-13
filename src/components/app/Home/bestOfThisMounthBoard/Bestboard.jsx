@@ -25,21 +25,21 @@ const BestBoard = () => {
   }, []);
 
   return (
-    <div className="bg-[#F1F2F2]  pt-[90px] pb-[120px]">
-      <div className="customContainer px-5 xl:px-0">
+    <div className="bg-[#F1F2F2]   sm:pt-[90px] pt-[75px] sm:pb-[120px] pb-[90px]">
+      <div className="customContainer   px-5 xl:px-0">
         <div className="sm:mb-5">
-          <h1 className="lg:text-title md:text-5xl  text-4xl  font-extralight font-outfit text-primary mb-2 sm:mb-4">
+          <h1 className="sm:text-title   text-[40px] leading-[40px]  font-extralight font-outfit text-primary mb-2 sm:mb-4">
             Best of this month
           </h1>
-          <h2 className="md:text-[22px] md:leading-[22px] font-roboto font-light text-lg   mt-1 lg:mt-3 text-secondary">
+          <h2 className="md:text-[22px] md:leading-[22px] font-roboto font-light text-[20px] leading-[22px]   sm:mt-1 mt-[25px] lg:mt-3 text-secondary">
             Every month we select the best resorts and liveboards, according to
             your reviews
           </h2>
         </div>
 
-        <div className=" flex justify-between relative  h-[435px] ">
+        <div className=" mt-[45px] sm:mt-10 flex justify-between relative  sm:h-[435px] h-[400px] ">
           <>
-            <div className="swiper-button image-swiper-button-next1">
+            <div className="swiper-button  image-swiper-button-next1">
               <ArrowBackIosNewIcon
                 sx={{
                   stroke: "#ffffff",
@@ -114,7 +114,7 @@ const BestBoard = () => {
             modules={[Pagination, Navigation]}
           >
             <SwiperSlide>
-              <div className="mt-10 text-center     w-fit   max-w-48 ">
+              <div className=" text-center     w-fit   max-w-48 ">
                 <div className=" w-36 h-36 mx-auto">
                   <img
                     className="mx-auto w-full h-full rounded-full object-cover"
@@ -123,10 +123,10 @@ const BestBoard = () => {
                   />
                 </div>
                 <div className="mt-3 ">
-                  <h1 className="text-primary text-xl md:text-2xl leading-5 md:leading-[24px]  font-[400] mx-auto text-center font-outfit">
+                  <h1 className="text-primary text-[20px] md:text-2xl leading-5 md:leading-[24px]  font-normal mx-auto text-center font-outfit">
                     Emperor Elite Liveaboard
                   </h1>
-                  <h2 className="text-[#9d9d9c] font-normal text-md mt-1">
+                  <h2 className="text-[#9d9d9c] font-normal text-[16px] mt-1">
                     Liveboard / Egypt
                   </h2>
                   <div className="mt-1 flex gap-2 justify-center">
@@ -148,8 +148,8 @@ const BestBoard = () => {
                       </div>
                     ))}
                   </div>
-                  <div className="mt-3">
-                    <button className="button3 w-40 font-normal text-white  font-roboto  hover:bg-primary hover:text-white">
+                  <div className="mt-4">
+                    <button className="button3 w-40 font-normal text-white  border-none outline-none  font-roboto  hover:bg-primary hover:text-white">
                       Details
                     </button>
                   </div>
@@ -157,7 +157,7 @@ const BestBoard = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className="mt-10 text-center     w-fit   max-w-48 ">
+              <div className=" text-center     w-fit   max-w-48 ">
                 <div className=" w-36 h-36 mx-auto">
                   <img
                     className="mx-auto w-full h-full rounded-full object-cover"
@@ -166,10 +166,10 @@ const BestBoard = () => {
                   />
                 </div>
                 <div className="mt-3 ">
-                  <h1 className="text-primary text-xl md:text-2xl leading-5 md:leading-[24px]  font-[400] mx-auto text-center font-outfit">
+                  <h1 className="text-primary text-[20px] md:text-2xl leading-5 md:leading-[24px]  font-normal mx-auto text-center font-outfit">
                     Emperor Elite Liveaboard
                   </h1>
-                  <h2 className="text-[#9d9d9c] font-normal text-md mt-1">
+                  <h2 className="text-[#9d9d9c] font-normal text-[16px] mt-1">
                     Liveboard / Egypt
                   </h2>
                   <div className="mt-1 flex gap-2 justify-center">
@@ -191,8 +191,8 @@ const BestBoard = () => {
                       </div>
                     ))}
                   </div>
-                  <div className="mt-3">
-                    <button className="button3 w-40 font-normal text-white  font-roboto  hover:bg-primary hover:text-white">
+                  <div className="mt-4">
+                    <button className="button3 w-40 font-normal text-white  border-none outline-none  font-roboto  hover:bg-primary hover:text-white">
                       Details
                     </button>
                   </div>
@@ -200,7 +200,7 @@ const BestBoard = () => {
               </div>
             </SwiperSlide>{" "}
             <SwiperSlide>
-              <div className="mt-10 text-center     w-fit   max-w-48 ">
+              <div className=" text-center     w-fit   max-w-48 ">
                 <div className=" w-36 h-36 mx-auto">
                   <img
                     className="mx-auto w-full h-full rounded-full object-cover"
@@ -209,10 +209,10 @@ const BestBoard = () => {
                   />
                 </div>
                 <div className="mt-3 ">
-                  <h1 className="text-primary text-xl md:text-2xl leading-5 md:leading-[24px]  font-[400] mx-auto text-center font-outfit">
+                  <h1 className="text-primary text-[20px] md:text-2xl leading-5 md:leading-[24px]  font-normal mx-auto text-center font-outfit">
                     Emperor Elite Liveaboard
                   </h1>
-                  <h2 className="text-[#9d9d9c] font-normal text-md mt-1">
+                  <h2 className="text-[#9d9d9c] font-normal text-[16px] mt-1">
                     Liveboard / Egypt
                   </h2>
                   <div className="mt-1 flex gap-2 justify-center">
@@ -234,8 +234,8 @@ const BestBoard = () => {
                       </div>
                     ))}
                   </div>
-                  <div className="mt-3">
-                    <button className="button3 w-40 font-normal text-white  font-roboto  hover:bg-primary hover:text-white">
+                  <div className="mt-4">
+                    <button className="button3 w-40 font-normal text-white  border-none outline-none  font-roboto  hover:bg-primary hover:text-white">
                       Details
                     </button>
                   </div>
@@ -243,7 +243,7 @@ const BestBoard = () => {
               </div>
             </SwiperSlide>{" "}
             <SwiperSlide>
-              <div className="mt-10 text-center     w-fit   max-w-48 ">
+              <div className=" text-center     w-fit   max-w-48 ">
                 <div className=" w-36 h-36 mx-auto">
                   <img
                     className="mx-auto w-full h-full rounded-full object-cover"
@@ -252,10 +252,10 @@ const BestBoard = () => {
                   />
                 </div>
                 <div className="mt-3 ">
-                  <h1 className="text-primary text-xl md:text-2xl leading-5 md:leading-[24px]  font-[400] mx-auto text-center font-outfit">
+                  <h1 className="text-primary text-[20px] md:text-2xl leading-5 md:leading-[24px]  font-normal mx-auto text-center font-outfit">
                     Emperor Elite Liveaboard
                   </h1>
-                  <h2 className="text-[#9d9d9c] font-normal text-md mt-1">
+                  <h2 className="text-[#9d9d9c] font-normal text-[16px] mt-1">
                     Liveboard / Egypt
                   </h2>
                   <div className="mt-1 flex gap-2 justify-center">
@@ -277,8 +277,8 @@ const BestBoard = () => {
                       </div>
                     ))}
                   </div>
-                  <div className="mt-3">
-                    <button className="button3 w-40 font-normal text-white  font-roboto  hover:bg-primary hover:text-white">
+                  <div className="mt-4">
+                    <button className="button3 w-40 font-normal text-white  border-none outline-none  font-roboto  hover:bg-primary hover:text-white">
                       Details
                     </button>
                   </div>

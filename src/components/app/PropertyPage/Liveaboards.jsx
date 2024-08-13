@@ -27,8 +27,8 @@ function Liveaboards({ propertyData }) {
 
   return (
     <>
-      <div className="w-full h-[94vh]  pb-48 ">
-        <div className="w-full h-[83%]    ">
+      <div className="w-full h-[94vh]  sm:mb-0 mb-44   ">
+        <div className="w-full h-[75%]    ">
           <img
             className="w-full h-full object-cover"
             src={propertyData?.featuredImage || propertyData?.featureImage}
@@ -36,24 +36,24 @@ function Liveaboards({ propertyData }) {
           />
         </div>
         <div className="w-full h-[17%] ">
-          <div className=" w-full  flex flex-col  md:flex-col md:flex md:w-full">
+          <div className=" w-full  flex flex-col  md:flex-col md:flex md:w-full  ">
             <div className="bg-[#0080FF] text-white    ">
-              <div className=" flex sm:flex-col flex-col-reverse gap-2  sm:gap-0  customContainer md:py-8 py-4 sm:px-0 px-4">
-                <h1 className="md:text-3xl text-2xl md:font-light ">
+              <div className=" flex sm:flex-col flex-col-reverse gap-[25px]  sm:gap-0  customContainer md:py-[30px] pt-[45px] pb-[35px] sm:px-0 px-4">
+                <h1 className="md:text-[22px] text-lg font-light font-roboto  ">
                   {searchValues?.destination} |{" "}
                   {searchValues?.tabValue === "Resorts" ||
                   searchValues?.property === "resort"
                     ? "Resort"
                     : "Liveaboards"}
                 </h1>
-                <h1 className="text-5xl  md:block md:text-8xl font-light mt-2">
+                <h1 className="text-5xl  md:block md:text-title font-outfit font-light ">
                   {propertyData?.nameOfProperty || propertyData?.propertyName}
                 </h1>
               </div>
             </div>
 
-            <div className=" bg-[#0080FF] text-white xl:h-16 h-auto    border-t-[1px] md:border-white md:flex md:items-center md:justify-between md:pl-8 md:w-full md:py-0 md:px-8 px-4">
-              <div className="flex flex-wrap justify-start  py-4  gap-3 sm:ps-4  customContainer ">
+            <div className=" bg-[#0080FF]   text-white xl:h-16 h-auto    border-t-[1px] md:border-white md:flex md:items-center md:justify-between md:pl-8 md:w-full sm:py-0 mb-[35px] pb-[35px] md:px-8 px-4 ">
+              <div className="flex flex-wrap justify-start   py-4  gap-3 sm:ps-4  customContainer ">
                 {buttons.map((button) => (
                   <button
                     key={button}
@@ -78,11 +78,11 @@ function Liveaboards({ propertyData }) {
               </div>
               <div
                 onClick={() => router.push("/secondPage")}
-                className="text-white  -mt-2 sm:mt-0 md:ml-8"
+                className="text-white  -mt-2 sm:mt-0     "
               >
-                <ul className="underline font-[200] px-2 md:py-8 py-2 cursor-pointer text-nowrap">
+                <buttons className="underline font-[200]  md:py-8 py-2 cursor-pointer text-nowrap">
                   Back to Results
-                </ul>
+                </buttons>
               </div>
             </div>
           </div>

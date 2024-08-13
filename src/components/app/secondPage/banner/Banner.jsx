@@ -122,16 +122,16 @@ const Banner = ({ setSearchResult }) => {
     };
   }, []); // Empty dependency array ensures the effect runs only once on mount
   return (
-    <div className="bg-primary py-[90px]">
+    <div className="bg-primary sm:py-[90px] py-[45px]">
       <div className="w-[90%] sm:w-[85%] mx-auto ">
         <div>
           {isSmallScreen && (
             <React.Fragment>
               <div className="sm:hidden">
-                <h1 className="text-white font-roboto font-light text-4xl ">
+                <h1 className="text-white font-roboto font-light text-title2 ">
                   {searchValues?.destination}
                 </h1>
-                <h1 className="text-white font-roboto font-light text-xl  mt-1">
+                <h1 className="text-white font-roboto font-light text-subtitle2  mt-2">
                   {searchValues?.tabValue} {searchValues?.tripStart && "  /  "}
                   {searchValues?.tripStart ? formattedMonth : null}
                   {searchValues?.tripStart && "  /  "}
@@ -139,7 +139,7 @@ const Banner = ({ setSearchResult }) => {
                 </h1>
                 <button
                   onClick={() => setIsMobileMode(!isMobileMode)}
-                  className={`text-[#f1f2f2] bg-transparent border-2 px-12 cursor-pointer py-3  rounded-full mt-6 text-[14px] font-[400]`}
+                  className={`text-[#f1f2f2] bg-transparent border-2 px-12 cursor-pointer py-3  rounded-full mt-[35px] text-[16px] font-roboto font-[400]`}
                 >
                   {!isMobileMode ? "New search" : "Hide Search"}
                 </button>
@@ -175,7 +175,7 @@ const Banner = ({ setSearchResult }) => {
               ))}
             </div>
           ) : isSmallScreen && isMobileMode ? (
-            <div className="flex items-center gap-2 md:gap-5 mt-10">
+            <div className="flex items-center justify-around gap-2 md:gap-5 mt-10">
               {tabItems?.map((item, index) => (
                 <div
                   onClick={() =>

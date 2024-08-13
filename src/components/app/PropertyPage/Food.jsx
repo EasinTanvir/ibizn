@@ -1,18 +1,18 @@
 import RatingPortion from "./RatingPortion";
 
 const Content = ({ title, description }) => (
-  <div className="w-full lg:w-1/2  flex flex-col justify-center items-start  md:justify-start">
-    <h1 className="text-3xl  text-[#0080FF] md:text-6xl md:font-light md:text-[#0080FF] mb-3 font-outfit">
+  <div className="w-full  flex flex-col justify-center items-start  md:justify-start">
+    <h1 className="sm:text-title text-title2  text-primary  font-light   font-outfit">
       {title}
     </h1>
-    <p className="text-[16px] md:text-xl font-light text-secondary font-roboto   ">
+    <p className="sm:text-subtitle text-subtitle2 sm:mt-[30px] mt-[25px]  font-light text-secondary font-roboto   ">
       {description}
     </p>
   </div>
 );
 
 const Image = ({ src, alt }) => (
-  <div className="p-2 w-full lg:w-1/2 aspect-[2/3]">
+  <div className="sm:p-2 p-0 w-full lg:w-1/2 aspect-[2/3]">
     <img className="w-full h-full object-cover" src={src} alt={alt} />
   </div>
 );
@@ -33,8 +33,8 @@ const Food = ({ propertyData, resort }) => {
   };
 
   return (
-    <div className="flex  flex-col gap-10 items-center lg:flex-row sm:justify-between  my-20 lg:my-24  customContainer bg-white">
-      <div>
+    <div className="flex   flex-col sm:gap-10 gap-[45px]  lg:flex-row sm:justify-between sm:pt-[90px] pt-[75px] sm:pb-[120px] pb-[90px]   customContainer bg-white">
+      <div className=" flex-1">
         <Content
           title={resort ? "Food" : "Food Onboard"}
           description={
@@ -42,15 +42,16 @@ const Food = ({ propertyData, resort }) => {
             propertyData?.food?.description
           }
         />
-        <div className="pt-8">
-          {" "}
+        <div className="sm:pt-[60px] pt-[35px]">
           <RatingPortion rating={propertyData?.veganRating} />
         </div>
       </div>
-      <Image
-        src={propertyData?.foodOnboard?.Picture || propertyData?.food?.image}
-        alt={foodInfo.imageAlt}
-      />
+      <div className="flex-1 flex justify-center">
+        <Image
+          src={propertyData?.foodOnboard?.Picture || propertyData?.food?.image}
+          alt={foodInfo.imageAlt}
+        />
+      </div>
     </div>
   );
 };

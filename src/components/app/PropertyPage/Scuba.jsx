@@ -13,7 +13,7 @@ const Diving = {
 };
 
 const Image = ({ src, alt }) => (
-  <div className="w-full lg:w-1/2 overflow-hidden flex-shrink-0 aspect-[2/3]">
+  <div className="w-full  flex-1 overflow-hidden flex-shrink-0 aspect-[2/3]">
     <img className="w-full h-full object-cover" src={src} alt={alt} />
   </div>
 );
@@ -21,13 +21,13 @@ const Image = ({ src, alt }) => (
 const Content = ({ title, description }) => (
   <div
     id="diving"
-    className="lg:w-1/2 w-full md:overflow-hidden md:rounded-lg md:flex md:flex-col md:items-start md:pr-8"
+    className="w-full flex-1 md:overflow-hidden md:rounded-lg md:flex md:flex-col  md:items-start md:pr-8"
   >
     <div className="">
-      <h1 className="text-3xl  text-[#0080FF] md:text-6xl md:font-light md:text-[#0080FF] md:mb-4 mb-2  font-outfit">
+      <h1 className="sm:text-title  text-title2 text-[#0080FF]  font-light  font-outfit">
         {title}
       </h1>
-      <p className="text-[16px] md:text-xl md:font-light text-secondary ">
+      <p className="text-[16px] sm:mt-[27px] mt-[23px] sm:text-subtitle text-subtitle2 font-roboto font-light text-secondary ">
         {description}
       </p>
     </div>
@@ -41,7 +41,7 @@ const Content = ({ title, description }) => (
 
 function Scuba({ propertyData }) {
   return (
-    <div className="customContainer flex  flex-col-reverse md:gap-14 lg:flex-row ">
+    <div className="customContainer  flex sm:pt-[90px] pt-[75px] sm:pb-[120px] pb-[90px] flex-col-reverse sm:gap-14  gap-[45px] lg:flex-row ">
       <Image
         src={propertyData?.diving?.Picture || propertyData?.diving?.image}
         alt={Diving.imageAlt}
