@@ -29,7 +29,7 @@ const LiveaBoard = ({
         <div className="my-4">
           <h4 className="block mb-2 text-xl font-medium text-gray-900">
             {" "}
-            Diving Image
+            Boat Image
           </h4>
           <label className=" flex gap-4 w-full items-center px-4 py-2 bg-white text-blue rounded-lg border  tracking-wide uppercase  cursor-pointer ">
             <svg
@@ -83,7 +83,7 @@ const LiveaBoard = ({
             className="block text-gray-700 text-xl  mb-2"
             htmlFor="divingDesc"
           >
-            Diving Description
+            Boat description
           </label>
           <textarea
             className="shadow appearance-none border  w-full py-2 px-3 rounded-md text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

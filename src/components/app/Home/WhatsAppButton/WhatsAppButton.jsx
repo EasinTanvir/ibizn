@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import whatsappImage from "../../../../../public/wp.svg"; //
+import whatsappImage from "../../../../../public/wp2.svg"; //
 import hoverImage from "../../../../../public/hover.svg"; //
 const WhatsAppButton = () => {
   const [image, setImage] = useState(false);
