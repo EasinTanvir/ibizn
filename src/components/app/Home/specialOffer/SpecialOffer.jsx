@@ -105,7 +105,7 @@ const SpecialOffer = () => {
                       15 Mar — 21 Mar
                     </h1>
                     <h1 className="text-primary text-xl font-outfit font-light md:text-2xl pb-[45px]">
-                      Vegan Raiting: 4.6
+                      Vegan Rating: 4.6
                     </h1>
                   </div>
                 </div>

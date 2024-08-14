@@ -242,7 +242,7 @@ const CheckFeilds = ({
           ))}
         </div>
         <div className="mb-4">
-          <h2 className="my-4 text-xl pb-2 border-b-2">Equipments</h2>
+          <h2 className="my-4 text-xl pb-2 border-b-2">Equipment available</h2>
           {equipments?.map((equipments) => (
             <label key={equipments?._id} className="flex gap-x-2 items-center">
               <input

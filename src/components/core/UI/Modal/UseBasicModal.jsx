@@ -19,7 +19,12 @@ const style = {
   pr: 2,
 };
 
-export default function UseBasicModal({ open, setOpen, children }) {
+export default function UseBasicModal({
+  open,
+  setOpen,
+  children,
+  isData = false,
+}) {
   const handleClose = () => setOpen(false);
 
   return (
@@ -30,7 +35,7 @@ export default function UseBasicModal({ open, setOpen, children }) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>{children}</Box>
+        {isData ? <>{children}</> : <Box sx={style}>{children}</Box>}
       </Modal>
     </div>
   );

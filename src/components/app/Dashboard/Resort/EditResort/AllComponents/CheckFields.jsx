@@ -4,7 +4,7 @@ import { baseUrl } from "@/src/config/serverConfig";
 import { userContext } from "@/src/storage/contextApi";
 import Loader from "../../../../../core/shared/Loader/Loader";
 
-const CheckFields = ({ resortData, setResortData,handleInputChange }) => {
+const CheckFields = ({ resortData, setResortData, handleInputChange }) => {
   const { loader, setLoader } = useContext(userContext);
   const [inclusionShowOthers, setInclusionShowOthers] = useState(false);
   const [exclusionsShowOthers, setExclusionsShowOthers] = useState(false);
