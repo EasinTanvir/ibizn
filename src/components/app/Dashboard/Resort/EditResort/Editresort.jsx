@@ -1,6 +1,6 @@
 import { compressAndConvertToBase64 } from "@/src/config/base64";
 import { baseUrl } from "@/src/config/serverConfig";
-import * as React from "react";
+import React from "react";
 import { useEffect } from "react";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
@@ -15,12 +15,31 @@ import FoodAtTheResort from "./AllComponents/FoodAtTheResort";
 import Room from "./AllComponents/Room";
 import CheckFields from "./AllComponents/CheckFields";
 import EnvQAndA from "./AllComponents/EnvQAndA";
+
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+
+import { Typography } from "@mui/material";
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
 export default function EditResort({ id }) {
   const router = useRouter();
   const [loading, setLoading] = React.useState(false);
   // some changes
   const [resortData, setResortData] = useState({});
-  console.log(resortData);
+  console.log(resortData?.listOfPackages);
   useEffect(() => {
     setLoading(true);
     fetch(`${baseUrl}/resorts/single-resort/${id}`)
@@ -159,6 +178,55 @@ export default function EditResort({ id }) {
   //   rooms,
   // };
   // console.log("updatedResortData", updatedResortData);
+
+  console.log(resortData?.listOfPackages);
+
+  const [packageData, setPackageData] = useState([]);
+  const [packages, setPackages] = useState([]);
+  //   console.log(packageData);
+
+  const handleChange = (event) => {
+    console.log(event.target.value);
+    const {
+      target: { value },
+    } = event;
+    setPackages(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
+  };
+
+  useEffect(() => {
+    fetch(`${baseUrl}/packages/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("access-token"),
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setPackageData(data?.data);
+      })
+      .catch((err) => {});
+  }, []);
+
+  useEffect(() => {
+    setResortData({
+      ...resortData,
+      listOfPackages: packages,
+    });
+  }, [packages]);
+
+  useEffect(() => {
+    if (resortData?.listOfPackages?.length > 0) {
+      console.log(resortData?.listOfPackages);
+      setPackages(resortData?.listOfPackages);
+    }
+  }, [resortData]);
+
+  console.log(resortData?.listOfPackages);
+
   if (loading) {
     return <Spinner />;
   }
@@ -172,6 +240,37 @@ export default function EditResort({ id }) {
               setResortData={setResortData}
               handleImageChanges={handleImageChanges}
             />
+            <div>
+              <div>
+                <FormControl sx={{ width: 300 }}>
+                  <InputLabel id="demo-multiple-name-label">
+                    Update Package
+                  </InputLabel>
+                  <Select
+                    labelId="demo-multiple-name-label"
+                    id="demo-multiple-name"
+                    multiple
+                    value={packages}
+                    onChange={handleChange}
+                    input={<OutlinedInput label="Select Package" />}
+                    MenuProps={MenuProps}
+                  >
+                    {console.log(packages)}
+                    {packageData?.map((p) => (
+                      <MenuItem key={p?._id} value={p?._id}>
+                        {p?.packageName}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                {/* {packageError && (
+                  <Typography color={"red"} mt={"10px"}>
+                    {packageError}
+                  </Typography>
+                )} */}
+              </div>
+            </div>
+
             <PropertyDesc
               resortData={resortData}
               setResortData={setResortData}

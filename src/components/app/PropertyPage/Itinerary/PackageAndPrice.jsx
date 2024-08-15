@@ -1,19 +1,67 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CabinModal from "./CabinModal";
 import BookingModal from "./BookingModal";
 import ResortBookingModal from "./ResortBookingModal";
 import PackageModal from "./PackageModal";
+import dayjs from "dayjs";
 
 function ResortAndPrice({ propertyData }) {
+  const [finalPrice, setFinalPrice] = useState();
+  const currentDate = dayjs();
+
   const [packages, setPackages] = useState();
   const [selectedPackage, setSelectedPackage] = useState();
   console.log(packages);
+  console.log(finalPrice);
   console.log(selectedPackage);
   const [open, setOpen] = useState(false);
 
   // for booking model;
   const [schedule, setSchedule] = useState({});
+  const [customDiscount, setCustomDiscount] = useState();
   const [isOpenBookingModal, setIsOpenBookingModal] = useState(false);
+
+  console.log(selectedPackage);
+
+  useEffect(() => {
+    const startDate = dayjs(propertyData?.discountTimeFrame?.startDate);
+    const endDate = dayjs(propertyData?.discountTimeFrame?.endDate);
+
+    // Convert discount to number
+    const discountPercentage = Number(propertyData?.discount);
+    console.log(discountPercentage);
+    const defaultPrice = Number(selectedPackage?.ConvertedPrice);
+    console.log(defaultPrice);
+
+    const isDiscountActive =
+      currentDate.isSameOrAfter(startDate) &&
+      currentDate.isSameOrBefore(endDate);
+    console.log(startDate);
+    console.log(endDate);
+    console.log(currentDate);
+    console.log(isDiscountActive);
+    console.log(propertyData?.discountTimeFrame?.startDate);
+    console.log(propertyData?.discountTimeFrame?.endDate);
+
+    if (propertyData?.discount && isDiscountActive) {
+      setCustomDiscount(Number(propertyData?.discount));
+    } else {
+      setCustomDiscount(null);
+    }
+
+    if (
+      isDiscountActive &&
+      propertyData?.discount &&
+      propertyData?.discountTimeFrame?.startDate
+    ) {
+      const discountedPrice =
+        defaultPrice - (defaultPrice * discountPercentage) / 100;
+      setFinalPrice(discountedPrice);
+    } else {
+      const defaultPrice = Number(selectedPackage?.ConvertedPrice);
+      setFinalPrice(defaultPrice);
+    }
+  }, [propertyData, finalPrice, packages, selectedPackage]);
 
   const handleOpenPackageModal = (item) => {
     setOpen(true);
@@ -58,7 +106,17 @@ function ResortAndPrice({ propertyData }) {
                         Nights)
                       </div>
                       <span className="inline-block font-roboto text-[#09aafe]  leading-[22px] text-[20px]  font-bold">
-                        (from {Number(item.ConvertedPrice).toFixed(2)} USD)
+                        (from
+                        {customDiscount ? (
+                          <>
+                            {Number(item.ConvertedPrice) -
+                              (Number(item.ConvertedPrice) * customDiscount) /
+                                100}
+                          </>
+                        ) : (
+                          <> {Number(item.ConvertedPrice).toFixed(2)}</>
+                        )}{" "}
+                        USD)
                       </span>
                     </div>
                   </div>
@@ -102,8 +160,11 @@ function ResortAndPrice({ propertyData }) {
 
                         <>
                           <div className="mt-2">
-                            <span className="text-white text-2xl md:text-3xl">
+                            {/* <span className="text-white text-2xl md:text-3xl">
                               {selectedPackage?.ConvertedPrice}
+                            </span> */}{" "}
+                            <span className="text-white text-2xl md:text-3xl">
+                              {finalPrice}
                             </span>
                             <span className="inline-block text-white ms-1  font-semibold text-sm">
                               USD

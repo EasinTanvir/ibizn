@@ -9,7 +9,7 @@ const Home = () => {
   const [isPropertyShow, setIsPropertyShow] = useState(false);
 
   return (
-    <div className="sm:space-y-[90px] ">
+    <div>
       <Banner />
       <SpecialOffer />
       <BestBoard />

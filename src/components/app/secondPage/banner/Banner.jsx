@@ -734,30 +734,26 @@ const Banner = ({ setSearchResult }) => {
                       >
                         <div className="flex flex-col gap-4">
                           {" "}
-                          {r.minRating === 1 && r.maxRating === 2 && (
+                          {r.minRating === 1 && r.maxRating === 5 && (
                             <div className="flex gap-0 items-center">
-                              <StarIcons />
                               <StarIcons />
                             </div>
                           )}
-                          {r.minRating === 1 && r.maxRating === 3 && (
+                          {r.minRating === 2 && r.maxRating === 5 && (
                             <div className="flex gap-0 items-center">
-                              <StarIcons />
                               <StarIcons />
                               <StarIcons />
                             </div>
                           )}{" "}
-                          {r.minRating === 1 && r.maxRating === 4 && (
+                          {r.minRating === 3 && r.maxRating === 5 && (
                             <div className="flex gap-0 items-center">
-                              <StarIcons />
                               <StarIcons />
                               <StarIcons />
                               <StarIcons />
                             </div>
                           )}
-                          {r.minRating === 1 && r.maxRating === 5 && (
+                          {r.minRating === 4 && r.maxRating === 5 && (
                             <div className="flex gap-0 items-center">
-                              <StarIcons />
                               <StarIcons />
                               <StarIcons />
                               <StarIcons />

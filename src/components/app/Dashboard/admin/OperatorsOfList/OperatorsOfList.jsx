@@ -3,11 +3,16 @@ import { userContext } from "@/src/storage/contextApi";
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Loader from "../../../../core/shared/Loader/Loader";
+import OperatorDetailsModal from "./OperatorDetailsModal";
 
 const OperatorsOfList = () => {
   const [operators, setOperators] = useState([]);
   const { control, setControl, loader, setLoader } = useContext(userContext);
   console.log(operators);
+
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState();
+
   useEffect(() => {
     setLoader(true);
     fetch(`${baseUrl}/users/get-operators`, {
@@ -65,6 +70,11 @@ const OperatorsOfList = () => {
       .catch((err) => toast.error("Something went wrong,try again later"));
   };
 
+  const operatorDetails = (id) => {
+    setSelectedUser(id);
+    setOpenModal(true);
+  };
+
   if (loader) {
     return <Loader />;
   }
@@ -74,13 +84,13 @@ const OperatorsOfList = () => {
       <table className="min-w-full bg-white border border-gray-300">
         <thead>
           <tr className="text-center">
-            <th className="py-2 px-1 border-b">ID</th>
             <th className="py-2 px-1 border-b">Name</th>
             <th className="py-2 px-1 border-b">Email</th>
             <th className="py-2 px-1 border-b">Phone</th>
-            <th className="py-2 px-1 border-b">Compane</th>
+            <th className="py-2 px-1 border-b">Company</th>
             {/* <th className="py-2 px-1 border-b">Company Name</th> */}
             <th className="py-2 px-1 border-b">Status</th>
+            <th className="py-2 px-1 border-b">Operator Details</th>
             <th className="py-2 px-1 border-b">Action</th>
           </tr>
         </thead>
@@ -92,7 +102,6 @@ const OperatorsOfList = () => {
                 index % 2 === 0 ? "bg-gray-100 text-center" : "text-center"
               }
             >
-              <td className="py-2 px-4 border-b">{item?._id}</td>
               <td className="py-2 px-4 border-b">{item?.fullName}</td>
               <td className="py-2 px-4 border-b">{item?.email}</td>
               <td className="py-2 px-4 border-b">{item?.phone}</td>
@@ -108,6 +117,14 @@ const OperatorsOfList = () => {
                 >
                   {item?.status}
                 </span>
+              </td>
+              <td className="py-2 px-4 border-b">
+                <button
+                  onClick={() => operatorDetails(item?._id)}
+                  className="bg-primary px-4 py-1 rounded-md text-white"
+                >
+                  View
+                </button>
               </td>
 
               <td className="py-2 px-4 border-b">
@@ -131,6 +148,12 @@ const OperatorsOfList = () => {
           ))}
         </tbody>
       </table>
+      <OperatorDetailsModal
+        open={openModal}
+        setOpen={setOpenModal}
+        userId={selectedUser}
+        operators={operators}
+      />
     </div>
   );
 };

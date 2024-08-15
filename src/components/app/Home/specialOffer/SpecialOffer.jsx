@@ -8,7 +8,7 @@ const board = [1, 2, 3];
 
 const SpecialOffer = () => {
   return (
-    <div className="px-5 md:px-0 customContainer   pt-[75px]  sm:pt-0 sm:pb-0 pb-[75px]  ">
+    <div className="px-5 md:px-0 customContainer   pt-[75px]  sm:pt-[90px] sm:pb-0 pb-[75px]  ">
       <h1 className="lg:text-title md:text-5xl  text-4xl font-extralight font-outfit text-primary mb-[35px] sm:mb-10">
         Special Offer
       </h1>
