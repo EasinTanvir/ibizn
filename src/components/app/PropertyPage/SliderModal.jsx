@@ -66,19 +66,16 @@ function SliderModal({
             navigation={true}
             modules={[Navigation]}
             initialSlide={initialSlide}
-            slidesPerView={2} // Default to 3 slides per view
+            slidesPerView={2} // Default to 2 slides per view
             breakpoints={{
-              // when window width is >= 640px
               640: {
                 slidesPerView: 1,
                 spaceBetween: 0,
               },
-              // when window width is >= 768px
               768: {
                 slidesPerView: 2,
                 spaceBetween: 0,
               },
-              // when window width is >= 1024px
               1024: {
                 slidesPerView: 4,
                 spaceBetween: 0,
@@ -96,7 +93,12 @@ function SliderModal({
                   onClick={() => openHandler(image)}
                   key={`other-${index}`}
                 >
-                  <img className="h-56 w-full md:w-96" src={image} />
+                  <div className="aspect-w-3 aspect-h-2">
+                    <img
+                      className="h-full w-full cursor-pointer object-cover"
+                      src={image}
+                    />
+                  </div>
                 </SwiperSlide>
               ))}
 
@@ -107,7 +109,12 @@ function SliderModal({
                   onClick={() => openHandler(image)}
                   key={`other-${index}`}
                 >
-                  <img className="h-56 w-full md:w-96" src={image} />
+                  <div className="aspect-w-3 aspect-h-2">
+                    <img
+                      className="h-full w-full cursor-pointer object-cover"
+                      src={image}
+                    />
+                  </div>
                 </SwiperSlide>
               ))}
           </Swiper>

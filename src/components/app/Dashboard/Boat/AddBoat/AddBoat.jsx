@@ -418,7 +418,7 @@ const AddBoat = () => {
   return (
     <div>
       <h1 className="text-2xl text-center text-black mt-5 font-bold">
-        Add a New Boat
+        Please add itineraries for this boat
       </h1>
       <div className="max-w-screen-xl mx-auto mt-10">
         <Box sx={{ width: "100%" }}>

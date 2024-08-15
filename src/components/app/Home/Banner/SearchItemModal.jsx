@@ -14,10 +14,10 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: "80%",
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  borderRadius: "10px",
   boxShadow: 24,
   minHeight: "500px", // Minimum height for the element
-  p: 4,
+  p: 5,
   "@media (max-width: 600px)": {
     width: "90%", // Width for devices with a maximum width of 600px (e.g., mobile phones)
   },
@@ -135,7 +135,9 @@ export default function SearchItemModal({
               <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
                 {updateSearchItem?.map((item, i) => (
                   <div key={i}>
-                    <h4 className="font-semibold mb-3">{item?.region}</h4>
+                    <h4 className="font-semibold text-[20px] mb-2">
+                      {item?.region}
+                    </h4>
                     {item?.countries?.map((country, i) => (
                       <p
                         onClick={() => handleDestination(country)}

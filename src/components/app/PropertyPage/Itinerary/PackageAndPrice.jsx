@@ -100,10 +100,6 @@ function ResortAndPrice({ propertyData }) {
                           {selectedPackage?.packageName}
                         </h1>
 
-                        <p className="text-sm text-white mt-2">
-                          {propertyData?.resortDailySchedule}
-                        </p>
-
                         <>
                           <div className="mt-2">
                             <span className="text-white text-2xl md:text-3xl">
@@ -135,7 +131,12 @@ function ResortAndPrice({ propertyData }) {
         </div>
       </div>
 
-      <PackageModal open={open} setOpen={setOpen} packages={packages} />
+      <PackageModal
+        propertyData={propertyData}
+        open={open}
+        setOpen={setOpen}
+        packages={packages}
+      />
 
       <ResortBookingModal
         open={isOpenBookingModal}

@@ -91,6 +91,8 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
     setForYear(formattedYear);
   }, [searchValues]);
 
+  console.log(searchValues);
+
   return (
     <div className="min-h-[70vh] lg:w-[85%] mx-auto px-5 lg:px-0  sm:pt-[65px] pt-[75px]  sm:pb-[120px] pb-[60px] ">
       <div>
@@ -150,6 +152,17 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                         }}
                         modules={[Pagination]}
                       >
+                        <SwiperSlide key={index}>
+                          <div className="">
+                            <div className="aspect-[3/2] w-full">
+                              <img
+                                className="w-full h-full object-cover"
+                                src={item?.featuredImage || item?.featureImage}
+                                alt="carousalImages"
+                              />
+                            </div>
+                          </div>
+                        </SwiperSlide>
                         {item?.carousal
                           ? item?.carousal?.map((img, index) => (
                               <SwiperSlide key={index}>
@@ -188,7 +201,7 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                       }  `}
                     >
                       <div className="sm:mt-6 mt-[45px] sm:mb-2">
-                        <div className="sm:hidden">
+                        {/* <div className="sm:hidden">
                           <h1 className="sm:text-[28px] text-subtitle2 text-gray font-light font-outfit">
                             {!resort && (
                               <span>
@@ -198,7 +211,7 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                             {searchValues?.destination}
                             {console.log(item.destnation)}
                           </h1>
-                        </div>
+                        </div> */}
                         <h1 className="lg:text-[32px] text-[24px] leading-[24px] sm:mt-0 mt-2 text-primary">
                           {item?.nameOfProperty || item?.propertyName}
                         </h1>

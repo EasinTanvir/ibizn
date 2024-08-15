@@ -4,8 +4,9 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
+import { RxCross2 } from "react-icons/rx";
 
-function PackageModal({ packages, setOpen, open }) {
+function PackageModal({ packages, setOpen, open, propertyData }) {
   console.log(packages);
   const handleClose = () => setOpen(false);
 
@@ -27,39 +28,42 @@ function PackageModal({ packages, setOpen, open }) {
             border: "none",
           }}
         >
-          <div className="p-6">
+          <div className="sm:p-6 p-3">
+            <button onClick={handleClose} className="absolute right-2 top-2">
+              <RxCross2 className="text-2xl text-white" />
+            </button>
             <Typography id="modal-modal-title" className="">
-              <h1 className="lg:text-5xl text-2xl font-roboto font-[300]">
+              <h1 className="lg:text-5xl text-3xl font-roboto font-[300]">
                 {packages?.packageName}
               </h1>
             </Typography>
-            <div className="w-full h-[1px] bg-white my-12"></div>
+            <div className="w-full h-[1px] bg-white sm:my-12 my-6"></div>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               <div className="flex sm:flex-row flex-col sm:justify-between sm:gap-0 gap-5 sm:items-center">
                 <div className="space-y-1">
                   <div className="  text-white ">
-                    <span className="font-[400] text-2xl font-roboto">
+                    <span className="font-[400] sm:text-2xl text-xl font-roboto">
                       Length :{" "}
                     </span>
-                    <span className="text-2xl font-roboto text-light font-[200]">
+                    <span className="sm:text-2xl text-xl font-roboto text-light font-[200]">
                       {" "}
                       ({packages?.numberOfDay} Days / {packages?.numberOfNight}{" "}
                       Nights)
                     </span>
                   </div>
                   <div className="  text-white ">
-                    <span className="font-[400] text-2xl font-roboto">
+                    <span className="font-[400] sm:text-2xl text-xl font-roboto">
                       Room Type :{" "}
                     </span>
-                    <span className="text-2xl font-roboto text-light font-[200]">
+                    <span className="sm:text-2xl text-xl font-roboto text-light font-[200]">
                       {packages?.roomType}
                     </span>
                   </div>{" "}
                   <div className="  text-white ">
-                    <span className="font-[400] text-2xl font-roboto">
+                    <span className="font-[400] sm:text-2xl text-xl font-roboto">
                       Full Board :{" "}
                     </span>
-                    <span className="text-2xl font-roboto text-light font-[200]">
+                    <span className="sm:text-2xl text-xl font-roboto text-light font-[200]">
                       {packages?.fullBoard ? (
                         <CheckIcon className="text-2xl" />
                       ) : (
@@ -70,19 +74,19 @@ function PackageModal({ packages, setOpen, open }) {
                 </div>
                 <div className="space-y-1">
                   <div className="  text-white ">
-                    <span className="font-[400] text-2xl font-roboto">
+                    <span className="font-[400] sm:text-2xl text-xl font-roboto">
                       Number of Dives :{" "}
                     </span>
-                    <span className="text-2xl font-roboto text-light font-[200]">
+                    <span className="sm:text-2xl text-xl font-roboto text-light font-[200]">
                       {" "}
                       {packages?.numberOfDivies}
                     </span>
                   </div>
                   <div className="  text-white ">
-                    <span className="font-[400] text-2xl font-roboto">
+                    <span className="font-[400] sm:text-2xl text-xl font-roboto">
                       Breakfast :{" "}
                     </span>
-                    <span className="text-2xl font-roboto text-light font-[200]">
+                    <span className="sm:text-2xl text-xl font-roboto text-light font-[200]">
                       {packages?.breakfast ? (
                         <CheckIcon className="text-2xl" />
                       ) : (
@@ -91,10 +95,10 @@ function PackageModal({ packages, setOpen, open }) {
                     </span>
                   </div>{" "}
                   <div className="  text-white ">
-                    <span className="font-[400] text-2xl font-roboto">
+                    <span className="font-[400] sm:text-2xl text-xl font-roboto">
                       Upgradeable :{" "}
                     </span>
-                    <span className="text-2xl font-roboto text-light font-[200]">
+                    <span className="sm:text-2xl text-xl font-roboto text-light font-[200]">
                       {packages?.upgradeable ? (
                         <CheckIcon className="text-2xl" />
                       ) : (
@@ -103,10 +107,10 @@ function PackageModal({ packages, setOpen, open }) {
                     </span>
                   </div>{" "}
                   <div className="  text-white ">
-                    <span className="font-[400] text-2xl font-roboto">
+                    <span className="font-[400] sm:text-2xl text-xl font-roboto">
                       Diving Courses :{" "}
                     </span>
-                    <span className="text-2xl font-roboto text-light font-[200]">
+                    <span className="sm:text-2xl text-xl font-roboto text-light font-[200]">
                       {packages?.divingCourses ? (
                         <CheckIcon className="text-2xl" />
                       ) : (
@@ -115,6 +119,10 @@ function PackageModal({ packages, setOpen, open }) {
                     </span>
                   </div>
                 </div>
+              </div>
+
+              <div className="sm:p-4 p-3 mt-5 rounded-sm bg-white text-primary">
+                <p> {propertyData?.resortDailySchedule}</p>
               </div>
             </Typography>
           </div>

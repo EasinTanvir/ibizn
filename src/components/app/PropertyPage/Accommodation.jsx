@@ -2,13 +2,15 @@ import React, { useState } from "react";
 
 const Accommodation = ({ propertyData, resort }) => {
   console.log(propertyData?.schedules);
-  const [activeButton, setActiveButton] = useState("Regular room");
+  const [activeButton, setActiveButton] = useState("");
 
   const lists = propertyData?.schedules?.flatMap((data) => {
+    console.log(data?.itinerary?.cabins[0]);
     if (data?.itinerary?.cabins.length > 0) {
       return data?.itinerary?.cabins?.map((list) => ({
         id: list?._id,
         cabinName: list?.cabinName,
+        cabinPicture: list?.cabinPicture,
       }));
     }
     return []; // return an empty array if no cabins
@@ -35,21 +37,20 @@ const Accommodation = ({ propertyData, resort }) => {
     },
   };
 
-  const { description, imgSrc } = accommodationTypes[activeButton];
-
-  const Button = ({ label }) => (
+  const Button = ({ label, cabinPicture }) => (
     <button
       className={`px-4 py-1 text-sm md:text-xl  rounded-full border-2 ${
-        activeButton === label
+        activeButton === cabinPicture
           ? "bg-[#0080FF] text-white border-[#0080FF]"
           : "text-[#0080FF] border-[#0080FF] hover:bg-[#0080FF] hover:text-white transition-colors duration-300"
       }`}
-      onClick={() => setActiveButton(label)}
+      onClick={() => setActiveButton(cabinPicture)}
     >
       {label}
     </button>
   );
 
+  console.log(activeButton);
   return (
     <div className="bg-[#F1F2F2]    sm:pt-[90px] pt-[75px] sm:pb-[120px] pb-[90px] px-4 lg:px-0">
       <section className="customContainer flex flex-col-reverse lg:flex-row    justify-center  lg:py-16  gap-[45px] lg:gap-12 ">
@@ -57,8 +58,10 @@ const Accommodation = ({ propertyData, resort }) => {
           <img
             className="w-full h-full object-cover"
             src={
-              propertyData?.accommodation?.Picture ||
-              propertyData?.accommodation?.image
+              activeButton
+                ? activeButton
+                : propertyData?.accommodation?.Picture ||
+                  propertyData?.accommodation?.image
             }
             alt={activeButton}
           />
@@ -76,7 +79,11 @@ const Accommodation = ({ propertyData, resort }) => {
           {!resort && (
             <div className="flex flex-wrap gap-4 mt-[20px] lg:mt-16 text-[#2f2f30]">
               {lists?.map((button) => (
-                <Button key={button?.id} label={button?.cabinName} />
+                <Button
+                  key={button?.id}
+                  label={button?.cabinName}
+                  cabinPicture={button?.cabinPicture}
+                />
               ))}
             </div>
           )}

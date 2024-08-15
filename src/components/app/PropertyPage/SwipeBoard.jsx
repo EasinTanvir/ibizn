@@ -26,17 +26,14 @@ const SwipeBoard = ({ propertyData }) => {
         modules={[Navigation]}
         slidesPerView={2} // Default to 2 slides per view
         breakpoints={{
-          // when window width is >= 640px
           640: {
             slidesPerView: 1,
             spaceBetween: 0,
           },
-          // when window width is >= 768px
           768: {
             slidesPerView: 2,
             spaceBetween: 0,
           },
-          // when window width is >= 1024px
           1024: {
             slidesPerView: 4,
             spaceBetween: 0,
@@ -50,18 +47,22 @@ const SwipeBoard = ({ propertyData }) => {
       >
         {propertyData?.carousal?.map((image) => (
           <SwiperSlide onClick={() => openHandler(image)}>
-            <img
-              className="h-72 w-48 md:w-64 md:h-96 cursor-pointer object-cover"
-              src={image}
-            />
+            <div className="aspect-w-3 aspect-h-2">
+              <img
+                className="h-full w-full cursor-pointer object-cover"
+                src={image}
+              />
+            </div>
           </SwiperSlide>
         ))}
         {propertyData?.carousalImages?.map((image) => (
           <SwiperSlide onClick={() => openHandler(image)}>
-            <img
-              className="h-72 w-48 md:w-64 md:h-96 cursor-pointer object-cover"
-              src={image}
-            />
+            <div className="aspect-w-3 aspect-h-2">
+              <img
+                className="h-full w-full cursor-pointer object-cover"
+                src={image}
+              />
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>
