@@ -22,7 +22,7 @@ const Itineraries = ({ schedules }) => {
             </h1>
 
             <h1 className="  sm:border-l-2 sm:pl-5  text-[#0080ff] font-outfit font-light text-[14px]  lg:text-subtitle">
-              approx. {item?.itinerary?.numberOfDives} Up to x dives
+              Up to {item?.itinerary?.numberOfDives} dives
             </h1>
           </div>
 

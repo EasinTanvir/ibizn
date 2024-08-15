@@ -38,7 +38,8 @@ export default function SearchItemModal({
   const handleClose = () => setIsModalOpen(false);
   const [searchItems, setSearchItems] = useState([]);
   const [searchLoader, setSearchLoader] = useState(false);
-  const { searchValues, setSearchValues } = useContext(userContext);
+  const { searchValues, setSearchValues, setMaxPrice, duration, setDuration } =
+    useContext(userContext);
 
   const getUniqueRegionsWithCountries = (searchItems) => {
     const result = [];
@@ -86,7 +87,22 @@ export default function SearchItemModal({
   }, [searchValues]);
 
   const handleDestination = (destination) => {
-    setSearchValues({ ...searchValues, destination });
+    // setSearchValues({
+    //   ...searchValues,
+    //   destination,
+    // });
+
+    setMaxPrice(null);
+    setDuration(0);
+    const updatedSearchValues = {
+      ...searchValues,
+      destination,
+    };
+    delete updatedSearchValues.minPrice;
+    delete updatedSearchValues.maxPrice;
+    delete updatedSearchValues.duration;
+    setSearchValues(updatedSearchValues);
+
     setIsModalOpen(false);
   };
 

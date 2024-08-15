@@ -6,6 +6,7 @@ import Modal from "@mui/material/Modal";
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import Swal from "sweetalert2";
+import { Close } from "@mui/icons-material";
 
 const style = {
   position: "absolute",
@@ -66,6 +67,7 @@ const BasicInfo = ({
       }
     }
   };
+  console.log(caruselImages);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   const handleCabinImageOnChange = async (event) => {
@@ -94,6 +96,11 @@ const BasicInfo = ({
       );
       setCabinImage(compressedBase64);
     }
+  };
+
+  const removeImage = (index) => {
+    const newImageData = caruselImages?.filter((image, i) => i !== index);
+    setCaruselImages(newImageData);
   };
 
   // go to next step ------------
@@ -177,15 +184,22 @@ const BasicInfo = ({
 
               {caruselImages.length > 0 && (
                 <div>
-                  <h4>Uploaded Carusel Images:</h4>
+                  <h4>Uploaded Carusel Imagess:</h4>
                   <ul className="grid grid-cols-5 gap-x-4 mt-4">
                     {caruselImages.map((image, index) => (
-                      <li key={index}>
+                      <li className=" w-fit relative" key={index}>
                         <img
                           src={image}
                           alt={`uploaded-${index}`}
                           style={imageStyles}
                         />
+                        <button
+                          type="button"
+                          onClick={() => removeImage(index)}
+                          className="absolute top-0 right-0 size-8 bg-green-500 text-white rounded-full flex justify-center items-center cursor-pointer"
+                        >
+                          <Close />
+                        </button>
                       </li>
                     ))}
                   </ul>

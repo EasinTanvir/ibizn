@@ -7,7 +7,7 @@ import Loader from "../../../../core/shared/Loader/Loader";
 const OperatorsOfList = () => {
   const [operators, setOperators] = useState([]);
   const { control, setControl, loader, setLoader } = useContext(userContext);
-
+  console.log(operators);
   useEffect(() => {
     setLoader(true);
     fetch(`${baseUrl}/users/get-operators`, {
@@ -74,9 +74,11 @@ const OperatorsOfList = () => {
       <table className="min-w-full bg-white border border-gray-300">
         <thead>
           <tr className="text-center">
+            <th className="py-2 px-1 border-b">ID</th>
             <th className="py-2 px-1 border-b">Name</th>
             <th className="py-2 px-1 border-b">Email</th>
             <th className="py-2 px-1 border-b">Phone</th>
+            <th className="py-2 px-1 border-b">Compane</th>
             {/* <th className="py-2 px-1 border-b">Company Name</th> */}
             <th className="py-2 px-1 border-b">Status</th>
             <th className="py-2 px-1 border-b">Action</th>
@@ -90,9 +92,11 @@ const OperatorsOfList = () => {
                 index % 2 === 0 ? "bg-gray-100 text-center" : "text-center"
               }
             >
+              <td className="py-2 px-4 border-b">{item?._id}</td>
               <td className="py-2 px-4 border-b">{item?.fullName}</td>
               <td className="py-2 px-4 border-b">{item?.email}</td>
               <td className="py-2 px-4 border-b">{item?.phone}</td>
+              <td className="py-2 px-4 border-b">{item?.companyName}</td>
               {/* <td className="py-2 px-4 border-b">{item?.companyName}</td> */}
               <td className="py-2 px-4 border-b">
                 <span

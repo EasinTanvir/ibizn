@@ -5,6 +5,7 @@ import { compressAndConvertToBase64 } from "@/src/config/base64";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { userContext } from "@/src/storage/contextApi";
+import { Close } from "@mui/icons-material";
 import {
   FormControl,
   InputLabel,
@@ -178,6 +179,11 @@ const BasicInfo = ({
     decreaseProgress();
   };
 
+  const removeImage = (index) => {
+    const newImageData = caruselImages?.filter((image, i) => i !== index);
+    setCaruselImages(newImageData);
+  };
+
   return (
     <>
       <h2 className="my-4 text-xl pb-2 border-b-2">Basic Information</h2>
@@ -302,12 +308,19 @@ const BasicInfo = ({
                 <h4>Uploaded Carusel Images:</h4>
                 <ul className="grid grid-cols-5 gap-x-4 mt-4">
                   {caruselImages.map((image, index) => (
-                    <li key={index}>
+                    <li className=" w-fit relative" key={index}>
                       <img
                         src={image}
                         alt={`uploaded-${index}`}
                         style={imageStyles}
                       />
+                      <button
+                        type="button"
+                        onClick={() => removeImage(index)}
+                        className="absolute top-0 right-0 size-8 bg-green-500 text-white rounded-full flex justify-center items-center cursor-pointer"
+                      >
+                        <Close />
+                      </button>
                     </li>
                   ))}
                 </ul>

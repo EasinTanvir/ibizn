@@ -53,7 +53,7 @@ const Accommodation = ({ propertyData, resort }) => {
   return (
     <div className="bg-[#F1F2F2]    sm:pt-[90px] pt-[75px] sm:pb-[120px] pb-[90px] px-4 lg:px-0">
       <section className="customContainer flex flex-col-reverse lg:flex-row    justify-center  lg:py-16  gap-[45px] lg:gap-12 ">
-        <div className="w-full lg:w-1/2 aspect-[2/3] lg:aspect-[2/3] order-first lg:order-none">
+        <div className="w-full lg:w-1/2 aspect-[3/2] lg:aspect-[3/2] order-first lg:order-none">
           <img
             className="w-full h-full object-cover"
             src={

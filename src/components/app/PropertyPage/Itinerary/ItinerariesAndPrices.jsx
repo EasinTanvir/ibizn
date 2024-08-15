@@ -372,15 +372,15 @@ function ItinerariesAndPrices({ propertyData }) {
                             </h1>
 
                             <>
-                              <div className="mt-2">
+                              {/* <div className="mt-2">
                                 <span className="text-[#3a95ea] text-2xl md:text-3xl line-through">
                                   1500
                                 </span>
                                 <span className="inline-block text-[#3a95ea] ms-1 line-through font-semibold text-sm">
                                   USD
                                 </span>
-                              </div>
-                              <div className="">
+                              </div> */}
+                              <div className=" mt-2">
                                 {/* <span className="text-white text-2xl md:text-3xl ">
                                 {Math.round(
                                   Number(data?.convertedPrice) -

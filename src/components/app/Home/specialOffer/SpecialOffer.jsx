@@ -76,7 +76,7 @@ const SpecialOffer = () => {
             <div key={i} className="lg:flex mb-10 w-full ">
               <div className="lg:flex items-center border   border-primary lg:w-[80%] md:w-full gap-10">
                 <div className="h-full">
-                  <div className="w-full lg:w-96 aspect-w-2 aspect-h-3">
+                  <div className="w-full lg:w-96 aspect-w-3 aspect-h-2">
                     <img
                       className="h-full w-full object-cover"
                       src="/images/client/boat.jpg"

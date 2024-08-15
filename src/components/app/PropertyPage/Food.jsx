@@ -12,7 +12,7 @@ const Content = ({ title, description }) => (
 );
 
 const Image = ({ src, alt }) => (
-  <div className="sm:p-2 p-0 w-full lg:w-1/2 aspect-[2/3]">
+  <div className="sm:p-2 p-0 w-full lg:w-1/2 aspect-[3/2]">
     <img className="w-full h-full object-cover" src={src} alt={alt} />
   </div>
 );

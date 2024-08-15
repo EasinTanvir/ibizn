@@ -28,7 +28,16 @@ const ratings = [
 const Banner = ({ setSearchResult }) => {
   //click event
   const [isMobileMode, setIsMobileMode] = useState(false);
-  const { searchValues, setSearchValues } = useContext(userContext);
+  const {
+    searchValues,
+    setSearchValues,
+    minPrice,
+    setMinPrice,
+    maxPrice,
+    setMaxPrice,
+    duration,
+    setDuration,
+  } = useContext(userContext);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   const date = dayjs(searchValues?.tripStart);
@@ -49,14 +58,37 @@ const Banner = ({ setSearchResult }) => {
       const endOfMonth = dayjs(date).endOf("month").format("YYYY-MM-DD");
       console.log(startOfMonth);
       console.log(endOfMonth);
-      setSearchValues({
+
+      setDuration(0);
+      setMaxPrice(null);
+      const updatedSearchValues = {
         ...searchValues,
         tripStart: startOfMonth,
         tripEnd: endOfMonth,
-      });
+      };
+
+      delete updatedSearchValues.minPrice;
+      delete updatedSearchValues.maxPrice;
+      delete updatedSearchValues.duration;
+      setSearchValues(updatedSearchValues);
     }
   };
+  console.log(searchValues);
   const handleSearchValues = () => {
+    setDuration(0);
+    setMaxPrice(null);
+
+    const updatedSearchValues = {
+      ...searchValues,
+      tripStart: startOfMonth,
+      tripEnd: endOfMonth,
+    };
+
+    delete updatedSearchValues.minPrice;
+    delete updatedSearchValues.maxPrice;
+    delete updatedSearchValues.duration;
+    setSearchValues(updatedSearchValues);
+
     if (rating.minRating || rating?.maxRating) {
       console.log(rating);
       searchValues.minRating = rating?.minRating;
@@ -96,13 +128,31 @@ const Banner = ({ setSearchResult }) => {
 
   useEffect(() => {
     if (rating.minRating || rating?.maxRating) {
-      setSearchValues({
+      // setSearchValues({
+      //   ...searchValues,
+      //   minRating: searchValues.minRating,
+      //   maxRating: searchValues.maxRating,
+      //   maxPrice: null,
+      //   duration: 0,
+      // });
+      console.log("I am on");
+
+      setDuration(0);
+      setMaxPrice(null);
+
+      const updatedSearchValues = {
         ...searchValues,
-        minRating: searchValues.minRating,
-        maxRating: searchValues.maxRating,
-      });
+        minRating: rating.minRating,
+        maxRating: rating.maxRating,
+      };
+      delete updatedSearchValues.minPrice;
+      delete updatedSearchValues.maxPrice;
+      delete updatedSearchValues.duration;
+      setSearchValues(updatedSearchValues);
     }
-  }, [rating?.minRating]);
+  }, [rating]);
+  console.log(rating);
+  console.log(searchValues);
 
   console.log(isSmallScreen);
   console.log(isMobileMode);
@@ -645,7 +695,7 @@ const Banner = ({ setSearchResult }) => {
                     style={{ color: "#f1f2f2" }}
                     id="demo-simple-select-label"
                   >
-                    Vegan ratings
+                    Vegan rating
                   </InputLabel>
                   <Select
                     label="Vegan rating"

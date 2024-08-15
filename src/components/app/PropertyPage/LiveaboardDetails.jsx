@@ -21,7 +21,7 @@ function LiveaboardDetails({ propertyData, resort }) {
             : propertyData?.liveABoard?.description}
         </p>
       </div>
-      <div className="w-full  sm:mt-0 mt-[45px] aspect-[2/3] md:aspect-[2/3]">
+      <div className="w-full  sm:mt-0 mt-[45px] aspect-[3/2] md:aspect-[3/2]">
         <img
           className="w-full h-full object-cover mt-1"
           src={

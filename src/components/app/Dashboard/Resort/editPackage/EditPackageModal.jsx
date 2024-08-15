@@ -137,8 +137,8 @@ const EditPackageModal = ({
                       className="w-full rounded-md"
                     />
                   </div>
-                  <div className="mt-3 w-full">
-                    <p className="text-lg font-semibold">Number of Days</p>
+                  <div className="mt-4 w-full">
+                    <p className="text-lg font-semibold">Number of Day</p>
                     <input
                       onChange={(e) =>
                         setPackageData({
@@ -150,6 +150,22 @@ const EditPackageModal = ({
                       type="number"
                       required
                       name="numberOfDay"
+                      className="w-full rounded-md"
+                    />
+                  </div>
+                  <div className="mt-4 w-full">
+                    <p className="text-lg font-semibold">Number of Nights</p>
+                    <input
+                      onChange={(e) =>
+                        setPackageData({
+                          ...packageData,
+                          numberOfNight: Number(e.target.value),
+                        })
+                      }
+                      defaultValue={packageData?.numberOfNight}
+                      type="number"
+                      required
+                      name="numberOfNight"
                       className="w-full rounded-md"
                     />
                   </div>

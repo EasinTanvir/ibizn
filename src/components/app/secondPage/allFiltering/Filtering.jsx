@@ -18,22 +18,25 @@ import { ArrowDropDown } from "@mui/icons-material";
 import { Menu, MenuItem } from "@mui/material";
 const Filtering = () => {
   const [isShowPriceField, setIsShowPriceField] = useState(false);
-  const { searchValues, setSearchValues } = useContext(userContext);
+  const {
+    searchValues,
+    setSearchValues,
+    minPrice,
+    setMinPrice,
+    maxPrice,
+    setMaxPrice,
+    duration,
+    setDuration,
+  } = useContext(userContext);
+  const priceFieldRefs = useRef(null);
 
-  const [duration, setDuration] = useState(0);
   console.log(duration);
 
   const priceFieldRef = useRef(null);
 
-  const handleClickOutside = (event) => {};
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
   const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClickOutside = (event) => {};
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -43,11 +46,12 @@ const Filtering = () => {
     setAnchorEl(null);
   };
 
-  const [minPrice, setMinPrice] = useState(0);
-
-  const [maxPrice, setMaxPrice] = useState();
-
-  const priceFieldRefs = useRef(null);
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {

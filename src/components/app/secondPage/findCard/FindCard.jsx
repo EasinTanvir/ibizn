@@ -12,6 +12,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import MoodIcon from "@mui/icons-material/Mood";
 import Wifi from "./Wifi";
+import { RxCross2 } from "react-icons/rx";
 import LoadingCard from "@/src/components/core/shared/Loader/LoadingCard";
 import Itineraries from "./Itineraries";
 import { Alert } from "@mui/material";
@@ -111,7 +112,7 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
             {searchValues?.maxPrice && (
               <span> among price $({searchValues?.maxPrice})</span>
             )}{" "}
-            {searchValues?.duration && (
+            {searchValues?.duration > 0 && (
               <span>
                 {searchValues?.maxPrice ? "and" : "among"} duration (
                 {searchValues?.duration} nights )
@@ -153,7 +154,7 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                           ? item?.carousal?.map((img, index) => (
                               <SwiperSlide key={index}>
                                 <div className="">
-                                  <div className="aspect-[2/3] w-full">
+                                  <div className="aspect-[3/2] w-full">
                                     <img
                                       className="w-full h-full object-cover"
                                       src={img}
@@ -166,7 +167,7 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                           : item?.carousalImages?.map((img, index) => (
                               <SwiperSlide key={index}>
                                 <div>
-                                  <div className="aspect-[2/3] w-full">
+                                  <div className="aspect-[3/2] w-full">
                                     <img
                                       className="w-full h-full object-cover"
                                       src={img}
@@ -293,19 +294,36 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
             <QuestionMarkIcon className="animate-bounce text-primary" />
             <div className="pt-5 space-y-5">
               <p className="text-gray text-subtitle font-outfit font-normal">
-                Explore your options and discover your perfect dive adventure.
-                Submit your booking to us by xxxxxxxx.
+                Explore your options and discover the perfect, inclusive dive
+                adventure.
               </p>
-              <p className="text-gray text-subtitle font-outfit font-normal">
-                We will check the most up-to-date availability and options for
-                you and hold your reservation. Afterwards, we will contact you
-                with your trip details, answer all your queries, and confirm
-                everything. Next, we will review payment methods and other terms
-                and conditions, and you will receive access to your diver’s hub
-                account. We will be available at any time to answer questions
-                and discuss your diving thoughts with you, we have heard them
-                all over our time, so don’t be shy
-              </p>
+              <div>
+                <ul className="list-disc space-y-2 text-gray">
+                  <li className=" text-subtitle font-outfit font-normal">
+                    Submit your booking or inquiry to us by clicking on ‘Book
+                    Now’.
+                  </li>{" "}
+                  <li className=" text-subtitle font-outfit font-normal">
+                    We will check the most up-to-date availability and options
+                    for you and hold your reservation.
+                  </li>{" "}
+                  <li className=" text-subtitle font-outfit font-normal">
+                    Very shortly, we will contact you with your trip details,
+                    answer all your queries, and confirm everything.
+                  </li>{" "}
+                  <li className=" text-subtitle font-outfit font-normal">
+                    Next, we will review payment methods and other terms and
+                    conditions, and you will receive access to your diver’s hub
+                    account. Here, we can gather the necessary information to
+                    make your trip perfect.
+                  </li>
+                  <li className=" text-subtitle font-outfit font-normal">
+                    We will be available anytime to answer questions and discuss
+                    your diving thoughts with you; we have heard them all over
+                    our time, so don’t be shy!
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
 
@@ -314,6 +332,7 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
+            className=""
           >
             <Box
               className="w-[90%] lg:w-[800px] md:w-[90%]"
@@ -322,7 +341,7 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                 top: "50%",
                 left: "50%",
                 transform: "translate(-50%, -50%)",
-                maxHeight: "80vh",
+                maxHeight: "70vh",
                 overflowY: "auto",
                 bgcolor: "background.paper",
                 borderRadius: 2,
@@ -330,36 +349,42 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                 p: 4,
               }}
             >
-              <Typography>
-                <h1 className="inline-block lg:text-[32px] md:text-3xl text-xl text-primary">
-                  Tips and FAQ for your booking
-                </h1>{" "}
-                <MoodIcon className="animate-bounce text-primary sm:hidden lg:inline-block md:inline-block lg:text-[32px] md:text-3xl text-xl" />
-              </Typography>
-              <div className="w-full h-[1px] bg-slate-400 mt-8"></div>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                <div className="opacity-[60%]">
-                  {/* if you want to see question and answer go to top line number 15 and you can see in faqData object */}
-                  {faqData.map((item, index) => (
-                    <div key={index}>
-                      <p className="lg:text-subtitle md:text-xl text-[14px] text-gray-500 mt-5">
-                        <h1>
-                          <b className="opacity-[100%] text-red-600">
-                            Question:{(index + 1).toFixed(0)}
-                          </b>
-                          - {item.question}
-                        </h1>
-                        <br />
-                        <b className="opacity-[100%] text-primary">
-                          Answer:
-                        </b>{" "}
-                        {item.answer}
-                      </p>
-                      <br />
-                    </div>
-                  ))}
+              <button onClick={handleClose} className="absolute right-2 top-2">
+                <RxCross2 className="text-2xl text-slate-800" />
+              </button>
+              <div className="pt-5 space-y-5">
+                <p className="text-gray text-subtitle font-outfit font-normal">
+                  Explore your options and discover the perfect, inclusive dive
+                  adventure.
+                </p>
+                <div>
+                  <ul className="list-disc space-y-2 text-gray">
+                    <li className=" text-subtitle font-outfit font-normal">
+                      Submit your booking or inquiry to us by clicking on ‘Book
+                      Now’.
+                    </li>{" "}
+                    <li className=" text-subtitle font-outfit font-normal">
+                      We will check the most up-to-date availability and options
+                      for you and hold your reservation.
+                    </li>{" "}
+                    <li className=" text-subtitle font-outfit font-normal">
+                      Very shortly, we will contact you with your trip details,
+                      answer all your queries, and confirm everything.
+                    </li>{" "}
+                    <li className=" text-subtitle font-outfit font-normal">
+                      Next, we will review payment methods and other terms and
+                      conditions, and you will receive access to your diver’s
+                      hub account. Here, we can gather the necessary information
+                      to make your trip perfect.
+                    </li>
+                    <li className=" text-subtitle font-outfit font-normal">
+                      We will be available anytime to answer questions and
+                      discuss your diving thoughts with you; we have heard them
+                      all over our time, so don’t be shy!
+                    </li>
+                  </ul>
                 </div>
-              </Typography>
+              </div>
             </Box>
           </Modal>
         </div>

@@ -31,6 +31,7 @@ function ResortAndPrice({ propertyData }) {
   if (propertyData?.listOfPackages?.length === 0) {
     return <div>No Package Found</div>;
   }
+  console.log(propertyData?.resortDailySchedule);
 
   return (
     <div className="w-full bg-primary sm:pt-[90px] pt-[75px] sm:pb-[120px] pb-[90px]">
@@ -98,6 +99,10 @@ function ResortAndPrice({ propertyData }) {
                         <h1 className="text-xl text-white font-medium  ">
                           {selectedPackage?.packageName}
                         </h1>
+
+                        <p className="text-sm text-white mt-2">
+                          {propertyData?.resortDailySchedule}
+                        </p>
 
                         <>
                           <div className="mt-2">

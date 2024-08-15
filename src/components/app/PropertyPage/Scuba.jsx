@@ -13,7 +13,7 @@ const Diving = {
 };
 
 const Image = ({ src, alt }) => (
-  <div className="w-full  flex-1 overflow-hidden flex-shrink-0 aspect-[2/3]">
+  <div className="w-full  flex-1 overflow-hidden flex-shrink-0 aspect-[3/2]">
     <img className="w-full h-full object-cover" src={src} alt={alt} />
   </div>
 );

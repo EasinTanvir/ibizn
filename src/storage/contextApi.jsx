@@ -9,6 +9,11 @@ const ContextApi = ({ children }) => {
   const [country, setCountry] = useState([]);
   const [loader, setLoader] = useState(true);
   const [submitLoader, setSubmitLoader] = useState(false);
+
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(null);
+  const [duration, setDuration] = useState(0);
+
   const [searchValues, setSearchValues] = useState({
     tabValue: "Liveaboards",
     destination: "",
@@ -61,6 +66,12 @@ const ContextApi = ({ children }) => {
     setSubmitLoader,
     searchValues,
     setSearchValues,
+    minPrice,
+    setMinPrice,
+    maxPrice,
+    setMaxPrice,
+    duration,
+    setDuration,
   };
   // console.log({ country });
   return (
