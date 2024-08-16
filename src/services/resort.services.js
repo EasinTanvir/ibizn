@@ -166,7 +166,7 @@ const getSingleResotFromDB = async (id) => {
       path: "listOfPackages",
       model: "Package",
     });
-  // console.log({result});
+  console.log(result.listOfPackages);
   return result;
 };
 
@@ -195,10 +195,16 @@ const getAllApprovedResortFromDB = async () => {
   return result;
 };
 const updateResortFromDB = async (id, payload) => {
-  const result = await Resort.findByIdAndUpdate(id, payload, {
-    new: true,
-    runValidators: true,
-  });
+  //console.log("pay = ", payload.listOfPackages);
+
+  const result = await Resort.findByIdAndUpdate(
+    id,
+    { ...payload, listOfPackages: payload.listOfPackages },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
 
   const htmlMessage = `
     <div>
