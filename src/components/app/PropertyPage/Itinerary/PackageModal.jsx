@@ -123,6 +123,7 @@ function PackageModal({ packages, setOpen, open, propertyData }) {
             </Typography>
           </div>
           <div className="bg-white text-secondary   py-3 px-6">
+            <h3 className="pb-2 sm:text-2xl text-lg"> Daily Itinerary</h3>
             <p>{propertyData?.resortDailySchedule}</p>
           </div>
         </Box>

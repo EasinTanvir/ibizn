@@ -707,7 +707,7 @@ const Banner = ({ setSearchResult }) => {
                     input={<OutlinedInput label="Vegan rating" />}
                     onChange={(e) => setRating(e.target.value)}
                     IconComponent={() => (
-                      <ArrowDropDown className="text-white cursor-pointer" />
+                      <ArrowDropDown className="text-white cursor-pointer me-3" />
                     )}
                     sx={{
                       "& .MuiOutlinedInput-notchedOutline": {

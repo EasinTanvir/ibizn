@@ -133,7 +133,7 @@ const Banner = () => {
               InputProps={{
                 endAdornment: (
                   <InputAdornment
-                    className="absolute left-0 top-2  h-12 w-full pe-3  flex justify-end"
+                    className="absolute left-0 top-2  h-12 w-full pe-2  flex justify-end"
                     position="start"
                   >
                     <ArrowDropDown className="text-white cursor-pointer " />
@@ -253,7 +253,7 @@ const Banner = () => {
                   slots={{
                     openPickerIcon: ArrowDropDown,
                   }}
-                  className="w-full  "
+                  className="w-full   "
                   onChange={handleDateChange}
                   format="MMM YYYY"
                   label={"Year / Month"}
@@ -288,7 +288,7 @@ const Banner = () => {
                     width: "100%",
                   }}
                 />
-                <div className="absolute sm:hidden top-4 right-3 h-full text-white  ">
+                <div className="absolute sm:hidden top-4 right-2 h-full text-white  ">
                   <ArrowDropDown className="text-white cursor-pointer" />
                 </div>
               </div>
@@ -300,13 +300,13 @@ const Banner = () => {
               <InputLabel
                 style={{ color: "#f1f2f2" }}
                 id="demo-simple-select-label"
-                className="-mt-1"
+                className="-mt-1 "
               >
                 Vegan ratings
               </InputLabel>
               {console.log(rating)}
               <Select
-                className="h-12 "
+                className="h-12  "
                 label="Vegan rating"
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"

@@ -126,6 +126,7 @@ function CabinModal({ cabins, setOpen, open, ititnary, tripDate }) {
             </Typography>
           </div>
           <div className="bg-white text-secondary   py-3 px-6">
+            <h3 className="pb-2 sm:text-2xl text-lg">Itinerary Description</h3>
             <p>{ititnary?.itineraryDescription}</p>
           </div>
         </Box>
