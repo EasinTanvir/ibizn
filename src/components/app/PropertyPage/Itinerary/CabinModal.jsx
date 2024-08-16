@@ -15,7 +15,7 @@ function CabinModal({ cabins, setOpen, open, ititnary, tripDate }) {
         aria-describedby="modal-modal-description"
       >
         <Box
-          className="w-[95%] sm:w-10/12 md:w-8/12 lg:w-9/12 mx-auto max-h-[80vh] overflow-y-auto bg-primary text-white shadow-lg outline-none sm:p-4 p-2 rounded-md"
+          className="w-[95%] sm:w-10/12 md:w-8/12 lg:w-9/12 mx-auto max-h-[70vh] overflow-y-auto bg-primary text-white shadow-lg outline-none rounded-md"
           sx={{
             position: "absolute",
             top: "50%",
@@ -123,10 +123,10 @@ function CabinModal({ cabins, setOpen, open, ititnary, tripDate }) {
                   </div>
                 </div>
               </div>
-              <div className="sm:p-4 p-3 mt-5 rounded-sm bg-white text-primary">
-                <p>{ititnary?.itineraryDescription}</p>
-              </div>
             </Typography>
+          </div>
+          <div className="bg-white text-secondary   py-3 px-6">
+            <p>{ititnary?.itineraryDescription}</p>
           </div>
         </Box>
       </Modal>

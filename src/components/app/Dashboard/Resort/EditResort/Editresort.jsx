@@ -15,6 +15,7 @@ import FoodAtTheResort from "./AllComponents/FoodAtTheResort";
 import Room from "./AllComponents/Room";
 import CheckFields from "./AllComponents/CheckFields";
 import EnvQAndA from "./AllComponents/EnvQAndA";
+import { Checkbox, ListItemText } from "@mui/material";
 
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -37,16 +38,19 @@ const MenuProps = {
 export default function EditResort({ id }) {
   const router = useRouter();
   const [loading, setLoading] = React.useState(false);
+  const [customLoader, setCustomLoader] = React.useState(false);
   // some changes
   const [resortData, setResortData] = useState({});
   console.log(resortData?.listOfPackages);
   useEffect(() => {
     setLoading(true);
+    setCustomLoader(true);
     fetch(`${baseUrl}/resorts/single-resort/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setResortData(data.data);
         setLoading(false);
+        setCustomLoader(false);
       });
   }, [id && !resortData]);
 
@@ -182,19 +186,9 @@ export default function EditResort({ id }) {
   console.log(resortData?.listOfPackages);
 
   const [packageData, setPackageData] = useState([]);
-  const [packages, setPackages] = useState([]);
-  //   console.log(packageData);
-
-  const handleChange = (event) => {
-    console.log(event.target.value);
-    const {
-      target: { value },
-    } = event;
-    setPackages(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
-  };
+  //const [packages, setPackages] = useState([]);
+  console.log(packageData);
+  //console.log(packages);
 
   useEffect(() => {
     fetch(`${baseUrl}/packages/`, {
@@ -211,25 +205,39 @@ export default function EditResort({ id }) {
       .catch((err) => {});
   }, []);
 
+  //console.log(packages);
+
+  //console.log(resortData?.listOfPackages);
+
+  const [selectedIds, setSelectedIds] = useState([]);
+  console.log(selectedIds);
+  const handleChange = (event) => {
+    const ids = event.target.value;
+
+    console.log(event.target.value);
+    setSelectedIds(event.target.value);
+  };
+
   useEffect(() => {
     setResortData({
       ...resortData,
-      listOfPackages: packages,
+      listOfPackages: selectedIds,
     });
-  }, [packages]);
+  }, [selectedIds]);
 
   useEffect(() => {
-    if (resortData?.listOfPackages?.length > 0) {
+    if (resortData?.listOfPackages) {
       console.log(resortData?.listOfPackages);
-      setPackages(resortData?.listOfPackages);
+      const rendom = resortData?.listOfPackages.map((data) => data?._id);
+      console.log(rendom);
+      setSelectedIds(rendom);
     }
-  }, [resortData]);
-
-  console.log(resortData?.listOfPackages);
+  }, [customLoader]);
 
   if (loading) {
     return <Spinner />;
   }
+
   return (
     <>
       {resortData && (
@@ -241,33 +249,57 @@ export default function EditResort({ id }) {
               handleImageChanges={handleImageChanges}
             />
             <div>
+              {/* <div className="flex flex-wrap gap-2">
+                {packages?.length > 0 &&
+                  packages?.map((item) => (
+                    <div className="flex items-center" key={item?._id}>
+                      <h1>{item?.packageName}</h1>
+                      <button
+                        className="bg-rose-700 text-white"
+                        onClick={() => {
+                          const updateData = packages.filter(
+                            (list) => list?._id !== item?._id
+                          );
+                          setPackages(updateData);
+                        }}
+                      >
+                        delete
+                      </button>
+                    </div>
+                  ))}
+              </div> */}
               <div>
-                <FormControl sx={{ width: 300 }}>
-                  <InputLabel id="demo-multiple-name-label">
-                    Update Package
-                  </InputLabel>
+                <InputLabel className="text-secondary text-lg font-roboto mb-2">
+                  Packages
+                </InputLabel>
+                <FormControl className="w-fit ">
                   <Select
-                    labelId="demo-multiple-name-label"
-                    id="demo-multiple-name"
+                    labelId="multiple-select-label"
+                    id="multiple-select"
                     multiple
-                    value={packages}
+                    value={selectedIds}
+                    className="pe-3"
                     onChange={handleChange}
-                    input={<OutlinedInput label="Select Package" />}
-                    MenuProps={MenuProps}
+                    renderValue={(selected) =>
+                      selected
+                        .map(
+                          (id) =>
+                            packageData.find((option) => option._id === id)
+                              ?.packageName
+                        )
+                        .join(", ")
+                    }
                   >
-                    {console.log(packages)}
-                    {packageData?.map((p) => (
-                      <MenuItem key={p?._id} value={p?._id}>
-                        {p?.packageName}
+                    {packageData.map((option) => (
+                      <MenuItem key={option?._id} value={option?._id}>
+                        <Checkbox
+                          checked={selectedIds.indexOf(option._id) > -1}
+                        />
+                        <ListItemText primary={option?.packageName} />
                       </MenuItem>
                     ))}
                   </Select>
                 </FormControl>
-                {/* {packageError && (
-                  <Typography color={"red"} mt={"10px"}>
-                    {packageError}
-                  </Typography>
-                )} */}
               </div>
             </div>
 
