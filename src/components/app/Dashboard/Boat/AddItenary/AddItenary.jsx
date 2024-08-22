@@ -4,7 +4,9 @@ import Swal from "sweetalert2";
 import CloseIcon from "@mui/icons-material/Close";
 import { useRouter } from "next/router";
 import { userContext } from "@/src/storage/contextApi";
-import ReactQuill from "react-quill";
+import dynamic from "next/dynamic";
+
+const ReactQuill = dynamic(import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 import {
   FormControl,

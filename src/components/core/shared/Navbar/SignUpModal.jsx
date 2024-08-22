@@ -83,13 +83,7 @@ const SignUpModal = ({ isModalOpen, setIsModalOpen }) => {
                   rel="stylesheet"
                   type="text/css"
                 />
-                <style
-                  type="text/css"
-                  dangerouslySetInnerHTML={{
-                    __html:
-                      "\n        #mc_embed_signup{background:#fff; false;clear:left; font:14px Helvetica,Arial,sans-serif; width: 100%;}\n        /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.\n           We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */\n",
-                  }}
-                />
+
                 <div id="mc_embed_signup">
                   <form
                     action="https://protonmail.us5.list-manage.com/subscribe/post?u=686f58751922907170dac8720&id=acb83b6e82&f_id=00af28ebf0"
