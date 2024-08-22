@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { RxCross2 } from "react-icons/rx";
+import DOMPurify from "dompurify";
 function CabinModal({ cabins, setOpen, open, ititnary, tripDate }) {
   const handleClose = () => setOpen(false);
 
@@ -127,7 +128,13 @@ function CabinModal({ cabins, setOpen, open, ititnary, tripDate }) {
           </div>
           <div className="bg-white text-secondary   py-3 px-6">
             <h3 className="pb-2 sm:text-2xl text-lg">Itinerary Description</h3>
-            <p>{ititnary?.itineraryDescription}</p>
+            <p>
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(ititnary?.itineraryDescription),
+                }}
+              />
+            </p>
           </div>
         </Box>
       </Modal>

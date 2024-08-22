@@ -1,4 +1,6 @@
 import React from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const PropertyDesc = ({
   handleInputChange,
@@ -67,7 +69,25 @@ const PropertyDesc = ({
           >
             Brief description
           </label>
-          <textarea
+
+          <ReactQuill
+            className="shadow appearance-none border h-40  w-full py-2 px-3 rounded-md text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="propertyDesc"
+            name="briefDescription"
+            modules={{
+              toolbar: false,
+            }}
+            value={resortData?.briefDescription || ""}
+            onChange={(value) =>
+              handleInputChange({
+                target: { name: "briefDescription", value },
+              })
+            }
+            required
+            theme="snow" // This is the default theme; you can customize it as needed
+          />
+
+          {/* <textarea
             className="shadow appearance-none border  w-full py-2 px-3 rounded-md text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="propertyDesc"
             rows="4"
@@ -75,7 +95,7 @@ const PropertyDesc = ({
             defaultValue={resortData?.briefDescription || ""}
             name="briefDescription"
             onChange={(e) => handleInputChange(e)}
-          />
+          /> */}
         </div>
 
         <div className="flex justify-between mt-10">

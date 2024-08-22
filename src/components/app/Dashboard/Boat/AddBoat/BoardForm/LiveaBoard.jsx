@@ -1,4 +1,7 @@
 import React from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import DOMPurify from "dompurify";
 
 const LiveaBoard = ({
   handleLiveboarChange,
@@ -58,41 +61,27 @@ const LiveaBoard = ({
             />
           )}
         </div>
-        {/* <div className="mb-4">
-          <label
-            className="block mb-2 text-xl font-medium text-gray-900"
-            for="divingImage"
-          >
-            Diving Image
-          </label>
-          <input
-            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none  "
-            name="Picture"
-            id="divingImage"
-            required={boardData?.liveABoard?.Picture ? false : true}
-            type="file"
-            accept=".jpg,.png,.jpeg,.webp"
-            onChange={(e) => handleLiveboarChange(e)}
-          />
-          {boardData?.liveABoard?.Picture && (
-            <img width={120} className="mt-5" src={boardData?.liveABoard?.Picture} />
-          )}
-        </div> */}
+
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-xl  mb-2"
+            className="block text-gray-700 text-xl mb-2"
             htmlFor="divingDesc"
           >
             Boat description
           </label>
-          <textarea
-            className="shadow appearance-none border  w-full py-2 px-3 rounded-md text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          <ReactQuill
+            className="shadow h-40 appearance-none border w-full py-2 px-3 rounded-md text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="divingDesc"
             name="description"
-            defaultValue={boardData?.liveABoard?.description || ""}
+            modules={{
+              toolbar: false,
+            }}
+            value={boardData?.liveABoard?.description || ""}
+            onChange={(value) =>
+              handleLiveboarChange({ target: { name: "description", value } })
+            }
             required
-            rows="4"
-            onChange={(e) => handleLiveboarChange(e)}
+            theme="snow" // This is the default theme; you can customize it as needed
           />
         </div>
         <div className="flex justify-between mt-10">

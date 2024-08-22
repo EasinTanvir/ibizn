@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import DOMPurify from "dompurify";
 const Accommodation = ({ propertyData, resort }) => {
   console.log(propertyData?.schedules);
   const [activeButton, setActiveButton] = useState("");
@@ -73,7 +73,13 @@ const Accommodation = ({ propertyData, resort }) => {
               Accommodation
             </h1>
             <p className="text-[16px] md:text-subtitle font-light sm:pt-[30px]  pt-[25px] font-roboto  text-secondary    ">
-              {propertyData?.accommodation?.description}
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(
+                    propertyData?.accommodation?.description
+                  ),
+                }}
+              />
             </p>
           </div>
           {!resort && (

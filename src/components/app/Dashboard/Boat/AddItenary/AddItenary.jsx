@@ -4,6 +4,8 @@ import Swal from "sweetalert2";
 import CloseIcon from "@mui/icons-material/Close";
 import { useRouter } from "next/router";
 import { userContext } from "@/src/storage/contextApi";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import {
   FormControl,
   InputLabel,
@@ -333,13 +335,29 @@ const AddItenary = () => {
         </div>
         <div className="mt-3 w-full">
           <p className="text-lg font-semibold">Itinerary Description</p>
-          <textarea
+          {/* <textarea
             onChange={handleItineraryDataChange}
             type="text"
             required
             name="itineraryDescription"
             placeholder="Itinerary Description"
             className="w-full h-20 rounded-md"
+          /> */}
+
+          <ReactQuill
+            className="w-full h-28 rounded-md border"
+            name="itineraryDescription"
+            placeholder="Itinerary Description "
+            required
+            modules={{
+              toolbar: false,
+            }}
+            onChange={(value) =>
+              handleItineraryDataChange({
+                target: { name: "itineraryDescription", value },
+              })
+            }
+            theme="snow" // This is the default theme; you can customize it as needed
           />
         </div>
         {error && <p className="text-red-600 text-xl mb-3">{error}</p>}

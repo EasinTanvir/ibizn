@@ -5,6 +5,7 @@ import Modal from "@mui/material/Modal";
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
 import { RxCross2 } from "react-icons/rx";
+import DOMPurify from "dompurify";
 
 function PackageModal({ packages, setOpen, open, propertyData }) {
   console.log(packages);
@@ -124,7 +125,13 @@ function PackageModal({ packages, setOpen, open, propertyData }) {
           </div>
           <div className="bg-white text-secondary   py-3 px-6">
             <h3 className="pb-2 sm:text-2xl text-lg"> Daily Itinerary</h3>
-            <p>{propertyData?.resortDailySchedule}</p>
+            <p>
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(propertyData?.resortDailySchedule),
+                }}
+              />
+            </p>
           </div>
         </Box>
       </Modal>

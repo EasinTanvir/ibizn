@@ -1,4 +1,6 @@
 import React from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const Diving = ({
   handleDivingChange,
@@ -79,14 +81,20 @@ const Diving = ({
           >
             Diving Description
           </label>
-          <textarea
-            className="shadow appearance-none border  w-full py-2 px-3 rounded-md text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+
+          <ReactQuill
+            className="shadow appearance-none border h-40  w-full py-2 px-3 rounded-md text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="divingDesc"
             name="description"
-            defaultValue={boardData?.diving?.description || ""}
-            rows="4"
             required
-            onChange={(e) => handleDivingChange(e)}
+            modules={{
+              toolbar: false,
+            }}
+            value={boardData?.diving?.description || ""}
+            onChange={(value) =>
+              handleDivingChange({ target: { name: "description", value } })
+            }
+            theme="snow" // This is the default theme; you can customize it as needed
           />
         </div>
         <div className="flex justify-between mt-10">

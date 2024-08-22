@@ -1,4 +1,5 @@
 import React from "react";
+import DOMPurify from "dompurify";
 
 function LiveaboardDetails({ propertyData, resort }) {
   return (
@@ -14,11 +15,16 @@ function LiveaboardDetails({ propertyData, resort }) {
             </span>
           )}
         </h1>
-        <p className=" text-secondary sm:text-subtitle text-subtitle3 font-roboto font-light sm:mt-[30px] mt-[25px]">
-          {" "}
-          {resort
-            ? propertyData?.briefDescription
-            : propertyData?.liveABoard?.description}
+        <p className="text-secondary sm:text-subtitle text-subtitle3 font-roboto font-light sm:mt-[30px] mt-[25px]">
+          <span
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(
+                resort
+                  ? propertyData?.briefDescription
+                  : propertyData?.liveABoard?.description
+              ),
+            }}
+          />
         </p>
       </div>
       <div className="w-full  sm:mt-0 mt-[45px] aspect-[3/2] md:aspect-[3/2]">

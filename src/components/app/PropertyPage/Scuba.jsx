@@ -1,3 +1,5 @@
+import DOMPurify from "dompurify";
+
 const Diving = {
   title: "Diving",
   description: `The MSY Ilike liveaboard Raja Ampat caters for up to 16 guests in
@@ -28,7 +30,11 @@ const Content = ({ title, description }) => (
         {title}
       </h1>
       <p className="text-[16px] sm:mt-[27px] mt-[23px] sm:text-subtitle text-subtitle2 font-roboto font-light text-secondary ">
-        {description}
+        <span
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(description),
+          }}
+        />
       </p>
     </div>
     {/* <div className="py-8 flex items-center sm:justify-around  sm:gap-10 gap-5 text-xl mt-5 text-[#0080FF]  font-regular  mb-5">

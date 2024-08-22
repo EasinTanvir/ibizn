@@ -1,4 +1,5 @@
 import RatingPortion from "./RatingPortion";
+import DOMPurify from "dompurify";
 
 const Content = ({ title, description }) => (
   <div className="w-full  flex flex-col justify-center items-start  md:justify-start">
@@ -6,7 +7,11 @@ const Content = ({ title, description }) => (
       {title}
     </h1>
     <p className="sm:text-subtitle text-subtitle2 sm:mt-[30px] mt-[25px]  font-light text-secondary font-roboto   ">
-      {description}
+      <span
+        dangerouslySetInnerHTML={{
+          __html: DOMPurify.sanitize(description),
+        }}
+      />
     </p>
   </div>
 );

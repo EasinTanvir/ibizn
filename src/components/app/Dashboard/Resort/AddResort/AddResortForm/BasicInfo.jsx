@@ -6,6 +6,8 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { userContext } from "@/src/storage/contextApi";
 import { Close } from "@mui/icons-material";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import {
   FormControl,
   InputLabel,
@@ -474,14 +476,29 @@ const BasicInfo = ({
           </div>
           <div className="mt-6">
             <p className="text-lg font-semibold">Resort daily schedule</p>
-            <textarea
+            <ReactQuill
+              className="w-full h-28 rounded-md border"
+              name="resortDailySchedule"
+              modules={{
+                toolbar: false,
+              }}
+              onChange={(value) =>
+                handleInputChange({
+                  target: { name: "resortDailySchedule", value },
+                })
+              }
+              required
+              theme="snow" // This is the default theme; you can customize it as needed
+            />
+
+            {/* <textarea
               type="text"
               required
               name="resortDailySchedule"
               placeholder="Type here"
               className="w-full h-20 rounded-md"
               onChange={(e) => handleInputChange(e)}
-            />
+            /> */}
           </div>
         </div>
         <div className="flex justify-between mt-10">

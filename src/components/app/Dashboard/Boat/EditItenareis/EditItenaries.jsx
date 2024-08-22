@@ -6,6 +6,8 @@ import Modal from "@mui/material/Modal";
 import { baseUrl } from "@/src/config/serverConfig";
 import { userContext } from "@/src/storage/contextApi";
 import Swal from "sweetalert2";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import {
   FormControl,
   InputLabel,
@@ -452,7 +454,26 @@ const EditItenaries = ({
                 </div>
                 <div className="mt-3 w-full">
                   <p className="text-lg font-semibold">Itinerary Description</p>
-                  <textarea
+
+                  <ReactQuill
+                    required
+                    value={itineraries?.itineraryDescription}
+                    name="itineraryDescription"
+                    placeholder="Itinerary Description"
+                    className="w-full h-20 rounded-md border"
+                    modules={{
+                      toolbar: false,
+                    }}
+                    onChange={(value) =>
+                      setItineraries({
+                        ...itineraries,
+                        itineraryDescription: value,
+                      })
+                    }
+                    theme="snow" // This is the default theme; you can customize it as needed
+                  />
+
+                  {/* <textarea
                     onChange={(e) =>
                       setItineraries({
                         ...itineraries,
@@ -465,7 +486,7 @@ const EditItenaries = ({
                     name="itineraryDescription"
                     placeholder="Itinerary Description"
                     className="w-full h-20 rounded-md"
-                  />
+                  /> */}
                 </div>
                 <input
                   className="w-full rounded-md cursor-pointer custom_red_color py-3 my-4 text-white font-semibold"

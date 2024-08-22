@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import DOMPurify from "dompurify";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -221,10 +222,20 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                           {resort ? (
                             <>
                               {readMore ? (
-                                item?.briefDescription
+                                <div
+                                  dangerouslySetInnerHTML={{
+                                    __html: item?.briefDescription,
+                                  }}
+                                />
                               ) : (
                                 <>
-                                  {truncateDescription(item?.briefDescription)}
+                                  <div
+                                    dangerouslySetInnerHTML={{
+                                      __html: truncateDescription(
+                                        item?.briefDescription
+                                      ),
+                                    }}
+                                  />
                                   {/* <button>Read More</button> */}
                                 </>
                               )}
@@ -232,19 +243,25 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                           ) : (
                             <>
                               {readMore ? (
-                                item?.briefDescription
+                                <div
+                                  className="text-[18px] font-light font-roboto leading-[20px]"
+                                  dangerouslySetInnerHTML={{
+                                    __html: DOMPurify.sanitize(
+                                      item?.briefDescription
+                                    ),
+                                  }}
+                                />
                               ) : (
-                                <p className="text-[18px] font-light font-roboto leading-[20px]">
-                                  {truncateDescription(
-                                    item?.liveABoard?.description
-                                  )}
-                                  {/* <button
-                                    className="ps-2 text-slate-800 text-lg"
-                                    onClick={() => setReadMore(!readMore)}
-                                  >
-                                    Read More
-                                  </button> */}
-                                </p>
+                                <p
+                                  className="text-[18px] font-light font-roboto leading-[20px]"
+                                  dangerouslySetInnerHTML={{
+                                    __html: DOMPurify.sanitize(
+                                      truncateDescription(
+                                        item?.liveABoard?.description
+                                      )
+                                    ),
+                                  }}
+                                />
                               )}
                             </>
                           )}
@@ -287,7 +304,8 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
             </div>
           ) : (
             <Alert variant="filled" severity="info">
-              There is no property for these date, Please search another date
+              There are no properties for these dates, Please search another
+              date.
             </Alert>
           )}
         </div>

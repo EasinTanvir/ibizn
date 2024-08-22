@@ -1,5 +1,6 @@
 import React from "react";
-
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 const FoodAtTheResort = ({
   handleFoodsChange,
   totalSteps,
@@ -65,7 +66,21 @@ const FoodAtTheResort = ({
           >
             Plant-based Food Description
           </label>
-          <textarea
+          <ReactQuill
+            className="shadow appearance-none border h-40  w-full py-2 px-3 rounded-md text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="foodAtTheResortDesc"
+            required
+            value={resortData?.food?.description}
+            name="description"
+            modules={{
+              toolbar: false,
+            }}
+            onChange={(value) =>
+              handleFoodsChange({ target: { name: "description", value } })
+            }
+            theme="snow" // This is the default theme; you can customize it as needed
+          />
+          {/* <textarea
             className="shadow appearance-none border  w-full py-2 px-3 rounded-md text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="foodAtTheResortDesc"
             rows="4"
@@ -73,7 +88,7 @@ const FoodAtTheResort = ({
             defaultValue={resortData?.food?.description}
             required
             onChange={(e) => handleFoodsChange(e)}
-          />
+          /> */}
         </div>
         <div className="flex justify-between mt-10">
           {currentStep > 1 && (

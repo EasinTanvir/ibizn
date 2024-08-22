@@ -1,5 +1,6 @@
 import React from "react";
-
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 const Accommodation = ({
   handleAccommodationChange,
   totalSteps,
@@ -69,7 +70,25 @@ const Accommodation = ({
           >
             Accommodation Description
           </label>
-          <textarea
+
+          <ReactQuill
+            className="shadow appearance-none border h-40  w-full py-2 px-3 rounded-md text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="propertyDesc"
+            name="description"
+            modules={{
+              toolbar: false,
+            }}
+            value={resortData?.accommodation?.description}
+            onChange={(value) =>
+              handleAccommodationChange({
+                target: { name: "description", value },
+              })
+            }
+            required
+            theme="snow" // This is the default theme; you can customize it as needed
+          />
+
+          {/* <textarea
             className="shadow appearance-none border  w-full py-2 px-3 rounded-md text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="propertyDesc"
             rows="4"
@@ -77,7 +96,7 @@ const Accommodation = ({
             defaultValue={resortData?.accommodation?.description}
             required
             onChange={(e) => handleAccommodationChange(e)}
-          />
+          /> */}
         </div>
         <div className="flex justify-between mt-10">
           {currentStep > 1 && (

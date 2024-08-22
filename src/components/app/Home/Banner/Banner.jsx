@@ -26,6 +26,7 @@ const ratings = [
   { minRating: 2, maxRating: 5 },
   { minRating: 3, maxRating: 5 },
   { minRating: 4, maxRating: 5 },
+  { minRating: 5, maxRating: 5 },
 ];
 const Banner = () => {
   const [error, setError] = useState("");
@@ -365,6 +366,15 @@ const Banner = () => {
                       )}
                       {r.minRating === 4 && r.maxRating === 5 && (
                         <div className="flex gap-0 items-center">
+                          <StarIcons />
+                          <StarIcons />
+                          <StarIcons />
+                          <StarIcons />
+                        </div>
+                      )}{" "}
+                      {r.minRating === 5 && r.maxRating === 5 && (
+                        <div className="flex gap-0 items-center">
+                          <StarIcons />
                           <StarIcons />
                           <StarIcons />
                           <StarIcons />

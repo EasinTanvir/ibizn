@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.ql-container.ql-snow {
+  border: none !important; /* Removes all borders */
+}
+
 body {
   font-family: "Roboto", sans-serif;
 }
