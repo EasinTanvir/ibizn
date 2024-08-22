@@ -117,9 +117,9 @@ const Packages = () => {
           </table>
         </div>
       ) : (
-        <Typography component={"h6"} variant="h6">
+        <h2 className="text-2xl">
           There are currently no packages, please add at least one.
-        </Typography>
+        </h2>
       )}
       {open && (
         <EditPackageModal

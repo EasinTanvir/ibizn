@@ -121,9 +121,7 @@ const Resorts = () => {
           </table>
         </div>
       ) : (
-        <Typography component={"h4"} variant="h4">
-          There are no resorts added
-        </Typography>
+        <h2 className="text-2xl">There are no resorts added</h2>
       )}
     </div>
   );

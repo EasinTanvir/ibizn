@@ -115,9 +115,7 @@ const Boats = () => {
           </table>
         </div>
       ) : (
-        <Typography component={"h4"} variant="h4">
-          There is no boat{" "}
-        </Typography>
+        <h2 className="text-2xl">There is no boat </h2>
       )}
     </div>
   );

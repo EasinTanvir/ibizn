@@ -126,9 +126,9 @@ const Itineraries = () => {
             </table>
           </div>
         ) : (
-          <Typography component={"h4"} variant="h4">
+          <h2 className="text-2xl">
             There are no current itineraries; please add some
-          </Typography>
+          </h2>
         )}
       </Box>
       {open && (

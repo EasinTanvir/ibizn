@@ -25,7 +25,7 @@ const Diving = ({
   };
   return (
     <>
-      <h2 className="my-4 text-xl pb-2 border-b-2">Divings</h2>
+      <h2 className="my-4 text-xl pb-2 border-b-2">Diving</h2>
 
       {/* <div className="mb-4">
                 <label htmlFor="divingTitle" className="block text-sm font-medium text-gray-700">
