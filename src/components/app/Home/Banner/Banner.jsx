@@ -67,7 +67,7 @@ const Banner = () => {
       if (searchValues.property === "" || searchValues.destination === "") {
         toast.error("Please select Destination and Property");
       } else {
-        router.push("/secondPage");
+        router.push("/search");
       }
     } else {
       if (
@@ -77,7 +77,7 @@ const Banner = () => {
       ) {
         toast.error("Please select Destination and Date");
       } else {
-        router.push("/secondPage");
+        router.push("/search");
       }
     }
   };

@@ -93,7 +93,7 @@ const ResortTable = () => {
       {resort?.length <= 0 ? (
         <p className="text-xl font-bold text-center">
           {" "}
-          There is no pending resorts
+          There are no pending resorts
         </p>
       ) : (
         <div className="overflow-x-auto">

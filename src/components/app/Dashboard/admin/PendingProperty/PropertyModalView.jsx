@@ -101,7 +101,7 @@ const PropertyModalView = ({
               //   router.push(`/secondPage/${resortData?._id}`, "_blank")
               // }
               onClick={() =>
-                window.open(`/secondPage/resort/${resortData?._id}`, "_blank")
+                window.open(`/search/resort/${resortData?._id}`, "_blank")
               }
               className="text-2xl w-full  py-5 font-semibold underline cursor-pointer "
             >

@@ -102,7 +102,7 @@ const Boats = () => {
                       </button>
                       <a
                         target="_blank"
-                        href={`/secondPage/${item?._id}`}
+                        href={`/search/${item?._id}`}
                         className="px-3 py-1 rounded bg-primary text-white flex gap-2 items-center"
                       >
                         <span>View</span> <MdRemoveRedEye />

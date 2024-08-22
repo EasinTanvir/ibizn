@@ -106,12 +106,8 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
           <p className="sm:text-subtitle  text-secondary text-subtitle2 font-outfit">
             <span>
               {" "}
-              We found {searchResult?.length || 0}{" "}
-              {searchValues?.tabValue === "Resorts" ||
-              searchValues?.property === "resort"
-                ? "resort for you"
-                : "boats for you "}{" "}
-            </span>{" "}
+              We found {searchResult?.length || 0} boat(s)/resort(s) for you{" "}
+            </span>
             {searchValues?.maxPrice && (
               <span> among price $({searchValues?.maxPrice})</span>
             )}{" "}
@@ -136,8 +132,8 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                   onClick={() =>
                     router.push(
                       !resort
-                        ? `/secondPage/${item?._id}`
-                        : `/secondPage/resort/${item?._id}`
+                        ? `/search/${item?._id}`
+                        : `/search/resort/${item?._id}`
                     )
                   }
                   key={index}

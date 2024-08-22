@@ -24,7 +24,7 @@ const FoodAtTheResort = ({
   };
   return (
     <>
-      <h2 className="my-4 text-xl pb-2 border-b-2">Food At the Resort</h2>
+      <h2 className="my-4 text-xl pb-2 border-b-2">Food at the Resort</h2>
       {/* divingTitle picture */}
       <form onSubmit={goToNextStep}>
         <div className="my-4">

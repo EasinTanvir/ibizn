@@ -117,7 +117,7 @@ const Packages = () => {
           </table>
         </div>
       ) : (
-        <Typography component={"h4"} variant="h4">
+        <Typography component={"h6"} variant="h6">
           There are currently no packages, please add at least one.
         </Typography>
       )}

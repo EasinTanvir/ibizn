@@ -77,7 +77,7 @@ function Liveaboards({ propertyData }) {
                 ))}
               </div>
               <div
-                onClick={() => router.push("/secondPage")}
+                onClick={() => router.push("/search")}
                 className="text-white  -mt-2 sm:mt-0     "
               >
                 <buttons className="underline font-[200]  md:py-8 py-2 cursor-pointer text-nowrap">

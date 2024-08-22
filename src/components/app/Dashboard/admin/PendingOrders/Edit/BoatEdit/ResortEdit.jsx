@@ -55,7 +55,7 @@ const ResortEdit = ({ id }) => {
           <h2
             onClick={() =>
               window.open(
-                `/secondPage/resort/${bookingData?.property?._id}`,
+                `/search/resort/${bookingData?.property?._id}`,
                 "_blank"
               )
             }

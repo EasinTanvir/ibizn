@@ -83,7 +83,7 @@ const BoatTable = () => {
       {boats?.length <= 0 ? (
         <p className="text-xl font-bold text-center">
           {" "}
-          There is no pending boats
+          There are no pending boats
         </p>
       ) : (
         <div className="overflow-x-auto">

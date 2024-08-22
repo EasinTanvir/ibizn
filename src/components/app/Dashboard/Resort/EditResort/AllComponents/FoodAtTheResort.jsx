@@ -4,7 +4,7 @@ import React from "react";
 const FoodAtTheResort = ({ resortData, handleResortDataChange }) => {
   return (
     <div>
-      <h2 className="text-2xl text-center font-bold">Food At the Resort</h2>
+      <h2 className="text-2xl text-center font-bold">Food at the Resort</h2>
       <form>
         <div className="mb-4">
           <label

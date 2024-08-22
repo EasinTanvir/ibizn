@@ -85,7 +85,7 @@ const BoatModal = ({
             <div>
               <h2
                 onClick={() =>
-                  window.open(`/secondPage/${boatData?._id}`, "_blank")
+                  window.open(`/search/${boatData?._id}`, "_blank")
                 }
                 className="text-2xl  py-5 font-semibold  underline cursor-pointer"
               >

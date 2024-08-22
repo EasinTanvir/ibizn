@@ -107,7 +107,7 @@ const Resorts = () => {
                       </button>{" "}
                       <a
                         target="_blank"
-                        href={`/secondPage/resort/${item?._id}`}
+                        href={`/search/resort/${item?._id}`}
                         className="px-3 py-1 rounded bg-primary text-white flex gap-2 items-center"
                       >
                         <span>View</span> <MdRemoveRedEye />
