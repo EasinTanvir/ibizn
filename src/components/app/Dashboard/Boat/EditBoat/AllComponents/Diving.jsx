@@ -1,4 +1,7 @@
+import dynamic from "next/dynamic";
 import React from "react";
+const ReactQuill = dynamic(import("react-quill"), { ssr: false });
+import "react-quill/dist/quill.snow.css";
 
 const Diving = ({ boatData, setBoatData, handleBoatDataChange }) => {
   // console.log(boatData?.diving?.Picture);
@@ -33,15 +36,31 @@ const Diving = ({ boatData, setBoatData, handleBoatDataChange }) => {
           >
             Diving Description
           </label>
-          <textarea
+          {/* <textarea
             className="shadow appearance-none border  w-full py-2 px-3 rounded-md text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="divingDesc"
             name="description"
             defaultValue={boatData?.diving?.description || ""}
             rows="4"
             required
-            // onChange={(e) => handleDivingChange(e)}
             onChange={(e) => handleBoatDataChange(e, "diving")}
+          /> */}
+
+          <ReactQuill
+            id="divingDesc"
+            name="description"
+            required
+            value={boatData?.diving?.description || ""}
+            onChange={(value) =>
+              handleBoatDataChange(
+                { target: { name: "description", value } },
+                "diving"
+              )
+            }
+            modules={{ toolbar: false }} // Disable toolbar
+            formats={[]} // No formats
+            className="shadow appearance-none border  w-full py-2 px-3 rounded-md text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            style={{ minHeight: "8rem" }} // To match the textarea rows="4"
           />
         </div>
       </form>

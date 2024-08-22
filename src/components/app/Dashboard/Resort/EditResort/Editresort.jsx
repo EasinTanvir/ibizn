@@ -320,10 +320,10 @@ export default function EditResort({ id }) {
               resortData={resortData}
               handleResortDataChange={handleResortDataChange}
             />
-            <Room
+            {/* <Room
               resortData={resortData}
               handleResortDataChange={handleResortDataChange}
-            />
+            /> */}
             <CheckFields
               resortData={resortData}
               setResortData={setResortData}

@@ -1,5 +1,8 @@
 import { compressAndConvertToBase64 } from "@/src/config/base64";
+import dynamic from "next/dynamic";
 import React from "react";
+const ReactQuill = dynamic(import("react-quill"), { ssr: false });
+import "react-quill/dist/quill.snow.css";
 
 const Accommodation = ({ resortData, handleResortDataChange }) => {
   return (
@@ -47,15 +50,30 @@ const Accommodation = ({ resortData, handleResortDataChange }) => {
           >
             Accommodation Description
           </label>
-          <textarea
+          {/* <textarea
             className="shadow appearance-none border  w-full py-2 px-3 rounded-md text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="propertyDesc"
             rows="4"
             name="description"
             defaultValue={resortData?.accommodation?.description}
-            required
-            // onChange={(e) => handleAccommodationChange(e)}
+            required           
             onChange={(e) => handleResortDataChange(e, "accommodation")}
+          /> */}
+          <ReactQuill
+            id="propertyDesc"
+            name="description"
+            required
+            value={resortData?.accommodation?.description || ""}
+            onChange={(value) =>
+              handleResortDataChange(
+                { target: { name: "description", value } },
+                "accommodation"
+              )
+            }
+            modules={{ toolbar: false }} // Disable toolbar
+            formats={[]} // No formats
+            className="shadow appearance-none border  w-full py-2 px-3 rounded-md text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            style={{ minHeight: "8rem" }} // To match the textarea rows="4"
           />
         </div>
       </form>

@@ -1,5 +1,8 @@
 import { compressAndConvertToBase64 } from "@/src/config/base64";
+import dynamic from "next/dynamic";
 import React from "react";
+const ReactQuill = dynamic(import("react-quill"), { ssr: false });
+import "react-quill/dist/quill.snow.css";
 
 const FoodAtTheResort = ({ resortData, handleResortDataChange }) => {
   return (
@@ -33,15 +36,31 @@ const FoodAtTheResort = ({ resortData, handleResortDataChange }) => {
           >
             Food Description
           </label>
-          <textarea
+          {/* <textarea
             className="shadow appearance-none border  w-full py-2 px-3 rounded-md text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="foodAtTheResortDesc"
             rows="4"
             name="description"
             defaultValue={resortData?.food?.description}
-            required
-            // onChange={(e) => handleFoodsChange(e)}
+            required          
             onChange={(e) => handleResortDataChange(e, "food")}
+          /> */}
+
+          <ReactQuill
+            id="foodAtTheResortDesc"
+            name="description"
+            required
+            value={resortData?.food?.description}
+            onChange={(value) =>
+              handleResortDataChange(
+                { target: { name: "description", value } },
+                "food"
+              )
+            }
+            modules={{ toolbar: false }} // Disable toolbar
+            formats={[]} // No formats
+            className="shadow appearance-none border  w-full py-2 px-3 rounded-md text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            style={{ minHeight: "8rem" }} // To match the textarea rows="4"
           />
         </div>
       </form>

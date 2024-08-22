@@ -41,7 +41,6 @@ const Room = ({ resortData, handleResortDataChange }) => {
             defaultValue={resortData?.rooms?.description}
             rows="4"
             required
-            // onChange={(e) => handleRoomsChange(e)}
             onChange={(e) => handleResortDataChange(e, "rooms")}
           />
         </div>

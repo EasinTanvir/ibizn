@@ -1,6 +1,8 @@
+import dynamic from "next/dynamic";
 import React from "react";
 import { useState } from "react";
-
+const ReactQuill = dynamic(import("react-quill"), { ssr: false });
+import "react-quill/dist/quill.snow.css";
 const PropertyDesc = ({ resortData, handleImageChanges, setResortData }) => {
   return (
     <div>
@@ -15,7 +17,7 @@ const PropertyDesc = ({ resortData, handleImageChanges, setResortData }) => {
           >
             Brief description
           </label>
-          <textarea
+          {/* <textarea
             onChange={(e) =>
               setResortData({
                 ...resortData,
@@ -28,8 +30,23 @@ const PropertyDesc = ({ resortData, handleImageChanges, setResortData }) => {
             required
             defaultValue={resortData?.briefDescription || ""}
             name="briefDescription"
-            // onChange={(e) => handleInputChange(e)}
-            // onChange={(e)=>}
+          
+          /> */}
+
+          <ReactQuill
+            id="propertyDesc"
+            modules={{ toolbar: false }} // Disable toolbar
+            formats={[]} // No formats
+            name="briefDescription"
+            value={resortData?.briefDescription || ""}
+            onChange={(value) =>
+              setResortData({
+                ...resortData,
+                briefDescription: value,
+              })
+            }
+            className="shadow appearance-none border  w-full py-2 px-3 rounded-md text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            style={{ minHeight: "8rem" }}
           />
         </div>
         <div className="mb-4">
