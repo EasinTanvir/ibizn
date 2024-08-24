@@ -6,6 +6,7 @@ const transporter = require("../config/smtp");
 const AppError = require("../error/appError");
 const createBoatBookingIntoDB = async (payload) => {
   const result = await BoatBooking.create(payload);
+
   const htmlMessage = `
   <div>
     <h1>New booking Request</h1>
@@ -13,7 +14,7 @@ const createBoatBookingIntoDB = async (payload) => {
     <p><strong>Phone : </strong> ${payload?.phone}</p>
     <p><strong>Email : </strong> ${payload?.email}</p>
     <p><strong>Number Of Guest : </strong> ${payload?.numberOfGuest}</p>
-     <p><strong>Price : </strong> ${payload?.price}</p>
+     <p><strong>Cabin Price : </strong> ${payload?.cabinPrice}</p>
      <p>Check the property : <a href=${`${process.env.FRONTEND_URL}/secondPage/${payload?.property}`}>click here</a></p>
   </div>
 `;
@@ -25,7 +26,7 @@ const createBoatBookingIntoDB = async (payload) => {
     <p><strong>Phone : </strong> ${payload?.phone}</p>
     <p><strong>Email : </strong> ${payload?.email}</p>
     <p><strong>Number Of Guest : </strong> ${payload?.numberOfGuest}</p>
-    <p><strong>Price : </strong> ${payload?.price}</p>
+    <p><strong>Cabin Price : </strong> ${payload?.cabinPrice}</p>
      <p>Check the property : <a href=${`${process.env.FRONTEND_URL}/secondPage/${payload?.property}`}> Click here </a></p>
   </div>
 `;

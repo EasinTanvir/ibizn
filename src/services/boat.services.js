@@ -443,14 +443,14 @@ const updateBoatFromDB = async (id, payload) => {
     </div>
   `;
 
-  let user = await USER.findById(result.user);
+  // let user = await USER.findById(result.user);
 
-  await transporter.sendMail({
-    from: "deeparture.reservations@gmail.com",
-    to: user.email,
-    subject: "Boat Approved",
-    html: htmlMessage,
-  });
+  // await transporter.sendMail({
+  //   from: "deeparture.reservations@gmail.com",
+  //   to: user.email,
+  //   subject: "Boat Approved",
+  //   html: htmlMessage,
+  // });
 
   return result;
 };

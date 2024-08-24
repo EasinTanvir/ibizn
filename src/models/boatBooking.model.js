@@ -45,6 +45,10 @@ const boatBookingSchema = new Schema(
       type: Number,
       required: true,
     },
+    cabinPrice: {
+      type: Number,
+      required: true,
+    },
     startDate: {
       type: Date,
       required: true,
