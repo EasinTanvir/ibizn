@@ -1,6 +1,7 @@
 import React from "react";
 import dayjs from "dayjs";
 const Itineraries = ({ schedules }) => {
+  console.log(schedules);
   return (
     <div className=" sm:pt-3 pt-[45px]">
       {schedules?.map((item, index) => (
@@ -10,15 +11,18 @@ const Itineraries = ({ schedules }) => {
             index !== schedules?.length - 1 ? "pb-6" : "pb-2"
           }    px-5 md:px-5 ${index % 2 === 0 ? "bg-slate-100" : ""}`}
         >
-          <div className="flex sm:flex-row flex-col sm:w-fit  w-1/2 ">
-            <h1 className="text-[#0080ff] font-outfit font-light sm:pe-5 text-[16px]   leading-[20px]  lg:text-subtitle ">
+          <div className="flex sm:flex-row flex-col sm:items-center sm:w-fit  w-1/2 ">
+            <h1 className="   sm:border-r-2 sm:pl-5  text-[#0080ff] font-outfit font-light sm:pe-5 text-[14px] mt-1  lg:text-subtitle">
+              {item?.itinerary?.itineraryName}
+            </h1>
+            <h1 className="text-[#0080ff] sm:ps-5 font-outfit font-light sm:pe-5 text-[16px]   leading-[20px]  lg:text-subtitle ">
               {dayjs(item?.tripStart).format("MMM DD")} -{" "}
               {dayjs(item?.tripEnd).format("MMM DD")}
             </h1>
 
             <h1 className="   sm:border-l-2 sm:pl-5  text-[#0080ff] font-outfit font-light sm:pe-5 text-[14px] mt-1  lg:text-subtitle">
-              {item?.itinerary?.numberOfDays + " "}Days,{" "}
-              {item?.itinerary?.numberOfNights + " "}Nights
+              {item?.itinerary?.numberOfDays}D /{" "}
+              {item?.itinerary?.numberOfNights}N
             </h1>
 
             <h1 className="  sm:border-l-2 sm:pl-5  text-[#0080ff] font-outfit font-light text-[14px]  lg:text-subtitle">
@@ -28,9 +32,9 @@ const Itineraries = ({ schedules }) => {
 
           <div className="sm:w-52  w-1/2  sm:ml-5">
             <div className="text-[#0080ff] flex sm:flex-row flex-col items-end sm:items-start font-outfit font-light  text-[14px]  lg:text-subtitle sm:border-l-2 pl-5">
-              <span> From USD</span>
+              <span> From {item?.convertPrice}</span>
               <span className="text-[#0080ff] sm:ms-2   font-outfit font-light  text-[14px]  lg:text-subtitle">
-                {item?.convertPrice}
+                USD
               </span>
             </div>
             <div className="text-end sm:hidden">

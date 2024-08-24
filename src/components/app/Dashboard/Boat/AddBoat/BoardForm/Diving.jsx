@@ -45,8 +45,11 @@ const Diving = ({
       <form onSubmit={goToNextStep}>
         <div className="my-4">
           <h4 className="block mb-2 text-xl font-medium text-gray-900">
-            {" "}
-            Diving Image
+            Diving Image{" "}
+            <span className="font-normal">
+              (Please upload 2:3 sized images or it will be automatically
+              cropped)
+            </span>
           </h4>
           <label className=" flex gap-4 w-full items-center px-4 py-2 bg-white text-blue rounded-lg border  tracking-wide uppercase  cursor-pointer ">
             <svg

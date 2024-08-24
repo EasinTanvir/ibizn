@@ -1,8 +1,9 @@
 import React from "react";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-const OrderedSchedule = ({ scheduleId, schedules, cabin }) => {
+const OrderedSchedule = ({ scheduleId, schedules, cabin, cabinPrice }) => {
   const schedule = schedules?.find((s) => s._id === scheduleId);
   console.log(cabin);
+
   return (
     <div>
       <h1 className="text-3xl font-semibold  my-3">
@@ -77,9 +78,9 @@ const OrderedSchedule = ({ scheduleId, schedules, cabin }) => {
           <div className="md:flex justify-between items-center space-y-4">
             <p className="text-xl  ">Name:{cabin?.cabinName}</p>
             <p className="text-xl ">
-              Price :
+              Price :{" "}
               <span className="font-semibold">
-                ${Number(cabin?.convertedPrice).toFixed(2)}
+                ${Number(cabinPrice).toFixed(2)}
               </span>{" "}
               USD
             </p>

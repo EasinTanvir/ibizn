@@ -5,6 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <title>Deeparute</title>
+        <link rel="icon" href="/fab.jpg" />
       </Head>
       <body>
         <Main />

@@ -43,12 +43,14 @@ function ItinerariesAndPrices({ propertyData }) {
   const [selectItitany, setSelectItinary] = useState();
   const [selectedcabin, setSelectedCabin] = useState([]);
   const [cabinId, setCabinId] = useState();
+  const [cabinPrice, setCabinPrice] = useState();
   const [discount, setDiscount] = useState();
   const [discountPrice, setDiscountPrice] = React.useState();
 
-  const handleOpenBookingModal = (schedule, cId) => {
+  const handleOpenBookingModal = (schedule, cId, price) => {
     setSchedule(schedule);
     setCabinId(cId);
+    setCabinPrice(price);
     setIsOpenBookingModal(true);
   };
 
@@ -320,8 +322,18 @@ function ItinerariesAndPrices({ propertyData }) {
                               : "text-light"
                           }`}
                         >
-                          {schedule?.itinerary?.embarkationPoints} —{" "}
-                          {schedule?.itinerary?.disembarkationPoints}
+                          {schedule?.itinerary?.itineraryName}
+                        </span>
+                        {"   "}
+                        <span
+                          className={`text-[24px] leading-[24px] md:text-[36px] font-light  font-outfit ${
+                            schedule._id === selectItitany
+                              ? "text-primary"
+                              : "text-light"
+                          }`}
+                        >
+                          ({schedule?.itinerary?.embarkationPoints} —{" "}
+                          {schedule?.itinerary?.disembarkationPoints})
                         </span>
                       </div>
                     </div>
@@ -372,30 +384,40 @@ function ItinerariesAndPrices({ propertyData }) {
                             </h1>
 
                             <>
-                              {/* <div className="mt-2">
-                                <span className="text-[#3a95ea] text-2xl md:text-3xl line-through">
-                                  1500
-                                </span>
-                                <span className="inline-block text-[#3a95ea] ms-1 line-through font-semibold text-sm">
-                                  USD
-                                </span>
-                              </div> */}
-                              <div className=" mt-2">
-                                {/* <span className="text-white text-2xl md:text-3xl ">
-                                {Math.round(
-                                  Number(data?.convertedPrice) -
-                                    (Number(data?.convertedPrice) *
-                                      Number(discount)) /
-                                      100
-                                )}
-                              </span> */}
-                                <span className="text-white text-2xl md:text-3xl ">
-                                  {data?.convertedPrice}
-                                </span>
-                                <span className="inline-block text-white ms-1  font-semibold text-sm">
-                                  USD
-                                </span>
-                              </div>
+                              {discount ? (
+                                <>
+                                  <div className="mt-2">
+                                    <span className="text-[#3a95ea] text-2xl md:text-3xl line-through">
+                                      {data?.convertedPrice}
+                                    </span>
+                                    <span className="inline-block text-[#3a95ea] ms-1 line-through font-semibold text-sm">
+                                      USD
+                                    </span>
+                                  </div>
+                                  <div className=" mt-2">
+                                    <span className="text-white text-2xl md:text-3xl ">
+                                      {Math.round(
+                                        Number(data?.convertedPrice) -
+                                          (Number(data?.convertedPrice) *
+                                            Number(discount)) /
+                                            100
+                                      )}
+                                    </span>
+                                  </div>
+                                </>
+                              ) : (
+                                <>
+                                  {" "}
+                                  <div className="mt-2">
+                                    <span className="text-white text-2xl md:text-3xl ">
+                                      {data?.convertedPrice}
+                                    </span>
+                                    <span className="inline-block text-white ms-1  font-semibold text-sm">
+                                      USD
+                                    </span>
+                                  </div>
+                                </>
+                              )}
                             </>
 
                             {console.log(data)}
@@ -403,9 +425,19 @@ function ItinerariesAndPrices({ propertyData }) {
                             <div className="pt-5">
                               <button
                                 onClick={() => {
+                                  const price = discount
+                                    ? Math.round(
+                                        Number(data?.convertedPrice) -
+                                          (Number(data?.convertedPrice) *
+                                            Number(discount)) /
+                                            100
+                                      )
+                                    : Number(data?.convertedPrice);
+
                                   return handleOpenBookingModal(
                                     schedule,
-                                    data?._id
+                                    data?._id,
+                                    price
                                   );
                                 }}
                                 className="bg-white text-primary rounded-full px-6 py-1 text-sm lg:text-xl "
@@ -443,6 +475,8 @@ function ItinerariesAndPrices({ propertyData }) {
         schedule={schedule}
         cabinId={cabinId}
         discountPrice={discountPrice}
+        discount={discount}
+        cabinPrice={cabinPrice}
       />
     </div>
   );

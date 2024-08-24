@@ -160,9 +160,11 @@ function ResortAndPrice({ propertyData }) {
 
                         <>
                           <div className="mt-2">
-                            {/* <span className="text-white text-2xl md:text-3xl">
-                              {selectedPackage?.ConvertedPrice}
-                            </span> */}{" "}
+                            {customDiscount && (
+                              <span className="text-[#3a95ea] text-2xl md:text-3xl line-through">
+                                {selectedPackage?.ConvertedPrice}
+                              </span>
+                            )}{" "}
                             <span className="text-white text-2xl md:text-3xl">
                               {finalPrice}
                             </span>

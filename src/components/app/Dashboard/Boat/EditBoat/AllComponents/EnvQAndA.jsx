@@ -36,7 +36,7 @@ const EnvQAndA = ({ submitData, boatData, setBoatData, handleEnvChange }) => {
             type="text"
             id="q2"
             name="q2"
-            defaultValue={boatData?.environmentalQuestionSchema?.q2 || ""}
+            defaultValue={boatData?.environmentalQuestions?.q2 || ""}
             required
             className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             onChange={(e) => handleEnvChange(e)}
@@ -54,7 +54,7 @@ const EnvQAndA = ({ submitData, boatData, setBoatData, handleEnvChange }) => {
             id="q3"
             required
             name="q3"
-            defaultValue={boatData?.environmentalQuestionSchema?.q3 || ""}
+            defaultValue={boatData?.environmentalQuestions?.q3 || ""}
             className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             onChange={(e) => handleEnvChange(e)}
           />
@@ -70,7 +70,7 @@ const EnvQAndA = ({ submitData, boatData, setBoatData, handleEnvChange }) => {
             type="text"
             id="q4"
             name="q4"
-            defaultValue={boatData?.environmentalQuestionSchema?.q4 || ""}
+            defaultValue={boatData?.environmentalQuestions?.q4 || ""}
             required
             className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             onChange={(e) => handleEnvChange(e)}
@@ -87,7 +87,7 @@ const EnvQAndA = ({ submitData, boatData, setBoatData, handleEnvChange }) => {
             type="text"
             id="q5"
             name="q5"
-            defaultValue={boatData?.environmentalQuestionSchema?.q5 || ""}
+            defaultValue={boatData?.environmentalQuestions?.q5 || ""}
             required
             className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             onChange={(e) => handleEnvChange(e)}
@@ -105,7 +105,7 @@ const EnvQAndA = ({ submitData, boatData, setBoatData, handleEnvChange }) => {
             id="q6"
             required
             name="q6"
-            defaultValue={boatData?.environmentalQuestionSchema?.q6 || ""}
+            defaultValue={boatData?.environmentalQuestions?.q6 || ""}
             className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             onChange={(e) => handleEnvChange(e)}
           />
@@ -121,7 +121,7 @@ const EnvQAndA = ({ submitData, boatData, setBoatData, handleEnvChange }) => {
             type="text"
             id="q7"
             name="q7"
-            defaultValue={boatData?.environmentalQuestionSchema?.q7 || ""}
+            defaultValue={boatData?.environmentalQuestions?.q7 || ""}
             required
             className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             onChange={(e) => handleEnvChange(e)}
@@ -140,7 +140,7 @@ const EnvQAndA = ({ submitData, boatData, setBoatData, handleEnvChange }) => {
             type="text"
             id="q8"
             name="q8"
-            defaultValue={boatData?.environmentalQuestionSchema?.q8 || ""}
+            defaultValue={boatData?.environmentalQuestions?.q8 || ""}
             required
             className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             onChange={(e) => handleEnvChange(e)}
@@ -163,7 +163,7 @@ const EnvQAndA = ({ submitData, boatData, setBoatData, handleEnvChange }) => {
             type="text"
             id="q9"
             name="q9"
-            defaultValue={boatData?.environmentalQuestionSchema?.q9 || ""}
+            defaultValue={boatData?.environmentalQuestions?.q9 || ""}
             required
             className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             onChange={(e) => handleEnvChange(e)}
@@ -180,7 +180,7 @@ const EnvQAndA = ({ submitData, boatData, setBoatData, handleEnvChange }) => {
             type="text"
             id="q10"
             name="q10"
-            defaultValue={boatData?.environmentalQuestionSchema?.q10 || ""}
+            defaultValue={boatData?.environmentalQuestions?.q10 || ""}
             required
             className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             onChange={(e) => handleEnvChange(e)}
@@ -197,7 +197,7 @@ const EnvQAndA = ({ submitData, boatData, setBoatData, handleEnvChange }) => {
             type="text"
             id="q11"
             name="q11"
-            defaultValue={boatData?.environmentalQuestionSchema?.q11 || ""}
+            defaultValue={boatData?.environmentalQuestions?.q11 || ""}
             required
             className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             onChange={(e) => handleEnvChange(e)}
@@ -214,7 +214,7 @@ const EnvQAndA = ({ submitData, boatData, setBoatData, handleEnvChange }) => {
             type="text"
             id="q12"
             name="q12"
-            defaultValue={boatData?.environmentalQuestionSchema?.q12 || ""}
+            defaultValue={boatData?.environmentalQuestions?.q12 || ""}
             required
             className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             onChange={(e) => handleEnvChange(e)}
@@ -249,7 +249,7 @@ const EnvQAndA = ({ submitData, boatData, setBoatData, handleEnvChange }) => {
             type="text"
             id="q14"
             name="q14"
-            defaultValue={boatData?.environmentalQuestionSchema?.q14 || ""}
+            defaultValue={boatData?.environmentalQuestions?.q14 || ""}
             required
             className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             onChange={(e) => handleEnvChange(e)}

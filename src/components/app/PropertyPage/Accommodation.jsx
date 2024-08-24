@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DOMPurify from "dompurify";
 const Accommodation = ({ propertyData, resort }) => {
   console.log(propertyData?.schedules);
-  const [activeButton, setActiveButton] = useState("");
+  const [activeButton, setActiveButton] = useState();
 
   const lists = propertyData?.schedules?.flatMap((data) => {
     console.log(data?.itinerary?.cabins[0]);
@@ -16,26 +16,13 @@ const Accommodation = ({ propertyData, resort }) => {
     return []; // return an empty array if no cabins
   });
 
-  const accommodationTypes = {
-    "Regular room": {
-      description:
-        "The MSY Ilike liveaboard Raja Ampat caters for up to 16 guests in 8 cabins. All cabins have individually controlled air conditioning, en-suite bathrooms, and hot and cold showers. In addition, the thoughtfully designed rooms can be laid out as twins or doubles, so can easily provide for your requirements. The yacht offers a large, comfortable outside deck to chill out after an incredible day’s diving.",
-      imgSrc:
-        "https://images.unsplash.com/photo-1540518614846-7eded433c457?q=80&w=2057&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    "Delux room": {
-      description:
-        "Experience luxury in our Delux room, featuring modern amenities and a spacious layout, perfect for relaxing after a day's adventure.",
-      imgSrc:
-        "https://plus.unsplash.com/premium_photo-1661962739798-0af59dc30d14?q=80&w=2029&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    "Super Delux room": {
-      description:
-        "Indulge in our Super Delux room, offering top-tier comfort and elegance with premium features to make your stay unforgettable.",
-      imgSrc:
-        "https://plus.unsplash.com/premium_photo-1682433066496-2daf69be82f0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-  };
+  useEffect(() => {
+    if (propertyData?.schedules?.length > 0) {
+      setActiveButton(
+        propertyData?.schedules[0]?.itinerary?.cabins[0]?.cabinPicture
+      );
+    }
+  }, [propertyData]);
 
   const Button = ({ label, cabinPicture }) => (
     <button

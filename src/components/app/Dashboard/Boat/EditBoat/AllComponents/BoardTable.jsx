@@ -569,7 +569,7 @@ const BoardTable = ({ boatData, setBoatData }) => {
                       onChange={(e) => setUpdatedSpecial(e.target.checked)}
                     />
                   }
-                  label="SPECIAL FEATURE?"
+                  label="Slide to Add This Property to Special Offers"
                 />
               </div>
               <div className="flex gap-2">

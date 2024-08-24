@@ -30,7 +30,7 @@ function Liveaboards({ propertyData }) {
       <div className="w-full h-[94vh]  sm:mb-0 mb-44   ">
         <div className="w-full h-[75%]    ">
           <img
-            className=" w-full h-full object-fill"
+            className=" w-full h-full object-scale-down"
             src={propertyData?.featuredImage || propertyData?.featureImage}
             alt="Liveaboard"
           />

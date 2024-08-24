@@ -180,10 +180,13 @@ const BoatEdit = ({ id }) => {
               }
             })}
           </div>
+
           <OrderedSchedule
             cabin={bookingData?.cabin}
+            cabinPrice={bookingData?.cabinPrice}
             scheduleId={bookingData?.scheduleId}
             schedules={bookingData?.property?.schedules}
+            bookingData={bookingData}
           />
           <OperatorDetails userInfo={bookingData?.operator} />
 

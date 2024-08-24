@@ -3,7 +3,6 @@ import dynamic from "next/dynamic";
 
 const ReactQuill = dynamic(import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
-import DOMPurify from "dompurify";
 
 const LiveaBoard = ({
   handleLiveboarChange,
@@ -33,9 +32,13 @@ const LiveaBoard = ({
       <form onSubmit={goToNextStep}>
         <div className="my-4">
           <h4 className="block mb-2 text-xl font-medium text-gray-900">
-            {" "}
-            Boat Image
+            Boat Image{" "}
+            <span className="font-normal">
+              (Please upload 2:3 sized images or it will be automatically
+              cropped)
+            </span>
           </h4>
+
           <label className=" flex gap-4 w-full items-center px-4 py-2 bg-white text-blue rounded-lg border  tracking-wide uppercase  cursor-pointer ">
             <svg
               className="w-8 h-8"

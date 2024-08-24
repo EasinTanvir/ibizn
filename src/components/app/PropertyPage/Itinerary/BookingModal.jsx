@@ -26,10 +26,18 @@ const BookingModal = ({
   schedule,
   cabinId,
   discountPrice,
+  cabinPrice,
+  discount,
 }) => {
+  console.log(propertyData);
+  console.log(schedule);
+
+  console.log(discount);
+  console.log(cabinPrice);
+  console.log(discountPrice);
+
   const [loading, setLoading] = React.useState(false);
 
-  console.log("discountPrice = ", discountPrice);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -52,6 +60,7 @@ const BookingModal = ({
       cabinId: cabinId,
       startDate: schedule?.tripStart,
       endDate: schedule?.tripEnd,
+      cabinPrice: cabinPrice,
       price: 220,
       name,
       phone,
