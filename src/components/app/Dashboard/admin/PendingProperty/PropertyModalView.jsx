@@ -124,11 +124,11 @@ const PropertyModalView = ({
               </div>
               <div className="flex gap-2">
                 <h2 className="capitalize font-semibold">country:</h2>{" "}
-                <h3>{resortData?.region}</h3>
+                <h3>{resortData?.country}</h3>
               </div>
               <div className="flex gap-2">
                 <h2 className="capitalize font-semibold">district:</h2>{" "}
-                <h3>{resortData?.region}</h3>
+                <h3>{resortData?.district}</h3>
               </div>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 justify-items-start  gap-5">

@@ -4,7 +4,9 @@ const Accommodation = ({ propertyData, resort }) => {
   console.log(propertyData?.schedules);
   const [activeButton, setActiveButton] = useState();
 
-  const lists = propertyData?.schedules?.flatMap((data) => {
+  console.log(propertyData?.schedules);
+
+  const lists = propertyData?.schedules?.slice(0, 1)?.flatMap((data) => {
     console.log(data?.itinerary?.cabins[0]);
     if (data?.itinerary?.cabins.length > 0) {
       return data?.itinerary?.cabins?.map((list) => ({
@@ -16,13 +18,13 @@ const Accommodation = ({ propertyData, resort }) => {
     return []; // return an empty array if no cabins
   });
 
-  useEffect(() => {
-    if (propertyData?.schedules?.length > 0) {
-      setActiveButton(
-        propertyData?.schedules[0]?.itinerary?.cabins[0]?.cabinPicture
-      );
-    }
-  }, [propertyData]);
+  // useEffect(() => {
+  //   if (propertyData?.schedules?.length > 0) {
+  //     setActiveButton(
+  //       propertyData?.schedules[0]?.itinerary?.cabins[0]?.cabinPicture
+  //     );
+  //   }
+  // }, [propertyData]);
 
   const Button = ({ label, cabinPicture }) => (
     <button

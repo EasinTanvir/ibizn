@@ -67,7 +67,7 @@ const Accommodation = ({
 
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-gray-700 text-[20px] font-normal mb-2 font-roboto"
             htmlFor="propertyDesc"
           >
             Accommodation Description

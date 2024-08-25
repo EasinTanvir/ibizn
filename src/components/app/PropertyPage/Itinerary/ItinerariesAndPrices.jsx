@@ -171,7 +171,7 @@ function ItinerariesAndPrices({ propertyData }) {
                     }}
                     views={["month"]}
                     label="Month"
-                    format="MMM YYYY"
+                    format="MMM"
                     value={selectedMonth}
                     onChange={handleMonthChange}
                     className="sm:w-40 w-36"
@@ -402,6 +402,9 @@ function ItinerariesAndPrices({ propertyData }) {
                                             Number(discount)) /
                                             100
                                       )}
+                                    </span>{" "}
+                                    <span className="inline-block text-white ms-1  font-semibold text-sm">
+                                      USD
                                     </span>
                                   </div>
                                 </>

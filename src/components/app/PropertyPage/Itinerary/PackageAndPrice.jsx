@@ -1,13 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import CabinModal from "./CabinModal";
 import BookingModal from "./BookingModal";
 import ResortBookingModal from "./ResortBookingModal";
 import PackageModal from "./PackageModal";
 import dayjs from "dayjs";
+import { userContext } from "@/src/storage/contextApi";
 
 function ResortAndPrice({ propertyData }) {
   const [finalPrice, setFinalPrice] = useState();
+  const { searchValues } = useContext(userContext);
   const currentDate = dayjs();
+
+  console.log(searchValues);
 
   const [packages, setPackages] = useState();
   const [selectedPackage, setSelectedPackage] = useState();
@@ -24,8 +28,15 @@ function ResortAndPrice({ propertyData }) {
   console.log(selectedPackage);
 
   useEffect(() => {
+    const searchStartDate = dayjs(searchValues?.tripStart);
+    const searchEndDate = dayjs(searchValues?.tripEnd);
     const startDate = dayjs(propertyData?.discountTimeFrame?.startDate);
     const endDate = dayjs(propertyData?.discountTimeFrame?.endDate);
+
+    console.log(searchStartDate);
+    console.log(searchEndDate);
+    console.log(startDate);
+    console.log(endDate);
 
     // Convert discount to number
     const discountPercentage = Number(propertyData?.discount);
@@ -34,14 +45,10 @@ function ResortAndPrice({ propertyData }) {
     console.log(defaultPrice);
 
     const isDiscountActive =
-      currentDate.isSameOrAfter(startDate) &&
-      currentDate.isSameOrBefore(endDate);
-    console.log(startDate);
-    console.log(endDate);
-    console.log(currentDate);
+      searchStartDate.isSameOrAfter(startDate) &&
+      searchEndDate.isSameOrBefore(endDate);
+
     console.log(isDiscountActive);
-    console.log(propertyData?.discountTimeFrame?.startDate);
-    console.log(propertyData?.discountTimeFrame?.endDate);
 
     if (propertyData?.discount && isDiscountActive) {
       setCustomDiscount(Number(propertyData?.discount));

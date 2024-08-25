@@ -52,22 +52,12 @@ const Environmental = ({ items }) => {
                   expandIcon={
                     expanded === `panel${index}` ? (
                       <>
-                        <RemoveCircleOutlineIcon
-                          sx={{
-                            stroke: "#ffffff",
-                            strokeWidth: 0.5,
-                          }}
-                          className=" text-primary text-5xl    "
-                        />
+                        <img className="w-9" src="/plus (3).svg" alt="" />
                       </>
                     ) : (
-                      <AddCircleOutlineIcon
-                        sx={{
-                          stroke: "#ffffff",
-                          strokeWidth: 0.5,
-                        }}
-                        className="md:text-[#3a95ea] text-[#3a95ea] text-5xl   -ml-6 sm:-ml-0"
-                      />
+                      <>
+                        <img className="w-9" src="/plus (1).svg" alt="" />
+                      </>
                     )
                   }
                   aria-controls={`panel${index}d-content`}
@@ -112,22 +102,10 @@ const Environmental = ({ items }) => {
                   expandIcon={
                     expanded === `panel${index}` ? (
                       <>
-                        <RemoveCircleOutlineIcon
-                          sx={{
-                            stroke: "#ffffff",
-                            strokeWidth: 0.5,
-                          }}
-                          className="md:text-[#3a95ea] text-[#3a95ea] text-5xl    "
-                        />
+                        <img className="w-9" src="/plus (3).svg" alt="" />
                       </>
                     ) : (
-                      <AddCircleOutlineIcon
-                        sx={{
-                          stroke: "#ffffff",
-                          strokeWidth: 0.5,
-                        }}
-                        className="md:text-[#3a95ea] text-[#3a95ea] text-5xl   -ml-6 sm:-ml-0"
-                      />
+                      <img className="w-9" src="/plus (1).svg" alt="" />
                     )
                   }
                   aria-controls={`panel${index}d-content`}

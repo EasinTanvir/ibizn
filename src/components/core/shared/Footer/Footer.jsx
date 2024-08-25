@@ -170,7 +170,7 @@ const Footer = () => {
         </div>
         <div className=" sm:text-end text-start sm:mt-0 mt-4   ">
           <span className=" text-[14px] text-primary">
-            Developed By &copy;{" "}
+            Developed By
             <a
               href="https://ibizn.com/"
               target="_blank"

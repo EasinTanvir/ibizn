@@ -64,10 +64,10 @@ const Diving = ({
 
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-gray-700 text-[20px] font-normal mb-2 font-roboto"
             htmlFor="divingDesc"
           >
-            Diving Description
+            Diving Descriptions
           </label>
           <ReactQuill
             className="shadow appearance-none border h-40  w-full py-2 px-3 rounded-md text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

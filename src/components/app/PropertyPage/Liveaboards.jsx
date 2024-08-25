@@ -27,7 +27,7 @@ function Liveaboards({ propertyData }) {
 
   return (
     <>
-      <div className="w-full h-[94vh]  sm:mb-0 mb-44   ">
+      <div className="w-full sm:h-[94vh] h-[65vh]  sm:mb-0 mb-44   ">
         <div className="w-full h-[75%] relative overflow-hidden">
           <div className="absolute inset-0 w-full h-full">
             <img

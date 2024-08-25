@@ -104,7 +104,6 @@ const SignUpModal = ({ isModalOpen, setIsModalOpen }) => {
                         className="required email"
                         id="mce-EMAIL"
                         required
-                        defaultValue
                       />
                       <span id="mce-EMAIL-HELPERTEXT" className="helper_text">
                         Enter your preferred email
@@ -120,7 +119,6 @@ const SignUpModal = ({ isModalOpen, setIsModalOpen }) => {
                         className="required text"
                         id="mce-FNAME"
                         required
-                        defaultValue
                       />
                       <span id="mce-FNAME-HELPERTEXT" className="helper_text">
                         Enter your preferred name
@@ -135,7 +133,6 @@ const SignUpModal = ({ isModalOpen, setIsModalOpen }) => {
                         name="LNAME"
                         className=" text"
                         id="mce-LNAME"
-                        defaultValue
                       />
                     </div>
                     <p />
