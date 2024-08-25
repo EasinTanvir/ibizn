@@ -28,12 +28,15 @@ function Liveaboards({ propertyData }) {
   return (
     <>
       <div className="w-full h-[94vh]  sm:mb-0 mb-44   ">
-        <div className="w-full h-[75%]    ">
-          <img
-            className=" w-full h-full object-scale-down"
-            src={propertyData?.featuredImage || propertyData?.featureImage}
-            alt="Liveaboard"
-          />
+        <div className="w-full h-[75%] relative overflow-hidden">
+          <div className="absolute inset-0 w-full h-full">
+            <img
+              className="absolute inset-0 w-full h-full "
+              style={{ aspectRatio: "3 / 2" }}
+              src={propertyData?.featuredImage || propertyData?.featureImage}
+              alt="Liveaboard"
+            />
+          </div>
         </div>
         <div className="w-full h-[17%] ">
           <div className=" w-full  flex flex-col  md:flex-col md:flex md:w-full  ">
