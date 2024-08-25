@@ -168,8 +168,8 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className=" text-center sm:pt-6 pt-8 ">
-          <span className="hidden text-[14px]">
+        <div className=" sm:text-end text-start sm:mt-0 mt-4   ">
+          <span className=" text-[14px] text-primary">
             Developed By &copy;{" "}
             <a
               href="https://ibizn.com/"
