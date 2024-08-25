@@ -9,7 +9,7 @@ const board = [1, 2, 3];
 const SpecialOffer = () => {
   return (
     <div className="px-5 md:px-0 customContainer   pt-[75px]  sm:pt-[90px] sm:pb-0 pb-[75px]  ">
-      <h1 className="lg:text-title md:text-5xl  text-4xl font-extralight font-outfit text-primary mb-[35px] sm:mb-10">
+      <h1 className="lg:text-title md:text-5xl   text-4xl font-light font-outfit text-primary mb-[35px] sm:mb-10">
         Special Offer
       </h1>
       <div className="relative">
@@ -74,7 +74,7 @@ const SpecialOffer = () => {
         >
           {board.map((i, item) => (
             <div key={i} className="lg:flex mb-10 w-full ">
-              <div className="lg:flex items-center border   border-primary lg:w-[80%] md:w-full gap-10">
+              <div className="lg:flex items-center border   border-primary lg:w-[80%] md:w-full gap-10 ">
                 <div className="h-full">
                   <div className="w-full lg:w-96 aspect-w-3 aspect-h-2">
                     <img
@@ -87,10 +87,10 @@ const SpecialOffer = () => {
 
                 <div className="lg:w-[65%] w-full px-5 lg:p-0  text-left  h-full   relative ">
                   <div className="">
-                    <h1 className="text-gray mt-[45px]  pb-2 font-medium font-roboto  text-[20px] leading-[22px] lg:text-subtitle">
+                    <h1 className="text-gray mt-[45px]  pb-2 font-medium font-outfit  text-[20px] leading-[22px] lg:text-subtitle">
                       Liveboard / Egypt
                     </h1>
-                    <h2 className="  md:text-[32px] pb-2  text-[24px] leading-[24px] font-outfit font-light  text-primary">
+                    <h2 className="  md:text-[28px] pb-2  text-[24px] leading-[24px] font-outfit font-light  text-primary">
                       Emperor Elite Liveaboard
                     </h2>
                     <p className="text-secondary font-roboto font-light  md:mt-2 xl:pe-12 lg:pe-5  md:text-[18px] sm:leading-[20px] leading-[18px] text-[16px] md:w-full">

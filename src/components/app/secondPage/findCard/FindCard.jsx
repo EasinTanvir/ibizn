@@ -98,7 +98,7 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
     <div className="min-h-[70vh] lg:w-[85%] mx-auto px-5 lg:px-0  sm:pt-[65px] pt-[75px]  sm:pb-[120px] pb-[60px] ">
       <div>
         {searchValues?.destination && searchValues?.tabValue && (
-          <h1 className="sm:text-title  text-title2 font-outfit  text-primary  sm:mb-[30px] mb-[25px]">
+          <h1 className="sm:text-title  text-title2 font-outfit font-light  text-primary  sm:mb-[30px] mb-[25px]">
             {searchValues?.tabValue} | {searchValues?.destination}
           </h1>
         )}
@@ -209,7 +209,7 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                             {console.log(item.destnation)}
                           </h1>
                         </div> */}
-                        <h1 className="lg:text-[32px] text-[24px] leading-[24px] sm:mt-0 mt-2 text-primary">
+                        <h1 className="lg:text-[28px] font-outfit font-light text-[24px] leading-[24px] sm:mt-0 mt-2 text-primary">
                           {item?.nameOfProperty || item?.propertyName}
                         </h1>
                         {console.log(item)}

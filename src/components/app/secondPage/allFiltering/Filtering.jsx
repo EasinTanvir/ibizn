@@ -92,7 +92,7 @@ const Filtering = () => {
   };
 
   return (
-    <div className="bg-gray-100    bg-stone-200 ">
+    <div className="bg-gray-100    bg-[#f1f2f2] ">
       <div className="md:w-[85%] px-5 md:px-0 mx-auto py-[25px] relative">
         <div className="flex  lg:pe-40  gap-4  flex-wrap xl:flex-row   ">
           <div>

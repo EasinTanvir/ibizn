@@ -12,7 +12,7 @@ const WhyDeeparture = () => {
           >
             Why Deeparture
           </h1>
-          <p className="text-[#f1f2f2] font-light font-roboto  text-[20px] leading-[22px] md:text-[24px] md:leading-[26px] md:w-full lg:w-3/4 w-full">
+          <p className="text-[#f1f2f2] font-light font-roboto  text-[20px] leading-[22px] md:text-[27px] md:leading-[26px] md:w-full lg:w-3/4 w-full">
             We are a team of professional scuba dives, free dives, artists and
             environmental advocates who work tirelessly to provide you with
             incredible, inclusive dive experiences, from experience, that you

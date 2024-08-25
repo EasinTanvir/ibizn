@@ -28,7 +28,7 @@ const BestBoard = () => {
     <div className="bg-[#F1F2F2]   sm:pt-[90px] pt-[75px] sm:pb-[120px] pb-[90px]">
       <div className="customContainer   px-5 xl:px-0">
         <div className="sm:mb-5">
-          <h1 className="sm:text-title   text-[40px] leading-[40px]  font-extralight font-outfit text-primary mb-2 sm:mb-4">
+          <h1 className="sm:text-title   text-[40px] leading-[40px]  font-light font-outfit text-primary mb-2 sm:mb-4">
             Best of this month
           </h1>
           <h2 className="md:text-[22px] md:leading-[22px] font-roboto font-light text-[20px] leading-[22px]   sm:mt-1 mt-[25px] lg:mt-3 text-secondary">
@@ -149,7 +149,7 @@ const BestBoard = () => {
                     ))}
                   </div>
                   <div className="mt-4">
-                    <button className="button3 w-40 font-normal text-white  border-none outline-none  font-roboto  hover:bg-primary hover:text-white">
+                    <button className="button3 w-40 font-normal text-white bg-primary  border-none outline-none  font-roboto hover:border hover:border-primary hover:bg-white hover:text-primary">
                       Details
                     </button>
                   </div>
@@ -192,7 +192,7 @@ const BestBoard = () => {
                     ))}
                   </div>
                   <div className="mt-4">
-                    <button className="button3 w-40 font-normal text-white  border-none outline-none  font-roboto  hover:bg-primary hover:text-white">
+                    <button className="button3 w-40 font-normal text-white bg-primary border-none font-roboto hover:border hover:border-primary hover:bg-white hover:text-primary">
                       Details
                     </button>
                   </div>
@@ -235,7 +235,7 @@ const BestBoard = () => {
                     ))}
                   </div>
                   <div className="mt-4">
-                    <button className="button3 w-40 font-normal text-white  border-none outline-none  font-roboto  hover:bg-primary hover:text-white">
+                    <button className="button3 w-40 font-normal text-white bg-primary border-none font-roboto hover:border hover:border-primary hover:bg-white hover:text-primary">
                       Details
                     </button>
                   </div>
@@ -278,7 +278,7 @@ const BestBoard = () => {
                     ))}
                   </div>
                   <div className="mt-4">
-                    <button className="button3 w-40 font-normal text-white  border-none outline-none  font-roboto  hover:bg-primary hover:text-white">
+                    <button className="button3 w-40 font-normal text-white bg-primary border-none font-roboto hover:border hover:border-primary hover:bg-white hover:text-primary">
                       Details
                     </button>
                   </div>

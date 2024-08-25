@@ -186,7 +186,12 @@ const BoardTable = ({
   return (
     <div className="overflow-x-auto">
       <form onSubmit={submitData}>
-        <Button onClick={incrementRow}>(+) Add New Trip Itinerary</Button>
+        <Button
+          className="text-[20px]  font-roboto font-normal"
+          onClick={incrementRow}
+        >
+          (+) Add New Trip Itinerary
+        </Button>
         <table className="min-w-full bg-white border border-gray-300">
           <thead>
             <tr>
@@ -194,9 +199,9 @@ const BoardTable = ({
               <th className="py-2 px-1 border-b">TRIP END DATE</th>
               <th className="py-2 px-1 border-b">ITINERARY</th>
               <th className="py-2 px-1 border-b">TRIP COST</th>
-              <th className="py-2 px-1 border-b">Discount </th>
-              <th className="py-2 px-1 border-b">Special </th>
-              <th className="py-2 px-1 border-b">Action </th>
+              <th className="py-2 px-1 border-b">DISCOUNT </th>
+              <th className="py-2 px-1 border-b">SPECIAL </th>
+              <th className="py-2 px-1 border-b">ACTION </th>
               {/* Add more headers as needed */}
             </tr>
           </thead>

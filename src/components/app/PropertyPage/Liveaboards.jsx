@@ -52,7 +52,7 @@ function Liveaboards({ propertyData }) {
               </div>
             </div>
 
-            <div className=" bg-[#0080FF]   text-white xl:h-16 h-auto    border-t-[1px] md:border-white md:flex md:items-center md:justify-between md:pl-8 md:w-full sm:py-0 mb-[35px] pb-[35px] md:px-8 px-4 ">
+            <div className=" bg-[#0080FF]   text-white xl:h-16 h-auto    border-t-[1px] md:border-white md:flex md:items-center md:justify-between md:pl-10 md:w-full sm:py-0 mb-[35px] pb-[35px] md:px-8 px-4 md:pr-[130px] ">
               <div className="flex flex-wrap justify-start   py-4  gap-3 sm:ps-4  customContainer ">
                 {buttons.map((button) => (
                   <button
