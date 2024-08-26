@@ -3,6 +3,7 @@ import DOMPurify from "dompurify";
 const Accommodation = ({ propertyData, resort }) => {
   console.log(propertyData?.schedules);
   const [activeButton, setActiveButton] = useState();
+  const [activeButton2, setActiveButton2] = useState();
 
   console.log(propertyData?.schedules);
 
@@ -26,14 +27,17 @@ const Accommodation = ({ propertyData, resort }) => {
   //   }
   // }, [propertyData]);
 
-  const Button = ({ label, cabinPicture }) => (
+  const Button = ({ label, cabinPicture, index }) => (
     <button
       className={`px-4 py-1 text-sm md:text-xl  rounded-full border-2 ${
-        activeButton === cabinPicture
+        activeButton2 === index
           ? "bg-[#0080FF] text-white border-[#0080FF]"
           : "text-[#0080FF] border-[#0080FF] hover:bg-[#0080FF] hover:text-white transition-colors duration-300"
       }`}
-      onClick={() => setActiveButton(cabinPicture)}
+      onClick={() => {
+        setActiveButton(cabinPicture);
+        setActiveButton2(index);
+      }}
     >
       {label}
     </button>
@@ -77,7 +81,8 @@ const Accommodation = ({ propertyData, resort }) => {
                 <Button
                   key={button?.id}
                   label={button?.cabinName}
-                  cabinPicture={i}
+                  cabinPicture={button?.cabinPicture}
+                  index={i}
                 />
               ))}
             </div>
