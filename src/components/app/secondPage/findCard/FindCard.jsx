@@ -71,15 +71,11 @@ const faqData = [
 const FindCard = ({ searchResult, isLoading, resort }) => {
   const [readMore, setReadMore] = useState(false);
   const { searchValues } = useContext(userContext);
-  console.log(searchValues);
-  console.log(resort);
+
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  console.log(searchResult);
-
-  console.log(searchValues);
 
   const [forMonth, setForMonth] = useState();
   const [forYear, setForYear] = useState();
@@ -91,8 +87,6 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
     setForMonth(formattedMonth);
     setForYear(formattedYear);
   }, [searchValues]);
-
-  console.log(searchValues);
 
   return (
     <div className="min-h-[70vh] lg:w-[85%] mx-auto px-5 lg:px-0  sm:pt-[65px] pt-[75px]  sm:pb-[120px] pb-[60px] ">

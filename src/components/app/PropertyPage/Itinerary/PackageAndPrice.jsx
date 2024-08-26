@@ -33,11 +33,6 @@ function ResortAndPrice({ propertyData }) {
     const startDate = dayjs(propertyData?.discountTimeFrame?.startDate);
     const endDate = dayjs(propertyData?.discountTimeFrame?.endDate);
 
-    console.log(searchStartDate);
-    console.log(searchEndDate);
-    console.log(startDate);
-    console.log(endDate);
-
     // Convert discount to number
     const discountPercentage = Number(propertyData?.discount);
     console.log(discountPercentage);
@@ -45,8 +40,8 @@ function ResortAndPrice({ propertyData }) {
     console.log(defaultPrice);
 
     const isDiscountActive =
-      searchStartDate.isSameOrAfter(startDate) &&
-      searchEndDate.isSameOrBefore(endDate);
+      startDate.isSameOrAfter(searchStartDate) &&
+      endDate.isSameOrBefore(searchEndDate);
 
     console.log(isDiscountActive);
 
@@ -68,7 +63,7 @@ function ResortAndPrice({ propertyData }) {
       const defaultPrice = Number(selectedPackage?.ConvertedPrice);
       setFinalPrice(defaultPrice);
     }
-  }, [propertyData, finalPrice, packages, selectedPackage]);
+  }, [propertyData, finalPrice, packages, selectedPackage, searchValues]);
 
   const handleOpenPackageModal = (item) => {
     setOpen(true);
