@@ -73,11 +73,11 @@ const Accommodation = ({ propertyData, resort }) => {
           </div>
           {!resort && (
             <div className="flex flex-wrap gap-4 mt-[20px] lg:mt-16 text-[#2f2f30]">
-              {lists?.map((button) => (
+              {lists?.map((button, i) => (
                 <Button
                   key={button?.id}
                   label={button?.cabinName}
-                  cabinPicture={button?.cabinPicture}
+                  cabinPicture={i}
                 />
               ))}
             </div>
