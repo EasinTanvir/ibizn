@@ -52,11 +52,19 @@ const Environmental = ({ items }) => {
                   expandIcon={
                     expanded === `panel${index}` ? (
                       <>
-                        <img className="w-9" src="/plus (3).svg" alt="" />
+                        <img
+                          className="min-w-9 max-w-9"
+                          src="/plus (3).svg"
+                          alt=""
+                        />
                       </>
                     ) : (
                       <>
-                        <img className="w-9" src="/plus (1).svg" alt="" />
+                        <img
+                          className="min-w-9 max-w-9"
+                          src="/plus (1).svg"
+                          alt=""
+                        />
                       </>
                     )
                   }
@@ -102,10 +110,18 @@ const Environmental = ({ items }) => {
                   expandIcon={
                     expanded === `panel${index}` ? (
                       <>
-                        <img className="w-9" src="/plus (3).svg" alt="" />
+                        <img
+                          className="min-w-9 max-w-9"
+                          src="/plus (3).svg"
+                          alt=""
+                        />
                       </>
                     ) : (
-                      <img className="w-9" src="/plus (1).svg" alt="" />
+                      <img
+                        className="min-w-9 max-w-9"
+                        src="/plus (1).svg"
+                        alt=""
+                      />
                     )
                   }
                   aria-controls={`panel${index}d-content`}
