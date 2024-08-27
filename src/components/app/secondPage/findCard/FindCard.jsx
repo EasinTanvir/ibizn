@@ -213,6 +213,7 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                             <>
                               {readMore ? (
                                 <div
+                                  className="sm:text-[18px] text-[16px] sm:font-light font-regular font-roboto leading-[20px]"
                                   dangerouslySetInnerHTML={{
                                     __html: item?.briefDescription,
                                   }}
@@ -220,6 +221,7 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                               ) : (
                                 <>
                                   <div
+                                    className="sm:text-[18px] text-[16px] sm:font-light font-regular font-roboto leading-[20px]"
                                     dangerouslySetInnerHTML={{
                                       __html: truncateDescription(
                                         item?.briefDescription
@@ -234,7 +236,7 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                             <>
                               {readMore ? (
                                 <div
-                                  className="text-[18px] font-light font-roboto leading-[20px]"
+                                  className="sm:text-[18px] text-[16px] font-light font-roboto leading-[20px]"
                                   dangerouslySetInnerHTML={{
                                     __html: DOMPurify.sanitize(
                                       item?.briefDescription
@@ -243,7 +245,7 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                                 />
                               ) : (
                                 <p
-                                  className="text-[18px] font-light font-roboto leading-[20px]"
+                                  className="sm:text-[18px] text-[16px] font-light font-roboto leading-[20px]"
                                   dangerouslySetInnerHTML={{
                                     __html: DOMPurify.sanitize(
                                       truncateDescription(
