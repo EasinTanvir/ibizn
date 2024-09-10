@@ -152,12 +152,7 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
             </div>
             <div className="mt-2">
               <p className="text-lg font-semibold">Phone number</p>
-              <input
-                type="text"
-                name="phone"
-                className="w-full rounded-md"
-                required
-              />
+              <input type="text" name="phone" className="w-full rounded-md" />
             </div>
             <div className="mt-2">
               <p className="text-lg font-semibold">Email</p>
@@ -174,7 +169,6 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
                 type="text"
                 name="whatsapp"
                 className="w-full rounded-md"
-                required
               />
             </div>
             <div className="mt-2">
@@ -229,7 +223,6 @@ const ResortBookingModal = ({ open, setOpen, propertyData, packages }) => {
                 type="text"
                 name="text"
                 className="w-full rounded-md"
-                required
                 rows={3}
               />
             </div>
