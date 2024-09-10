@@ -27,11 +27,9 @@ const boatBookingSchema = new Schema(
     },
     text: {
       type: String,
-      required: true,
     },
     phone: {
       type: String,
-      required: true,
     },
     email: {
       type: String,
@@ -39,7 +37,6 @@ const boatBookingSchema = new Schema(
     },
     whatsapp: {
       type: String,
-      required: true,
     },
     price: {
       type: Number,

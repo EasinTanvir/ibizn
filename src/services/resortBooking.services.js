@@ -10,6 +10,8 @@ const createResortBookingIntoDB = async (payload) => {
     <p><strong>Name : </strong> ${payload?.name}</p>
     <p><strong>Phone : </strong> ${payload?.phone}</p>
     <p><strong>Email : </strong> ${payload?.email}</p>
+    <p><strong>Text : </strong> ${payload?.text}</p>
+    <p><strong>whatsapp : </strong> ${payload?.whatsapp}</p>
     <p><strong>Number Of Guest : </strong> ${payload?.numberOfGuest}</p>
      <p>Check the property : <a href=${`${process.env.FRONTEND_URL}/secondPage/resort/${payload?.property}`}>click here</a></p>
   </div>
@@ -21,6 +23,8 @@ const createResortBookingIntoDB = async (payload) => {
     <p><strong>Name : </strong> ${payload?.name}</p>
     <p><strong>Phone  :</strong> ${payload?.phone}</p>
     <p><strong>Email : </strong> ${payload?.email}</p>
+    <p><strong>Text : </strong> ${payload?.text}</p>
+    <p><strong>whatsapp : </strong> ${payload?.whatsapp}</p>
     <p><strong>Number Of Guest : </strong> ${payload?.numberOfGuest}</p>
     <p><strong>Price : </strong> ${payload?.price}</p>
      <p>Check the property : <a href=${`${process.env.FRONTEND_URL}/secondPage/resort/${payload?.property}`}>click here</a></p>
