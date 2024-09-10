@@ -126,12 +126,7 @@ const BookingModal = ({
             </div>
             <div className="mt-2">
               <p className="text-lg font-semibold"> Phone number</p>
-              <input
-                type="text"
-                name="phone"
-                className="w-full rounded-md"
-                required
-              />
+              <input type="text" name="phone" className="w-full rounded-md" />
             </div>
             <div className="mt-2">
               <p className="text-lg font-semibold">Email</p>
@@ -148,7 +143,6 @@ const BookingModal = ({
                 type="text"
                 name="whatsapp"
                 className="w-full rounded-md"
-                required
               />
             </div>
             <div className="mt-2">
@@ -168,7 +162,6 @@ const BookingModal = ({
                 type="text"
                 name="text"
                 className="w-full rounded-md"
-                required
                 rows={3}
               />
             </div>

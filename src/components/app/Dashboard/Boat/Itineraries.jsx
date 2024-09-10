@@ -127,7 +127,7 @@ const Itineraries = () => {
           </div>
         ) : (
           <h2 className="text-2xl">
-            There are no current itineraries; please add some
+            There are currently no Itineraries, please add at least one
           </h2>
         )}
       </Box>

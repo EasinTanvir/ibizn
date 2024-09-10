@@ -1,7 +1,6 @@
 const Nitrox = ({ facilities }) => {
-  const hasWifi = facilities.some(
-    (facility) => facility.toLowerCase() === "nitrox"
-  );
+  console.log(facilities);
+  const hasWifi = facilities?.includes("Nitrox");
   return (
     <div>
       <h1 className="text-[#0080ff] text-[14px] md:text-[25px] font-outfit">

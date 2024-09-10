@@ -99,8 +99,12 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
         {!isLoading && (
           <p className="sm:text-subtitle  text-secondary text-subtitle2 font-outfit">
             <span>
-              {" "}
-              We found {searchResult?.length || 0} boat(s)/resort(s) for you{" "}
+              {searchValues?.tabValue === "Resorts" ||
+              searchValues?.property === "resort" ? (
+                <> We found {searchResult?.length || 0} resort(s) </>
+              ) : (
+                <>We found {searchResult?.length || 0} boat(s)</>
+              )}
             </span>
             {searchValues?.maxPrice && (
               <span> among price $({searchValues?.maxPrice})</span>

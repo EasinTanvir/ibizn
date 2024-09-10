@@ -217,12 +217,7 @@ const AddResortForm = ({ increaseProgress, decreaseProgress }) => {
           "File size exceeds the limit (2MB). Please choose a smaller file.",
       });
     } else {
-      const compressedBase64 = await compressAndConvertToBase64(
-        files,
-        800,
-        600,
-        0.8
-      );
+      const compressedBase64 = await compressAndConvertToBase64(files);
       let newValue = { ...resortData };
       newValue[name] = compressedBase64;
       setResortData(newValue);

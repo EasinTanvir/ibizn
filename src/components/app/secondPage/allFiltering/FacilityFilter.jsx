@@ -91,7 +91,7 @@ const FacilityFilter = () => {
       <FormControl className="w-32">
         <InputLabel
           id="demo-multiple-checkbox-label"
-          className={`text-primary ${!label ? "-mt-1" : " mt-0 "}  `}
+          className={`text-primary ${!label ? "-mt-[7px]" : " mt-0 "}  `}
         >
           Facilities
         </InputLabel>

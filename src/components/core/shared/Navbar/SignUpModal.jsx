@@ -96,7 +96,7 @@ const SignUpModal = ({ isModalOpen, setIsModalOpen }) => {
                     </div>
                     <div className="mc-field-group my-2 flex flex-col gap-1">
                       <label htmlFor="mce-EMAIL" className="font-semibold">
-                        Email Address <span className="asterisk" />
+                        Email Address <span className="asterisk">*</span>
                       </label>
                       <input
                         type="email"
@@ -111,7 +111,7 @@ const SignUpModal = ({ isModalOpen, setIsModalOpen }) => {
                     </div>
                     <div className="mc-field-group my-2 flex flex-col gap-1">
                       <label htmlFor="mce-FNAME" className="font-semibold">
-                        First Name <span className="asterisk" />
+                        First Name <span className="asterisk">*</span>
                       </label>
                       <input
                         type="text"

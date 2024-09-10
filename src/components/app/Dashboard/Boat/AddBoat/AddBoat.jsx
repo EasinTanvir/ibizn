@@ -235,12 +235,7 @@ const AddBoat = () => {
           "File size exceeds the limit (2MB). Please choose a smaller file.",
       });
     } else {
-      const compressedBase64 = await compressAndConvertToBase64(
-        files,
-        800,
-        600,
-        0.8
-      );
+      const compressedBase64 = await compressAndConvertToBase64(files);
       let newValue = { ...boardData };
       newValue[name] = compressedBase64;
       setBoardData(newValue);
@@ -259,6 +254,8 @@ const AddBoat = () => {
   };
 
   const submitData = (e) => {
+    console.log("boat  data", boardData);
+
     e.preventDefault();
     setSubmitLoader(true);
     fetch(`${baseUrl}/boats/create-boat`, {

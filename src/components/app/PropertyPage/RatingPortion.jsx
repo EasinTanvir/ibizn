@@ -12,8 +12,8 @@ export default function RatingPortion({ rating }) {
         "& > legend": { mt: 2 },
       }}
     >
-      <div className="md:text-2xl text-[#0080FF]">
-        <span className="font-semibold">Vegan rating</span>: {value}
+      <div className="md:text-[25px] text-[20px] text-[#0080FF]">
+        <span className="font-semibold font-outfit">Vegan rating</span>: {value}
       </div>
       <Rating
         name="read-only"

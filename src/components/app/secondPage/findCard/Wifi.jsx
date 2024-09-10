@@ -1,6 +1,5 @@
 const Wifi = ({ facilities }) => {
-  console.log(facilities);
-  const hasWifi = facilities.some((facility) => facility === "Wi-fi onboard");
+  const hasWifi = facilities?.includes("Wi-fi onboard");
   return (
     <div>
       <h1 className="text-[#0080ff] text-[14px] md:text-[25px] font-outfit">

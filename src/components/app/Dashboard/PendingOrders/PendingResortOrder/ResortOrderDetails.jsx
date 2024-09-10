@@ -47,7 +47,7 @@ const ResortOrderDetails = ({ id }) => {
             <LaunchIcon sx={{ ml: "10px" }} />
           </h2>
           <img
-            className="w-full h-[300px] rounded my-3 object-contain"
+            className="w-full aspect-[3/2]  my-3 "
             src={bookingData?.property?.featureImage}
             alt="featured image"
           />
@@ -68,7 +68,7 @@ const ResortOrderDetails = ({ id }) => {
                 </h3>
               </div>
             </div> */}
-          <div className="grid grid-cols-2 md:grid-cols-3 justify-items-start  gap-5">
+          <div className="grid grid-cols-2 md:grid-cols-3 justify-items-start  gap-5 mt-10">
             <div>
               <h2 className="font-semibold">Facilities </h2>
               <ul>
