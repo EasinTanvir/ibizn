@@ -273,7 +273,7 @@ const FindCard = ({ searchResult, isLoading, resort }) => {
                         )}
                         <div className="sm:-mt-2  sm:mr-0 mr-6">
                           <div className="flex gap-2 items-center">
-                            <h1 className="text-[#0080ff] text-[16px] sm:text-[20px] font-light font-outfit sm:leading-[24px] leading-[20px]">
+                            <h1 className="md:text-[20px] font-light font-outfit leading-[24px] text-[14px] text-[#0080ff]">
                               Vegan Rating:
                             </h1>
                             <h1 className="md:text-[20px] font-light font-outfit leading-[24px] text-[14px] text-[#0080ff]">
