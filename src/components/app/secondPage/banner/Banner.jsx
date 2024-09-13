@@ -79,6 +79,14 @@ const Banner = ({ setSearchResult }) => {
     setDuration(0);
     setMaxPrice(null);
 
+    const startOfMonth = dayjs(date).startOf("month").format("YYYY-MM-DD");
+    const endOfMonth = dayjs(date).endOf("month").format("YYYY-MM-DD");
+
+    const updatedSearchValues = {
+      ...searchValues,
+      tripStart: startOfMonth,
+      tripEnd: endOfMonth,
+    };
     delete updatedSearchValues.minPrice;
     delete updatedSearchValues.maxPrice;
     delete updatedSearchValues.duration;

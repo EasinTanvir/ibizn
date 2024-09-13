@@ -21,7 +21,7 @@ function ItinerariesAndPrices({ propertyData }) {
   const [selectedYear, setSelectedYear] = useState(null);
 
   const [selectedMonth, setSelectedMonth] = useState(null);
-  const [filteredTrips, setFilteredTrips] = useState();
+  const [filteredTrips, setFilteredTrips] = useState(propertyData?.schedules);
 
   //month
 
@@ -47,9 +47,17 @@ function ItinerariesAndPrices({ propertyData }) {
   const [discount, setDiscount] = useState();
   const [discountPrice, setDiscountPrice] = React.useState();
 
+  const [spe, setSpee] = useState(false);
+
+  // useEffect(() => {
+  //   if (searchValues?.tabValue && searchValues?.tabValue === "Special Offers") {
+  //     setSpee(true);
+  //   }
+  // }, [searchValues]);
+
   useEffect(() => {
     console.log(searchValues);
-    if (searchValues?.tabValue === "Special Offers") {
+    if (searchValues?.tabValue && searchValues?.tabValue === "Special Offers") {
       console.log(propertyData?.schedules);
       const res = propertyData?.schedules?.filter(
         (item) => item?.special === true
@@ -58,8 +66,6 @@ function ItinerariesAndPrices({ propertyData }) {
       setFilteredTrips(
         propertyData?.schedules?.filter((item) => item?.special === true)
       );
-    } else {
-      setFilteredTrips(propertyData?.schedules);
     }
   }, [propertyData, searchValues]);
 
