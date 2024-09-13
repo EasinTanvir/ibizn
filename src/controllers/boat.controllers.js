@@ -143,7 +143,15 @@ const updateBoat = catchAsync(async (req, res) => {
           item.currency === "USD"
             ? item.cost
             : await convertTedCurrency(item.cost, item.currency);
-        return { ...item, convertPrice: Number(convertedPrice).toFixed(2) }; // Add converted price to the item
+
+        // Calculate discount if it exists
+        const discountPercent = item.discount?.percent
+          ? Number(item.discount.percent)
+          : 0;
+        const finalPrice =
+          convertedPrice - (convertedPrice * discountPercent) / 100;
+
+        return { ...item, convertPrice: Number(finalPrice).toFixed(2) }; // Add converted price to the item
       })
     );
     req.body.schedules = convertedPrices;
