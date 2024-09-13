@@ -79,12 +79,6 @@ const Banner = ({ setSearchResult }) => {
     setDuration(0);
     setMaxPrice(null);
 
-    const updatedSearchValues = {
-      ...searchValues,
-      tripStart: startOfMonth,
-      tripEnd: endOfMonth,
-    };
-
     delete updatedSearchValues.minPrice;
     delete updatedSearchValues.maxPrice;
     delete updatedSearchValues.duration;

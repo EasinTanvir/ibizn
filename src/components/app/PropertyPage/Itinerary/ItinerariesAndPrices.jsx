@@ -21,7 +21,7 @@ function ItinerariesAndPrices({ propertyData }) {
   const [selectedYear, setSelectedYear] = useState(null);
 
   const [selectedMonth, setSelectedMonth] = useState(null);
-  const [filteredTrips, setFilteredTrips] = useState(propertyData?.schedules);
+  const [filteredTrips, setFilteredTrips] = useState();
 
   //month
 
@@ -47,6 +47,22 @@ function ItinerariesAndPrices({ propertyData }) {
   const [discount, setDiscount] = useState();
   const [discountPrice, setDiscountPrice] = React.useState();
 
+  useEffect(() => {
+    console.log(searchValues);
+    if (searchValues?.tabValue === "Special Offers") {
+      console.log(propertyData?.schedules);
+      const res = propertyData?.schedules?.filter(
+        (item) => item?.special === true
+      );
+      console.log(res);
+      setFilteredTrips(
+        propertyData?.schedules?.filter((item) => item?.special === true)
+      );
+    } else {
+      setFilteredTrips(propertyData?.schedules);
+    }
+  }, [propertyData, searchValues]);
+
   const handleOpenBookingModal = (schedule, cId, price) => {
     setSchedule(schedule);
     setCabinId(cId);
@@ -55,6 +71,7 @@ function ItinerariesAndPrices({ propertyData }) {
   };
 
   React.useEffect(() => {
+    console.log(discount);
     if (discount) {
       const myPrice = Math.round(
         Number(schedule?.convertPrice) -
@@ -257,7 +274,7 @@ function ItinerariesAndPrices({ propertyData }) {
         <div className="mt-[43px]">
           {filteredTrips?.length > 0 ? (
             filteredTrips?.map((schedule, index) => {
-              console.log(schedule?._id);
+              console.log(schedule.special);
               return (
                 <div>
                   <div
